@@ -1,0 +1,175 @@
+:root {
+    --w: 1080;
+    --h: 777;
+    --gap: 0;
+}
+
+/*  ==========================================================
+	MIXINS
+	========================================================== */
+
+@mixin cuboid() {
+    position: relative;
+    transform-style: preserve-3d;
+    height: 100%;
+    width: 100%;
+
+    .face {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        background-color: black;
+
+        // &:after {
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     display: block;
+        //     content: '';
+        //     padding-top: 100%;
+        // }
+    }
+
+    .face--front {
+        transform: rotateY(90deg) translateX(-50%) rotateY(-90deg);
+    }
+
+    .face--back {
+        transform: rotateY(90deg) translateX(50%) rotateY(90deg);
+    }
+
+    .face--left {
+        transform: translateX(-50%) rotateY(-90deg);
+    }
+
+    .face--right {
+        transform: translateX(50%) rotateY(90deg);
+    }
+
+    .face--top {
+        display: none;
+    }
+
+    .face--bottom {
+        display: none;
+    }
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.tour-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+}
+
+.stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    // background: red;
+    visibility: hidden;
+    perspective: 2000px;
+}
+
+.hero {
+    cursor: pointer;
+}
+
+.hero,
+.logo__wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0px;
+    transform-style: preserve-3d;
+
+    &:before {
+        content: "";
+        display: block;
+        padding-top: calc(
+            var(--h) / var(--w) * 100%
+        ); // determine aspect ratio height 1080x777
+        // background: green;
+    }
+}
+
+.hero__inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    transform-style: preserve-3d;
+}
+
+.hero__cuboid {
+    @include cuboid();
+    transform-style: preserve-3d;
+
+    .face {
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        overflow: hidden;
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.overlay {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    content: "";
+    pointer-events: none;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, #000 80%),
+        radial-gradient(50vh at bottom, black, transparent);
+}
+
+.logo__wrap {
+    position: absolute;
+    margin: 0;
+    pointer-events: none;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 0px;
+    min-width: 150px;
+    width: 20vw;
+    max-width: 300px;
+}
+
+.spark,
+#glow {
+    mix-blend-mode: screen;
+}
