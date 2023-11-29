@@ -6,7 +6,7 @@ export default {
 }
 </script>
 <template>
-    <article class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
+    <a href="#details" class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
         <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" :src="tour.artist.image" />
         <h3 class="font-bold text-lg text-gray-900">{{ tour.artist.name }}</h3>
         <p class="text-gray-500 text-sm leading-4 pe-10">{{ tour.description }}</p>
@@ -72,7 +72,7 @@ export default {
                 </button>
             </div>
         </div>
-    </article>
+    </a>
 </template>
 <style scoped>
 h3,

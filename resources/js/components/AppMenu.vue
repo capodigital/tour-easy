@@ -11,7 +11,7 @@ export default {
     <footer
         class="flex justify-center w-full h-16 z-30 items-end relative overflow-hidden transition-all rounded-t-2xl bg-white bg-opacity-50">
         <div class="flex pb-3">
-            <a class="transition-all px-5" @click="active = -2" href="#"
+            <a class="transition-all px-5" @click="active = -2" href="#calendar"
                 :class="{ 'text-gray-500': active != -2, 'text-black': active == -2 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -2 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -23,7 +23,7 @@ export default {
                     <path d="m9 16 2 2 4-4" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = -1" href="#"
+            <a class="transition-all px-5" @click="active = -1" href="#tours"
                 :class="{ 'text-gray-500': active != -1, 'text-black': active == -1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -1 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -33,7 +33,7 @@ export default {
                     <line x1="12" x2="12" y1="19" y2="22" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = 0" href="#"
+            <a class="transition-all px-5" @click="active = 0" href="#home"
                 :class="{ 'text-gray-500': active != 0, 'text-black': active == 0 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 0 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -42,7 +42,7 @@ export default {
                     <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = 1" href="#"
+            <a class="transition-all px-5" @click="active = 1" href="#personal"
                 :class="{ 'text-gray-500': active != 1, 'text-black': active == 1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 1 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -53,7 +53,7 @@ export default {
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = 2" href="#"
+            <a class="transition-all px-5" @click="active = 2" href="#share"
                 :class="{ 'text-gray-500': active != 2, 'text-black': active == 2 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 2 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"

@@ -13,8 +13,12 @@ import { createApp } from "vue"
 import mitt from "mitt"
 import Utils from "./Utils"
 import App from "./components/App.vue"
+import HomePage from "./components/pages/HomePage.vue";
+import TourDetails from "./components/pages/TourDetails.vue";
 
 const app = createApp(App)
+app.component('home', HomePage);
+app.component('details', TourDetails);
 app.config.globalProperties.Utils = Utils
 /** Implementar bus de eventos */
 const emitter = mitt()

@@ -92,11 +92,11 @@ export default {
     <section>
         <div class="tour-images">
             <div class="stage bg-cover bg-no-repeat">
-                <div class="absolute bottom-0 left-0 flex justify-center items-end z-30 w-full pb-10">
+                <div class="absolute bottom-0 left-0 flex justify-center items-end z-30 w-full pb-3 md:pb-10">
                     <div class="text-center">
                         <h1
-                            class="font-bold bg-gradient-to-tr from-slate-100 to-slate-300 text-4xl bg-clip-text text-transparent drop-shadow-md shadow-black">
-                            TOUR NAME</h1>
+                            class="md:text-4xl font-bold bg-gradient-to-tr from-slate-100 to-slate-300 text-xl bg-clip-text text-transparent drop-shadow-md shadow-black">
+                            UN VERANO SIN TI</h1>
                         <p class="text-2xl">Bad Bunny</p>
                     </div>
                 </div>
