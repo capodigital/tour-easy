@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agencia', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');         
+            $table->foreignId('country_id')->references('id')->on('countries')->nullable()->onDelete('set null');
+
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agencia');
+        Schema::dropIfExists('cities');
     }
 };
