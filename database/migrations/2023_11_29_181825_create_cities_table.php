@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');         
-            $table->foreignId('country_id')->references('id')->on('countries')->nullable()->onDelete('set null');
+            $table->string('name');   
+            $table->string('country_id',2);   
+            $table->foreign('country_id')->references('code')->on('countries')->nullable()->onDelete('set null');
 
         });
     }
