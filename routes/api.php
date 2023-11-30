@@ -30,6 +30,8 @@ Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
 Route::resource('artists', ArtistsController::class);
 Route::post('/artists/agency',[ArtistsController::class,'artistsByAgency']);
 
+Route::resource('tours', ArtistsController::class);
+
 Route::get('/countries', [CountriesController::class, 'index']);
 
 Route::post('/cities',[CitiesController::class,'citiesByCountry']);
