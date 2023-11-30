@@ -28,6 +28,7 @@ Route::get('/agencies/deleted', [AgenciesController::class, 'deleted']);
 Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
 
 Route::resource('artists', ArtistsController::class);
+Route::post('/artists/agency',[ArtistsController::class,'artistsByAgency']);
 
 Route::get('/countries', [CountriesController::class, 'index']);
 

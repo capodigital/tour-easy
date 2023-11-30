@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ArtistsResource;
+use App\Models\Agencies;
 use App\Models\Artists;
 use Illuminate\Http\Request;
 
@@ -81,5 +82,13 @@ class ArtistsController extends Controller
         $artist->delete();
 
         return response()->json($artist);
+    }
+
+    public function artistsByAgency(Request $request)
+    {
+        $agency = Agencies::find($request->id);
+        $artists = $agency->artists()->get();
+
+        return response()->json($artists);
     }
 }
