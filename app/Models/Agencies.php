@@ -12,7 +12,7 @@ class Agencies extends Model
     use HasFactory;
     protected $fillable = [
         'tradename', 'taxname', 'taxcode', 'owner', 'address', 'email', 'web', 'notes', 'phone',
-        'city_id'
+        'city_id',
     ];
 
     public function city(): BelongsTo

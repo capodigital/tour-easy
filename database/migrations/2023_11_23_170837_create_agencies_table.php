@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('web')->nullable();
             $table->text('notes')->nullable();
             $table->string('phone', 30)->nullable();
+            $table->softDeletes();
             $table->foreignId('city_id')->references('id')->on('cities')->onDelete('set null');
    
 

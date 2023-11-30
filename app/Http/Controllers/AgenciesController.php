@@ -14,7 +14,19 @@ class AgenciesController extends Controller
     public function index()
     {
 
-        $agencies = Agencies::all();
+        $agencies = Agencies::whithTrashed()->whereNull('deleted_at')->get();
+        return AgenciesResource::collection($agencies);
+    }
+    public function all()
+    {
+
+        $agencies = Agencies::whithTrashed()->get();
+        return AgenciesResource::collection($agencies);
+    }
+    public function deleted()
+    {
+
+        $agencies = Agencies::onlyTrashed()->get();
         return AgenciesResource::collection($agencies);
     }
 
@@ -80,6 +92,13 @@ class AgenciesController extends Controller
     public function destroy(Agencies $agency)
     {
         $agency->delete();
+
+        return response()->json($agency);
+    }
+
+    public function restore(Agencies $agency)
+    {
+        $agency->restore();
 
         return response()->json($agency);
     }

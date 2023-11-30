@@ -31,7 +31,7 @@ class ArtistsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'name',
+            'name' => 'required',
 
         ]);
 
@@ -55,22 +55,31 @@ class ArtistsController extends Controller
      */
     public function edit(Artists $artists)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Artists $artists)
+    public function update(Request $request, Artists $artist)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            
+        ]);
+
+        $artist->update($request->all());
+        $artist->refresh();
+        return new ArtistsResource($artist);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Artists $artists)
+    public function destroy(Artists $artist)
     {
-        //
+        $artist->delete();
+
+        return response()->json($artist);
     }
 }
