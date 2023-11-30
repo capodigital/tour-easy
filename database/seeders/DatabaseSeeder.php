@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Agencies;
+use App\Models\Artists;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         DB::unprepared($sql2);
 
         Agencies::factory(20)->create();
+        Artists::factory(40)->create();
     }
 }
