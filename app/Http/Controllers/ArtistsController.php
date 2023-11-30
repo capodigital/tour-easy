@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArtistsResource;
 use App\Models\Artists;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class ArtistsController extends Controller
      */
     public function index()
     {
-        //
+        $artists = Artists::all();
+        return ArtistsResource::collection($artists);
     }
 
     /**
@@ -28,7 +30,16 @@ class ArtistsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'name',
+
+        ]);
+
+        $artist = new Artists($request->input());
+        $artist->save();
+
+        $artist->refresh();
+        return new ArtistsResource($artist);
     }
 
     /**

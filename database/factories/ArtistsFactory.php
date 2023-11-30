@@ -32,7 +32,7 @@ class ArtistsFactory extends Factory
             'stagename' => $stagename,
             'name' => fake()->name(),
             'lastname' => fake()->lastName(),
-            'birthday' => fake()->dateTimeBetween('-100 years', 'now'),
+            'birthday' => fake()->dateTimeBetween('-100 years', '-15 years'),
             'instagram' => 'https://www.instagram.com/' . $stagename,
             'facebook' => 'https://www.facebook.com/' . $stagename,
             'twitter' => 'https://www.twitter.com/' . $stagename,

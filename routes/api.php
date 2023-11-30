@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgenciesController;
+use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CountriesController;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('agencies', AgenciesController::class);
+Route::resource('artists', ArtistsController::class);
 
 Route::get('/countries', [CountriesController::class, 'index']);
 
