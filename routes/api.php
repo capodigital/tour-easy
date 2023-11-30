@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AgenciesController;
+use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\CountriesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/agencies', [AgenciesController::class, 'index']);
+Route::resource('agencies', AgenciesController::class);
+
+Route::get('/countries', [CountriesController::class, 'index']);
+
+Route::post('/cities',[CitiesController::class,'citiesByCountry']);

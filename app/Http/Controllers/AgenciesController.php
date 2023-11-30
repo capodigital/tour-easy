@@ -31,7 +31,16 @@ class AgenciesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tradename' => 'required',
+            
+        ]);
+
+        $agency = new Agencies($request->input());
+        $agency->save();
+
+        $agency->refresh();
+        return new AgenciesResource($agency);
     }
 
     /**
@@ -53,16 +62,25 @@ class AgenciesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Agencies $agencies)
+    public function update(Request $request, Agencies $agency)
     {
-        //
+        $request->validate([
+            'tradename' => 'required',
+            
+        ]);
+
+        $agency->update($request->all());
+        $agency->refresh();
+        return new AgenciesResource($agency);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Agencies $agencies)
+    public function destroy(Agencies $agency)
     {
-        //
+        $agency->delete();
+
+        return response()->json($agency);
     }
 }
