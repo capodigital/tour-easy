@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Tours;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -29,8 +30,6 @@ class DatabaseSeeder extends Seeder
         Artists::factory(8)->create();
         Tours::factory(4)->create();
 
-        DB::table('users')->insert([
-            ['name' => 'Ariel Leyva', 'email' => 'arielleyva@gmail.com', 'password' => bcrypt('gWCXR3Y8'), 'agency_id' => 1]
-        ]);
+        User::factory(1)->create();
     }
 }
