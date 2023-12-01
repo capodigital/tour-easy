@@ -14,13 +14,13 @@ class AgenciesController extends Controller
     public function index()
     {
 
-        $agencies = Agencies::whithTrashed()->whereNull('deleted_at')->get();
+        $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
         return AgenciesResource::collection($agencies);
     }
     public function all()
     {
 
-        $agencies = Agencies::whithTrashed()->get();
+        $agencies = Agencies::withTrashed()->get();
         return AgenciesResource::collection($agencies);
     }
     public function deleted()
