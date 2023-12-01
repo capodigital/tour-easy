@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgenciesController;
 use App\Http\Controllers\ArtistsController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\ToursController;
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('user/login', [AuthController::class, 'authenticate']);
 
 Route::resource('agencies', AgenciesController::class);
 Route::get('/all_agencies', [AgenciesController::class, 'all']);

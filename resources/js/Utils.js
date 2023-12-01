@@ -77,4 +77,8 @@ export default class Utils {
             });
         }
     }
+
+    static TOKEN = localStorage.getItem("token");
+
+    static USER = JSON.parse(localStorage.getItem("user"));
 }

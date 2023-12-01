@@ -1,7 +1,9 @@
 <script>
+import axios from 'axios';
 import TourCard from '../TourCard.vue';
 
 export default {
+    components: { TourCard },
     data() {
         return {
             tours: [
@@ -111,7 +113,18 @@ export default {
             ]
         };
     },
-    components: { TourCard }
+
+    mounted() {
+        axios.post('api/tours/agency', {
+            id: this.Utils.USER.agency_id
+        }, {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.TOKEN}`
+            }
+        }).then((response) => {
+            console.log(response)
+        })
+    }
 }
 </script>
 <template>
