@@ -24,4 +24,8 @@ class Agencies extends Model
     {
         return $this->hasMany(Artists::class,'agency_id');
     }
+    public function tours(): HasMany
+    {
+        return $this->hasMany(Tours::class,'agency_id');
+    }
 }

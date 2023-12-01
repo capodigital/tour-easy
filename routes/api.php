@@ -4,6 +4,7 @@ use App\Http\Controllers\AgenciesController;
 use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\ToursController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,8 @@ Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
 Route::resource('artists', ArtistsController::class);
 Route::post('/artists/agency',[ArtistsController::class,'artistsByAgency']);
 
-Route::resource('tours', ArtistsController::class);
+Route::resource('tours', ToursController::class);
+Route::post('/tours/agency',[ToursController::class,'toursByAgency']);
 
 Route::get('/countries', [CountriesController::class, 'index']);
 

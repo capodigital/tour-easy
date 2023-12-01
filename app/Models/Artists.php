@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Artists extends Model
 {
@@ -18,5 +19,10 @@ class Artists extends Model
     public function agency(): BelongsTo
     {
         return $this->belongsTo(Agencies::class, 'agency_id');
+    }
+
+    public function tours(): HasMany
+    {
+        return $this->hasMany(Tours::class,'artist_id');
     }
 }

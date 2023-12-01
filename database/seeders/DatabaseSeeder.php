@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Tours;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
 
         Agencies::factory(2)->create();
         Artists::factory(10)->create();
+        Tours::factory(4)->create();
     }
 }
