@@ -39,6 +39,7 @@ class ArtistsResource extends JsonResource
             'tags' => $genres,
             'agency' => new AgenciesResource($agency),
             'agency_id' => $this->agency_id,
+            'image'=> $this->image
                            
         ];
     }

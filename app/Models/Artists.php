@@ -13,7 +13,7 @@ class Artists extends Model
 
     protected $fillable = [
         'stagename', 'name', 'lastname', 'birthday', 'instagram', 'facebook', 'twitter', 'tiktok', 'youtube', 'spotify',
-        'applemusic', 'amazonmusic', 'tidal', 'web', 'extraprofile', 'notes', 'tags', 'agency_id'
+        'applemusic', 'amazonmusic', 'tidal', 'web', 'extraprofile', 'notes', 'tags', 'agency_id', 'image'
     ];
 
     public function agency(): BelongsTo

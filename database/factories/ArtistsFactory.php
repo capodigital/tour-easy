@@ -17,6 +17,14 @@ class ArtistsFactory extends Factory
      */
     public function definition(): array
     {
+
+        $images = [
+            asset('storage/artists/artist1.jpeg'),
+            asset('storage/artists/artist2.jpeg'),
+            asset('storage/artists/artist3.jpeg'),
+            asset('storage/artists/artist4.jpeg'),
+        ];
+
         $stagename = fake()->userName();
         $websites = [
             fake()->url,
@@ -49,6 +57,8 @@ class ArtistsFactory extends Factory
             },
             'tags' => implode(', ', $tags),
             'extraprofile' => implode(', ', $websites),
+            'image' => fake()->unique()->randomElement($images),
         ];
+
     }
 }
