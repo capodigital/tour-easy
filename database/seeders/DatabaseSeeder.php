@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         DB::unprepared($sql2);
 
         Agencies::factory(2)->create();
-        Artists::factory(10)->create();
+        Artists::factory(8)->create();
         Tours::factory(4)->create();
     }
 }
