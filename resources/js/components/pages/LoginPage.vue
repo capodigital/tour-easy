@@ -68,7 +68,7 @@ main::before {
     height: 100vh;
     top: 0;
     left: 0;
-    background-image: url("../../../img/pattern_1.png");
+    background-image: url("/src/pattern_1.png");
     opacity: .3;
 }
 </style>

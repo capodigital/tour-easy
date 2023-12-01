@@ -71,6 +71,6 @@ class ToursController extends Controller
         $agency = Agencies::find($request->id);
         $tours = $agency->tours()->get();
 
-        return response()->json($tours);
+        return ToursResource::collection($tours);
     }
 }
