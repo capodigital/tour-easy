@@ -1,7 +1,7 @@
 <template>
     <nav class="w-screen h-16 flex items-center shadow-lg shadow-gray-300 bg-white">
         <div class="px-2">
-            <img src="../../img/logo.svg" class="h-12 w-12" />
+            <img src="src/logo.svg" class="h-12 w-12" />
         </div>
         <div class="flex items-center w-full justify-end px-1">
             <div
@@ -26,7 +26,7 @@
                     </p>
                 </div>
                 <img
-                    src="../../img/user_4.jpg"
+                    src="src/user_4.jpg"
                     class="rounded-full h-10 w-10 cursor-pointer me-2"
                 />
                 <span

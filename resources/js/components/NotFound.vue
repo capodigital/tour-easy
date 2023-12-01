@@ -22,7 +22,7 @@ section::after {
     width: 100%;
     height: 100%;
     position: absolute;
-    background-image: url(../../img/broken-glass.png);
+    background-image: url("/src/broken-glass.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: -20rem -10rem;
