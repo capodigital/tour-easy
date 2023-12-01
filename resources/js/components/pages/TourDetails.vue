@@ -150,7 +150,7 @@ h1 {
 }
 
 .stage {
-    background-image: url(src/background.jpg);
+    background-image: url("/src/background.jpg");
 
     position: relative;
 }
