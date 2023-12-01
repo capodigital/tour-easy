@@ -19,10 +19,10 @@ class ToursFactory extends Factory
     public function definition(): array
     {
         $cartels = [
-            asset('storage/tours/tour1'),
-            asset('storage/tours/tour2'),
-            asset('storage/tours/tour3'),
-            asset('storage/tours/tour4'),
+            asset('storage/tours/tour1.jpeg'),
+            asset('storage/tours/tour2.jpeg'),
+            asset('storage/tours/tour3.jpeg'),
+            asset('storage/tours/tour4.jpeg'),
         ];
         return [
             'tourname' => fake()->catchPhrase(),
