@@ -7,9 +7,9 @@ export default {
 </script>
 <template>
     <a href="#details" class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
-        <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" :src="tour.artist.image" />
+        <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" :src="tour.tourcartel" />
         <h3 class="font-bold text-lg text-gray-900">{{ tour.artist.name }}</h3>
-        <p class="text-gray-500 text-sm leading-4 pe-10">{{ tour.description }}</p>
+        <p class="text-gray-500 text-sm leading-4 pe-10">{{ tour.tourname }}</p>
         <div class="flex justify-around text-xs mt-2">
             <div class="flex rounded bg-gray-300 p-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -22,7 +22,7 @@ export default {
                     <line x1="19" x2="19" y1="16" y2="22" />
                     <line x1="16" x2="22" y1="19" y2="19" />
                 </svg>
-                <p class="ms-1 text-gray-700">{{ tour.start }}</p>
+                <p class="ms-1 text-gray-700">{{ tour.startdate }}</p>
             </div>
             <div class="flex rounded bg-gray-300 p-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -34,7 +34,7 @@ export default {
                     <line x1="3" x2="21" y1="10" y2="10" />
                     <path d="m16 20 2 2 4-4" />
                 </svg>
-                <p class="ms-1 text-gray-700">{{ tour.end }}</p>
+                <p class="ms-1 text-gray-700">{{ tour.enddate }}</p>
             </div>
         </div>
         <div class="flex mt-4">
