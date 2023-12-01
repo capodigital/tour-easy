@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('agencies', AgenciesController::class);
-Route::get('/agencies/all', [AgenciesController::class, 'all']);
-Route::get('/agencies/deleted', [AgenciesController::class, 'deleted']);
+Route::get('/all_agencies', [AgenciesController::class, 'all']);
+Route::get('/deleted_agencies', [AgenciesController::class, 'deleted']);
 Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
 
 Route::resource('artists', ArtistsController::class);
