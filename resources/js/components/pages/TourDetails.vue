@@ -103,34 +103,34 @@ export default {
                 <div class="hero">
                     <div class="hero__inner">
                         <div class="hero__cuboid hero__cuboid--1">
-                            <div class="face face--front"><img src="../../../img/bad-bunny/1.jpg" alt=""></div>
-                            <div class="face face--back"><img src="../../../img/bad-bunny/2.jpg" alt=""></div>
-                            <div class="face face--left"><img src="../../../img/bad-bunny/3.jpeg" alt=""></div>
-                            <div class="face face--right"><img src="../../../img/bad-bunny/4.jpg" alt=""></div>
+                            <div class="face face--front"><img src="src/bad-bunny/1.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/bad-bunny/2.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/bad-bunny/3.jpeg" alt=""></div>
+                            <div class="face face--right"><img src="src/bad-bunny/4.jpg" alt=""></div>
                             <div class="face face--top"></div>
                             <div class="face face--bottom"></div>
                         </div>
                         <div class="hero__cuboid hero__cuboid--2">
-                            <div class="face face--front"><img src="../../../img/bad-bunny/5.jpg" alt=""></div>
-                            <div class="face face--back"><img src="../../../img/bad-bunny/6.jpg" alt=""></div>
-                            <div class="face face--left"><img src="../../../img/bad-bunny/7.jpg" alt=""></div>
-                            <div class="face face--right"><img src="../../../img/bad-bunny/8.jpg" alt=""></div>
+                            <div class="face face--front"><img src="src/bad-bunny/5.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/bad-bunny/6.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/bad-bunny/7.jpg" alt=""></div>
+                            <div class="face face--right"><img src="src/bad-bunny/8.jpg" alt=""></div>
                             <div class="face face--top"></div>
                             <div class="face face--bottom"></div>
                         </div>
                         <div class="hero__cuboid hero__cuboid--3">
-                            <div class="face face--front"><img src="../../../img/bad-bunny/2.jpg" alt=""></div>
-                            <div class="face face--back"><img src="../../../img/bad-bunny/1.jpg" alt=""></div>
-                            <div class="face face--left"><img src="../../../img/bad-bunny/4.jpg" alt=""></div>
-                            <div class="face face--right"><img src="../../../img/bad-bunny/3.jpeg" alt=""></div>
+                            <div class="face face--front"><img src="src/bad-bunny/2.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/bad-bunny/1.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/bad-bunny/4.jpg" alt=""></div>
+                            <div class="face face--right"><img src="src/bad-bunny/3.jpeg" alt=""></div>
                             <div class="face face--top"></div>
                             <div class="face face--bottom"></div>
                         </div>
                         <div class="hero__cuboid hero__cuboid--4">
-                            <div class="face face--front"><img src="../../../img/bad-bunny/7.jpg" alt=""></div>
-                            <div class="face face--back"><img src="../../../img/bad-bunny/8.jpg" alt=""></div>
-                            <div class="face face--left"><img src="../../../img/bad-bunny/5.jpg" alt=""></div>
-                            <div class="face face--right"><img src="../../../img/bad-bunny/6.jpg" alt=""></div>
+                            <div class="face face--front"><img src="src/bad-bunny/7.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/bad-bunny/8.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/bad-bunny/5.jpg" alt=""></div>
+                            <div class="face face--right"><img src="src/bad-bunny/6.jpg" alt=""></div>
                             <div class="face face--top"></div>
                             <div class="face face--bottom"></div>
                         </div>
@@ -150,7 +150,7 @@ h1 {
 }
 
 .stage {
-    background-image: url(../../../img/background.jpg);
+    background-image: url("/src/background.jpg");
 
     position: relative;
 }
