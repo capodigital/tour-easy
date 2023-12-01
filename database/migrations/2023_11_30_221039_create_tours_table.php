@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('enddate')->nullable();
             $table->string('web', 250)->nullable();
             $table->string('tourcartel', 150)->nullable();
-            $table->foreignId('agency_id')->references('id')->on('agencies')->onDelete('set null');
-            $table->foreignId('artist_id')->references('id')->on('artists')->onDelete('set null');
+            $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
+            $table->foreignId('artist_id')->nullable()->references('id')->on('artists')->onDelete('set null');
 
 
         });

@@ -31,7 +31,7 @@ return new class extends Migration
             $table->text('extraprofile')->nullable();
             $table->text('tags')->nullable();
             $table->text('notes')->nullable();
-            $table->foreignId('agency_id')->references('id')->on('agencies')->onDelete('set null');
+            $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');   
-            $table->string('country_id',2);   
+            $table->string('country_id',2)->nullable();   
             $table->foreign('country_id')->references('code')->on('countries')->nullable()->onDelete('set null');
 
         });
