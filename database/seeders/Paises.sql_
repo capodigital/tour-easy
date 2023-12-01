@@ -250,4 +250,5 @@ INSERT INTO `countries` (`code`, `name`) VALUES
 ('GY', 'Guyana'),
 ('LA', 'Lao People''s Democratic Republic'),
 ('CU', 'Cuba'),
+('AN', 'País desconocido'),
 ('ET', 'Ethiopia');
