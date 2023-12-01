@@ -4,14 +4,16 @@ import AppNavbar from "./AppNavbar.vue";
 import HomePage from "./pages/HomePage.vue";
 import TourDetails from "./pages/TourDetails.vue";
 import NotFound from "./NotFound.vue";
+import LoginPage from "./pages/LoginPage.vue";
+import axios from 'axios'
 
 export default {
-    components: { AppNavbar, AppMenu, HomePage, TourDetails, NotFound },
+    components: { AppNavbar, AppMenu, HomePage, TourDetails, NotFound, LoginPage },
     data() {
         const hash = window.location.hash
-        const active = hash == "" ? "home" : hash.substring(1)
+        const active = hash == "" ? "login" : hash.substring(1)
         return {
-            pages: ["#home", "#details"],
+            pages: ["#home", "#details", "#login"],
             active: active,
         }
     },
@@ -54,22 +56,33 @@ export default {
             })
             if (!exist) this.active = "NotFound"
         }
-
+        axios.get('api/user', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.TOKEN}`
+            }
+        }).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            location.href = '#login'
+        })
     },
 };
 </script>
 <template>
-    <AppNavbar />
-    <main class="scroll overflow-auto">
+    <template v-if="active != 'login'">
+        <AppNavbar />
+        <main class="scroll overflow-auto">
+            <transition name="bounce" mode="out-in">
+                <component :is="active"> </component>
+            </transition>
+        </main>
+        <AppMenu />
+    </template>
+    <template v-else>
         <transition name="bounce" mode="out-in">
-            <!-- <keep-alive> -->
             <component :is="active"> </component>
-            <!-- </keep-alive> -->
         </transition>
-        <!-- <TourDetails /> -->
-        <!-- <HomePage /> -->
-    </main>
-    <AppMenu />
+    </template>
 </template>
 <style scoped>
 main {

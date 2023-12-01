@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    
+
     public function run(): void
     {
         $path1 = base_path() . '\database\seeders\Paises.sql_';
@@ -28,5 +28,9 @@ class DatabaseSeeder extends Seeder
         Agencies::factory(2)->create();
         Artists::factory(8)->create();
         Tours::factory(4)->create();
+
+        DB::table('users')->insert([
+            ['name' => 'Ariel Leyva', 'email' => 'arielleyva@gmail.com', 'password' => bcrypt('gWCXR3Y8'), 'agency_id' => 1]
+        ]);
     }
 }
