@@ -13,7 +13,7 @@ export default {
         const hash = window.location.hash
         const active = hash == "" ? "login" : hash.substring(1)
         return {
-            pages: ["#home", "#details", "#login"],
+            pages: ["#home", "#details", "#artists", "#login"],
             active: active,
         }
     },
@@ -58,7 +58,7 @@ export default {
         }
         axios.get('api/user', {
             headers: {
-                'Authorization': `Bearer ${this.Utils.TOKEN}`
+                'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             console.log(response)

@@ -4,25 +4,27 @@
 // } else {
 //     document.documentElement.classList.remove("dark")
 // }
-document.documentElement.classList.remove("dark")
+document.documentElement.classList.remove("dark");
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "../css/app.css"
-import "../scss/app.scss"
+import "../css/app.css";
+import "../scss/app.scss";
 
-import { createApp } from "vue"
-import mitt from "mitt"
-import Utils from "./Utils"
-import App from "./components/App.vue"
+import { createApp } from "vue";
+import mitt from "mitt";
+import Utils from "./Utils";
+import App from "./components/App.vue";
 import HomePage from "./components/pages/HomePage.vue";
 import TourDetails from "./components/pages/TourDetails.vue";
+import ArtistsPage from "./components/pages/ArtistsPage.vue";
 import LoginPage from "./components/pages/LoginPage.vue";
 
-const app = createApp(App)
-app.component('home', HomePage);
-app.component('details', TourDetails);
-app.component('login', LoginPage);
-app.config.globalProperties.Utils = Utils
+const app = createApp(App);
+app.component("home", HomePage);
+app.component("details", TourDetails);
+app.component("artists", ArtistsPage);
+app.component("login", LoginPage);
+app.config.globalProperties.Utils = Utils;
 /** Implementar bus de eventos */
-const emitter = mitt()
-app.config.globalProperties.emitter = emitter
-app.mount("#app")
+const emitter = mitt();
+app.config.globalProperties.emitter = emitter;
+app.mount("#app");

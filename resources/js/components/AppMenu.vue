@@ -3,7 +3,24 @@ export default {
     data() {
         return {
             active: 0,
+            pages: ["#home", "#artists"],
         }
+    },
+    methods: {
+        update() {
+            const hash = location.hash
+            if (hash == "#home") {
+                this.active = 0;
+            } else if (hash == "#artists") {
+                this.active = 1;
+            }
+        }
+    },
+    created() {
+        window.onhashchange = () => {
+            this.update()
+        }
+        this.update()
     }
 }
 </script>
@@ -42,7 +59,7 @@ export default {
                     <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = 1" href="#personal"
+            <a class="transition-all px-5" @click="active = 1" href="#artists"
                 :class="{ 'text-gray-500': active != 1, 'text-black': active == 1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 1 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
