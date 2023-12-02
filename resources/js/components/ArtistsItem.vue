@@ -41,7 +41,7 @@ export default {
                         class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
                         <img src="src/Tiktok.png" class="" />
                     </a>
-                    <a :href="artist.extraprofile" target="_blank"
+                    <a :href="artist.extraprofile.split(',')[0]" target="_blank"
                         class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
                         <img src="src/Link.png" class="" />
                     </a>
@@ -72,6 +72,7 @@ export default {
                     </a>
                 </div>
             </div>
+            
             <div class="px-2">
                 <button class="bg-black px-2 py-1 text-white rounded me-2 text-sm" v-for="tag in tags(artist.tags)">{{ tag
                 }}</button>
