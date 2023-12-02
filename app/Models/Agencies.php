@@ -30,4 +30,8 @@ class Agencies extends Model
     {
         return $this->hasMany(Tours::class,'agency_id');
     }
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'agency_id');
+    }
 }

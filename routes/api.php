@@ -28,6 +28,7 @@ Route::post('user/login', [AuthController::class, 'authenticate']);
 
 Route::resource('agencies', AgenciesController::class);
 Route::get('/all_agencies', [AgenciesController::class, 'all']);
+Route::post('/agency/user',[AgenciesController::class,'agencyByUser']);
 Route::get('/deleted_agencies', [AgenciesController::class, 'deleted']);
 Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
 

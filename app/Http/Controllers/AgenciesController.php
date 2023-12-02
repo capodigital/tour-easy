@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AgenciesResource;
 use App\Models\Agencies;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AgenciesController extends Controller
@@ -101,5 +102,13 @@ class AgenciesController extends Controller
         $agency->restore();
 
         return response()->json($agency);
+    }
+
+    public function agencyByUser(Request $request)
+    {
+        $user = User::find($request->id);
+        $agency = $user->agency()->get();
+
+        return new AgenciesResource($agency);
     }
 }
