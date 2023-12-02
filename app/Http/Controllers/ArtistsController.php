@@ -14,7 +14,17 @@ class ArtistsController extends Controller
      */
     public function index()
     {
-        $artists = Artists::all();
+        $artists = Artists::withTrashed()->whereNull('deleted_at')->get();
+        return ArtistsResource::collection($artists);
+    }
+    public function all()
+    {
+        $artists = Artists::withTrashed()->get();
+        return ArtistsResource::collection($artists);
+    }
+    public function deleted()
+    {
+        $artists = Artists::onlyTrashed()->get();
         return ArtistsResource::collection($artists);
     }
 
@@ -80,6 +90,12 @@ class ArtistsController extends Controller
     public function destroy(Artists $artist)
     {
         $artist->delete();
+
+        return response()->json($artist);
+    }
+    public function restore(Artists $artist)
+    {
+        $artist->restore();
 
         return response()->json($artist);
     }

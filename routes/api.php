@@ -32,9 +32,15 @@ Route::get('/deleted_agencies', [AgenciesController::class, 'deleted']);
 Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
 
 Route::resource('artists', ArtistsController::class);
+Route::get('/all_artists', [ArtistsController::class, 'all']);
+Route::get('/deleted_artists', [ArtistsController::class, 'deleted']);
+Route::post('/artists/{id}/restore', [ArtistsController::class, 'restore']);
 Route::post('/artists/agency',[ArtistsController::class,'artistsByAgency']);
 
 Route::resource('tours', ToursController::class);
+Route::get('/all_tours', [ToursController::class, 'all']);
+Route::get('/deleted_tours', [ToursController::class, 'deleted']);
+Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
 Route::post('/tours/agency',[ToursController::class,'toursByAgency']);
 
 Route::get('/countries', [CountriesController::class, 'index']);

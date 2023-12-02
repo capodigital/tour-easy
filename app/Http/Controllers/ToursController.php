@@ -14,7 +14,17 @@ class ToursController extends Controller
      */
     public function index()
     {
-        $tours = Tours::all();
+        $tours = Tours::withTrashed()->whereNull('deleted_at')->get();
+        return ToursResource::collection($tours);
+    }
+    public function all()
+    {
+        $tours = Tours::withTrashed()->get();
+        return ToursResource::collection($tours);
+    }
+    public function deleted()
+    {
+        $tours = Tours::onlyTrashed()->get();
         return ToursResource::collection($tours);
     }
 
@@ -61,9 +71,17 @@ class ToursController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tours $tours)
+    public function destroy(Tours $tour)
     {
-        //
+        $tour->delete();
+
+        return response()->json($tour);
+    }
+    public function restore(Tours $tour)
+    {
+        $tour->restore();
+
+        return response()->json($tour);
     }
 
     public function toursByAgency(Request $request)
