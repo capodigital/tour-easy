@@ -7,7 +7,7 @@ export default {
 </script>
 <template>
     <a href="#details" class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
-        <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" :src="tour.tourcartel" />
+        <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" :src="tour.tourcartel.replace('http://localhost/', '')" />
         <h3 class="font-bold text-lg text-gray-900">{{ tour.artist.name }}</h3>
         <p class="text-gray-500 text-sm leading-4 pe-10">{{ tour.tourname }}</p>
         <div class="flex justify-around text-xs mt-2">
