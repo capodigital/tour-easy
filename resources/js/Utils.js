@@ -83,6 +83,7 @@ export default class Utils {
     }
 
     static user() {
+
         return JSON.parse(localStorage.getItem("user"));
     }
 }
