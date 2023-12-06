@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Typeredes extends Model
+class Typecontacts extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'logo'
+        'description'
     ];
 
-    public function socialmedias(): HasMany
+    public function contacts(): HasMany
     {
-        return $this->hasMany(Socialmedias::class,'typeredes_id');
+        return $this->hasMany(Contacts::class,'typecontacts_id');
     }
 }

@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Contacts;
 use App\Models\Socialmedias;
 use App\Models\Tours;
 use App\Models\User;
@@ -24,6 +25,10 @@ class DatabaseSeeder extends Seeder
             TyperedesSeeder::class,
            
         ]);
+        $this->call([
+            TypecontactsSeeder::class,
+           
+        ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
         $path2 = base_path() . '\database\seeders\Ciudades.sql_';
         $sql1 = file_get_contents($path1);
@@ -40,6 +45,13 @@ class DatabaseSeeder extends Seeder
             
         Tours::factory(4)->create();
         Socialmedias::factory(10)->tour()->create();
+
+        Contacts::factory(10)->create();
+
+        $this->call([
+            TourcontactsSeeder::class,
+           
+        ]);
 
 
         User::factory(1)->create();

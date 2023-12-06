@@ -43,4 +43,9 @@ class Agencies extends Model
     {
         return $this->morphMany(Socialmedias::class, 'socialmediasable','socialmediaable_type','socialmediaable_id');
     }
+
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contacts::class,'agency_id');
+    }
 }

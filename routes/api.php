@@ -4,6 +4,7 @@ use App\Http\Controllers\AgenciesController;
 use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\ToursController;
 use Illuminate\Http\Request;
@@ -43,6 +44,9 @@ Route::get('/all_tours', [ToursController::class, 'all']);
 Route::get('/deleted_tours', [ToursController::class, 'deleted']);
 Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
 Route::post('/tours/agency',[ToursController::class,'toursByAgency']);
+
+Route::resource('contacts', ContactsController::class);
+
 
 Route::get('/countries', [CountriesController::class, 'index']);
 

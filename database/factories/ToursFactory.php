@@ -24,6 +24,7 @@ class ToursFactory extends Factory
             asset('storage/tours/tour3.jpeg'),
             asset('storage/tours/tour4.jpeg'),
         ];
+        
         return [
             'tourname' => fake()->catchPhrase(),
             'startdate' => fake()->dateTimeBetween('now', '+1 month'),
