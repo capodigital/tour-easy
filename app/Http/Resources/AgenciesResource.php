@@ -29,6 +29,8 @@ class AgenciesResource extends JsonResource
             'phone' => $this->phone,
             'city' => new CitiesResource($city),
             'city_id' => $this->city_id,
+            'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
+
                            
         ];
     }

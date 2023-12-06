@@ -10,7 +10,7 @@ class Socialmedias extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'description', 'typeredes_id', 'socialmediaable_id', 'socialmediaable_type'
+        'description', 'typeredes_id', 'socialmediaable_id', 'socialmediaable_type','url'
     ];
 
     public function socialmediasable(): MorphTo

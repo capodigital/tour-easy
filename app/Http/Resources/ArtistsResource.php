@@ -17,7 +17,6 @@ class ArtistsResource extends JsonResource
     {
         $agency = Agencies::find($this->agency_id);
         $genres = explode(', ', $this->tags);
-        $profiles = explode(', ', $this->extraprofile);
         return [
             'id' => $this->id,
             'stagename' => $this->stagename,
@@ -28,7 +27,8 @@ class ArtistsResource extends JsonResource
             'tags' => $genres,
             'agency' => new AgenciesResource($agency),
             'agency_id' => $this->agency_id,
-            'image'=> $this->image
+            'image'=> $this->image,
+            'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
                            
         ];
     }

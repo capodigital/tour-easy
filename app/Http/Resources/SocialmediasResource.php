@@ -18,6 +18,7 @@ class SocialmediasResource extends JsonResource
         $typered = Typeredes::find($this->typeredes_id);
         return [
             'id' => $this->id,
+            'url'=>$this->url,
             'description' => $this->description,
             'typered' => new TyperedesResource($typered),
             'typeredes_id' => $this->typeredes_id,

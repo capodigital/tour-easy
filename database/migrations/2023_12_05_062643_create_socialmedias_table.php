@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('socialmedias', function (Blueprint $table) {
             $table->id();
             $table->text('description');
+            $table->string('url');
             $table->foreignId('typeredes_id')->nullable()->references('id')->on('typeredes');
             $table->unsignedBigInteger('socialmediaable_id');
             $table->string('socialmediaable_type');
