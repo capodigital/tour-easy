@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Tours;
 use App\Models\Typeredes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -45,6 +46,16 @@ class SocialmediasFactory extends Factory
             return [
                 'socialmediaable_id' => Agencies::inRandomOrder()->first()->id,
                 'socialmediaable_type' => 'App\Models\Agencies',
+            ];
+        });
+    }
+
+    public function tour()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'socialmediaable_id' => Tours::inRandomOrder()->first()->id,
+                'socialmediaable_type' => 'App\Models\Tours',
             ];
         });
     }

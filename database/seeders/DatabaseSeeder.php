@@ -34,11 +34,13 @@ class DatabaseSeeder extends Seeder
         Agencies::factory(2)->create();
         Socialmedias::factory(3)->agency()->create();
 
-        $artistas = Artists::factory(4)->create();
+        Artists::factory(4)->create();
         Socialmedias::factory(10)->artist()->create();
 
             
         Tours::factory(4)->create();
+        Socialmedias::factory(10)->tour()->create();
+
 
         User::factory(1)->create();
     }
