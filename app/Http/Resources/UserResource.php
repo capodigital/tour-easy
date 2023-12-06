@@ -15,14 +15,10 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $agency = Agencies::find($this->agency_id);
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'agency' => new AgenciesResource($agency),
-            'agency_id' => $this->agency_id,
-                           
+            'email' => $this->email,                           
         ];
     }
 }

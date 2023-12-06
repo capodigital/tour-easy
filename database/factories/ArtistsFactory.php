@@ -33,6 +33,8 @@ class ArtistsFactory extends Factory
             'stagename' => $stagename,
             'name' => fake()->name(),
             'lastname' => fake()->lastName(),
+            'email' => fake()->email(),
+            'password' =>  bcrypt('artista123'),
             'birthday' => fake()->dateTimeBetween('-100 years', '-15 years'),
             'notes' => fake()->paragraph(),
             'agency_id' => function () {

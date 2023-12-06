@@ -28,6 +28,7 @@ class ArtistsResource extends JsonResource
             'agency' => new AgenciesResource($agency),
             'agency_id' => $this->agency_id,
             'image'=> $this->image,
+            'email' => $this->email,  
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
                            
         ];

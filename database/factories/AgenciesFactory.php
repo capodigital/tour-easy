@@ -27,6 +27,7 @@ class AgenciesFactory extends Factory
             'owner' => fake()->name(),
             'address' => fake()->address(),
             'email' => fake()->companyEmail(),
+            'password' =>  bcrypt('agencia123'),
             'notes' => fake()->paragraph(),
             'phone' => fake()->phoneNumber(),
             'city_id' => function () {

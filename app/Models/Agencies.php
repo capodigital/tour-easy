@@ -15,7 +15,15 @@ class Agencies extends Model
     use SoftDeletes;
     protected $fillable = [
         'tradename', 'taxname', 'taxcode', 'owner', 'address', 'email', 'notes', 'phone',
-        'city_id',
+        'city_id', 'password'
+    ];
+    protected $hidden = [
+        'password',
+    ];
+
+
+    protected $casts = [
+        'password' => 'hashed',
     ];
 
     public function city(): BelongsTo
@@ -30,10 +38,6 @@ class Agencies extends Model
     public function tours(): HasMany
     {
         return $this->hasMany(Tours::class,'agency_id');
-    }
-    public function usuario(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'agency_id');
     }
     public function socialmedias(): MorphMany
     {

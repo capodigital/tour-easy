@@ -15,8 +15,18 @@ class Artists extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'stagename', 'name', 'lastname', 'birthday', 'notes', 'tags', 'agency_id', 'image'
+        'stagename', 'name', 'lastname', 'birthday', 'notes', 'tags', 'agency_id', 'image',
+        'email', 'password'
     ];
+    protected $hidden = [
+        'password',
+    ];
+
+   
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
 
     public function agency(): BelongsTo
     {

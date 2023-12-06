@@ -21,6 +21,8 @@ return new class extends Migration
             $table->text('tags')->nullable();
             $table->text('notes')->nullable();
             $table->string('image', 150)->nullable();
+            $table->string('email', 250)->unique()->nullable();
+            $table->string('password');
             $table->softDeletes();
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
         });
