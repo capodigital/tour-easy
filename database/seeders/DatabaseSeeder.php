@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Socialmedias;
 use App\Models\Tours;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,10 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        $this->call([
+            TyperedesSeeder::class,
+           
+        ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
         $path2 = base_path() . '\database\seeders\Ciudades.sql_';
         $sql1 = file_get_contents($path1);
@@ -27,7 +32,12 @@ class DatabaseSeeder extends Seeder
         DB::unprepared($sql2);
 
         Agencies::factory(2)->create();
-        Artists::factory(4)->create();
+        Socialmedias::factory(3)->agency()->create();
+
+        $artistas = Artists::factory(4)->create();
+        Socialmedias::factory(10)->artist()->create();
+
+            
         Tours::factory(4)->create();
 
         User::factory(1)->create();

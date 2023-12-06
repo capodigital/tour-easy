@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Agencies extends Model
@@ -13,7 +14,7 @@ class Agencies extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
-        'tradename', 'taxname', 'taxcode', 'owner', 'address', 'email', 'web', 'notes', 'phone',
+        'tradename', 'taxname', 'taxcode', 'owner', 'address', 'email', 'notes', 'phone',
         'city_id',
     ];
 
@@ -33,5 +34,9 @@ class Agencies extends Model
     public function usuario(): BelongsTo
     {
         return $this->belongsTo(User::class, 'agency_id');
+    }
+    public function socialmedias(): MorphMany
+    {
+        return $this->morphMany(Socialmedias::class, 'socialmediasable','socialmediaable_type','socialmediaable_id');
     }
 }

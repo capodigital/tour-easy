@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('tourname', 100)->nullable();
             $table->date('startdate')->nullable();
             $table->date('enddate')->nullable();
-            $table->string('web', 250)->nullable();
             $table->string('tourcartel', 150)->nullable();
+            $table->text('notes')->nullable();
             $table->softDeletes();
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
             $table->foreignId('artist_id')->nullable()->references('id')->on('artists')->onDelete('set null');

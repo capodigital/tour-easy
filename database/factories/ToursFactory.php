@@ -28,7 +28,7 @@ class ToursFactory extends Factory
             'tourname' => fake()->catchPhrase(),
             'startdate' => fake()->dateTimeBetween('now', '+1 month'),
             'enddate' => fake()->dateTimeBetween('+1 month', '+2 months'),
-            'web' => fake()->url(),
+            'notes' => fake()->paragraph(),
             'agency_id' => function () {
                 return Agencies::all()->random()->id;
             },

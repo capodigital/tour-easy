@@ -18,17 +18,6 @@ return new class extends Migration
             $table->string('name', 50)->nullable();
             $table->string('lastname', 50)->nullable();
             $table->date('birthday')->nullable();
-            $table->string('instagram', 250)->nullable();
-            $table->string('facebook', 250)->nullable();
-            $table->string('twitter', 250)->nullable();
-            $table->string('tiktok', 250)->nullable();
-            $table->string('youtube', 250)->nullable();
-            $table->string('spotify', 250)->nullable();
-            $table->string('applemusic', 250)->nullable();
-            $table->string('amazonmusic', 250)->nullable();
-            $table->string('tidal', 250)->nullable();
-            $table->string('web', 250)->nullable();
-            $table->text('extraprofile')->nullable();
             $table->text('tags')->nullable();
             $table->text('notes')->nullable();
             $table->string('image', 150)->nullable();

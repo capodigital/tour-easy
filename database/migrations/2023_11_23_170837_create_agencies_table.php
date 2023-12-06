@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('owner', 50)->nullable();
             $table->string('address', 250)->nullable();
             $table->string('email', 250)->unique()->nullable();
-            $table->text('web')->nullable();
             $table->text('notes')->nullable();
             $table->string('phone', 30)->nullable();
             $table->softDeletes();
