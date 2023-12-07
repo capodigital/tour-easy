@@ -10,6 +10,7 @@ use App\Models\Contacts;
 use App\Models\Places;
 use App\Models\Socialmedias;
 use App\Models\Tours;
+use App\Models\Typeagencies;
 use App\Models\Typeitineraries;
 use App\Models\Typeplaces;
 use App\Models\User;
@@ -38,6 +39,10 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             TypeplacesSeeder::class,
+           
+        ]);
+        $this->call([
+            TypeagenciesSeeder::class,
            
         ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';

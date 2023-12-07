@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('phone', 30)->nullable();
             $table->softDeletes();
             $table->foreignId('city_id')->nullable()->references('id')->on('cities')->onDelete('set null');
-   
+            $table->foreignId('typeagency_id')->nullable()->references('id')->on('typeagencies')->onDelete('set null');
+
 
         });
     }

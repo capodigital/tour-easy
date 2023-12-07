@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Typecontacts extends Model
+class Typeagencies extends Model
 {
     use HasFactory;
     protected $fillable = [
         'description'
     ];
 
-    public function contacts(): HasMany
+    public function agencies(): HasMany
     {
-        return $this->hasMany(Contacts::class,'typecontact_id');
+        return $this->hasMany(Agencies::class,'typeagency_id');
     }
 }

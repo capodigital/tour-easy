@@ -15,7 +15,7 @@ class Agencies extends Model
     use SoftDeletes;
     protected $fillable = [
         'tradename', 'taxname', 'taxcode', 'owner', 'address', 'email', 'notes', 'phone',
-        'city_id', 'password'
+        'city_id', 'password', 'typeagency_id'
     ];
     protected $hidden = [
         'password',
@@ -29,6 +29,10 @@ class Agencies extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(Cities::class, 'city_id');
+    }
+    public function typeagency(): BelongsTo
+    {
+        return $this->belongsTo(Typeagencies::class, 'typeagency_id');
     }
 
     public function artists(): HasMany

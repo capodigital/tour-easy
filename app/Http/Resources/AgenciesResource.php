@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Cities;
+use App\Models\Typeagencies;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,6 +17,7 @@ class AgenciesResource extends JsonResource
     public function toArray(Request $request): array
     {
         $city = Cities::find($this->city_id);
+        $typeagency = Typeagencies::find($this->typeagency_id);
         return [
             'id' => $this->id,
             'tradename' => $this->tradename,
@@ -29,6 +31,8 @@ class AgenciesResource extends JsonResource
             'phone' => $this->phone,
             'city' => new CitiesResource($city),
             'city_id' => $this->city_id,
+            'typeagency' => new TypeagenciesResource($typeagency),
+            'typeagency_id' => $this->typeagency_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
 
                            
