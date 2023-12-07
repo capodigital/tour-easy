@@ -33,11 +33,11 @@ class DatabaseSeeder extends Seeder
            
         ]);
         $this->call([
-            Typeitineraries::class,
+            TypeitinerariesSeeder::class,
            
         ]);
         $this->call([
-            Typeplaces::class,
+            TypeplacesSeeder::class,
            
         ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
