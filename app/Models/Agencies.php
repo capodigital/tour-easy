@@ -52,4 +52,8 @@ class Agencies extends Model
     {
         return $this->hasMany(Contacts::class,'agency_id');
     }
+    public function suppliers(): HasMany
+    {
+        return $this->hasMany(Suppliers::class,'agency_id');
+    }
 }

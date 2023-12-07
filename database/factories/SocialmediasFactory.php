@@ -4,6 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Contacts;
+use App\Models\Places;
+use App\Models\Suppliers;
 use App\Models\Tours;
 use App\Models\Typeredes;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -56,6 +59,35 @@ class SocialmediasFactory extends Factory
             return [
                 'socialmediaable_id' => Tours::inRandomOrder()->first()->id,
                 'socialmediaable_type' => 'App\Models\Tours',
+            ];
+        });
+    }
+
+    public function contact()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'socialmediaable_id' => Contacts::inRandomOrder()->first()->id,
+                'socialmediaable_type' => 'App\Models\Contacts',
+            ];
+        });
+    }
+
+    public function place()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'socialmediaable_id' => Places::inRandomOrder()->first()->id,
+                'socialmediaable_type' => 'App\Models\Places',
+            ];
+        });
+    }
+    public function supplier()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'socialmediaable_id' => Suppliers::inRandomOrder()->first()->id,
+                'socialmediaable_type' => 'App\Models\Suppliers',
             ];
         });
     }

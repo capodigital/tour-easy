@@ -38,6 +38,8 @@ class PlacesResource extends JsonResource
             'typeplace_id' => $this->typeplace_id,
             'city' => new CitiesResource($city),
             'city_id' => $this->city_id, 
+            'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
+
                            
         ];
     }

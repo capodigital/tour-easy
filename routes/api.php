@@ -7,6 +7,7 @@ use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ToursController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::post('/tours/agency',[ToursController::class,'toursByAgency']);
 Route::resource('contacts', ContactsController::class);
 
 Route::resource('places', PlacesController::class);
+
+Route::resource('suppliers', SuppliersController::class);
 
 Route::get('/countries', [CountriesController::class, 'index']);
 

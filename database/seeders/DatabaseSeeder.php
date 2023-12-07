@@ -9,6 +9,7 @@ use App\Models\Artists;
 use App\Models\Contacts;
 use App\Models\Places;
 use App\Models\Socialmedias;
+use App\Models\Suppliers;
 use App\Models\Tours;
 use App\Models\Typeagencies;
 use App\Models\Typeitineraries;
@@ -63,6 +64,11 @@ class DatabaseSeeder extends Seeder
         Socialmedias::factory(10)->tour()->create();
 
         Contacts::factory(10)->create();
+        Socialmedias::factory(10)->contact()->create();
+
+        Suppliers::factory(10)->create();
+        Socialmedias::factory(10)->supplier()->create();
+
 
         $this->call([
             TourcontactsSeeder::class,
@@ -70,6 +76,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Places::factory(10)->create();
+        Socialmedias::factory(10)->place()->create();
+
 
         User::factory(1)->create();
     }
