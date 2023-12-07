@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('places', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->nullable();
-            $table->string('lastname', 50)->nullable();
-            $table->date('birthday')->nullable();
-            $table->string('email', 250)->nullable();
+            $table->string('name', 100)->nullable();
+            $table->string('google_id', 100)->nullable();
             $table->string('phone', 30)->nullable();
             $table->string('extra_phone', 30)->nullable();
-            $table->enum('lang', ['Inglés','Español', 'Francés'])->nullable();
-            $table->string('position', 150)->nullable();
-            $table->boolean('notify')->default(false);
+            $table->string('manager', 100)->nullable();
+            $table->string('email', 250)->nullable();
+            $table->string('gis', 250)->nullable();
             $table->text('notes')->nullable();
-            $table->foreignId('typecontact_id')->nullable()->references('id')->on('typecontacts')->onDelete('set null');
+            $table->string('address', 250)->nullable();
+            $table->foreignId('typeplace_id')->nullable()->references('id')->on('typeplaces')->onDelete('set null');
             $table->foreignId('city_id')->nullable()->references('id')->on('cities')->onDelete('set null');
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
             $table->timestamps();
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('places');
     }
 };

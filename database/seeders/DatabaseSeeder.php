@@ -7,8 +7,11 @@ namespace Database\Seeders;
 use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Contacts;
+use App\Models\Places;
 use App\Models\Socialmedias;
 use App\Models\Tours;
+use App\Models\Typeitineraries;
+use App\Models\Typeplaces;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +30,14 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             TypecontactsSeeder::class,
+           
+        ]);
+        $this->call([
+            Typeitineraries::class,
+           
+        ]);
+        $this->call([
+            Typeplaces::class,
            
         ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
@@ -53,6 +64,7 @@ class DatabaseSeeder extends Seeder
            
         ]);
 
+        Places::factory(10)->create();
 
         User::factory(1)->create();
     }

@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Contacts extends Model
+class Places extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'lastname', 'birthday', 'notes', 'extra_phone', 'agency_id', 'phone',
-        'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
+        'name', 'google_id', 'phone', 'extra_phone', 'manager',
+        'email', 'gis', 'notes', 'address', 'typeplace_id', 'city_id', 'agency_id'
     ];
+
     public function agency(): BelongsTo
     {
         return $this->belongsTo(Agencies::class, 'agency_id');
@@ -22,13 +23,9 @@ class Contacts extends Model
     {
         return $this->belongsTo(Cities::class, 'city_id');
     }
-    public function typecontact(): BelongsTo
+    public function typeplace(): BelongsTo
     {
-        return $this->belongsTo(Typecontacts::class, 'typecontact_id');
-    }
-    public function tours(): BelongsToMany
-    {
-        return $this->belongsToMany(Tours::class, 'tourcontacts', 'contact_id', 'tour_id')->withTimestamps();
+        return $this->belongsTo(Typeplaces::class, 'typeplace_id');
     }
     
 }

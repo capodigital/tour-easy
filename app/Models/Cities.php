@@ -21,4 +21,12 @@ class Cities extends Model
     {
         return $this->hasMany(Agencies::class,'city_id');
     }
+    public function places(): HasMany
+    {
+        return $this->hasMany(Places::class,'city_id');
+    }
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contacts::class,'city_id');
+    }
 }
