@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -32,5 +33,9 @@ class Tours extends Model
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contacts::class, 'tourcontacts', 'tour_id', 'contact_id')->withTimestamps();
+    }
+    public function itineraries(): HasMany
+    {
+        return $this->hasMany(Itineraries::class,'tour_id');
     }
 }

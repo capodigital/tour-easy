@@ -13,7 +13,7 @@ class TypeagenciesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('typeplaces')->insert([
+        DB::table('typeagencies')->insert([
             [
                 'description' => 'Agencia',
                 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Suppliers extends Model
@@ -27,5 +28,10 @@ class Suppliers extends Model
     public function socialmedias(): MorphMany
     {
         return $this->morphMany(Socialmedias::class, 'socialmediasable','socialmediaable_type','socialmediaable_id');
+    }
+    
+    public function itineraries(): HasMany
+    {
+        return $this->hasMany(Itineraries::class,'supplier_id');
     }
 }

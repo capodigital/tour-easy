@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Contacts;
+use App\Models\Itineraries;
 use App\Models\Places;
 use App\Models\Socialmedias;
 use App\Models\Suppliers;
@@ -15,6 +16,7 @@ use App\Models\Typeagencies;
 use App\Models\Typeitineraries;
 use App\Models\Typeplaces;
 use App\Models\User;
+use Database\Factories\ItinerariesFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -68,6 +70,10 @@ class DatabaseSeeder extends Seeder
 
         Suppliers::factory(10)->create();
         Socialmedias::factory(10)->supplier()->create();
+
+        Places::factory(10)->create();
+
+        Itineraries::factory(10)->create();
 
 
         $this->call([

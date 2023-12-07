@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\ItinerariesController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ToursController;
@@ -52,6 +53,8 @@ Route::resource('contacts', ContactsController::class);
 Route::resource('places', PlacesController::class);
 
 Route::resource('suppliers', SuppliersController::class);
+
+Route::resource('itineraries', ItinerariesController::class);
 
 Route::get('/countries', [CountriesController::class, 'index']);
 

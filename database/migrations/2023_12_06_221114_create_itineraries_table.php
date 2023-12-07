@@ -14,6 +14,22 @@ return new class extends Migration
         Schema::create('itineraries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tour_id')->nullable()->references('id')->on('tours')->onDelete('set null');
+            $table->foreignId('place_id')->nullable()->references('id')->on('places')->onDelete('set null');
+            $table->foreignId('city_start_id')->nullable()->references('id')->on('cities')->onDelete('set null');
+            $table->foreignId('city_destination_id')->nullable()->references('id')->on('cities')->onDelete('set null');
+            $table->foreignId('typeitinerary_id')->nullable()->references('id')->on('typeitineraries')->onDelete('set null');
+            $table->foreignId('contact_id')->nullable()->references('id')->on('contacts')->onDelete('set null');
+            $table->foreignId('supplier_id')->nullable()->references('id')->on('suppliers')->onDelete('set null');
+            $table->string('name', 150)->nullable();
+            $table->date('startdate')->nullable();
+            $table->date('enddate')->nullable();
+            $table->text('notes')->nullable();
+            $table->boolean('outoflour', 150)->default(false);
+            $table->string('carrier', 150)->nullable();
+            $table->string('carrier_id', 150)->nullable();
+            $table->time('showcheck');
+            $table->time('showtime');
+            $table->boolean('notify')->default(false);
             $table->timestamps();
         });
     }
