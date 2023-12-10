@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ItinerariesResource;
 use App\Models\Itineraries;
+use App\Models\Tours;
 use Illuminate\Http\Request;
 
 class ItinerariesController extends Controller
@@ -63,5 +64,13 @@ class ItinerariesController extends Controller
     public function destroy(Itineraries $itineraries)
     {
         //
+    }
+
+    public function itinerariesByTour(Request $request)
+    {
+        $tour = Tours::find($request->id);
+        $itineraries = $tour->itineraries()->get();
+
+        return ItinerariesResource::collection($itineraries);
     }
 }
