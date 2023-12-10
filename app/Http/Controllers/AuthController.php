@@ -33,7 +33,7 @@ class AuthController extends Controller
         }
         $token = $user->createToken('f8b7c4a2e6d9c0a1b3f5')->plainTextToken;
         return response()->json([
-            'user' => new UserResource($user),
+            'user' => $user,
             'token' => $token,
         ]);
     }
@@ -44,5 +44,5 @@ class AuthController extends Controller
         return response('');
     }
 
-    
+
 }
