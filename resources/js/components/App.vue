@@ -13,7 +13,7 @@ export default {
         const hash = window.location.hash
         const active = hash == "" ? "login" : hash.substring(1)
         return {
-            pages: ["#home", "#details", "#artists", "#login"],
+            pages: ["#home", "#details", "#artists", "#login", "#tour"],
             active: active,
         }
     },
@@ -48,7 +48,8 @@ export default {
     mounted() {
         const hash = window.location.hash
         window.onhashchange = () => {
-            this.showComponent(window.location.hash)
+            console.log('has changed')
+            this.showComponent(hash)
         }
         if (hash != "") {
             const exist = this.pages.find((page) => {
@@ -69,7 +70,12 @@ export default {
 };
 </script>
 <template>
-    <template v-if="active != 'login'">
+    <template v-if="active == 'tour'">
+        <transition name="bounce" mode="out-in">
+            <component :is="active"> </component>
+        </transition>
+    </template>
+    <template v-else-if="active != 'login'">
         <AppNavbar />
         <main class="scroll overflow-auto">
             <transition name="bounce" mode="out-in">

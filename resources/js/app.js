@@ -17,12 +17,14 @@ import HomePage from "./components/pages/HomePage.vue";
 import TourDetails from "./components/pages/TourDetails.vue";
 import ArtistsPage from "./components/pages/ArtistsPage.vue";
 import LoginPage from "./components/pages/LoginPage.vue";
+import TourPage from "./components/pages/TourPage.vue";
 
 const app = createApp(App);
 app.component("home", HomePage);
 app.component("details", TourDetails);
 app.component("artists", ArtistsPage);
 app.component("login", LoginPage);
+app.component("tour", TourPage);
 app.config.globalProperties.Utils = Utils;
 /** Implementar bus de eventos */
 const emitter = mitt();
