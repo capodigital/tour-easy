@@ -6,8 +6,7 @@ export default {
 }
 </script>
 <template>
-    <a href="#details"
-        class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
+    <div class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
         <div class="">
             <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400"
                 :src="tour.tourcartel.replace('http://localhost/', '')" />
@@ -46,16 +45,26 @@ export default {
         </div>
         <div class="flex mt-4">
             <div class="flex w-full">
-                <button :class="{ 'border-gray-400': tour.favorite == undefined, 'border-red-600': tour.favorite }"
+                <a :href="'#tour/' + tour.id" :class="{ 'border-gray-400': tour.favorite == undefined, 'border-red-600': tour.favorite }"
                     class="rounded-lg border  w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        :stroke="tour.favorite ? '#ff0000' : '#000'" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-heart">
-                        <path
-                            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-qr-code">
+                        <rect width="5" height="5" x="3" y="3" rx="1" />
+                        <rect width="5" height="5" x="16" y="3" rx="1" />
+                        <rect width="5" height="5" x="3" y="16" rx="1" />
+                        <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
+                        <path d="M21 21v.01" />
+                        <path d="M12 7v3a2 2 0 0 1-2 2H7" />
+                        <path d="M3 12h.01" />
+                        <path d="M12 3h.01" />
+                        <path d="M12 16v.01" />
+                        <path d="M16 12h1" />
+                        <path d="M21 12v.01" />
+                        <path d="M12 21v-1" />
                     </svg>
-                </button>
-                <button class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
+                </a>
+                <a href="#" class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-share-2">
@@ -65,10 +74,10 @@ export default {
                         <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
                         <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
                     </svg>
-                </button>
+                </a>
             </div>
             <div class="flex">
-                <button
+                <a href="#details"
                     class="bg-gradient-to-br overlay-button from-slate-800 to-black text-white px-3 h-7 rounded-lg flex text-sm items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -77,10 +86,10 @@ export default {
                         <circle cx="12" cy="12" r="3" />
                     </svg>
                     Detalles
-                </button>
+                </a>
             </div>
         </div>
-    </a>
+    </div>
 </template>
 <style scoped>
 h3,
