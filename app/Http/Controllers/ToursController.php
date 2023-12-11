@@ -47,9 +47,9 @@ class ToursController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tours $tours)
+    public function show(Tours $tour)
     {
-        //
+        return response()->json($tour);
     }
 
     /**

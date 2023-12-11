@@ -22,7 +22,7 @@ export default {
         </div>
         <div class="p-2">
             <p class="text-sm mb-2 text-white">{{ artist.notes }}</p>
-            <div class="relative h-20 sm:h-24">
+            <!-- <div class="relative h-20 sm:h-24">
                 <p1 class="text-gray-300 text-sm left-1 top-0 font-semibold">Redes sociales</p1>
                 <div class="flex pt-2">
                     <a :href="artist.facebook" target="_blank"
@@ -72,10 +72,16 @@ export default {
                     </a>
                 </div>
             </div>
-            
+
             <div class="px-2">
                 <button class="bg-black px-2 py-1 text-white rounded me-2 text-sm" v-for="tag in tags(artist.tags)">{{ tag
                 }}</button>
+            </div> -->
+            <div class="mt-3 grid grid-cols-6">
+                <a v-for="socialmedia in artist.socialmedias" :href="socialmedia.url" target="_blank"
+                    class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
+                    <img :src="socialmedia.typered.logo.replace('http://localhost/', '')" class="" />
+                </a>
             </div>
         </div>
     </article>

@@ -10,10 +10,11 @@ import axios from 'axios'
 export default {
     components: { AppNavbar, AppMenu, HomePage, TourDetails, NotFound, LoginPage },
     data() {
-        const hash = window.location.hash
+        const separator = location.hash.lastIndexOf('/')
+        const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
         const active = hash == "" ? "login" : hash.substring(1)
         return {
-            pages: ["#home", "#details", "#artists", "#login", "#tour"],
+            pages: ["#home", "#details", "#artists", "#login", "#personal", "#tour"],
             active: active,
         }
     },
@@ -46,9 +47,11 @@ export default {
         },
     },
     mounted() {
-        const hash = window.location.hash
+        const separator = location.hash.lastIndexOf('/')
+        const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
         window.onhashchange = () => {
-            console.log('has changed')
+            const separator = location.hash.lastIndexOf('/')
+            const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
             this.showComponent(hash)
         }
         if (hash != "") {
@@ -61,9 +64,7 @@ export default {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
-        }).then((response) => {
-            console.log(response)
-        }).catch((error) => {
+        }).catch(() => {
             location.href = '#login'
         })
     },

@@ -38,4 +38,10 @@ class Tours extends Model
     {
         return $this->hasMany(Itineraries::class,'tour_id');
     }
+
+    public function toArray() {
+        $data = parent::toArray();
+        $data['artist'] = $this->artist;
+        return $data;
+    }
 }

@@ -22,7 +22,7 @@ class Artists extends Model
         'password',
     ];
 
-   
+
     protected $casts = [
         'password' => 'hashed',
     ];
@@ -41,5 +41,11 @@ class Artists extends Model
     public function socialmedias(): MorphMany
     {
         return $this->morphMany(Socialmedias::class, 'socialmediasable','socialmediaable_type','socialmediaable_id');
+    }
+
+    public function toArray() {
+        $data = parent::toArray();
+        $data['socialmedias'] = $this->socialmedias;
+        return $data;
     }
 }
