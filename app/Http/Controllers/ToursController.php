@@ -14,17 +14,17 @@ class ToursController extends Controller
      */
     public function index()
     {
-        $tours = Tours::withTrashed()->whereNull('deleted_at')->get();
+        $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->orderBy('startdate');
         return ToursResource::collection($tours);
     }
     public function all()
     {
-        $tours = Tours::withTrashed()->get();
+        $tours = Tours::withTrashed()->get()->orderBy('startdate');
         return ToursResource::collection($tours);
     }
     public function deleted()
     {
-        $tours = Tours::onlyTrashed()->get();
+        $tours = Tours::onlyTrashed()->get()->orderBy('startdate');
         return ToursResource::collection($tours);
     }
 
@@ -87,7 +87,7 @@ class ToursController extends Controller
     public function toursByAgency(Request $request)
     {
         $agency = Agencies::find($request->id);
-        $tours = $agency->tours()->get();
+        $tours = $agency->tours()->get()->orderBy('startdate');
 
         return ToursResource::collection($tours);
     }
