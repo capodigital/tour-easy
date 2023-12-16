@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ArtistsResource;
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Documents;
 use App\Models\Socialmedias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -74,6 +75,17 @@ class ArtistsController extends Controller
                 'socialmediaable_type' => 'App\Models\Artists'
             ]);
         }
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $artist->id,
+                'documentable_type' => 'App\Models\Artists'
+            ]);
+        }
 
         $artist->refresh();
         return new ArtistsResource($artist);
@@ -127,6 +139,18 @@ class ArtistsController extends Controller
                 'typeredes_id' => $socialmedia->typeredes_id,
                 'socialmediaable_id' => $artist->id,
                 'socialmediaable_type' => 'App\Models\Artists'
+            ]);
+        }
+        Documents::where('documentable_id', $artist->id)->delete();
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $artist->id,
+                'documentable_type' => 'App\Models\Artists'
             ]);
         }
 

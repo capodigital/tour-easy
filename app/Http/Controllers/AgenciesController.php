@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AgenciesResource;
 use App\Models\Agencies;
+use App\Models\Documents;
 use App\Models\Socialmedias;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -72,6 +73,17 @@ class AgenciesController extends Controller
                 'socialmediaable_type' => 'App\Models\Agencies'
             ]);
         }
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $agency->id,
+                'documentable_type' => 'App\Models\Agencies'
+            ]);
+        }
 
         $agency->refresh();
         return new AgenciesResource($agency);
@@ -119,6 +131,18 @@ class AgenciesController extends Controller
                 'typeredes_id' => $socialmedia->typeredes_id,
                 'socialmediaable_id' => $agency->id,
                 'socialmediaable_type' => 'App\Models\Agencies'
+            ]);
+        }
+        Documents::where('documentable_id', $agency->id)->delete();
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $agency->id,
+                'documentable_type' => 'App\Models\Agencies'
             ]);
         }
 
