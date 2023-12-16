@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AgenciesResource;
 use App\Models\Agencies;
+use App\Models\Socialmedias;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -46,11 +47,31 @@ class AgenciesController extends Controller
     {
         $request->validate([
             'tradename' => 'required',
+            'email' => 'required|email|unique:agencies',
+            'password' => [
+                'required',
+                'string',
+            ],
+            'confirm_password' => 'required|same:password'
             
         ]);
 
-        $agency = new Agencies($request->input());
-        $agency->save();
+        $data = $request->only(['tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
+        'notes', 'phone', 'city_id', 'typeagency_id']);
+
+        $data['password'] = bcrypt($request->password);
+        //Almacenar los datos en la base de datos
+        $agency = Agencies::create($data);
+
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $agency->id,
+                'socialmediaable_type' => 'App\Models\Agencies'
+            ]);
+        }
 
         $agency->refresh();
         return new AgenciesResource($agency);
@@ -79,10 +100,28 @@ class AgenciesController extends Controller
     {
         $request->validate([
             'tradename' => 'required',
+            'email' => ['required', 'email', 'unique:agencies,email,' . $agency->id],
             
         ]);
 
-        $agency->update($request->all());
+        $data = $request->only(['tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
+        'notes', 'phone', 'city_id', 'typeagency_id']);
+
+       
+        //Almacenar los datos en la base de datos
+        $agency->update($data);
+        
+        Socialmedias::where('socialmediaable_id', $agency->id)->delete();
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $agency->id,
+                'socialmediaable_type' => 'App\Models\Agencies'
+            ]);
+        }
+
         $agency->refresh();
         return new AgenciesResource($agency);
     }
