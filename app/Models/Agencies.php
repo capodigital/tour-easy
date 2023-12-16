@@ -47,7 +47,10 @@ class Agencies extends Model
     {
         return $this->morphMany(Socialmedias::class, 'socialmediasable','socialmediaable_type','socialmediaable_id');
     }
-
+    public function documents(): MorphMany
+    {
+        return $this->morphMany(Documents::class, 'documentsable','documentable_type','documentable_id');
+    }
     public function contacts(): HasMany
     {
         return $this->hasMany(Contacts::class,'agency_id');
@@ -55,5 +58,16 @@ class Agencies extends Model
     public function suppliers(): HasMany
     {
         return $this->hasMany(Suppliers::class,'agency_id');
+    }
+
+    public function toArray() {
+        $data = parent::toArray();
+        $data['socialmedias'] = $this->socialmedias;
+        return $data;
+    }
+    public function toArray1() {
+        $data = parent::toArray();
+        $data['documents'] = $this->documents;
+        return $data;
     }
 }
