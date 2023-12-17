@@ -147,13 +147,13 @@ class ContactsController extends Controller
         $agency = Agencies::find($request->id);
         $contacts = $agency->contacts()->get();
 
-        return response()->json($contacts);
+        return ContactsResource::collection($contacts);
     }
     public function contactsByTour(Request $request)
     {
         $tour = Tours::find($request->id);
         $contacts = $tour->contacts()->get();
 
-        return response()->json($contacts);
+        return ContactsResource::collection($contacts);
     }
 }
