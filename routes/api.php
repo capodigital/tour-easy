@@ -50,6 +50,8 @@ Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
 Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
 
 Route::resource('contacts', ContactsController::class);
+Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);
+Route::post('/contacts/tour', [ContactsController::class, 'contactsByTour']);
 
 Route::resource('places', PlacesController::class);
 
