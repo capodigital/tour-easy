@@ -125,10 +125,10 @@ export default {
                     :class="{ 'border-r-black': index % 7 != 6, 'border-b-black': index < forms.length - 7, 'bg-gray-300': day.out != undefined }"
                     v-for="(day, index) in forms">
                     <template v-if="!day.out">
-                        <a :href="'#day/' + "
+                        <button
                             class="absolute right-0 top-1 rounded text-white text-sm bg-gradient-to-tr from-slate-800 to-slate-950 w-5 h-5 text-center me-1">
                             {{
-                                day.day }}</a>
+                                day.day }}</button>
                         <div class="w-full">
                             <div class="rounded">
                                 <!-- <p class="text-gray-400 text-center text-xs">Mañana</p> -->
