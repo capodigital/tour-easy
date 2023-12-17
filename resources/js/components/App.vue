@@ -41,7 +41,6 @@ export default {
          */
         isComponentExist(name) {
             return this.pages.find((page) => {
-                console.log(page);
                 if (page == name) return true
             })
         },

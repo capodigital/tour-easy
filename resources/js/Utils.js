@@ -8,6 +8,10 @@ export default class Utils {
         hour12: true,
     };
 
+    static TEXT_DATE = {
+        dateStyle: "long"
+    };
+
     static FULL_TIME = {
         hour: "2-digit",
         minute: "2-digit",

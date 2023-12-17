@@ -11,10 +11,9 @@ export default {
 }
 </script>
 <template>
-    <div>
-        <article class="w-full bg-gradient-to-tr rounded-lg from-slate-800 via-slate-900 to-slate-950 mb-2">
+        <article class="w-full bg-gradient-to-tr rounded-lg from-slate-800 via-slate-900 to-slate-950 mb-2 max-w-3xl">
             <div class="flex items-center w-full">
-                <div class="p-2 w-11/12">
+                <div class="p-2 w-full">
                     <span class="float-right text-sm text-gray-400">{{ contact.typecontact.description }}</span>
                     <h2 class="font-semibold text-white mb-1">{{ contact.name }}
                     </h2>
@@ -27,8 +26,10 @@ export default {
                                 class="bi bi-envelope"></i> {{ contact.email }}</a>
                     </p>
                 </div>
-                <button @click="collapse = !collapse" :class="{ 'rotate-180': !collapse }"
-                    class="text-white me-2 w-1/12 transition-transform"><i class="bi bi-chevron-down"></i></button>
+                <div class="text-end px-2">
+                    <button @click="collapse = !collapse" :class="{ 'rotate-180': !collapse }"
+                    class="text-white me-2 transition-transform"><i class="bi bi-chevron-down"></i></button>
+                </div>
             </div>
             <div class="w-full transition-all overflow-hidden" :class="{ 'h-0 p-0': collapse, 'h-auto p-2': !collapse }">
                 <p class="text-gray-300 text-sm mb-2"><i class="bi bi-geo-alt"></i> Ciudad: {{ contact.city.name }} ({{
@@ -47,5 +48,4 @@ export default {
                 </div>
             </div>
         </article>
-    </div>
 </template>

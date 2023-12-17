@@ -10,7 +10,6 @@ export default {
         login(e) {
             this.error = null
             axios.post('api/user/login', new FormData(e.target)).then((response) => {
-                console.log(response)
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('user', JSON.stringify(response.data.user))
                 location.href = '#home'
