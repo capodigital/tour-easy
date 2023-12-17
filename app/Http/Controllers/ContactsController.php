@@ -176,6 +176,8 @@ class ContactsController extends Controller
     public function destroy(Contacts $contact)
     {
         $contact->delete();
+        Socialmedias::where('socialmediaable_id', $contact->id)->delete();
+
 
         return response()->json($contact);
     }
