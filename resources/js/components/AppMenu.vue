@@ -16,6 +16,8 @@ export default {
                 this.active = -1;
             } else if (hash == "#personal") {
                 this.active = 1;
+            } else if (hash == "#calendar") {
+                this.active = -2;
             }
         }
     },

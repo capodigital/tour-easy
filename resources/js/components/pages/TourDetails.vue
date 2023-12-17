@@ -1,91 +1,132 @@
 <script>
+import { data } from 'autoprefixer';
 import TourActivity from '../TourActivity.vue';
 import AnimMixin from './AnimMixin';
+import axios from 'axios'
 export default {
     mixins: [AnimMixin],
     data() {
         return {
             activities: [
-                {
-                    name: 'Aeropuerto → Hotel',
-                    description: 'Llegada a destino a las 11:00AM',
-                    type: 'drive',
-                    start: '25/11/2023 10:40AM',
-                    complete: true,
-                },
-                {
-                    name: 'Marlin Square Hotel',
-                    description: 'Hospedaje 2 noches en Suite Lusure',
-                    type: 'hotel',
-                    start: '25/11/2023 11:10AM',
-                    complete: true,
-                },
-                {
-                    name: 'Hotel → Madison Artist',
-                    description: 'Llegada a destino a las 04:30PM',
-                    type: 'drive',
-                    start: '25/11/2023 04:00PM',
-                    complete: true,
-                },
-                {
-                    name: 'Sessión de fotos',
-                    description: 'Cadenas de Univisión y Mediaset',
-                    type: 'photos',
-                    start: '25/11/2023 04:40PM',
-                    complete: true,
-                },
-                {
-                    name: 'Madison Artist → Plaza Roja',
-                    description: 'Llegada a destino a las 05:15PM',
-                    type: 'drive',
-                    start: '25/11/2023 05:30PM'
-                },
-                {
-                    name: 'Sessión de fotos',
-                    description: 'Varias cadenas de televisión invitadas',
-                    type: 'photos',
-                    start: '25/11/2023 05:40PM'
-                },
-                {
-                    name: 'Festival latino-boricua',
-                    description: 'Prueba de sonidos: 07:30PM. \nPuertas abiertas:08:00PM. \nFunción: 2 horas.',
-                    type: 'function',
-                    start: '25/11/2023 07:30PM'
-                },
-                {
-                    name: 'Plaza Roja → Hotel',
-                    description: 'Llegada a destino a las 11:00PM',
-                    type: 'drive',
-                    start: '25/11/2023 10:40PM'
-                },
-                {
-                    name: 'Marlin Square Hotel',
-                    description: 'Cena gratis con todo incluído',
-                    type: 'hotel',
-                    start: '25/11/2023 11:10PM'
-                },
-                {
-                    name: 'Hotel → Madrid',
-                    description: 'Llegada a destino a las 08:30AM',
-                    type: 'drive',
-                    start: '26/11/2023 08:00AM'
-                },
-                {
-                    name: 'Madrid → Aeropuerto',
-                    description: 'Llegada a destino a las 09:00AM',
-                    type: 'drive',
-                    start: '26/11/2023 08:40AM'
-                },
-                {
-                    name: 'Madrid → Barcelona',
-                    description: 'Vuelo: MA56T112023\nLlegada a Barcelona a las 11:45AM',
-                    type: 'travel',
-                    start: '26/11/2023 09:30AM'
-                },
+                // {
+                //     name: 'Aeropuerto → Hotel',
+                //     description: 'Llegada a destino a las 11:00AM',
+                //     type: 'drive',
+                //     start: '25/11/2023 10:40AM',
+                //     complete: true,
+                // },
+                // {
+                //     name: 'Marlin Square Hotel',
+                //     description: 'Hospedaje 2 noches en Suite Lusure',
+                //     type: 'hotel',
+                //     start: '25/11/2023 11:10AM',
+                //     complete: true,
+                // },
+                // {
+                //     name: 'Hotel → Madison Artist',
+                //     description: 'Llegada a destino a las 04:30PM',
+                //     type: 'drive',
+                //     start: '25/11/2023 04:00PM',
+                //     complete: true,
+                // },
+                // {
+                //     name: 'Sessión de fotos',
+                //     description: 'Cadenas de Univisión y Mediaset',
+                //     type: 'photos',
+                //     start: '25/11/2023 04:40PM',
+                //     complete: true,
+                // },
+                // {
+                //     name: 'Madison Artist → Plaza Roja',
+                //     description: 'Llegada a destino a las 05:15PM',
+                //     type: 'drive',
+                //     start: '25/11/2023 05:30PM'
+                // },
+                // {
+                //     name: 'Sessión de fotos',
+                //     description: 'Varias cadenas de televisión invitadas',
+                //     type: 'photos',
+                //     start: '25/11/2023 05:40PM'
+                // },
+                // {
+                //     name: 'Festival latino-boricua',
+                //     description: 'Prueba de sonidos: 07:30PM. <br />Puertas abiertas:08:00PM. <br />Función: 2 horas.',
+                //     type: 'function',
+                //     start: '25/11/2023 07:30PM'
+                // },
+                // {
+                //     name: 'Plaza Roja → Hotel',
+                //     description: 'Llegada a destino a las 11:00PM',
+                //     type: 'drive',
+                //     start: '25/11/2023 10:40PM'
+                // },
+                // {
+                //     name: 'Marlin Square Hotel',
+                //     description: 'Cena gratis con todo incluído',
+                //     type: 'hotel',
+                //     start: '25/11/2023 11:10PM'
+                // },
+                // {
+                //     name: 'Hotel → Madrid',
+                //     description: 'Llegada a destino a las 08:30AM',
+                //     type: 'drive',
+                //     start: '26/11/2023 08:00AM'
+                // },
+                // {
+                //     name: 'Madrid → Aeropuerto',
+                //     description: 'Llegada a destino a las 09:00AM',
+                //     type: 'drive',
+                //     start: '26/11/2023 08:40AM'
+                // },
+                // {
+                //     name: 'Madrid → Barcelona',
+                //     description: 'Vuelo: MA56T112023<br />Llegada a Barcelona a las 11:45AM',
+                //     type: 'travel',
+                //     start: '26/11/2023 09:30AM'
+                // },
             ]
         };
     },
-    components: { TourActivity }
+    components: { TourActivity },
+    mounted() {
+        const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
+        axios.post('api/itineraries/tour', { id: id }).then((response) => {
+            for (let i in response.data.data) {
+                const activity = response.data.data[i]
+                const next = (Number(i) + 1 == response.data.data.length) ? { place: { name: '' } } : response.data.data[Number(i) + 1];
+                let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate;
+                console.log(next)
+                switch (activity.typeitinerary_id) {
+                    case 1:
+                        name = activity.name, description = `Prueba de sonidos: ${activity.showcheck}.<br />Puertas abiertas: ${activity.showtime}`;
+                        break;
+                    case 2:
+                    case 3:
+                    case 5:
+                        name = activity.name, description = `Proveedor: ${activity.supplier.company_name}. <br />${activity.notes}`;
+                        break;
+                    case 4:
+                        name = `${activity.place.name} → ${next.place.name}`, description = `Conductor: ${activity.carrier}.<br />Llegada a destino a las ${activity.enddate}`;
+                        break;
+                    case 6:
+                        name = `${activity.place.name} → ${next.place.name}`, description = `Aerolinea: ${activity.carrier}.<br />Llegada a destino a las ${activity.enddate}`;
+                        break;
+                    case 7:
+                        name = `${activity.place.name} → ${next.place.name}`, description = `Ferroviaria: ${activity.carrier}.<br />Llegada a destino a las ${activity.enddate}`;
+                        break;
+                    case 8:
+                        name = activity.name, description = activity.notes;
+                        break;
+                }
+                this.activities.push({
+                    name: name,
+                    description: description,
+                    type: type,
+                    start: start
+                })
+            }
+        })
+    }
 }
 </script>
 <template>
@@ -163,4 +204,5 @@ h1 {
     height: 100%;
     top: 0;
     left: 0;
-}</style>
+}
+</style>

@@ -77,7 +77,7 @@ export default {
                 </a>
             </div>
             <div class="flex">
-                <a href="#details"
+                <a :href="'#details/' + tour.id"
                     class="bg-gradient-to-br overlay-button from-slate-800 to-black text-white px-3 h-7 rounded-lg flex text-sm items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
