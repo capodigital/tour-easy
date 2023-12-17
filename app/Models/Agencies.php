@@ -59,6 +59,10 @@ class Agencies extends Model
     {
         return $this->hasMany(Suppliers::class,'agency_id');
     }
+    public function places(): HasMany
+    {
+        return $this->hasMany(Places::class,'agency_id');
+    }
 
     public function toArray() {
         $data = parent::toArray();
