@@ -179,6 +179,6 @@ class ArtistsController extends Controller
         $agency = Agencies::find($request->id);
         $artists = $agency->artists()->get();
 
-        return response()->json($artists);
+        return ArtistsResource::collection($artists);
     }
 }

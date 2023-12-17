@@ -31,7 +31,18 @@ class ItinerariesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+       $itinerary = new Itineraries($request->input());
+       $itinerary->save();
+
+       $itinerary->refresh();
+        
+
+      
+        return new ItinerariesResource($itinerary);
     }
 
     /**
@@ -53,17 +64,24 @@ class ItinerariesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Itineraries $itineraries)
+    public function update(Request $request, Itineraries $itinerary)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $itinerary->update($request->all());
+
+        return new ItinerariesResource($itinerary);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Itineraries $itineraries)
+    public function destroy(Itineraries $itinerary)
     {
-        //
+        $itinerary->delete();
+
+        return response()->json($itinerary);
     }
 
     public function itinerariesByTour(Request $request)
@@ -76,10 +94,14 @@ class ItinerariesController extends Controller
 
     public function month(Request $request, $month, $year)
     {
-        return response()->json(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get());
+        return ItinerariesResource::collection(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get());
     }
-    public function day(Request $request,$day, $month, $year)
+    public function day(Request $request, $day, $month, $year)
     {
+<<<<<<< HEAD
         return response()->json(ItinerariesResource::collection(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->whereDay('startdate', $day)->get()));
+=======
+        return ItinerariesResource::collection(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->whereDay('startdate', $day)->get());
+>>>>>>> 504f1ff8df7ed509881b401ca80cafb726837e82
     }
 }
