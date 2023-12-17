@@ -98,8 +98,6 @@ class ItinerariesController extends Controller
     }
     public function day(Request $request, $day, $month, $year)
     {
-
-
         return ItinerariesResource::collection(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->whereDay('startdate', $day)->get());
     }
 }
