@@ -177,7 +177,7 @@ class ContactsController extends Controller
     {
         $contact->delete();
         Socialmedias::where('socialmediaable_id', $contact->id)->delete();
-
+        Documents::where('documentable_id', $contact->id)->delete();
 
         return response()->json($contact);
     }
