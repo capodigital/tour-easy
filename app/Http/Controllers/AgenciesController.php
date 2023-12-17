@@ -64,26 +64,48 @@ class AgenciesController extends Controller
         //Almacenar los datos en la base de datos
         $agency = Agencies::create($data);
 
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $agency->id,
-                'socialmediaable_type' => 'App\Models\Agencies'
-            ]);
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia->url,
+                    'description' => $socialmedia->description,
+                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'socialmediaable_id' => $agency->id,
+                    'socialmediaable_type' => 'App\Models\Agencies'
+                ]);
+            }
         }
-        foreach ($request->documents as $document) {
-            Documents::create([
-                'url' => $document->url,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
-                'documentable_id' => $agency->id,
-                'documentable_type' => 'App\Models\Agencies'
-            ]);
+       
+        if ($request->has('documents')) {
+            foreach ($request->documents as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                Documents::create([
+                    'url' => null,
+                    'name' => $document->name,
+                    'document_path' => $document->document_path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $agency->id,
+                    'documentable_type' => 'App\Models\Agencies'
+                ]);
+            }
         }
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $agency->id,
+                    'documentable_type' => 'App\Models\Agencies'
+                ]);
+            }
+        }
+        
 
         $agency->refresh();
         return new AgenciesResource($agency);
@@ -135,12 +157,26 @@ class AgenciesController extends Controller
         }
         Documents::where('documentable_id', $agency->id)->delete();
         foreach ($request->documents as $document) {
+            $sizeInBytes = $document->getSize();
+            $sizeInMB = $sizeInBytes / 1024 / 1024;
+            $extension = $document->getClientOriginalExtension();
             Documents::create([
-                'url' => $document->url,
+                'url' => null,
                 'name' => $document->name,
                 'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
+                'size' => $sizeInMB,
+                'ext' => $extension,
+                'documentable_id' => $agency->id,
+                'documentable_type' => 'App\Models\Agencies'
+            ]);
+        }
+        foreach ($request->urls as $url) {
+            Documents::create([
+                'url' => $url,
+                'name' => null,
+                'document_path' => null,
+                'size' => null,
+                'ext' => null,
                 'documentable_id' => $agency->id,
                 'documentable_type' => 'App\Models\Agencies'
             ]);
