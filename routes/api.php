@@ -11,7 +11,13 @@ use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ToursController;
+use App\Http\Controllers\TypeagenciesController;
 use App\Http\Controllers\TypecontactsController;
+use App\Http\Controllers\TypeitinerariesController;
+use App\Http\Controllers\TypeplacesController;
+use App\Http\Controllers\TyperedesController;
+use App\Models\Typeitineraries;
+use App\Models\Typeplaces;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -71,3 +77,7 @@ Route::resource('photos', PhotosController::class);
 Route::post('/photos/tour', [PhotosController::class, 'photosByTour']);
 
 Route::resource('typecontacts', TypecontactsController::class);
+Route::resource('typeagencies', TypeagenciesController::class);
+Route::resource('typeitineraries', TypeitinerariesController::class);
+Route::resource('typeplaces', TypeplacesController::class);
+Route::resource('typeredes', TyperedesController::class);
