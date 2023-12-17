@@ -11,6 +11,7 @@ use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ToursController;
+use App\Http\Controllers\TypecontactsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -68,3 +69,5 @@ Route::post('/cities', [CitiesController::class, 'citiesByCountry']);
 
 Route::resource('photos', PhotosController::class);
 Route::post('/photos/tour', [PhotosController::class, 'photosByTour']);
+
+Route::resource('typecontacts', TypecontactsController::class);
