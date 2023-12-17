@@ -21,10 +21,10 @@ return new class extends Migration
             $table->foreignId('contact_id')->nullable()->references('id')->on('contacts')->onDelete('set null');
             $table->foreignId('supplier_id')->nullable()->references('id')->on('suppliers')->onDelete('set null');
             $table->string('name', 150)->nullable();
-            $table->date('startdate')->nullable();
-            $table->date('enddate')->nullable();
+            $table->dateTime('startdate')->nullable();
+            $table->dateTime('enddate')->nullable();
             $table->text('notes')->nullable();
-            $table->boolean('outoflour', 150)->default(false);
+            $table->boolean('outoflour')->default(false);
             $table->string('carrier', 150)->nullable();
             $table->string('carrier_id', 150)->nullable();
             $table->time('showcheck');

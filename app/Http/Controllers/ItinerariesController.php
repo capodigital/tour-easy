@@ -69,8 +69,13 @@ class ItinerariesController extends Controller
     public function itinerariesByTour(Request $request)
     {
         $tour = Tours::find($request->id);
-        $itineraries = $tour->itineraries()->get()->orderBy('startdate');
+        $itineraries = $tour->itineraries()->get()->sortBy('startdate');
 
         return ItinerariesResource::collection($itineraries);
+    }
+
+    public function month(Request $request, $month, $year)
+    {
+        return response()->json(Itineraries::whereYear('created_at', $year)->whereMonth('created_at', $month)->get());
     }
 }
