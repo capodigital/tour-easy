@@ -12,9 +12,7 @@ export default {
     },
 
     mounted() {
-        axios.post('api/tours/agency', {
-            id: this.Utils.user().agency_id
-        }, {
+        axios.get('api/tours', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
