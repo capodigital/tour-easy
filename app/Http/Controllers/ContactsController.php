@@ -141,12 +141,26 @@ class ContactsController extends Controller
         }
         Documents::where('documentable_id', $contact->id)->delete();
         foreach ($request->documents as $document) {
+            $sizeInBytes = $document->getSize();
+            $sizeInMB = $sizeInBytes / 1024 / 1024;
+            $extension = $document->getClientOriginalExtension();
             Documents::create([
-                'url' => $document->url,
+                'url' => null,
                 'name' => $document->name,
                 'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
+                'size' => $sizeInMB,
+                'ext' => $extension,
+                'documentable_id' => $contact->id,
+                'documentable_type' => 'App\Models\Contacts'
+            ]);
+        }
+        foreach ($request->urls as $url) {
+            Documents::create([
+                'url' => $url,
+                'name' => null,
+                'document_path' => null,
+                'size' => null,
+                'ext' => null,
                 'documentable_id' => $contact->id,
                 'documentable_type' => 'App\Models\Contacts'
             ]);
