@@ -69,7 +69,7 @@ class ItinerariesController extends Controller
     public function itinerariesByTour(Request $request)
     {
         $tour = Tours::find($request->id);
-        $itineraries = $tour->itineraries()->get()->orderBy('startdate');
+        $itineraries = $tour->itineraries()->get()->sortBy('startdate');
 
         return ItinerariesResource::collection($itineraries);
     }
