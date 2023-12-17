@@ -63,6 +63,7 @@ Route::post('/contacts/tour', [ContactsController::class, 'contactsByTour']);
 Route::resource('places', PlacesController::class);
 
 Route::resource('suppliers', SuppliersController::class);
+Route::post('/suppliers/agency', [SuppliersController::class, 'suppliersByAgency']);
 
 Route::resource('itineraries', ItinerariesController::class);
 Route::post('/itineraries/tour',[ItinerariesController::class,'itinerariesByTour']);

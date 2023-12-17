@@ -66,26 +66,48 @@ class ArtistsController extends Controller
         //Almacenar los datos en la base de datos
         $artist = Agencies::create($data);
 
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $artist->id,
-                'socialmediaable_type' => 'App\Models\Artists'
-            ]);
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia->url,
+                    'description' => $socialmedia->description,
+                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'socialmediaable_id' => $artist->id,
+                    'socialmediaable_type' => 'App\Models\Artists'
+                ]);
+            }
         }
-        foreach ($request->documents as $document) {
-            Documents::create([
-                'url' => $document->url,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
-                'documentable_id' => $artist->id,
-                'documentable_type' => 'App\Models\Artists'
-            ]);
+
+        if ($request->has('documents')) {
+            foreach ($request->documents as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                Documents::create([
+                    'url' => null,
+                    'name' => $document->name,
+                    'document_path' => $document->document_path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $artist->id,
+                    'documentable_type' => 'App\Models\Artists'
+                ]);
+            }
         }
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $artist->id,
+                    'documentable_type' => 'App\Models\Artists'
+                ]);
+            }
+        }
+        
 
         $artist->refresh();
         return new ArtistsResource($artist);
@@ -104,7 +126,6 @@ class ArtistsController extends Controller
      */
     public function edit(Artists $artists)
     {
-        
     }
 
     /**
@@ -115,7 +136,7 @@ class ArtistsController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => ['required', 'email', 'unique:artists,email,' . $artist->id],
-            
+
         ]);
 
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags']);
@@ -127,10 +148,10 @@ class ArtistsController extends Controller
             $image = $request->file('image')->store('girls');
             $data['image'] = $image;
         }
-       
+
         //Almacenar los datos en la base de datos
         $artist->update($data);
-        
+
         Socialmedias::where('socialmediaable_id', $artist->id)->delete();
         foreach ($request->socialmedias as $socialmedia) {
             Socialmedias::create([
@@ -143,12 +164,26 @@ class ArtistsController extends Controller
         }
         Documents::where('documentable_id', $artist->id)->delete();
         foreach ($request->documents as $document) {
+            $sizeInBytes = $document->getSize();
+            $sizeInMB = $sizeInBytes / 1024 / 1024;
+            $extension = $document->getClientOriginalExtension();
             Documents::create([
-                'url' => $document->url,
+                'url' => null,
                 'name' => $document->name,
                 'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
+                'size' => $sizeInMB,
+                'ext' => $extension,
+                'documentable_id' => $artist->id,
+                'documentable_type' => 'App\Models\Artists'
+            ]);
+        }
+        foreach ($request->urls as $url) {
+            Documents::create([
+                'url' => $url,
+                'name' => null,
+                'document_path' => null,
+                'size' => null,
+                'ext' => null,
                 'documentable_id' => $artist->id,
                 'documentable_type' => 'App\Models\Artists'
             ]);

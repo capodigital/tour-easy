@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SuppliersResource;
+use App\Models\Agencies;
+use App\Models\Documents;
+use App\Models\Socialmedias;
 use App\Models\Suppliers;
 use Illuminate\Http\Request;
 
@@ -22,7 +25,6 @@ class SuppliersController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -30,7 +32,67 @@ class SuppliersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'company_name' => 'required',
+
+
+        ]);
+
+        $data = $request->only([
+            'company_name', 'supplier_name', 'tax_code', 'address', 'notes', 'extra_phone',
+            'phone', 'email', 'contact_manager', 'contact_phone', 'contact_email', 'city_id'
+        ]);
+
+        $data['agency_id'] = $request->user()->id;
+
+        //Almacenar los datos en la base de datos
+        $supplier = Suppliers::create($data);
+
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia->url,
+                    'description' => $socialmedia->description,
+                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'socialmediaable_id' => $supplier->id,
+                    'socialmediaable_type' => 'App\Models\Suppliers'
+                ]);
+            }
+        }
+
+        if ($request->has('documents')) {
+            foreach ($request->documents as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                Documents::create([
+                    'url' => null,
+                    'name' => $document->name,
+                    'document_path' => $document->document_path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $supplier->id,
+                    'documentable_type' => 'App\Models\Suppliers'
+                ]);
+            }
+        }
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $supplier->id,
+                    'documentable_type' => 'App\Models\Suppliers'
+                ]);
+            }
+        }
+
+
+        $supplier->refresh();
+        return new SuppliersResource($supplier);
     }
 
     /**
@@ -52,16 +114,78 @@ class SuppliersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Suppliers $suppliers)
+    public function update(Request $request, Suppliers $supplier)
     {
-        //
+        $request->validate([
+            'company_name' => 'required',
+        ]);
+
+        $data = $request->only([
+            'company_name', 'supplier_name', 'tax_code', 'address', 'notes', 'extra_phone',
+            'phone', 'email', 'contact_manager', 'contact_phone', 'contact_email', 'city_id'
+        ]);
+
+        //Almacenar los datos en la base de datos
+        $supplier->update($data);
+
+        Socialmedias::where('socialmediaable_id', $supplier->id)->delete();
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $supplier->id,
+                'socialmediaable_type' => 'App\Models\Suppliers'
+            ]);
+        }
+        Documents::where('documentable_id', $supplier->id)->delete();
+        foreach ($request->documents as $document) {
+            $sizeInBytes = $document->getSize();
+            $sizeInMB = $sizeInBytes / 1024 / 1024;
+            $extension = $document->getClientOriginalExtension();
+            Documents::create([
+                'url' => null,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $sizeInMB,
+                'ext' => $extension,
+                'documentable_id' => $supplier->id,
+                'documentable_type' => 'App\Models\Suppliers'
+            ]);
+        }
+        foreach ($request->urls as $url) {
+            Documents::create([
+                'url' => $url,
+                'name' => null,
+                'document_path' => null,
+                'size' => null,
+                'ext' => null,
+                'documentable_id' => $supplier->id,
+                'documentable_type' => 'App\Models\Suppliers'
+            ]);
+        }
+
+        $supplier->refresh();
+        return new SuppliersResource($supplier);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Suppliers $suppliers)
+    public function destroy(Suppliers $supplier)
     {
-        //
+        $supplier->delete();
+        Socialmedias::where('socialmediaable_id', $supplier->id)->delete();
+        Documents::where('documentable_id', $supplier->id)->delete();
+
+        return response()->json($supplier);
+    }
+
+    public function suppliersByAgency(Request $request)
+    {
+        $agency = Agencies::find($request->id);
+        $suppliers = $agency->suppliers()->get();
+
+        return SuppliersResource::collection($suppliers);
     }
 }

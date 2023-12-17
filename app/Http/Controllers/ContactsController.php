@@ -47,26 +47,50 @@ class ContactsController extends Controller
         //Almacenar los datos en la base de datos
         $contact = Contacts::create($data);
 
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $contact->id,
-                'socialmediaable_type' => 'App\Models\Contacts'
-            ]);
+
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia->url,
+                    'description' => $socialmedia->description,
+                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'socialmediaable_id' => $contact->id,
+                    'socialmediaable_type' => 'App\Models\Contacts'
+                ]);
+            }
         }
-        foreach ($request->documents as $document) {
-            Documents::create([
-                'url' => $document->url,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
-                'documentable_id' => $contact->id,
-                'documentable_type' => 'App\Models\Contacts'
-            ]);
+        if ($request->has('documents')) {
+            foreach ($request->documents as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                Documents::create([
+                    'url' => null,
+                    'name' => $document->name,
+                    'document_path' => $document->document_path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $contact->id,
+                    'documentable_type' => 'App\Models\Contacts'
+                ]);
+            }
         }
+
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $contact->id,
+                    'documentable_type' => 'App\Models\Contacts'
+                ]);
+            }
+        }
+
+
 
         $contact->refresh();
         return new ContactsResource($contact);
@@ -94,17 +118,17 @@ class ContactsController extends Controller
     public function update(Request $request, Contacts $contact)
     {
         $request->validate([
-            'name' => 'required',            
+            'name' => 'required',
         ]);
 
         $data = $request->only([
             'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
             'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
         ]);
-       
+
         //Almacenar los datos en la base de datos
         $contact->update($data);
-        
+
         Socialmedias::where('socialmediaable_id', $contact->id)->delete();
         foreach ($request->socialmedias as $socialmedia) {
             Socialmedias::create([
@@ -117,12 +141,26 @@ class ContactsController extends Controller
         }
         Documents::where('documentable_id', $contact->id)->delete();
         foreach ($request->documents as $document) {
+            $sizeInBytes = $document->getSize();
+            $sizeInMB = $sizeInBytes / 1024 / 1024;
+            $extension = $document->getClientOriginalExtension();
             Documents::create([
-                'url' => $document->url,
+                'url' => null,
                 'name' => $document->name,
                 'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
+                'size' => $sizeInMB,
+                'ext' => $extension,
+                'documentable_id' => $contact->id,
+                'documentable_type' => 'App\Models\Contacts'
+            ]);
+        }
+        foreach ($request->urls as $url) {
+            Documents::create([
+                'url' => $url,
+                'name' => null,
+                'document_path' => null,
+                'size' => null,
+                'ext' => null,
                 'documentable_id' => $contact->id,
                 'documentable_type' => 'App\Models\Contacts'
             ]);
@@ -138,6 +176,8 @@ class ContactsController extends Controller
     public function destroy(Contacts $contact)
     {
         $contact->delete();
+        Socialmedias::where('socialmediaable_id', $contact->id)->delete();
+        Documents::where('documentable_id', $contact->id)->delete();
 
         return response()->json($contact);
     }
