@@ -30,6 +30,8 @@ class ToursFactory extends Factory
             'startdate' => fake()->dateTimeBetween('now', '+1 month'),
             'enddate' => fake()->dateTimeBetween('+1 month', '+2 months'),
             'notes' => fake()->paragraph(),
+            'youtube_list' => 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr',
+            'spotify_list' => 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0',
             'agency_id' => function () {
                 return Agencies::all()->random()->id;
             },

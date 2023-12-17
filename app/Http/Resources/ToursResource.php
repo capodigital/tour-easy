@@ -25,6 +25,8 @@ class ToursResource extends JsonResource
             'enddate' => $this->enddate,
             'tourcartel' => $this->tourcartel,
             'notes' => $this->notes,
+            'youtube_list' => $this->youtube_list,
+            'spotify_list' => $this->spotify_list,
             'artist' => new ArtistsResource($artist),
             'artist_id' => $this->artist_id,
             'agency' => new AgenciesResource($agency),

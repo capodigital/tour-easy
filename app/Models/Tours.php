@@ -15,7 +15,8 @@ class Tours extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
-        'tourname', 'startdate', 'enddate', 'tourcartel', 'agency_id', 'artist_id', 'notes'
+        'tourname', 'startdate', 'enddate', 'tourcartel', 'agency_id', 'artist_id', 'notes',
+        'spotify_list', 'youtube_list'
     ];
 
     public function agency(): BelongsTo
@@ -37,6 +38,10 @@ class Tours extends Model
     public function itineraries(): HasMany
     {
         return $this->hasMany(Itineraries::class,'tour_id');
+    }
+    public function photos(): HasMany
+    {
+        return $this->hasMany(Photos::class,'tour_id');
     }
 
     public function toArray() {

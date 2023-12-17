@@ -91,6 +91,10 @@ class DatabaseSeeder extends Seeder
         Socialmedias::factory(10)->place()->create();
         Documents::factory(3)->place()->create();
 
+        $this->call([
+            PhotosSeeder::class,
+           
+        ]);
 
         User::factory(1)->create();
     }
