@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Contacts;
+use App\Models\Documents;
 use App\Models\Itineraries;
 use App\Models\Places;
 use App\Models\Socialmedias;
@@ -57,19 +58,24 @@ class DatabaseSeeder extends Seeder
 
         Agencies::factory(2)->create();
         Socialmedias::factory(3)->agency()->create();
+        Documents::factory(3)->agency()->create();
 
         Artists::factory(4)->create();
         Socialmedias::factory(10)->artist()->create();
+        Documents::factory(3)->artist()->create();
 
             
         Tours::factory(4)->create();
         Socialmedias::factory(10)->tour()->create();
+        Documents::factory(3)->tour()->create();
 
         Contacts::factory(10)->create();
         Socialmedias::factory(10)->contact()->create();
+        Documents::factory(3)->contact()->create();
 
         Suppliers::factory(10)->create();
         Socialmedias::factory(10)->supplier()->create();
+        Documents::factory(3)->supplier()->create();
 
         Places::factory(10)->create();
 
@@ -83,6 +89,7 @@ class DatabaseSeeder extends Seeder
 
         Places::factory(10)->create();
         Socialmedias::factory(10)->place()->create();
+        Documents::factory(3)->place()->create();
 
 
         User::factory(1)->create();

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ArtistsResource;
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Documents;
+use App\Models\Socialmedias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArtistsController extends Controller
 {
@@ -43,11 +46,46 @@ class ArtistsController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'email' => 'required|email|unique:artists',
+            'password' => [
+                'required',
+                'string',
+            ],
+            'image' => ['required', 'image'],
+            'confirm_password' => 'required|same:password'
 
         ]);
 
-        $artist = new Artists($request->input());
-        $artist->save();
+        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags']);
+
+        $data['password'] = bcrypt($request->password);
+        $data['agency_id'] = $request->user()->id;
+        $image = $request->file('image')->store('artists');
+        $data['image'] = $image;
+
+        //Almacenar los datos en la base de datos
+        $artist = Agencies::create($data);
+
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $artist->id,
+                'socialmediaable_type' => 'App\Models\Artists'
+            ]);
+        }
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $artist->id,
+                'documentable_type' => 'App\Models\Artists'
+            ]);
+        }
 
         $artist->refresh();
         return new ArtistsResource($artist);
@@ -76,10 +114,46 @@ class ArtistsController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'email' => ['required', 'email', 'unique:artists,email,' . $artist->id],
             
         ]);
 
-        $artist->update($request->all());
+        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags']);
+
+        if ($request->has('image')) {
+            //Eliminar la vieja foto de perfil
+            Storage::disk('src')->delete($artist->image);
+            //Almacenar la nueva foto de perfil
+            $image = $request->file('image')->store('girls');
+            $data['image'] = $image;
+        }
+       
+        //Almacenar los datos en la base de datos
+        $artist->update($data);
+        
+        Socialmedias::where('socialmediaable_id', $artist->id)->delete();
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $artist->id,
+                'socialmediaable_type' => 'App\Models\Artists'
+            ]);
+        }
+        Documents::where('documentable_id', $artist->id)->delete();
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $artist->id,
+                'documentable_type' => 'App\Models\Artists'
+            ]);
+        }
+
         $artist->refresh();
         return new ArtistsResource($artist);
     }

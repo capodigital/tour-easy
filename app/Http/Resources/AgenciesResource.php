@@ -34,6 +34,7 @@ class AgenciesResource extends JsonResource
             'typeagency' => new TypeagenciesResource($typeagency),
             'typeagency_id' => $this->typeagency_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
+            'documents' => DocumentsResource::collection($this->documents()->get()),
 
                            
         ];
