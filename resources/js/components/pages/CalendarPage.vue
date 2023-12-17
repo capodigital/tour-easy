@@ -60,6 +60,10 @@ export default {
                 }
 
             });
+        },
+        timestamp(day) {
+            const date = new Date(this.year, this.month, day)
+            return date.valueOf()
         }
     },
     created() {
@@ -125,10 +129,10 @@ export default {
                     :class="{ 'border-r-black': index % 7 != 6, 'border-b-black': index < forms.length - 7, 'bg-gray-300': day.out != undefined }"
                     v-for="(day, index) in forms">
                     <template v-if="!day.out">
-                        <button
+                        <a :href="'#day/' + timestamp(day.day)"
                             class="absolute right-0 top-1 rounded text-white text-sm bg-gradient-to-tr from-slate-800 to-slate-950 w-5 h-5 text-center me-1">
                             {{
-                                day.day }}</button>
+                                day.day }}</a>
                         <div class="w-full">
                             <div class="rounded">
                                 <!-- <p class="text-gray-400 text-center text-xs">Mañana</p> -->
@@ -141,7 +145,8 @@ export default {
                                         v-for="activity in day.activities" :href="'#activity/' + + activity.id">{{
                                             types[activity.typeitinerary_id - 1].description }}</a>
                                 </template>
-                                <button class="w-full py-0.5 text-center border mt-0.5 border-gray-400 text-gray-400 rounded flex justify-center items-center">
+                                <button
+                                    class="w-full py-0.5 text-center border mt-0.5 border-gray-400 text-gray-400 rounded flex justify-center items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                         fill="none" stroke="rgb(156, 163, 175)" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" class="lucide lucide-plus">
@@ -178,4 +183,5 @@ th {
 
 h1 {
     font-family: 'Archivo Black', sans-serif;
-}</style>
+}
+</style>
