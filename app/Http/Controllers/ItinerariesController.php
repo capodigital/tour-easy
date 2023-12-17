@@ -76,6 +76,10 @@ class ItinerariesController extends Controller
 
     public function month(Request $request, $month, $year)
     {
-        return response()->json(Itineraries::whereYear('created_at', $year)->whereMonth('created_at', $month)->get());
+        return response()->json(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get());
+    }
+    public function day(Request $request, $month, $year, $day)
+    {
+        return response()->json(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->whereDay('startdate', $day)->get());
     }
 }
