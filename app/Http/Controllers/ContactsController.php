@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ContactsResource;
+use App\Models\Agencies;
 use App\Models\Contacts;
+use App\Models\Documents;
+use App\Models\Socialmedias;
+use App\Models\Tours;
 use Illuminate\Http\Request;
 
 class ContactsController extends Controller
@@ -22,7 +26,6 @@ class ContactsController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -30,7 +33,43 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+
+        ]);
+
+        $data = $request->only([
+            'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
+            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
+        ]);
+
+        $data['agency_id'] = $request->user()->id;
+        //Almacenar los datos en la base de datos
+        $contact = Contacts::create($data);
+
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $contact->id,
+                'socialmediaable_type' => 'App\Models\Contacts'
+            ]);
+        }
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $contact->id,
+                'documentable_type' => 'App\Models\Contacts'
+            ]);
+        }
+
+        $contact->refresh();
+        return new ContactsResource($contact);
     }
 
     /**
@@ -52,16 +91,69 @@ class ContactsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contacts $contacts)
+    public function update(Request $request, Contacts $contact)
     {
-        //
+        $request->validate([
+            'name' => 'required',            
+        ]);
+
+        $data = $request->only([
+            'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
+            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
+        ]);
+       
+        //Almacenar los datos en la base de datos
+        $contact->update($data);
+        
+        Socialmedias::where('socialmediaable_id', $contact->id)->delete();
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $contact->id,
+                'socialmediaable_type' => 'App\Models\Contacts'
+            ]);
+        }
+        Documents::where('documentable_id', $contact->id)->delete();
+        foreach ($request->documents as $document) {
+            Documents::create([
+                'url' => $document->url,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $document->size,
+                'ext' => $document->ext,
+                'documentable_id' => $contact->id,
+                'documentable_type' => 'App\Models\Contacts'
+            ]);
+        }
+
+        $contact->refresh();
+        return new ContactsResource($contact);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contacts $contacts)
+    public function destroy(Contacts $contact)
     {
-        //
+        $contact->delete();
+
+        return response()->json($contact);
+    }
+
+    public function contactsByAgency(Request $request)
+    {
+        $agency = Agencies::find($request->id);
+        $contacts = $agency->contacts()->get();
+
+        return response()->json($contacts);
+    }
+    public function contactsByTour(Request $request)
+    {
+        $tour = Tours::find($request->id);
+        $contacts = $tour->contacts()->get();
+
+        return response()->json($contacts);
     }
 }
