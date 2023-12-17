@@ -57,6 +57,7 @@ Route::resource('suppliers', SuppliersController::class);
 Route::resource('itineraries', ItinerariesController::class);
 Route::post('/itineraries/tour',[ItinerariesController::class,'itinerariesByTour']);
 Route::get('/itineraries/{month}/{year}',[ItinerariesController::class,'month']);
+Route::get('/itineraries/{day}/{month}/{year}',[ItinerariesController::class,'day']);
 
 Route::get('/countries', [CountriesController::class, 'index']);
 
