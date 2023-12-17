@@ -161,7 +161,7 @@ class SuppliersController extends Controller
                 'size' => null,
                 'ext' => null,
                 'documentable_id' => $supplier->id,
-                'documentable_type' => 'App\Models\Contacts'
+                'documentable_type' => 'App\Models\Suppliers'
             ]);
         }
 

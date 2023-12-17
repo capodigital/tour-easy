@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ToursResource;
 use App\Models\Agencies;
+use App\Models\Documents;
+use App\Models\Socialmedias;
 use App\Models\Tours;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ToursController extends Controller
 {
@@ -41,7 +44,70 @@ class ToursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tourname' => 'required',
+            'tourcartel' => ['required', 'image'],
+
+
+        ]);
+
+        $data = $request->only([
+            'tourname', 'startdate', 'enddate', 'artist_id', 'notes',
+            'spotify_list', 'youtube_list'
+        ]);
+
+        $data['agency_id'] = $request->user()->id;
+        $image = $request->file('tourcartel')->store('tours');
+        $data['tourcartel'] = $image;
+
+        //Almacenar los datos en la base de datos
+        $tour = Tours::create($data);
+
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia->url,
+                    'description' => $socialmedia->description,
+                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'socialmediaable_id' => $tour->id,
+                    'socialmediaable_type' => 'App\Models\Tours'
+                ]);
+            }
+        }
+
+        if ($request->has('documents')) {
+            foreach ($request->documents as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                Documents::create([
+                    'url' => null,
+                    'name' => $document->name,
+                    'document_path' => $document->document_path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $tour->id,
+                    'documentable_type' => 'App\Models\Tours'
+                ]);
+            }
+        }
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $tour->id,
+                    'documentable_type' => 'App\Models\Suppliers'
+                ]);
+            }
+        }
+
+
+        $tour->refresh();
+        return new ToursResource($tour);
     }
 
     /**
@@ -63,9 +129,65 @@ class ToursController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tours $tours)
+    public function update(Request $request, Tours $tour)
     {
-        //
+        $request->validate([
+            'tourname' => 'required',
+        ]);
+
+        $data = $request->only([
+            'tourname', 'startdate', 'enddate', 'artist_id', 'notes',
+            'spotify_list', 'youtube_list'
+        ]);
+        if ($request->has('tourcartel')) {
+            //Eliminar la vieja foto de perfil
+            Storage::disk('src')->delete($tour->tourcartel);
+            //Almacenar la nueva foto de perfil
+            $image = $request->file('tourcartel')->store('tours');
+            $data['tourcartel'] = $image;
+        }
+
+        //Almacenar los datos en la base de datos
+        $tour->update($data);
+
+        Socialmedias::where('socialmediaable_id', $tour->id)->delete();
+        foreach ($request->socialmedias as $socialmedia) {
+            Socialmedias::create([
+                'url' => $socialmedia->url,
+                'description' => $socialmedia->description,
+                'typeredes_id' => $socialmedia->typeredes_id,
+                'socialmediaable_id' => $tour->id,
+                'socialmediaable_type' => 'App\Models\Tours'
+            ]);
+        }
+        Documents::where('documentable_id', $tour->id)->delete();
+        foreach ($request->documents as $document) {
+            $sizeInBytes = $document->getSize();
+            $sizeInMB = $sizeInBytes / 1024 / 1024;
+            $extension = $document->getClientOriginalExtension();
+            Documents::create([
+                'url' => null,
+                'name' => $document->name,
+                'document_path' => $document->document_path,
+                'size' => $sizeInMB,
+                'ext' => $extension,
+                'documentable_id' => $tour->id,
+                'documentable_type' => 'App\Models\Tours'
+            ]);
+        }
+        foreach ($request->urls as $url) {
+            Documents::create([
+                'url' => $url,
+                'name' => null,
+                'document_path' => null,
+                'size' => null,
+                'ext' => null,
+                'documentable_id' => $tour->id,
+                'documentable_type' => 'App\Models\Tours'
+            ]);
+        }
+        $tour->refresh();
+        return new ToursResource($tour);
     }
 
     /**
