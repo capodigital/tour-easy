@@ -20,15 +20,34 @@ export default {
                 <h2 class="text-center text-white text-xl font-semibold">{{ artist.name }} {{ artist.lastname }}</h2>
             </div>
         </div>
+        <div class="p-2 flex justify-between">
+            <p class="text-sm text-white"><span class="font-bold">Nombre artístico: </span>{{ artist.stagename }}</p>
+            <p class="text-sm text-white"><span class="font-bold">Correo: </span>{{ artist.email }}</p>
+        </div>
+        <div class="p-2 flex justify-between">
+            <p class="text-sm text-white"><span class="font-bold">Fecha de nacimiento: </span>{{ artist.birthday }}</p>
+        </div>
+
         <div class="p-2">
-            <p class="text-sm mb-2 text-white">Redes sociales</p>
+            <p class="text-sm text-white">Redes sociales</p>
 
             <div class="mt-3 grid grid-cols-6">
                 <a v-for="socialmedia in artist.socialmedias" :href="socialmedia.url" target="_blank"
-                    class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
+                    class="px-3 rounded-md flex justify-center text-whiteitems-center me-1">
                     <img :src="socialmedia.typered.logo.replace('http://localhost/', '')" class="" />
                 </a>
             </div>
+        </div>
+        <div class="p-2">
+            <p class="text-sm text-white">Géneros</p>
+
+
+           <div class="flex justify-start gap-2 p-2">
+            <div v-for="tag in artist.tags" class="rounded-md border text-whiteitems-center p-2 text-white">
+                {{ tag }}
+            </div>
+           </div>
+
         </div>
         <div class="px-2 pb-3 grid grid-cols-2 gap-2">
             <button type="button" @click="$emit('edit', artist)"

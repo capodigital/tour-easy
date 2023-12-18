@@ -89,12 +89,15 @@ export default {
         };
     },
     components: { TourActivity },
-    mounted() {
+    created() {
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-        axios.post('api/tour', { id: id }).then((response) => {
+         axios.post('api/tour', { id: id }).then((response) => {
             this.tour = response.data.data;
         })
-        axios.post('api/itineraries/tour', { id: id }).then((response) => {
+    },
+     mounted() {
+       
+         axios.post('api/itineraries/tour', { id: id }).then((response) => {
             for (let i in response.data.data) {
                 const activity = response.data.data[i]
                 //const next = (Number(i) + 1 == response.data.data.length) ? { place: { name: '' } } : response.data.data[Number(i) + 1];
