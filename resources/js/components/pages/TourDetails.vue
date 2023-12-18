@@ -96,7 +96,7 @@ export default {
         })
     },
      mounted() {
-       
+        const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
          axios.post('api/itineraries/tour', { id: id }).then((response) => {
             for (let i in response.data.data) {
                 const activity = response.data.data[i]
