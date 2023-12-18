@@ -67,9 +67,9 @@ class AgenciesController extends Controller
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
                 Socialmedias::create([
-                    'url' => $socialmedia->url,
-                    'description' => $socialmedia->description,
-                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
                     'socialmediaable_id' => $agency->id,
                     'socialmediaable_type' => 'App\Models\Agencies'
                 ]);
@@ -77,14 +77,16 @@ class AgenciesController extends Controller
         }
        
         if ($request->has('documents')) {
-            foreach ($request->documents as $document) {
+            foreach ($request->file('documents') as $document) {
                 $sizeInBytes = $document->getSize();
                 $sizeInMB = $sizeInBytes / 1024 / 1024;
                 $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
                 Documents::create([
                     'url' => null,
-                    'name' => $document->name,
-                    'document_path' => $document->document_path,
+                    'name' => $name,
+                    'document_path' => $path,
                     'size' => $sizeInMB,
                     'ext' => $extension,
                     'documentable_id' => $agency->id,

@@ -2,7 +2,7 @@
 /node_modules
 /public/hot
 /vendor
-/public/build
+/public/build/manifest.json
 .env
 .env.backup
 .env.production
