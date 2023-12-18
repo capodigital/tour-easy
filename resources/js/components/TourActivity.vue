@@ -15,7 +15,8 @@ export default {
             <ActivityIcon :activity="activity" />
         </div>
 
-        <p class="text-gray-500 text-sm leading-4 pe-10 min-h-[5.4em] max-h-[5.5em] mt-2 overflow-hidden text-ellipsis" v-html="activity.description"></p>
+        <p class="text-gray-500 text-sm leading-4 pe-10 min-h-[5.4em] max-h-[5.5em] mt-2 overflow-hidden text-ellipsis"
+            v-html="activity.description"></p>
         <!-- <div class="flex justify-around text-xs mt-2">
             <div class="flex rounded bg-gray-300 p-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -44,7 +45,7 @@ export default {
             </div>
         </div> -->
         <div class="flex mt-4">
-            <div class="flex w-full">
+            <div class="flex w-full justify-between items-end">
                 <button
                     :class="{ 'from-gray-400': activity.complete == undefined, 'to-gray-800': activity.complete == undefined, 'from-green-500': activity.complete, 'to-green-700': activity.complete }"
                     class="rounded-lg border px-3 h-9 overlay-button me-1 flex justify-center items-center bg-gradient-to-br text-white">
@@ -67,14 +68,17 @@ export default {
                         <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
                     </svg>
                 </button> -->
-        </div>
-        <div class="flex">
+                <div class="flex">
 
-            <small class="text-end text-gray-500 leading-4">{{ activity.start }}</small>
+                    <small class="text-end text-gray-500 leading-4">{{ activity.start }}</small>
+                </div>
+            </div>
+
         </div>
-    </div>
-</article></template>
-<style scoped>h3,
+    </article>
+</template>
+<style scoped>
+h3,
 p {
     font-family: 'Roboto', sans-serif;
 }</style>
