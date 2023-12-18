@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('email', 250)->nullable();
             $table->string('phone', 30)->nullable();
             $table->string('extra_phone', 30)->nullable();
-            $table->enum('lang', ['Inglés','Español', 'Francés'])->nullable();
+            // $table->enum('lang', ['Inglés','Español', 'Francés'])->nullable();
+            $table->string('lang')->nullable();
             $table->string('position', 150)->nullable();
             $table->boolean('notify')->default(false);
             $table->text('notes')->nullable();

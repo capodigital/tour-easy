@@ -1,0 +1,16 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"tours"},
+{"type":"table","name":"typeitineraries","database":"tours","data":
+[
+{"id":"1","description":"Show","created_at":null,"updated_at":null},
+{"id":"2","description":"Actividad","created_at":null,"updated_at":null},
+{"id":"3","description":"Servicio","created_at":null,"updated_at":null},
+{"id":"4","description":"Transporte terrestre","created_at":null,"updated_at":null},
+{"id":"5","description":"Hotel","created_at":null,"updated_at":null},
+{"id":"6","description":"Avión","created_at":null,"updated_at":null},
+{"id":"7","description":"Tren","created_at":null,"updated_at":null},
+{"id":"8","description":"Transfer","created_at":null,"updated_at":null}
+]
+}
+]

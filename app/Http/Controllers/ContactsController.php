@@ -9,6 +9,7 @@ use App\Models\Documents;
 use App\Models\Socialmedias;
 use App\Models\Tours;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ContactsController extends Controller
 {
@@ -43,7 +44,8 @@ class ContactsController extends Controller
             'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
         ]);
 
-        $data['agency_id'] = $request->user()->id;
+        // $data['agency_id'] = $request->user()->id;
+        $data['agency_id'] = 1;
         //Almacenar los datos en la base de datos
         $contact = Contacts::create($data);
 
@@ -51,23 +53,25 @@ class ContactsController extends Controller
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
                 Socialmedias::create([
-                    'url' => $socialmedia->url,
-                    'description' => $socialmedia->description,
-                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
                     'socialmediaable_id' => $contact->id,
                     'socialmediaable_type' => 'App\Models\Contacts'
                 ]);
             }
         }
         if ($request->has('documents')) {
-            foreach ($request->documents as $document) {
+            foreach ($request->file('documents') as $document) {
                 $sizeInBytes = $document->getSize();
                 $sizeInMB = $sizeInBytes / 1024 / 1024;
                 $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
                 Documents::create([
                     'url' => null,
-                    'name' => $document->name,
-                    'document_path' => $document->document_path,
+                    'name' => $name,
+                    'document_path' => $path,
                     'size' => $sizeInMB,
                     'ext' => $extension,
                     'documentable_id' => $contact->id,

@@ -31,6 +31,7 @@ export default {
             languages: [],
             socialmedias: [{}],
             files: [{ type: 'link' }],
+            documents: new FormData(),
         };
     },
     methods: {
@@ -38,6 +39,18 @@ export default {
             axios.post('api/cities', { code: country }).then((response) => {
                 this.cities = response.data;
             });
+        },
+        add(file) {
+            // const exist = this.documents.get('documents');
+            // this.documents.append('documents', [...exist, file.files[0]]);
+        },
+        send(e) {
+            const data = new FormData(e.target)
+            data.append('notify', 0);
+            data.append('documents', this.documents.get('documents'))
+            axios.post('api/contacts', data).then((response) => {
+                console.log(response)
+            })
         }
     },
     created() {
@@ -51,6 +64,9 @@ export default {
         axios.get('src/languages.json').then((response) => {
             this.languages = response.data;
         });
+    },
+    mounted() {
+        // this.documents = this.$el.querySelector('.invisible')
     },
     components: { PersonalItem }
 }
@@ -70,7 +86,8 @@ export default {
         </div>
         <div class="hidden md:block md:w-1/3 px-2">
             <h1 class="text-center text-2xl mb-4 text-gray-700 font-semibold">Añadir</h1>
-            <div class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10">
+            <form @submit.prevent="send"
+                class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10">
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
@@ -84,17 +101,27 @@ export default {
                         <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-person text-gray-100"></i>
-                            <input name="last" type="text" placeholder="Apellidos"
+                            <input name="lastname" type="text" placeholder="Apellidos"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         </div>
                     </div>
                 </div>
-                <div>
-                    <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                        <i class="bi bi-envelope text-gray-100"></i>
-                        <input name="email" type="email" placeholder="Correo electrónico"
-                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                <div class="grid grid-cols-2 gap-x-2">
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-envelope text-gray-100"></i>
+                            <input name="email" type="email" placeholder="Correo electrónico"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Fecha de nacimiento</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-calendar-day text-gray-100"></i>
+                            <input name="birthday" type="date" placeholder="Fecha de nacimiento"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                        </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
@@ -203,7 +230,7 @@ export default {
                         type="button">Añadir</button>
                     <label class="text-slate-200 text-xs font-semibold">Documentos</label>
                     <div class="mt-1 grid grid-cols-3 gap-2">
-                        <template v-for="file in files">
+                        <template v-for="(file, index) in files">
                             <div class="flex items-center rounded border border-gray-300 px-2">
                                 <select v-model="file.type"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -212,9 +239,9 @@ export default {
                                 </select>
                             </div>
                             <div class="flex items-center rounded border border-gray-300 px-2" style="grid-column: span 2;">
-                                <input v-model="file.link" v-if="file.type == 'link'" type="text" placeholder="Link"
+                                <input :name="`urls[${index}]`" v-model="file.link" v-if="file.type == 'link'" type="text" placeholder="Link"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <input @change="(e) => add(e.target)" v-else type="file"
+                                <input @change="(e) => add(e.target)" :name="`documents[${index}]`" v-else type="file"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </template>
@@ -222,7 +249,7 @@ export default {
                 </div>
                 <button type="submit"
                     class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">Agregar</button>
-            </div>
+            </form>
         </div>
     </div>
 </template>
