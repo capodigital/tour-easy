@@ -84,7 +84,8 @@ export default {
                 //     type: 'travel',
                 //     start: '26/11/2023 09:30AM'
                 // },
-            ]
+            ],
+            
         };
     },
     components: { TourActivity },
@@ -94,35 +95,49 @@ export default {
             for (let i in response.data.data) {
                 const activity = response.data.data[i]
                 const next = (Number(i) + 1 == response.data.data.length) ? { place: { name: '' } } : response.data.data[Number(i) + 1];
-                let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate;
+                let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate
+                let date = '';
                 console.log(next)
                 switch (activity.typeitinerary_id) {
                     case 1:
-                        name = activity.name, description = `Prueba de sonidos: ${activity.showcheck}.<br />Puertas abiertas: ${activity.showtime}`;
+                        name = activity.name, description = `<b>Prueba de sonidos: </b>${activity.showcheck}.<br /><b>Puertas abiertas: </b>${activity.showtime}.<br /><b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
                         break;
                     case 2:
+                        name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                        break;
                     case 3:
+                        name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                        break;
                     case 5:
-                        name = activity.name, description = `Proveedor: ${activity.supplier.company_name}. <br />${activity.notes}`;
+                        name = activity.name, description = `<b>Proveedor: </b>${activity.supplier.company_name}.<br /><b>Lugar: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                     case 4:
-                        name = `${activity.place.name} → ${next.place.name}`, description = `Conductor: ${activity.carrier}.<br />Llegada a destino a las ${activity.enddate}`;
+                        name = `<b>Lugar: </b>`, description = `<b>Conductor: </b>${activity.carrier}`,
+                        date = `<br />${start}`;
                         break;
                     case 6:
-                        name = `${activity.place.name} → ${next.place.name}`, description = `Aerolinea: ${activity.carrier}.<br />Llegada a destino a las ${activity.enddate}`;
+                        name = `${activity.citystart.name} → ${next.cityend.name}`, description = `<b>Aerolinea: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                     case 7:
-                        name = `${activity.place.name} → ${next.place.name}`, description = `Ferroviaria: ${activity.carrier}.<br />Llegada a destino a las ${activity.enddate}`;
+                        name = `${activity.citystart.name} → ${next.cityend.name}`, description = `<b>Ferroviaria: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                     case 8:
-                        name = activity.name, description = activity.notes;
+                        name = `${activity.citystart.name} → ${next.cityend.name}`, description = `<b>Transporte: </b>${activity.contact.name}.<br /><b>Conductor: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                 }
                 this.activities.push({
                     name: name,
                     description: description,
                     type: type,
-                    start: start
+                    start: start,
+                    date: date
                 })
             }
         })

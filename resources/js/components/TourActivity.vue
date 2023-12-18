@@ -70,7 +70,7 @@ export default {
                 </button> -->
                 <div class="flex">
 
-                    <small class="text-end text-gray-500 leading-4">{{ activity.start }}</small>
+                    <small class="text-end text-gray-500 leading-4" v-html="activity.date"></small>
                 </div>
             </div>
 
