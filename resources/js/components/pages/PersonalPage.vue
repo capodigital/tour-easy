@@ -105,7 +105,6 @@ export default {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
         <div :class="{ hidden: !show }"
             class="w-full bg-white bg-opacity-90 md:bg-transparent h-screen md:h-auto absolute md:relative top-0 md:block md:w-1/3 px-2 flex justify-center items-center">
             <div>
@@ -184,7 +183,6 @@ export default {
                                 <select v-model="contact.typecontact_id" name="typecontact_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option v-for="type in types" :value="type.id">{{ type.description }}</option>
-=======
         <div class="hidden md:block md:w-1/3 px-2">
             <h1 class="text-center text-2xl mb-4 text-gray-700 font-semibold">Añadir</h1>
             <form @submit.prevent="send"
@@ -312,7 +310,6 @@ export default {
                                 <select :name="`socialmedias[${index}][typeredes_id]`"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="type in socialtypes" :value="type.id">{{ type.name }}</option>
->>>>>>> 53e1d22f5f2152f12d610758c99dd96eef0fc5a3
                                 </select>
                             </div>
                         </div>
@@ -322,10 +319,8 @@ export default {
                                 <i class="bi bi-translate text-gray-100"></i>
                                 <select v-model="contact.lang" name="lang"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-<<<<<<< HEAD
                                     <option v-for="language in languages" :value="language.name">{{ language.name }}
                                     </option>
-=======
                             </div>
                             <div class="flex items-center rounded border border-gray-300 px-2">
                                 <input :name="`socialmedias[${index}][description]`" type="text" placeholder="Descripción"
@@ -346,7 +341,6 @@ export default {
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" value="link">Google Drive</option>
                                     <option class="text-black" value="document">Local</option>
->>>>>>> 53e1d22f5f2152f12d610758c99dd96eef0fc5a3
                                 </select>
                             </div>
                         </div>
