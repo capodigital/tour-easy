@@ -198,7 +198,7 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-x-2">
+<div class="grid grid-cols-2 gap-x-2">
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">País</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
@@ -209,7 +209,7 @@ export default {
                                 </select>
                             </div>
                         </div>
-                        <div>
+<div>
                             <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-globe-americas text-gray-100"></i>
@@ -220,21 +220,21 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <div>
+<div>
                         <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
                             <textarea v-model="contact.notes" name="notes" placeholder="Datos adicionales"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                         </div>
                     </div>
-                    <div>
+<div>
                         <label class="text-slate-200 text-xs font-semibold">Posición</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
                             <textarea name="position" v-model="contact.position" placeholder="Posición"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                         </div>
                     </div>
-                    <div>
+<div>
                         <button @click="socialmedias.push({})"
                             class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
                             type="button">Añadir</button>
@@ -248,12 +248,12 @@ export default {
                                         <option v-for="type in socialtypes" :value="type.id">{{ type.name }}</option>
                                     </select>
                                 </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2">
+<div class="flex items-center rounded border border-gray-300 px-2">
                                     <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
                                         placeholder="Link"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2">
+<div class="flex items-center rounded border border-gray-300 px-2">
                                     <input v-model="socialmedia.description" :name="`socialmedias[${index}][description]`"
                                         type="text" placeholder="Descripción"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -261,7 +261,7 @@ export default {
                             </template>
                         </div>
                     </div>
-                    <div class="mt-2">
+<div class="mt-2">
                         <button @click="files.push({ type: 'link' })"
                             class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
                             type="button">Añadir</button>
@@ -275,7 +275,7 @@ export default {
                                         <option value="local">Local</option>
                                     </select>
                                 </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2"
+<div class="flex items-center rounded border border-gray-300 px-2"
                                     style="grid-column: span 2;">
                                     <template v-if="file.type == 'link'">
                                         <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
@@ -300,7 +300,7 @@ export default {
                             </template>
                         </div>
                     </div>
-                    <div class="flex justify-center">
+<div class="flex justify-center">
                         <button type="button" @click="show = false"
                             class="mt-8 me-2 md:hidden overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
                             Cerrar
@@ -320,13 +320,11 @@ export default {
         </div>
     </div>
 </template>
-<style scoped>
-h1 {
+<style scoped>h1 {
     font-family: 'Archivo Black', sans-serif;
 }
 
 form,
 .container {
     max-height: calc(100vh - 11.5rem);
-}
-</style>
+}</style>
