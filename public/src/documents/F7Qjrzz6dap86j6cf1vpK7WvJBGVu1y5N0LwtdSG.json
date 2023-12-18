@@ -1,0 +1,14 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"tours"},
+{"type":"table","name":"typecontacts","database":"tours","data":
+[
+{"id":"1","description":"Artista","created_at":null,"updated_at":null},
+{"id":"2","description":"Manager","created_at":null,"updated_at":null},
+{"id":"3","description":"Promotor","created_at":null,"updated_at":null},
+{"id":"4","description":"Chofer","created_at":null,"updated_at":null},
+{"id":"5","description":"Crew","created_at":null,"updated_at":null},
+{"id":"6","description":"Tech","created_at":null,"updated_at":null}
+]
+}
+]

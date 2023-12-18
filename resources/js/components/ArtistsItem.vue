@@ -21,68 +21,24 @@ export default {
             </div>
         </div>
         <div class="p-2">
-            <p class="text-sm mb-2 text-white">{{ artist.notes }}</p>
-            <!-- <div class="relative h-20 sm:h-24">
-                <p1 class="text-gray-300 text-sm left-1 top-0 font-semibold">Redes sociales</p1>
-                <div class="flex pt-2">
-                    <a :href="artist.facebook" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Facebook.png" class="" />
-                    </a>
-                    <a :href="artist.instagram" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Instagram.png" class="" />
-                    </a>
-                    <a :href="artist.twitter" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Twitter.png" class="" />
-                    </a>
-                    <a :href="artist.tiktok" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Tiktok.png" class="" />
-                    </a>
-                    <a :href="artist.extraprofile.split(',')[0]" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Link.png" class="" />
-                    </a>
-                </div>
-            </div>
-            <div class="px-2 relative pt-2">
-                <p1 class="text-gray-300 text-sm left-1 top-0 font-semibold">Música</p1>
-                <div class="flex">
-                    <a :href="artist.spotify" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Spotify.png" class="" />
-                    </a>
-                    <a :href="artist.youtube" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Youtube.png" class="" />
-                    </a>
-                    <a :href="artist.applemusic" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/AppleMusic.png" class="" />
-                    </a>
-                    <a :href="artist.amazonmusic" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/AmazonMusic.png" class="" />
-                    </a>
-                    <a :href="artist.tidal" target="_blank"
-                        class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                        <img src="src/Tindal.png" class="" />
-                    </a>
-                </div>
-            </div>
+            <p class="text-sm mb-2 text-white">Redes sociales</p>
 
-            <div class="px-2">
-                <button class="bg-black px-2 py-1 text-white rounded me-2 text-sm" v-for="tag in tags(artist.tags)">{{ tag
-                }}</button>
-            </div> -->
             <div class="mt-3 grid grid-cols-6">
                 <a v-for="socialmedia in artist.socialmedias" :href="socialmedia.url" target="_blank"
                     class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
                     <img :src="socialmedia.typered.logo.replace('http://localhost/', '')" class="" />
                 </a>
             </div>
+        </div>
+        <div class="px-2 pb-3 grid grid-cols-2 gap-2">
+            <button type="button" @click="$emit('edit', artist)"
+                class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                <i class="bi bi-pencil-square"></i> Editar
+            </button>
+            <button type="button" @click="$emit('destroy', artist)"
+                class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                <i class="bi bi-trash"></i> Eliminar
+            </button>
         </div>
     </article>
 </template>

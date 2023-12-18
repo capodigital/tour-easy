@@ -8,6 +8,7 @@ use App\Models\Artists;
 use App\Models\Documents;
 use App\Models\Socialmedias;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ArtistsController extends Controller
@@ -55,23 +56,21 @@ class ArtistsController extends Controller
             'confirm_password' => 'required|same:password'
 
         ]);
-
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags']);
-
         $data['password'] = bcrypt($request->password);
-        $data['agency_id'] = $request->user()->id;
-        $image = $request->file('image')->store('artists');
-        $data['image'] = $image;
+        // $data['agency_id'] = $request->user()->id;
+        $data['agency_id'] = 1;
+        $image = $request->file('image')->store('documents', 'src');
+        $data['image'] = "src/$image";
 
         //Almacenar los datos en la base de datos
-        $artist = Agencies::create($data);
-
+        $artist = Artists::create($data);
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
                 Socialmedias::create([
-                    'url' => $socialmedia->url,
-                    'description' => $socialmedia->description,
-                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
                     'socialmediaable_id' => $artist->id,
                     'socialmediaable_type' => 'App\Models\Artists'
                 ]);
@@ -79,14 +78,16 @@ class ArtistsController extends Controller
         }
 
         if ($request->has('documents')) {
-            foreach ($request->documents as $document) {
+            foreach ($request->file('documents') as $document) {
                 $sizeInBytes = $document->getSize();
                 $sizeInMB = $sizeInBytes / 1024 / 1024;
                 $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
                 Documents::create([
                     'url' => null,
-                    'name' => $document->name,
-                    'document_path' => $document->document_path,
+                    'name' => $name,
+                    'document_path' => $path,
                     'size' => $sizeInMB,
                     'ext' => $extension,
                     'documentable_id' => $artist->id,
@@ -94,6 +95,7 @@ class ArtistsController extends Controller
                 ]);
             }
         }
+
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
                 Documents::create([
@@ -107,7 +109,6 @@ class ArtistsController extends Controller
                 ]);
             }
         }
-        
 
         $artist->refresh();
         return new ArtistsResource($artist);
@@ -139,7 +140,7 @@ class ArtistsController extends Controller
 
         ]);
 
-        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags']);
+        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'notes']);
 
         if ($request->has('image')) {
             //Eliminar la vieja foto de perfil
@@ -152,41 +153,49 @@ class ArtistsController extends Controller
         //Almacenar los datos en la base de datos
         $artist->update($data);
 
-        Socialmedias::where('socialmediaable_id', $artist->id)->delete();
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $artist->id,
-                'socialmediaable_type' => 'App\Models\Artists'
-            ]);
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
+                    'socialmediaable_id' => $artist->id,
+                    'socialmediaable_type' => 'App\Models\Artists'
+                ]);
+            }
         }
-        Documents::where('documentable_id', $artist->id)->delete();
-        foreach ($request->documents as $document) {
-            $sizeInBytes = $document->getSize();
-            $sizeInMB = $sizeInBytes / 1024 / 1024;
-            $extension = $document->getClientOriginalExtension();
-            Documents::create([
-                'url' => null,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $sizeInMB,
-                'ext' => $extension,
-                'documentable_id' => $artist->id,
-                'documentable_type' => 'App\Models\Artists'
-            ]);
+
+        if ($request->has('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
+                Documents::create([
+                    'url' => null,
+                    'name' => $name,
+                    'document_path' => $path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $artist->id,
+                    'documentable_type' => 'App\Models\Artists'
+                ]);
+            }
         }
-        foreach ($request->urls as $url) {
-            Documents::create([
-                'url' => $url,
-                'name' => null,
-                'document_path' => null,
-                'size' => null,
-                'ext' => null,
-                'documentable_id' => $artist->id,
-                'documentable_type' => 'App\Models\Artists'
-            ]);
+
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $artist->id,
+                    'documentable_type' => 'App\Models\Artists'
+                ]);
+            }
         }
 
         $artist->refresh();
