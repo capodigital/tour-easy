@@ -65,7 +65,17 @@ export default {
                         <path d="M12 21v-1" />
                     </svg>
                 </a>
-                <a href="#" class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
+                <button @click="$emit('edit', tour)" class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-clipboard-edit">
+                        <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                        <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z" />
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5.5" />
+                        <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
+                    </svg>
+                </button>
+                <button @click="$emit('destroy', tour)" class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-2">
@@ -75,7 +85,7 @@ export default {
                         <line x1="10" x2="10" y1="11" y2="17" />
                         <line x1="14" x2="14" y1="11" y2="17" />
                     </svg>
-                </a>
+                </button>
             </div>
             <div class="flex">
                 <a :href="'#details/' + tour.id"
@@ -90,7 +100,7 @@ export default {
                 </a>
             </div>
         </div>
-    </div></template>
+</div></template>
 <style scoped>h3,
 p {
     font-family: 'Roboto', sans-serif;

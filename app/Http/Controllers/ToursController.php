@@ -58,7 +58,7 @@ class ToursController extends Controller
 
         $data['agency_id'] = $request->agency_id;
         $image = $request->file('tourcartel')->store('tours', 'src');
-        $data['tourcartel'] = $image;
+        $data['tourcartel'] = "src/$image";
 
         //Almacenar los datos en la base de datos
         $tour = Tours::create($data);
@@ -152,42 +152,51 @@ class ToursController extends Controller
         //Almacenar los datos en la base de datos
         $tour->update($data);
 
-        Socialmedias::where('socialmediaable_id', $tour->id)->delete();
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $tour->id,
-                'socialmediaable_type' => 'App\Models\Tours'
-            ]);
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
+                    'socialmediaable_id' => $tour->id,
+                    'socialmediaable_type' => 'App\Models\Tours'
+                ]);
+            }
         }
-        Documents::where('documentable_id', $tour->id)->delete();
-        foreach ($request->documents as $document) {
-            $sizeInBytes = $document->getSize();
-            $sizeInMB = $sizeInBytes / 1024 / 1024;
-            $extension = $document->getClientOriginalExtension();
-            Documents::create([
-                'url' => null,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $sizeInMB,
-                'ext' => $extension,
-                'documentable_id' => $tour->id,
-                'documentable_type' => 'App\Models\Tours'
-            ]);
+
+        if ($request->has('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
+                Documents::create([
+                    'url' => null,
+                    'name' => $name,
+                    'document_path' => $path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $tour->id,
+                    'documentable_type' => 'App\Models\Tours'
+                ]);
+            }
         }
-        foreach ($request->urls as $url) {
-            Documents::create([
-                'url' => $url,
-                'name' => null,
-                'document_path' => null,
-                'size' => null,
-                'ext' => null,
-                'documentable_id' => $tour->id,
-                'documentable_type' => 'App\Models\Tours'
-            ]);
+
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $tour->id,
+                    'documentable_type' => 'App\Models\Tours'
+                ]);
+            }
         }
+
         $tour->refresh();
         return new ToursResource($tour);
     }

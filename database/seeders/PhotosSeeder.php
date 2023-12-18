@@ -19,7 +19,7 @@ class PhotosSeeder extends Seeder
             for ($i = 0; $i < 20; $i++) {
                 DB::table('photos')->insert([
                     [
-                        'url' => "src/luis-fonsi/"+$i+1+".jpg",
+                        'url' => "src/luis-fonsi/". ($i+1) . ".jpg",
                         'tour_id' => $tour->id,
                     ]
                 ]);

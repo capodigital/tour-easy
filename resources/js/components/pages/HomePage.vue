@@ -43,7 +43,7 @@ export default {
                 document.type = document.url == null ? 'local' : 'link'
                 this.files.push(document)
             }
-            this.preview = item.image
+            this.preview = item.tourcartel
             this.show = true
         },
         destroy(item) {
@@ -53,8 +53,8 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target)
-            data.append('_method', this.artist.id == undefined ? 'post' : 'put');
-            axios.post(this.artist.id == undefined ? 'api/tours' : `api/tours/${this.artist.id}`, data).then((response) => {
+            data.append('_method', this.tour.id == undefined ? 'post' : 'put');
+            axios.post(this.tour.id == undefined ? 'api/tours' : `api/tours/${this.tour.id}`, data).then((response) => {
                 console.log(response)
             })
         },
