@@ -30,6 +30,7 @@ class ArtistsResource extends JsonResource
             'image'=> $this->image,
             'email' => $this->email,  
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
+            'documents' => DocumentsResource::collection($this->documents()->get()),
                            
         ];
     }

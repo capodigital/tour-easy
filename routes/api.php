@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\ItinerariesController;
 use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\PlacesController;
@@ -55,6 +56,7 @@ Route::get('/all_tours', [ToursController::class, 'all']);
 Route::get('/deleted_tours', [ToursController::class, 'deleted']);
 Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
 Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
+Route::post('/tour', [ToursController::class, 'tour']);
 
 Route::resource('contacts', ContactsController::class);
 Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);
@@ -82,3 +84,5 @@ Route::resource('typeagencies', TypeagenciesController::class);
 Route::resource('typeitineraries', TypeitinerariesController::class);
 Route::resource('typeplaces', TypeplacesController::class);
 Route::resource('typeredes', TyperedesController::class);
+
+Route::resource('documents', DocumentsController::class);

@@ -31,6 +31,10 @@ class Tours extends Model
     {
         return $this->morphMany(Socialmedias::class, 'socialmediasable','socialmediaable_type','socialmediaable_id');
     }
+    public function documents(): MorphMany
+    {
+        return $this->morphMany(Documents::class, 'documentsable','documentable_type','documentable_id');
+    }
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contacts::class, 'tourcontacts', 'tour_id', 'contact_id')->withTimestamps();
@@ -47,6 +51,11 @@ class Tours extends Model
     public function toArray() {
         $data = parent::toArray();
         $data['artist'] = $this->artist;
+        return $data;
+    }
+    public function toArray1() {
+        $data = parent::toArray();
+        $data['documents'] = $this->documents;
         return $data;
     }
 }
