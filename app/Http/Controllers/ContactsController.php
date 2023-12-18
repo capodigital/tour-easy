@@ -45,10 +45,9 @@ class ContactsController extends Controller
         ]);
 
         // $data['agency_id'] = $request->user()->id;
-       // $data['agency_id'] = 1;
+        // $data['agency_id'] = 1;
         //Almacenar los datos en la base de datos
         $contact = Contacts::create($data);
-
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
@@ -61,6 +60,7 @@ class ContactsController extends Controller
                 ]);
             }
         }
+
         if ($request->has('documents')) {
             foreach ($request->file('documents') as $document) {
                 $sizeInBytes = $document->getSize();
@@ -127,49 +127,56 @@ class ContactsController extends Controller
 
         $data = $request->only([
             'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
-            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id','agency_id'
+            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id', 'agency_id'
         ]);
 
         //Almacenar los datos en la base de datos
         $contact->update($data);
 
         Socialmedias::where('socialmediaable_id', $contact->id)->delete();
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $contact->id,
-                'socialmediaable_type' => 'App\Models\Contacts'
-            ]);
-        }
-        Documents::where('documentable_id', $contact->id)->delete();
-        foreach ($request->documents as $document) {
-            $sizeInBytes = $document->getSize();
-            $sizeInMB = $sizeInBytes / 1024 / 1024;
-            $extension = $document->getClientOriginalExtension();
-            Documents::create([
-                'url' => null,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $sizeInMB,
-                'ext' => $extension,
-                'documentable_id' => $contact->id,
-                'documentable_type' => 'App\Models\Contacts'
-            ]);
-        }
-        foreach ($request->urls as $url) {
-            Documents::create([
-                'url' => $url,
-                'name' => null,
-                'document_path' => null,
-                'size' => null,
-                'ext' => null,
-                'documentable_id' => $contact->id,
-                'documentable_type' => 'App\Models\Contacts'
-            ]);
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
+                    'socialmediaable_id' => $contact->id,
+                    'socialmediaable_type' => 'App\Models\Contacts'
+                ]);
+            }
         }
 
+        if ($request->has('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
+                Documents::create([
+                    'url' => null,
+                    'name' => $name,
+                    'document_path' => $path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $contact->id,
+                    'documentable_type' => 'App\Models\Contacts'
+                ]);
+            }
+        }
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $contact->id,
+                    'documentable_type' => 'App\Models\Contacts'
+                ]);
+            }
+        }
         $contact->refresh();
         return new ContactsResource($contact);
     }
