@@ -56,8 +56,8 @@ class ToursController extends Controller
             'spotify_list', 'youtube_list'
         ]);
 
-        $data['agency_id'] = $request->user()->id;
-        $image = $request->file('tourcartel')->store('tours');
+        $data['agency_id'] = $request->agency_id;
+        $image = $request->file('tourcartel')->store('tours', 'src');
         $data['tourcartel'] = $image;
 
         //Almacenar los datos en la base de datos
@@ -66,9 +66,9 @@ class ToursController extends Controller
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
                 Socialmedias::create([
-                    'url' => $socialmedia->url,
-                    'description' => $socialmedia->description,
-                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
                     'socialmediaable_id' => $tour->id,
                     'socialmediaable_type' => 'App\Models\Tours'
                 ]);
@@ -76,14 +76,16 @@ class ToursController extends Controller
         }
 
         if ($request->has('documents')) {
-            foreach ($request->documents as $document) {
+            foreach ($request->file('documents') as $document) {
                 $sizeInBytes = $document->getSize();
                 $sizeInMB = $sizeInBytes / 1024 / 1024;
                 $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
                 Documents::create([
                     'url' => null,
-                    'name' => $document->name,
-                    'document_path' => $document->document_path,
+                    'name' => $name,
+                    'document_path' => $path,
                     'size' => $sizeInMB,
                     'ext' => $extension,
                     'documentable_id' => $tour->id,
@@ -91,6 +93,7 @@ class ToursController extends Controller
                 ]);
             }
         }
+
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
                 Documents::create([
@@ -100,11 +103,10 @@ class ToursController extends Controller
                     'size' => null,
                     'ext' => null,
                     'documentable_id' => $tour->id,
-                    'documentable_type' => 'App\Models\Suppliers'
+                    'documentable_type' => 'App\Models\Tours'
                 ]);
             }
         }
-
 
         $tour->refresh();
         return new ToursResource($tour);
