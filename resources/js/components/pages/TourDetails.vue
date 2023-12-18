@@ -85,19 +85,21 @@ export default {
                 //     start: '26/11/2023 09:30AM'
                 // },
             ],
-            
+            tour: {}
         };
     },
     components: { TourActivity },
     mounted() {
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
+        axios.post('api/tour', { id: id }).then((response) => {
+            this.tour = response.data.data;
+        })
         axios.post('api/itineraries/tour', { id: id }).then((response) => {
             for (let i in response.data.data) {
                 const activity = response.data.data[i]
-                const next = (Number(i) + 1 == response.data.data.length) ? { place: { name: '' } } : response.data.data[Number(i) + 1];
+                //const next = (Number(i) + 1 == response.data.data.length) ? { place: { name: '' } } : response.data.data[Number(i) + 1];
                 let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate
                 let date = '';
-                console.log(next)
                 switch (activity.typeitinerary_id) {
                     case 1:
                         name = activity.name, description = `<b>Prueba de sonidos: </b>${activity.showcheck}.<br /><b>Puertas abiertas: </b>${activity.showtime}.<br /><b>Lugar: </b>${activity.place.name}`,
@@ -120,15 +122,15 @@ export default {
                         date = `<br />${start}`;
                         break;
                     case 6:
-                        name = `${activity.citystart.name} → ${next.cityend.name}`, description = `<b>Aerolinea: </b>${activity.place.name}`,
+                        name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Aerolinea: </b>${activity.place.name}`,
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                     case 7:
-                        name = `${activity.citystart.name} → ${next.cityend.name}`, description = `<b>Ferroviaria: </b>${activity.place.name}`,
+                        name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Ferroviaria: </b>${activity.place.name}`,
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                     case 8:
-                        name = `${activity.citystart.name} → ${next.cityend.name}`, description = `<b>Transporte: </b>${activity.contact.name}.<br /><b>Conductor: </b>${activity.place.name}`,
+                        name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Transporte: </b>${activity.contact.name}.<br /><b>Conductor: </b>${activity.place.name}`,
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                 }
@@ -152,8 +154,8 @@ export default {
                     <div class="text-center">
                         <h1
                             class="md:text-4xl font-bold bg-gradient-to-tr from-slate-100 to-slate-300 text-xl bg-clip-text text-transparent drop-shadow-md shadow-black">
-                            UN VERANO SIN TI</h1>
-                        <p class="text-2xl">Bad Bunny</p>
+                            {{tour.tourname}}</h1>
+                        <p class="text-2xl">{{ tour.artist.stagename }}</p>
                     </div>
                 </div>
                 <div class="hero">

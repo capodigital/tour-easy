@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Agencies;
 use App\Models\Artists;
+use App\Models\Documents;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -32,6 +33,8 @@ class ToursResource extends JsonResource
             'agency' => new AgenciesResource($agency),
             'agency_id' => $this->agency_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
+            'documents' => DocumentsResource::collection($this->documents()->get()),
+
 
                            
         ];

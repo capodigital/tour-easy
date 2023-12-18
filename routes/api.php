@@ -55,6 +55,7 @@ Route::get('/all_tours', [ToursController::class, 'all']);
 Route::get('/deleted_tours', [ToursController::class, 'deleted']);
 Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
 Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
+Route::post('/tour', [ToursController::class, 'tour']);
 
 Route::resource('contacts', ContactsController::class);
 Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);

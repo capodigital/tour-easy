@@ -213,4 +213,11 @@ class ToursController extends Controller
 
         return ToursResource::collection($tours);
     }
+
+    public function tour(Request $request)
+    {
+        $tour = Tours::find($request->id);
+
+        return new ToursResource($tour);
+    }
 }
