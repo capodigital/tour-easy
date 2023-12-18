@@ -97,7 +97,7 @@ export default {
                             PERSONAL DE LA AGENCIA
                         </h1>
                         <button @click="add"
-                            class="float-right bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
+                            class="float-right sm:hidden bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
                     </div>
                     <div class="container overflow-auto scroll">
                         <PersonalItem @edit="edit" @destroy="destroy" v-for="contact in contacts" :contact="contact" />
