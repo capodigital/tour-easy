@@ -182,7 +182,7 @@ export default {
                                 <i class="bi bi-person-vcard text-gray-100"></i>
                                 <select v-model="contact.typecontact_id" name="typecontact_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option v-for="type in types" :value="type.id">{{ type.description }}</option>
+                                    <option class="text-black" v-for="type in types" :value="type.id">{{ type.description }}</option>
                                 </select>
                             </div>
                         </div>
@@ -192,7 +192,7 @@ export default {
                                 <i class="bi bi-translate text-gray-100"></i>
                                 <select v-model="contact.lang" name="lang"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option v-for="language in languages" :value="language.name">{{ language.name }}
+                                    <option class="text-black" v-for="language in languages" :value="language.name">{{ language.name }}
                                     </option>
                                 </select>
                             </div>
@@ -205,7 +205,7 @@ export default {
                                 <i class="bi bi-globe text-gray-100"></i>
                                 <select @change="(e) => setCities(e.target.value)"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option v-for="country in countries" :value="country.code">{{ country.name }}</option>
+                                    <option class="text-black" v-for="country in countries" :value="country.code">{{ country.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -215,7 +215,7 @@ export default {
                                 <i class="bi bi-globe-americas text-gray-100"></i>
                                 <select v-model="contact.city_id" @change="setCities" name="city_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option v-for="city in cities" :value="city.id">{{ city.name }}</option>
+                                    <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -245,7 +245,7 @@ export default {
                                     <select v-model="socialmedia.typeredes_id"
                                         :name="`socialmedias[${index}][typeredes_id]`"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option v-for="type in socialtypes" :value="type.id">{{ type.name }}</option>
+                                        <option class="text-black" v-for="type in socialtypes" :value="type.id">{{ type.name }}</option>
                                     </select>
                                 </div>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
@@ -271,8 +271,8 @@ export default {
                                 <div class="flex items-center rounded border border-gray-300 px-2">
                                     <select v-model="file.type"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option value="link">Google Drive</option>
-                                        <option value="local">Local</option>
+                                        <option class="text-black" value="link">Google Drive</option>
+                                        <option class="text-black" value="local">Local</option>
                                     </select>
                                 </div>
                                 <div class="flex items-center rounded border border-gray-300 px-2"
