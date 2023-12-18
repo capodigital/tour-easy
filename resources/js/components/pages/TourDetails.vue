@@ -155,7 +155,7 @@ export default {
                         <h1
                             class="md:text-4xl font-bold bg-gradient-to-tr from-slate-100 to-slate-300 text-xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                             {{tour.tourname}}</h1>
-                        <p class="text-2xl">{{ tour.artist.id }}</p>
+                        <p class="text-2xl">{{ tour.artist }}</p>
                     </div>
                 </div>
                 <div class="hero">
