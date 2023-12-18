@@ -66,8 +66,8 @@ export default {
                         SOBRE EL ARTISTA</h1>
                     <article class="rounded-lg h-full">
                         <img :src="tour.tourcartel.replace('http://localhost/', '')" class="rounded-t-lg " />
-                        <div class="flex p-2 rounded-lg w-full">
-                            <div class="rounded-md shadow-lg shadow-gray-800 me-2 w-20 h-20 bg-cover bg-center"
+                        <div class="grid grid-cols-2 p-2 rounded-lg w-full">
+                            <div class="rounded-md shadow-lg shadow-gray-800 me-2 w-40 h-40 bg-cover bg-center"
                                 :style="{ 'background': `url(${tour.artist.image.replace('http://localhost/', '')})` }">
                             </div>
                             <div>
