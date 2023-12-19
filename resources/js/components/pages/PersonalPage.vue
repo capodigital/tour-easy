@@ -46,7 +46,20 @@ export default {
             data.append('notify', 0);
             data.append('_method', this.contact.id == undefined ? 'post' : 'put');
             axios.post(this.contact.id == undefined ? 'api/contacts' : `api/contacts/${this.contact.id}`, data).then((response) => {
-                console.log(response)
+                if (this.contact.id == undefined) {
+                    this.contacts.unshift(response.data.data)
+                } else {
+                    for (let i in this.contacts) {
+                        if (this.contacts[i].id == this.contact.id) {
+                            this.contacts[i] = response.data.data
+                            break
+                        }
+                    }
+                }
+                this.tour = {}
+                this.socialmedias = [{}]
+                this.files = [{ type: 'link' }]
+                this.show = false
             })
         },
         add() {
@@ -67,7 +80,12 @@ export default {
         },
         destroy(item) {
             axios.post('api/contacts/' + item.id, { _method: 'delete' }).then((response) => {
-                console.log(response)
+                for (let i in this.contacts) {
+                    if (this.contacts[i].id == item.id) {
+                        this.contacts.splice(i, 1)
+                        break
+                    }
+                }
             })
         }
     },
@@ -182,7 +200,8 @@ export default {
                                 <i class="bi bi-person-vcard text-gray-100"></i>
                                 <select v-model="contact.typecontact_id" name="typecontact_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="type in types" :value="type.id">{{ type.description }}</option>
+                                    <option class="text-black" v-for="type in types" :value="type.id">{{ type.description }}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -192,7 +211,8 @@ export default {
                                 <i class="bi bi-translate text-gray-100"></i>
                                 <select v-model="contact.lang" name="lang"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="language in languages" :value="language.name">{{ language.name }}
+                                    <option class="text-black" v-for="language in languages" :value="language.name">{{
+                                        language.name }}
                                     </option>
                                 </select>
                             </div>
@@ -205,7 +225,8 @@ export default {
                                 <i class="bi bi-globe text-gray-100"></i>
                                 <select @change="(e) => setCities(e.target.value)"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="country in countries" :value="country.code">{{ country.name }}</option>
+                                    <option class="text-black" v-for="country in countries" :value="country.code">{{
+                                        country.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -215,7 +236,8 @@ export default {
                                 <i class="bi bi-globe-americas text-gray-100"></i>
                                 <select v-model="contact.city_id" @change="setCities" name="city_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}</option>
+                                    <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -245,7 +267,8 @@ export default {
                                     <select v-model="socialmedia.typeredes_id"
                                         :name="`socialmedias[${index}][typeredes_id]`"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" v-for="type in socialtypes" :value="type.id">{{ type.name }}</option>
+                                        <option class="text-black" v-for="type in socialtypes" :value="type.id">{{ type.name
+                                        }}</option>
                                     </select>
                                 </div>
                                 <div class="flex items-center rounded border border-gray-300 px-2">

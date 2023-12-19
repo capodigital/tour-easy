@@ -32,6 +32,7 @@ export default {
         add() {
             this.tour = {}
             this.socialmedias = [{}]
+            this.preview = 'src/cartel-placeholder.jpeg'
             this.files = [{ type: 'link' }]
             this.show = true
         },
@@ -48,14 +49,32 @@ export default {
         },
         destroy(item) {
             axios.post('api/tours/' + item.id, { _method: 'delete' }).then((response) => {
-                console.log(response)
+                for (let i in this.tours) {
+                    if (this.tours[i].id == item.id) {
+                        this.tours.splice(i, 1)
+                        break
+                    }
+                }
             })
         },
         send(e) {
             const data = new FormData(e.target)
             data.append('_method', this.tour.id == undefined ? 'post' : 'put');
             axios.post(this.tour.id == undefined ? 'api/tours' : `api/tours/${this.tour.id}`, data).then((response) => {
-                console.log(response)
+                if (this.tour.id == undefined) {
+                    this.tours.unshift(response.data.data)
+                } else {
+                    for (let i in this.tours) {
+                        if (this.tours[i].id == this.tour.id) {
+                            this.tours[i] = response.data.data
+                            break
+                        }
+                    }
+                }
+                this.tour = {}
+                this.socialmedias = [{}]
+                this.files = [{ type: 'link' }]
+                this.show = false
             })
         },
         updatePreview(e) {
@@ -103,7 +122,7 @@ export default {
                     class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded z-50">Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
-                <TourCard  @edit="edit" @destroy="destroy" :tour="tour" v-for="tour in tours" />
+                <TourCard @edit="edit" @destroy="destroy" :tour="tour" v-for="tour in tours" />
             </div>
         </div>
         <div :class="{ hidden: !show }"

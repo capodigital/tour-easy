@@ -28,7 +28,7 @@ export default {
             ],
             socialmedias: [{}],
             files: [{ type: 'link' }],
-            preview: 'src/user_4.jpg',
+            preview: 'src/user_placeholder.png',
             show: false
         };
     },
@@ -37,6 +37,7 @@ export default {
             this.artist = {}
             this.socialmedias = [{}]
             this.files = [{ type: 'link' }]
+            this.preview = 'src/user_placeholder.png'
             this.show = true
         },
         edit(item) {
@@ -52,14 +53,34 @@ export default {
         },
         destroy(item) {
             axios.post('api/artists/' + item.id, { _method: 'delete' }).then((response) => {
-                console.log(response)
+                for (let i in this.artists) {
+                    if (this.artists[i].id == item.id) {
+                        this.artists.splice(i, 1)
+                        break
+                    }
+                }
             })
         },
         send(e) {
             const data = new FormData(e.target)
             data.append('_method', this.artist.id == undefined ? 'post' : 'put');
             axios.post(this.artist.id == undefined ? 'api/artists' : `api/artists/${this.artist.id}`, data).then((response) => {
-                console.log(response)
+                if (this.artist.id == undefined) {
+                    console.log(this.artists)
+                    this.artists.unshift(response.data.data)
+                } else {
+                    for (let i in this.artists) {
+                        if (this.artists[i].id == this.artist.id) {
+                            this.artists[i] = response.data.data
+                            break
+                        }
+                    }
+                }
+                this.tour = {}
+                this.socialmedias = [{}]
+                this.files = [{ type: 'link' }]
+                this.show = false
+                this.preview = 'src/user_placeholder.png'
             })
         },
         updatePreview(e) {
@@ -79,7 +100,7 @@ export default {
                 Authorization: `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
-            this.artists = response.data;
+            this.artists = response.data.data;
         });
 
     },
@@ -97,7 +118,7 @@ export default {
                 class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
-            <ArtistsItem @edit="edit" @destroy="destroy" :artist="artist" v-for="artist in artists.data" />
+            <ArtistsItem @edit="edit" @destroy="destroy" :artist="artist" v-for="artist in artists" />
         </div>
         <div :class="{ hidden: !show }"
             class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
@@ -113,7 +134,8 @@ export default {
                 </h1>
                 <form @submit.prevent="send"
                     class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                    <input @change="updatePreview" type="file" class="hidden" name="image" :required="artist.id == undefined" />
+                    <input @change="updatePreview" type="file" class="hidden" name="image"
+                        :required="artist.id == undefined" />
                     <div class="grid grid-cols-2 gap-2">
                         <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
                             class="rounded-full w-52 h-52 cursor-pointer" />
