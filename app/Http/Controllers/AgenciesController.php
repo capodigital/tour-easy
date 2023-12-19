@@ -16,6 +16,7 @@ class AgenciesController extends Controller
      */
     public function index()
     {
+        
 
         $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
         return AgenciesResource::collection($agencies);

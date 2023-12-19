@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ToursResource;
 use App\Models\Agencies;
+use App\Models\Artists;
 use App\Models\Documents;
 use App\Models\Socialmedias;
 use App\Models\Tours;
@@ -17,17 +18,17 @@ class ToursController extends Controller
      */
     public function index()
     {
-        $tours = Tours::withTrashed()->whereNull('deleted_at')->orderBy('startdate')->get();
+        $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
         return ToursResource::collection($tours);
     }
     public function all()
     {
-        $tours = Tours::withTrashed()->orderBy('startdate')->get();
+        $tours = Tours::withTrashed()->orderBy('startdate')->get()->sortBy('startdate');
         return ToursResource::collection($tours);
     }
     public function deleted()
     {
-        $tours = Tours::onlyTrashed()->orderBy('startdate')->get();
+        $tours = Tours::onlyTrashed()->orderBy('startdate')->get()->sortBy('startdate');
         return ToursResource::collection($tours);
     }
 
@@ -220,7 +221,16 @@ class ToursController extends Controller
     public function toursByAgency(Request $request)
     {
         $agency = Agencies::find($request->id);
-        $tours = $agency->tours()->orderBy('startdate')->get();
+
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $tours = Tours::all()->sortBy('startdate');
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {     
+            $tours = $agency->tours()->get()->sortBy('startdate');
+        } else {
+            $artist = Artists::find($request->user()->id);
+            $tours = $artist->tours()->get()->sortBy('startdate');
+        }
+
 
         return ToursResource::collection($tours);
     }
