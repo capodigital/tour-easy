@@ -13,7 +13,7 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        $countries = Countries::all();
+        $countries = Countries::all()->sortBy('name');
         return CountriesResource::collection($countries);
     }
 
