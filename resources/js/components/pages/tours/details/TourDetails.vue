@@ -26,9 +26,11 @@ export default {
     components: { TourActivity, ActivityDetails },
     methods: {
         setCities(country) {
-            axios.post('api/cities', { code: country },{headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }}).then((response) => {
+            axios.post('api/cities', { code: country }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 this.cities = response.data;
             });
         },
@@ -112,13 +114,42 @@ export default {
             item.date = date
             item.start = start
             return item
+        },
+        contact(contact) {
+            switch (this.activity.typeitinerary_id) {
+                case 1:
+                    return contact.typecontact_id == 3 || contact.typecontact_id == 2
+                case 4:
+                case 6:
+                case 7:
+                case 8:
+                    return contact.typecontact_id == 4
+                default:
+                    return false
+            }
+        },
+        place(place) {
+            switch (this.activity.typeitinerary_id) {
+                case 1:
+                    return place.typeplace_id == 1
+                case 5:
+                    return place.typeplace_id == 2
+                case 6:
+                    return place.typeplace_id == 3
+                case 7:
+                    return place.typeplace_id == 4
+                default:
+                    return false
+            }
         }
     },
     created() {
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-        axios.post('api/itineraries/tour', { id: id },{headers: {
+        axios.post('api/itineraries/tour', { id: id }, {
+            headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
-            }}).then((response) => {
+            }
+        }).then((response) => {
             for (let activity of response.data.data) {
                 console.log(activity)
                 this.activities.push(this.getActivityData(activity))
@@ -229,7 +260,8 @@ export default {
             </div>
         </div>
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
-            <TourActivity v-for="item in activities" @show="(item) => details = item" @edit="edit" @destroy="destroy" :activity="item" />
+            <TourActivity v-for="item in activities" @show="(item) => details = item" @edit="edit" @destroy="destroy"
+                :activity="item" />
             <article @click="add"
                 class="border-2 border-gray-500 rounded-2xl cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
                 <i class="bi bi-plus text-6xl text-gray-500"></i>
@@ -325,7 +357,7 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <label class="text-slate-200 text-xs font-semibold">Ciudad de salida</label>
+                    <label class="text-slate-200 text-xs font-semibold">Ciudad <template v-if="[4,6,7,8].includes(activity.typeitinerary_id)"> de salida</template></label>
                     <div class="grid grid-cols-2 gap-x-2">
                         <div>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
@@ -348,49 +380,55 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe text-gray-100"></i>
-                                <select @change="(e) => setCities(e.target.value)"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="country in countries" :value="country.code">{{
-                                        country.name }}</option>
-                                </select>
+                    <template v-if="[6, 7].includes(activity.typeitinerary_id)">
+                        <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-globe text-gray-100"></i>
+                                    <select @change="(e) => setCities(e.target.value)"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="country in countries" :value="country.code">{{
+                                            country.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-globe-americas text-gray-100"></i>
+                                    <select v-model="activity.city_destination_id" name="city_destination_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe-americas text-gray-100"></i>
-                                <select v-model="activity.city_destination_id" name="city_destination_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                     <div class="grid grid-cols-2 gap-x-2">
-                        <div>
+                        <div v-if="[1, 4, 6, 7, 8].includes(activity.typeitinerary_id)">
                             <label class="text-slate-200 text-xs font-semibold">Contacto</label>
                             <div class="flex items-center rounded border border-gray-300 px-2">
                                 <select v-model="activity.contact_id" name="contact_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="contact in contacts" :value="contact.id">{{
-                                        contact.name
-                                    }}</option>
+                                    <template v-for="item in contacts">
+                                        <option v-if="contact(item)" class="text-black" :value="item.id">{{
+                                            item.name
+                                        }}</option>
+                                    </template>
                                 </select>
                             </div>
                         </div>
-                        <div>
+                        <div v-if="[1, 5, 6, 7].includes(activity.typeitinerary_id)">
                             <label class="text-slate-200 text-xs font-semibold">Lugar</label>
                             <div class="flex items-center rounded border border-gray-300 px-2">
                                 <select v-model="activity.place_id" name="place_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="place in places" :value="place.id">{{
-                                        place.name
-                                    }}</option>
+                                    <template v-for="item in places">
+                                        <option v-if="place(item)" class="text-black" :value="item.id">{{
+                                            item.name
+                                        }}</option>
+                                    </template>
                                 </select>
                             </div>
                         </div>
