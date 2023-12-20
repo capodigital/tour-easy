@@ -55,7 +55,11 @@ export default {
         send(e) {
             const data = new FormData(e.target)
             data.append('_method', this.activity.id == undefined ? 'post' : 'put');
-            axios.post(this.activity.id == undefined ? 'api/itineraries' : `api/itineraries/${this.activity.id}`, data).then((response) => {
+            axios.post(this.activity.id == undefined ? 'api/itineraries' : `api/itineraries/${this.activity.id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 if (this.activity.id == undefined) {
                     this.activities.push(this.getActivityData(response.data.data))
                 } else {
@@ -151,7 +155,6 @@ export default {
             }
         }).then((response) => {
             for (let activity of response.data.data) {
-                console.log(activity)
                 this.activities.push(this.getActivityData(activity))
             }
         })
@@ -225,7 +228,7 @@ export default {
                         <div class="hero__cuboid hero__cuboid--1">
                             <div class="face face--front"><img src="src/statics/1.jpg" alt=""></div>
                             <div class="face face--back"><img src="src/statics/2.jpg" alt=""></div>
-                            <div class="face face--left"><img src="src/statics/3.jpeg" alt=""></div>
+                            <div class="face face--left"><img src="src/statics/3.jpg" alt=""></div>
                             <div class="face face--right"><img src="src/statics/4.jpg" alt=""></div>
                             <div class="face face--top"></div>
                             <div class="face face--bottom"></div>
@@ -357,7 +360,8 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <label class="text-slate-200 text-xs font-semibold">Ciudad <template v-if="[4,6,7,8].includes(activity.typeitinerary_id)"> de salida</template></label>
+                    <label class="text-slate-200 text-xs font-semibold">Ciudad <template
+                            v-if="[4, 6, 7, 8].includes(activity.typeitinerary_id)"> de salida</template></label>
                     <div class="grid grid-cols-2 gap-x-2">
                         <div>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
