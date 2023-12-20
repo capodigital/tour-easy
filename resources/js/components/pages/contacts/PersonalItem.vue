@@ -17,14 +17,6 @@ export default {
                 <span class="float-right text-sm text-gray-400">{{ contact.typecontact.description }}</span>
                 <h2 class="font-semibold text-white mb-1">{{ contact.name }}
                 </h2>
-                <!-- <p class="truncate">
-                    <a :href="'tel:' + contact.phone"
-                        class="rounded bg-white bg-opacity-20 py-1 px-2 text-sm transition-all text-white hover:bg-opacity-100 hover:text-black me-2 whitespace-nowrap leading-5"><i
-                            class="bi bi-telephone"></i> {{ contact.phone }}</a>
-                    <a :href="'mailto:' + contact.email"
-                        class="rounded bg-white bg-opacity-20 py-1 px-2 text-sm transition-all text-white hover:bg-opacity-100 hover:text-black whitespace-nowrap me-2 leading-5"><i
-                            class="bi bi-envelope"></i> {{ contact.email }}</a>
-                </p> -->
                 <div class="flex">
                     <button @click="$emit('edit', contact)"
                         class="rounded text-sm border hover:bg-white hover:text-black transition-all border-gray-100 text-gray-100 px-2 py-1 me-1"><i

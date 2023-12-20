@@ -1,5 +1,5 @@
 <script>
-import ActivityIcon from './common/ActivityIcon.vue';
+import ActivityIcon from '../../../common/ActivityIcon.vue';
 
 export default {
     props: {

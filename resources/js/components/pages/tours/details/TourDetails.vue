@@ -1,26 +1,18 @@
 <script>
+import TourActivity from './TourActivity.vue';
+import ActivityDetails from '../../../common/ActivityDetails.vue';
+import AnimMixin from './AnimMixin';
 import axios from 'axios'
-import ActivityDetails from './ActivityDetails.vue';
 export default {
+    mixins: [AnimMixin],
     data() {
-        const today = new Date();
         return {
-            forms: [],
-            types: [
-                { "id": "1", "description": "Show" },
-                { "id": "2", "description": "Actividad" },
-                { "id": "3", "description": "Servicio" },
-                { "id": "4", "description": "Transporte terrestre" },
-                { "id": "5", "description": "Hotel" },
-                { "id": "6", "description": "Avión" },
-                { "id": "7", "description": "Tren" },
-                { "id": "8", "description": "Transfer" }
-            ],
-            month: today.getMonth(),
-            year: today.getFullYear(),
-            date: today,
+            activities: [],
+            tour: {
+                artist: {}
+            },
+            details: null,
             activity: {},
-            tour: {},
             tours: [],
             contacts: [],
             suppliers: [],
@@ -28,223 +20,220 @@ export default {
             countries: [],
             cities: [],
             places: [],
-            daySelect: null,
-            initial: 0,
             show: false,
         };
     },
+    components: { TourActivity, ActivityDetails },
     methods: {
         setCities(country) {
-            axios.post('api/cities', { code: country }).then((response) => {
+            axios.post('api/cities', { code: country },{headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }}).then((response) => {
                 this.cities = response.data;
             });
         },
-        update() {
-            this.date.setMonth(this.month);
-            this.date.setFullYear(this.year);
-            this.init();
+        add() {
+            this.activity = { tour_id: this.tour.id }
+            this.show = true
         },
-        add(day) {
-            this.activity = {
-                startdate: `${this.year}-${this.month + 1}-${day}`
-            };
-            this.show = true;
+        edit(item) {
+            Object.assign(this.activity, item)
+            this.show = true
+        },
+        destroy(item) {
+            axios.post('api/itineraries/' + item.id, { _method: 'delete' }).then((response) => {
+                for (let i in this.activities) {
+                    if (this.activities[i].id == item.id) {
+                        this.activities.splice(i, 1)
+                        break
+                    }
+                }
+            })
         },
         send(e) {
-            const data = new FormData(e.target);
-            axios.post('api/itineraries', data, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
+            const data = new FormData(e.target)
+            data.append('_method', this.activity.id == undefined ? 'post' : 'put');
+            axios.post(this.activity.id == undefined ? 'api/itineraries' : `api/itineraries/${this.activity.id}`, data).then((response) => {
+                if (this.activity.id == undefined) {
+                    this.activities.push(this.getActivityData(response.data.data))
+                } else {
+                    for (let i in this.activities) {
+                        if (this.activities[i].id == this.activity.id) {
+                            this.activities[i] = this.getActivityData(response.data.data)
+                            break
+                        }
+                    }
                 }
-            }).then((response) => {
-                const date = new Date(response.data.data.startdate);
-                this.forms[date.getDate() - 1 + this.initial].activities.push(response.data.data);
-                this.activity = { tour_id: this.tour.id };
-                this.show = false;
-            });
+                this.activity = { tour_id: this.tour.id }
+                this.show = false
+            })
         },
-        init() {
-            const today = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate());
-            axios.get("api/itineraries/" + (today.getMonth() + 1) + '/' + (today.getFullYear()), {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                this.forms = [];
-                today.setDate(1);
-                for (let i = 1; i < today.getDay(); i++) {
-                    this.forms.push({
-                        day: '',
-                        out: true,
-                    });
-                }
-                const initial = this.forms.length;
-                this.initial = initial;
-                today.setMonth(today.getMonth() + 1);
-                today.setDate(0);
-                for (let i = 1; i < today.getDate() + 1; i++) {
-                    this.forms.push({
-                        day: i,
-                        activities: [],
-                        color: 'text-black',
-                    });
-                }
-                for (let item of response.data.data) {
-                    const date = new Date(item.startdate);
-                    this.forms[date.getDate() - 1 + initial].activities.push(item);
-                }
-                for (let i = 1; i < 8 - today.getDay(); i++) {
-                    this.forms.push({
-                        day: '',
-                        out: true,
-                    });
-                }
-            });
-        },
-        timestamp(day) {
-            const date = new Date(this.year, this.month, day);
-            return date.valueOf();
+        getActivityData(activity) {
+            let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate
+            let date = '';
+            switch (Number(activity.typeitinerary_id)) {
+                case 1:
+                    name = activity.name, description = `<b>Prueba de sonidos: </b>${activity.showcheck}.<br /><b>Puertas abiertas: </b>${activity.showtime}.<br /><b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                    break;
+                case 2:
+                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                    break;
+                case 3:
+                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                    break;
+                case 5:
+                    name = activity.name, description = `<b>Proveedor: </b>${activity.supplier.company_name}.<br /><b>Lugar: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+                case 4:
+                    name = `<b>Lugar: </b>`, description = `<b>Conductor: </b>${activity.carrier}`,
+                        date = `<br />${start}`;
+                    break;
+                case 6:
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Aerolinea: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+                case 7:
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Ferroviaria: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+                case 8:
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Transporte: </b>${activity.contact.name}.<br /><b>Conductor: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+            }
+            const item = activity
+            item.name = name
+            item.type = type
+            item.description = description
+            item.date = date
+            item.start = start
+            return item
         }
     },
     created() {
-        this.init();
+        const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
+        axios.post('api/itineraries/tour', { id: id },{headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }}).then((response) => {
+            for (let activity of response.data.data) {
+                console.log(activity)
+                this.activities.push(this.getActivityData(activity))
+            }
+        })
+        axios.post('api/tour', { id: id }, {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.tour = response.data.data;
+        })
         axios.get('api/tours', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             this.tours = response.data.data;
-        });
+        })
         axios.get('api/typeitineraries', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             this.types = response.data.data;
-        });
+        })
         axios.get('api/contacts', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             this.contacts = response.data.data;
-        });
+        })
         axios.get('api/countries', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             this.countries = response.data.data;
-            this.setCities(this.countries[0].code);
-        });
+            this.setCities(this.countries[0].code)
+        })
         axios.get('api/places', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             this.places = response.data.data;
-        });
+        })
         axios.get('api/suppliers', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             this.suppliers = response.data.data;
-        });
+        })
     },
-    components: { ActivityDetails }
-};
+}
 </script>
 <template>
-    <div class="w-full px-4 py-4 overflow-auto scroll" style="font-family: Roboto">
-        <h1 class="font-bold text-gray-800 text-2xl">CALENDARIO DE ACTIVIDADES</h1>
-        <div class="my-2">
-            <div class="text-center flex items-center">
-                <label class="me-2">Filtrar: </label>
-                <select v-model="month" @change="update" class="rounded border border-gray-500 px-3 py-1 me-2 w-32">
-                    <option value="0">Enero</option>
-                    <option value="1">Febrero</option>
-                    <option value="2">Marzo</option>
-                    <option value="3">Abril</option>
-                    <option value="4">Mayo</option>
-                    <option value="5">Junio</option>
-                    <option value="6">Julio</option>
-                    <option value="7">Agosto</option>
-                    <option value="8">Septiembre</option>
-                    <option value="9">Octubre</option>
-                    <option value="10">Noviembre</option>
-                    <option value="11">Diciembre</option>
-                </select>
-                <select v-model="year" @change="update" class="rounded border border-gray-500 px-3 py-1 w-[5.5rem]">
-                    <option :value="2000 + n" v-for="n in 23">
-                        {{ 2000 + n }}
-                    </option>
-                </select>
+    <section>
+        <div class="tour-images">
+            <div class="stage bg-cover bg-no-repeat">
+                <div class="absolute bottom-0 left-0 flex justify-center items-end z-30 w-full pb-3 md:pb-10">
+                    <div class="text-center">
+                        <h1
+                            class="md:text-4xl font-bold bg-gradient-to-tr from-slate-100 to-slate-300 text-xl bg-clip-text text-transparent drop-shadow-md shadow-black">
+                            {{ tour.tourname }}</h1>
+                        <p class="text-2xl">{{ tour.artist.name }}</p>
+                    </div>
+                </div>
+                <div class="hero">
+                    <div class="hero__inner">
+                        <div class="hero__cuboid hero__cuboid--1">
+                            <div class="face face--front"><img src="src/statics/1.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/statics/2.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/statics/3.jpeg" alt=""></div>
+                            <div class="face face--right"><img src="src/statics/4.jpg" alt=""></div>
+                            <div class="face face--top"></div>
+                            <div class="face face--bottom"></div>
+                        </div>
+                        <div class="hero__cuboid hero__cuboid--2">
+                            <div class="face face--front"><img src="src/statics/5.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/statics/6.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/statics/7.jpg" alt=""></div>
+                            <div class="face face--right"><img src="src/statics/9.jpg" alt=""></div>
+                            <div class="face face--top"></div>
+                            <div class="face face--bottom"></div>
+                        </div>
+                        <div class="hero__cuboid hero__cuboid--3">
+                            <div class="face face--front"><img src="src/statics/2.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/statics/1.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/statics/6.jpg" alt=""></div>
+                            <div class="face face--right"><img src="src/statics/3.jpg" alt=""></div>
+                            <div class="face face--top"></div>
+                            <div class="face face--bottom"></div>
+                        </div>
+                        <div class="hero__cuboid hero__cuboid--4">
+                            <div class="face face--front"><img src="src/statics/7.jpg" alt=""></div>
+                            <div class="face face--back"><img src="src/statics/9.jpg" alt=""></div>
+                            <div class="face face--left"><img src="src/statics/5.jpg" alt=""></div>
+                            <div class="face face--right"><img src="src/statics/6.jpg" alt=""></div>
+                            <div class="face face--top"></div>
+                            <div class="face face--bottom"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlay"></div>
             </div>
         </div>
-
-        <div>
-            <div class="grid grid-cols-7 rounded-t">
-                <div
-                    class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                    D</div>
-                <div
-                    class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white rounded-tl">
-                    L
-                </div>
-                <div
-                    class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                    M</div>
-                <div
-                    class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                    M</div>
-                <div
-                    class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                    J</div>
-                <div
-                    class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                    V</div>
-                <div
-                    class="text-center font-bold text-lg p-2 border bg-gradient-to-tr from-slate-800 to-slate-950 text-white rounded-tr">
-                    S</div>
-            </div>
-            <div class="grid grid-cols-7 border border-black border-t-0 rounded-b">
-                <div class="border p-2 flex relative"
-                    :class="{ 'border-r-black': index % 7 != 6, 'border-b-black': index < forms.length - 7, 'bg-gray-300': day.out != undefined }"
-                    v-for="(day, index) in forms">
-                    <template v-if="!day.out">
-                        <a :href="'#day/' + timestamp(day.day)"
-                            class="absolute right-0 top-1 rounded text-white text-sm bg-gradient-to-tr from-slate-800 to-slate-950 w-5 h-5 text-center me-1">
-                            {{
-                                day.day }}</a>
-                        <div class="w-full">
-                            <div class="rounded">
-                                <!-- <p class="text-gray-400 text-center text-xs">Mañana</p> -->
-                                <template v-if="day.activities.length == 0">
-                                    <div class="rounded bg-gray-600 text-white text-center text-xs py-1 px-2">No hay
-                                        actividades</div>
-                                </template>
-                                <template v-else>
-                                    <button @click="activity = item"
-                                        class="block rounded text-white w-full bg-green-500 py-1 px-2 mb-0.5 text-xs truncate"
-                                        v-for="item in day.activities">{{
-                                            types[Number(item.typeitinerary_id) - 1].description }}</button>
-                                </template>
-                                <button @click="add(day.day)"
-                                    class="w-full py-0.5 text-center border mt-0.5 border-gray-400 text-gray-400 rounded flex justify-center items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="rgb(156, 163, 175)" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-plus">
-                                        <path d="M5 12h14" />
-                                        <path d="M12 5v14" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                        </div>
-                    </template>
-                </div>
-            </div>
+        <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
+            <TourActivity v-for="item in activities" @show="(item) => details = item" @edit="edit" @destroy="destroy" :activity="item" />
+            <article @click="add"
+                class="border-2 border-gray-500 rounded-2xl cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
+                <i class="bi bi-plus text-6xl text-gray-500"></i>
+            </article>
         </div>
         <div v-if="show"
             class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
@@ -264,7 +253,7 @@ export default {
                         <div :class="{ hidden: tour.id != undefined }">
                             <label class="text-slate-200 text-xs font-semibold">Gira</label>
                             <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select name="tour_id"
+                                <select :value="tour.id" name="tour_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="item in tours" :value="item.id">{{
                                         item.tourname
@@ -425,29 +414,28 @@ export default {
                 </form>
             </div>
         </div>
-        <ActivityDetails @close="activity = {}" v-if="activity.id != undefined" :activity="activity" />
-    </div>
+        <ActivityDetails @close="details = null" v-if="details != null" :activity="details" />
+    </section>
 </template>
 <style scoped>
-tr>*:first-child {
-    width: 1.5rem;
-}
-
-th {
-    white-space: nowrap;
-    cursor: pointer;
-    color: #7e7e7e;
-    text-align: left;
-}
-
-td,
-th {
-    border-bottom: solid 1px rgb(175, 175, 175);
-    padding: 0.25rem;
-}
-
 h1 {
     font-family: 'Archivo Black', sans-serif;
+}
+
+.stage {
+    background-image: url("/src/background.jpg");
+
+    position: relative;
+}
+
+.stage::before {
+    background-color: rgba(0, 0, 0, 0.712);
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 }
 
 form {

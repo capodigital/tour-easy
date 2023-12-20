@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import TourCard from '../TourCard.vue';
+import TourCard from './TourCard.vue';
 
 export default {
     components: { TourCard },

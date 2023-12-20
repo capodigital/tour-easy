@@ -1,5 +1,5 @@
 <script>
-import DayItem from '../DayItem.vue';
+import DayItem from './DayItem.vue';
 import axios from 'axios'
 
 export default {

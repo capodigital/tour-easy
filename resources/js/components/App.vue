@@ -1,8 +1,8 @@
 <script>
 import AppMenu from "./AppMenu.vue";
 import AppNavbar from "./AppNavbar.vue";
-import HomePage from "./pages/HomePage.vue";
-import TourDetails from "./pages/TourDetails.vue";
+import HomePage from "./pages/tours/HomePage.vue";
+import TourDetails from "./pages/tours/details/TourDetails.vue";
 import NotFound from "./NotFound.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import axios from 'axios'
