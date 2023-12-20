@@ -15,14 +15,15 @@ import { createApp } from "vue";
 import mitt from "mitt";
 import Utils from "./Utils";
 import App from "./components/App.vue";
-import HomePage from "./components/pages/HomePage.vue";
-import TourDetails from "./components/pages/TourDetails.vue";
-import ArtistsPage from "./components/pages/ArtistsPage.vue";
 import LoginPage from "./components/pages/LoginPage.vue";
-import PersonalPage from "./components/pages/PersonalPage.vue";
-import TourPage from "./components/pages/TourPage.vue";
-import CalendarPage from "./components/pages/CalendarPage.vue";
-import DayPage from "./components/pages/DayPage.vue";
+
+import HomePage from "./components/pages/tours/HomePage.vue";
+import TourDetails from "./components/pages/tours/details/TourDetails.vue";
+import ArtistsPage from "./components/pages/artists/ArtistsPage.vue";
+import PersonalPage from "./components/pages/contacts/PersonalPage.vue";
+import TourPage from "./components/pages/tours/TourPage.vue";
+import CalendarPage from "./components/pages/calendar/CalendarPage.vue";
+import DayPage from "./components/pages/day/DayPage.vue";
 
 const app = createApp(App);
 app.component("home", HomePage);
