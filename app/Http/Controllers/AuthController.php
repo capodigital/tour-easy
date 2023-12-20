@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Models\Agencies;
+use App\Models\Artists;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -25,12 +27,27 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        //Verificar si el usuario es un administrador
+        if(!$user) {
+            //Verificar si el usuario es una agencia
+            $user = Agencies::where('email', $request->email)->first();
+            if(!$user) {
+                //Verificar si el usuario es un artista
+                $user = Artists::where('email', $request->email)->first();
+                if(!$user) {
+                    throw ValidationException::withMessages([
+                        'email' => ['No se encontró ningún usuario registrado con este correo.'],
+                    ]);
+                }
+            }
+        }
+        //Verificar si la contraseña es correcta
+        if (!Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['Las credenciales son incorrectas'],
+                'email' => ['Las credenciales son incorrectas.'],
             ]);
         }
+        //Retornar los datos y el token
         $token = $user->createToken('f8b7c4a2e6d9c0a1b3f5')->plainTextToken;
         return response()->json([
             'user' => $user,

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->text('notes')->nullable();
             $table->string('phone', 30)->nullable();
+            $table->rememberToken();
             $table->softDeletes();
             $table->foreignId('city_id')->nullable()->references('id')->on('cities')->onDelete('set null');
             $table->foreignId('typeagency_id')->nullable()->references('id')->on('typeagencies')->onDelete('set null');

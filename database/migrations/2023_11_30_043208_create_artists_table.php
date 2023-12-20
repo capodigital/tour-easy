@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('image', 150)->nullable();
             $table->string('email', 250)->unique()->nullable();
             $table->string('password');
+            $table->rememberToken();
             $table->softDeletes();
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
         });
