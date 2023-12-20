@@ -181,7 +181,7 @@ export default {
                             <div class="face face--front"><img src="src/statics/2.jpg" alt=""></div>
                             <div class="face face--back"><img src="src/statics/1.jpg" alt=""></div>
                             <div class="face face--left"><img src="src/statics/6.jpg" alt=""></div>
-                            <div class="face face--right"><img src="src/statics/3.jpeg" alt=""></div>
+                            <div class="face face--right"><img src="src/statics/3.jpg" alt=""></div>
                             <div class="face face--top"></div>
                             <div class="face face--bottom"></div>
                         </div>
