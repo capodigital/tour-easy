@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100)->nullable();
+            $table->string('lastname', 100)->nullable();
+            $table->string('email', 250)->nullable();
+            $table->float('amount')->nullable();
+            $table->string('wallet', 100)->nullable();
+            $table->string('chain', 100)->nullable();
+            $table->text('notes')->nullable();
+            $table->foreignId('itinerary_id')->nullable()->references('id')->on('itineraries')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@ use App\Models\Itineraries;
 use App\Models\Places;
 use App\Models\Socialmedias;
 use App\Models\Suppliers;
+use App\Models\Tickets;
 use App\Models\Tours;
 use App\Models\Typeagencies;
 use App\Models\Typeitineraries;
@@ -90,6 +91,8 @@ class DatabaseSeeder extends Seeder
         Places::factory(10)->create();
         Socialmedias::factory(10)->place()->create();
         Documents::factory(3)->place()->create();
+
+        Tickets::factory(10)->create();
 
         $this->call([
             PhotosSeeder::class,
