@@ -8,9 +8,10 @@ export default {
         <div class="px-2">
             <img src="src/logo.svg" class="h-12 w-12" />
         </div>
-        <div class="flex items-center w-full justify-end px-1">
-            <div class="relative p-2 hover:bg-slate-800 hover:bg-opacity-25 transition-all flex rounded me-2">
-            </div>
+        <div class="relative p-2 w-full text-center">
+            <h1 v-if="Utils.role() != 'user'" class="text-lg text-slate-700 font-bold">{{ Utils.username() }}</h1>
+        </div>
+        <div class="flex items-center justify-end px-1">
             <div
                 class="relative p-2 group hover:bg-gradient-to-tr hover:from-slate-800 hover:to-slate-950 hover:bg-opacity-90 transition-all flex rounded">
                 <div class="w-0 group-hover:w-52 transition-all overflow-hidden px-0 group-hover:px-2">
@@ -29,3 +30,8 @@ export default {
         </div>
     </nav>
 </template>
+<style scoped>
+h1 {
+    font-family: 'Roboto', sans-serif;
+}
+</style>

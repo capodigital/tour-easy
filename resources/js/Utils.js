@@ -86,8 +86,15 @@ export default class Utils {
         return localStorage.getItem("token");
     }
 
-    static user() {
+    static username() {
+        return localStorage.getItem("username");
+    }
 
+    static role() {
+        return localStorage.getItem("user_role");
+    }
+
+    static user() {
         return JSON.parse(localStorage.getItem("user"));
     }
 }
