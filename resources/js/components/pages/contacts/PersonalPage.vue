@@ -56,10 +56,12 @@ export default {
             }).then((response) => {
                 if (this.contact.id == undefined) {
                     this.contacts.unshift(response.data.data)
+                    this.Utils.notify('Se ha creado correctamente el contacto')
                 } else {
                     for (let i in this.contacts) {
                         if (this.contacts[i].id == this.contact.id) {
                             this.contacts[i] = response.data.data
+                            this.Utils.notify('Se han actualizado correctamente los datos del contacto')
                             break
                         }
                     }
@@ -68,6 +70,8 @@ export default {
                 this.socialmedias = [{}]
                 this.files = [{ type: 'link' }]
                 this.show = false
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         },
         add() {
@@ -95,28 +99,43 @@ export default {
                 for (let i in this.contacts) {
                     if (this.contacts[i].id == item.id) {
                         this.contacts.splice(i, 1)
+                        this.Utils.notify('Se ha eliminado correctamente el contacto')
                         break
                     }
                 }
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         }
     },
     created() {
-        axios.get('api/contacts',{headers: {
+        axios.get('api/contacts', {
+            headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
-            }}).then((response) => {
+            }
+        }).then((response) => {
             this.contacts = response.data.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
         });
-        axios.get('api/countries',{headers: {
+        axios.get('api/countries', {
+            headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
-            }}).then((response) => {
+            }
+        }).then((response) => {
             this.countries = response.data.data;
             this.setCities(this.countries[0].code)
+        }).catch((error) => {
+            this.Utils.error(error.response)
         });
-        axios.get('src/languages.json',{headers: {
+        axios.get('src/languages.json', {
+            headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
-            }}).then((response) => {
+            }
+        }).then((response) => {
             this.languages = response.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
         });
     },
     components: { PersonalItem }
@@ -369,5 +388,4 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 11.5rem);
-}
-</style>
+}</style>

@@ -45,6 +45,8 @@ export default {
             }
         }).then((response) => {
             this.tour = response.data
+        }).catch((error) => {
+            this.Utils.error(error.response)
         })
     }
 }

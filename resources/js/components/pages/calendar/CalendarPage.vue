@@ -60,7 +60,10 @@ export default {
                 const date = new Date(response.data.data.startdate);
                 this.forms[date.getDate() - 1 + this.initial].activities.push(response.data.data);
                 this.activity = { tour_id: this.tour.id };
+                this.Utils.notify('Se ha creado correctamente la actividad')
                 this.show = false;
+            }).catch((error) => {
+                this.Utils.error(error.response)
             });
         },
         init() {
@@ -99,6 +102,8 @@ export default {
                         out: true,
                     });
                 }
+            }).catch((error) => {
+                this.Utils.error(error.response)
             });
         },
         timestamp(day) {

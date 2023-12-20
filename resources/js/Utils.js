@@ -1,3 +1,6 @@
+import Alert from "./components/alert/Alert.js";
+import AlertConfig from "./components/alert/AlertConfig.js";
+
 export default class Utils {
     static FULL_DATE_TIME = {
         day: "2-digit",
@@ -9,7 +12,7 @@ export default class Utils {
     };
 
     static TEXT_DATE = {
-        dateStyle: "long"
+        dateStyle: "long",
     };
 
     static FULL_TIME = {
@@ -96,5 +99,51 @@ export default class Utils {
 
     static user() {
         return JSON.parse(localStorage.getItem("user"));
+    }
+
+    static notify(text) {
+        const alert = new Alert(
+            new AlertConfig({
+                title: "¡Operación satisfactoria!",
+                text: text,
+                icon: "bi bi-check2-square",
+                color: "#198754",
+            })
+        );
+        alert.fire();
+    }
+
+    static error(response) {
+        let title = "",
+            text = "";
+        switch (response.status) {
+            case 500:
+                title = "¡Error en el servidor!";
+                text =
+                    "Ha ocurrido un error al comunicarse con el servidor, intnte nuevamente";
+                break;
+            case 422:
+                title = "¡Error de validación!";
+                text = response.data.message;
+                break;
+            case 401:
+                title = "¡Error de autenticación!";
+                text =
+                    "No está autenticado o no tiene permisos para realizar esta acción";
+                break;
+            default:
+                title = "¡Error desconocido!";
+                text = "Lo sentimos, tuvimos un error desconocido";
+                break;
+        }
+        const alert = new Alert(
+            new AlertConfig({
+                title: title,
+                text: text,
+                icon: "bi bi-exclamation-triangle",
+                color: "#f55555",
+            })
+        );
+        alert.fire();
     }
 }

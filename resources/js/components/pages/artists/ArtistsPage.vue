@@ -61,9 +61,12 @@ export default {
                 for (let i in this.artists) {
                     if (this.artists[i].id == item.id) {
                         this.artists.splice(i, 1)
+                        this.Utils.notify('Se ha eliminado correctamente el artista')
                         break
                     }
                 }
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         },
         send(e) {
@@ -75,12 +78,13 @@ export default {
                 }
             }).then((response) => {
                 if (this.artist.id == undefined) {
-                    console.log(this.artists)
                     this.artists.unshift(response.data.data)
+                    this.Utils.notify('Se ha agregado correctamente el artista')
                 } else {
                     for (let i in this.artists) {
                         if (this.artists[i].id == this.artist.id) {
                             this.artists[i] = response.data.data
+                            this.Utils.notify('Se han actualizado correctamente los datos del artista')
                             break
                         }
                     }
@@ -90,6 +94,8 @@ export default {
                 this.files = [{ type: 'link' }]
                 this.show = false
                 this.preview = 'src/user_placeholder.png'
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         },
         updatePreview(e) {
@@ -109,9 +115,7 @@ export default {
         }
     },
     created() {
-        axios.post('api/artists/agency', {
-            id: this.Utils.user().id
-        }, {
+        axios.get('api/artists', {
             headers: {
                 Authorization: `Bearer ${this.Utils.token()}`
             }
@@ -296,7 +300,8 @@ export default {
                         </div>
                         <label class="text-slate-200 text-xs font-semibold mt-5">Etiquetas</label>
                         <div class="w-full mt-1 rounded border border-gray-300 p-2 whitespace-pre-wrap">
-                            <span @click="tags.splice(index, 1)" v-for="(tag, index) in tags" class="text-sm cursor-pointer me-1 text-black bg-gray-300 rounded px-2 py-1">{{ tag }} <i
+                            <span @click="tags.splice(index, 1)" v-for="(tag, index) in tags"
+                                class="text-sm cursor-pointer me-1 text-black bg-gray-300 rounded px-2 py-1">{{ tag }} <i
                                     class="bi bi-x"></i></span>
                             <input @keydown="addTag"
                                 class="bg-transparent text-gray-300 focus:outline-none outline-none border-none" />

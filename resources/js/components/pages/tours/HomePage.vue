@@ -56,6 +56,7 @@ export default {
                 for (let i in this.tours) {
                     if (this.tours[i].id == item.id) {
                         this.tours.splice(i, 1)
+                        this.Utils.notify('Se ha eliminado correctamente la gira')
                         break
                     }
                 }
@@ -71,10 +72,12 @@ export default {
             }).then((response) => {
                 if (this.tour.id == undefined) {
                     this.tours.unshift(response.data.data)
+                    this.Utils.notify('Se ha creado correctamente la gira')
                 } else {
                     for (let i in this.tours) {
                         if (this.tours[i].id == this.tour.id) {
                             this.tours[i] = response.data.data
+                            this.Utils.notify('Se han actualizado correctamente los datos de la gira')
                             break
                         }
                     }
@@ -83,6 +86,8 @@ export default {
                 this.socialmedias = [{}]
                 this.files = [{ type: 'link' }]
                 this.show = false
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         },
         updatePreview(e) {
@@ -101,6 +106,8 @@ export default {
             }
         }).then((response) => {
             this.tours = response.data.data
+        }).catch((error) => {
+            this.Utils.error(error.response)
         })
         axios.get('api/agencies', {
             headers: {
@@ -108,6 +115,8 @@ export default {
             }
         }).then((response) => {
             this.agencies = response.data.data
+        }).catch((error) => {
+            this.Utils.error(error.response)
         })
         axios.get('api/artists', {
             headers: {
@@ -115,6 +124,8 @@ export default {
             }
         }).then((response) => {
             this.artists = response.data.data
+        }).catch((error) => {
+            this.Utils.error(error.response)
         })
     }
 }
@@ -127,7 +138,7 @@ export default {
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     GIRAS ACTIVAS</h1>
                 <button @click="add"
-                    class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded z-50">Añadir</button>
+                    class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <TourCard @edit="edit" @destroy="destroy" :tour="tour" v-for="tour in tours" />
