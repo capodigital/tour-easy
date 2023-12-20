@@ -10,6 +10,11 @@ export default {
             type: Number,
             default: 24,
         }
+    },
+    mounted() {
+        if(this.activity.type == undefined) {
+            this.activity.type = this.activity.typeitinerary_id
+        }
     }
 }
 </script>

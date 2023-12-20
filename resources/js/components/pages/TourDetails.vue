@@ -1,5 +1,6 @@
 <script>
 import TourActivity from '../TourActivity.vue';
+import ActivityDetails from './ActivityDetails.vue';
 import AnimMixin from './AnimMixin';
 import axios from 'axios'
 export default {
@@ -10,6 +11,7 @@ export default {
             tour: {
                 artist: {}
             },
+            details: null,
             activity: {},
             tours: [],
             contacts: [],
@@ -21,7 +23,7 @@ export default {
             show: false,
         };
     },
-    components: { TourActivity },
+    components: { TourActivity, ActivityDetails },
     methods: {
         setCities(country) {
             axios.post('api/cities', { code: country }).then((response) => {
@@ -223,7 +225,7 @@ export default {
             </div>
         </div>
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
-            <TourActivity v-for="item in activities" @edit="edit" @destroy="destroy" :activity="item" />
+            <TourActivity v-for="item in activities" @show="(item) => details = item" @edit="edit" @destroy="destroy" :activity="item" />
             <article @click="add"
                 class="border-2 border-gray-500 rounded-2xl cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
                 <i class="bi bi-plus text-6xl text-gray-500"></i>
@@ -408,6 +410,7 @@ export default {
                 </form>
             </div>
         </div>
+        <ActivityDetails @close="details = null" v-if="details != null" :activity="details" />
     </section>
 </template>
 <style scoped>
@@ -431,8 +434,7 @@ h1 {
     left: 0;
 }
 
-form,
-.container {
+form {
     max-height: calc(100vh - 7.5rem);
 }
 </style>

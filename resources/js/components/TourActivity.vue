@@ -12,6 +12,15 @@ export default {
     <article class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
         <div class="float-right">
             <div class="flex">
+                <button @click="$emit('show', activity)"
+                    class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-eye">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </button>
                 <button @click="$emit('edit', activity)"
                     class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -72,5 +81,4 @@ export default {
 h3,
 p {
     font-family: 'Roboto', sans-serif;
-}
-</style>
+}</style>
