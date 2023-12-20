@@ -22,7 +22,6 @@ class TicketsFactory extends Factory
             'lastname' => fake()->lastName(),
             'email' => fake()->email(),
             'amount' => fake()->numberBetween(10,200),
-            'phone' => fake()->phoneNumber(),
             'wallet' => fake()->word(),
             'chain' => fake()->word(),
             'notes' => fake()->paragraph(),
