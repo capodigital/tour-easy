@@ -41,52 +41,54 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('user/login', [AuthController::class, 'authenticate']);
 
 Route::middleware('auth:sanctum')->group(function () {
-Route::resource('agencies', AgenciesController::class);
-Route::get('/all_agencies', [AgenciesController::class, 'all']);
-Route::post('/agency/user', [AgenciesController::class, 'agencyByUser']);
-Route::get('/deleted_agencies', [AgenciesController::class, 'deleted']);
-Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::resource('artists', ArtistsController::class);
-Route::get('/all_artists', [ArtistsController::class, 'all']);
-Route::get('/deleted_artists', [ArtistsController::class, 'deleted']);
-Route::post('/artists/{id}/restore', [ArtistsController::class, 'restore']);
-Route::post('/artists/agency', [ArtistsController::class, 'artistsByAgency']);
+    Route::resource('agencies', AgenciesController::class);
+    Route::get('/all_agencies', [AgenciesController::class, 'all']);
+    Route::post('/agency/user', [AgenciesController::class, 'agencyByUser']);
+    Route::get('/deleted_agencies', [AgenciesController::class, 'deleted']);
+    Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
 
-Route::resource('tours', ToursController::class);
-Route::get('/all_tours', [ToursController::class, 'all']);
-Route::get('/deleted_tours', [ToursController::class, 'deleted']);
-Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
-Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
-Route::post('/tour', [ToursController::class, 'tour']);
+    Route::resource('artists', ArtistsController::class);
+    Route::get('/all_artists', [ArtistsController::class, 'all']);
+    Route::get('/deleted_artists', [ArtistsController::class, 'deleted']);
+    Route::post('/artists/{id}/restore', [ArtistsController::class, 'restore']);
+    Route::post('/artists/agency', [ArtistsController::class, 'artistsByAgency']);
 
-Route::resource('contacts', ContactsController::class);
-Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);
-Route::post('/contacts/tour', [ContactsController::class, 'contactsByTour']);
+    Route::resource('tours', ToursController::class);
+    Route::get('/all_tours', [ToursController::class, 'all']);
+    Route::get('/deleted_tours', [ToursController::class, 'deleted']);
+    Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
+    Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
+    Route::post('/tour', [ToursController::class, 'tour']);
 
-Route::resource('places', PlacesController::class);
+    Route::resource('contacts', ContactsController::class);
+    Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);
+    Route::post('/contacts/tour', [ContactsController::class, 'contactsByTour']);
 
-Route::resource('suppliers', SuppliersController::class);
-Route::post('/suppliers/agency', [SuppliersController::class, 'suppliersByAgency']);
+    Route::resource('places', PlacesController::class);
 
-Route::resource('itineraries', ItinerariesController::class);
-Route::post('/itineraries/tour',[ItinerariesController::class,'itinerariesByTour']);
-Route::get('/itineraries/{month}/{year}',[ItinerariesController::class,'month']);
-Route::get('/itineraries/{day}/{month}/{year}',[ItinerariesController::class,'day']);
+    Route::resource('suppliers', SuppliersController::class);
+    Route::post('/suppliers/agency', [SuppliersController::class, 'suppliersByAgency']);
 
-Route::get('/countries', [CountriesController::class, 'index']);
+    Route::resource('itineraries', ItinerariesController::class);
+    Route::post('/itineraries/tour', [ItinerariesController::class, 'itinerariesByTour']);
+    Route::get('/itineraries/{month}/{year}', [ItinerariesController::class, 'month']);
+    Route::get('/itineraries/{day}/{month}/{year}', [ItinerariesController::class, 'day']);
 
-Route::post('/cities', [CitiesController::class, 'citiesByCountry']);
+    Route::get('/countries', [CountriesController::class, 'index']);
 
-Route::resource('photos', PhotosController::class);
-Route::post('/photos/tour', [PhotosController::class, 'photosByTour']);
+    Route::post('/cities', [CitiesController::class, 'citiesByCountry']);
 
-Route::resource('tickets', TicketsController::class);
-Route::resource('typecontacts', TypecontactsController::class);
-Route::resource('typeagencies', TypeagenciesController::class);
-Route::resource('typeitineraries', TypeitinerariesController::class);
-Route::resource('typeplaces', TypeplacesController::class);
-Route::resource('typeredes', TyperedesController::class);
+    Route::resource('photos', PhotosController::class);
+    Route::post('/photos/tour', [PhotosController::class, 'photosByTour']);
 
-Route::resource('documents', DocumentsController::class);
+    Route::resource('tickets', TicketsController::class);
+    Route::resource('typecontacts', TypecontactsController::class);
+    Route::resource('typeagencies', TypeagenciesController::class);
+    Route::resource('typeitineraries', TypeitinerariesController::class);
+    Route::resource('typeplaces', TypeplacesController::class);
+    Route::resource('typeredes', TyperedesController::class);
+
+    Route::resource('documents', DocumentsController::class);
 });

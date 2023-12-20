@@ -28,13 +28,13 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
         //Verificar si el usuario es un administrador
-        if(!$user) {
+        if (!$user) {
             //Verificar si el usuario es una agencia
             $user = Agencies::where('email', $request->email)->first();
-            if(!$user) {
+            if (!$user) {
                 //Verificar si el usuario es un artista
                 $user = Artists::where('email', $request->email)->first();
-                if(!$user) {
+                if (!$user) {
                     throw ValidationException::withMessages([
                         'email' => ['No se encontró ningún usuario registrado con este correo.'],
                     ]);
@@ -60,6 +60,4 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
         return response('');
     }
-
-
 }
