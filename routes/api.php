@@ -11,6 +11,7 @@ use App\Http\Controllers\ItinerariesController;
 use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\ToursController;
 use App\Http\Controllers\TypeagenciesController;
 use App\Http\Controllers\TypecontactsController;
@@ -79,6 +80,7 @@ Route::post('/cities', [CitiesController::class, 'citiesByCountry']);
 Route::resource('photos', PhotosController::class);
 Route::post('/photos/tour', [PhotosController::class, 'photosByTour']);
 
+Route::resource('tickets', TicketsController::class);
 Route::resource('typecontacts', TypecontactsController::class);
 Route::resource('typeagencies', TypeagenciesController::class);
 Route::resource('typeitineraries', TypeitinerariesController::class);
