@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'agency' => [
+            'driver' => 'session',
+            'provider' => 'agencies',
+        ],
+
+        'artist' => [
+            'driver' => 'session',
+            'provider' => 'artists',
+        ],
     ],
 
     /*
@@ -63,6 +73,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'agencies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Agencies::class,
+        ],
+
+        'artists' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Artists::class,
         ],
 
         // 'users' => [
