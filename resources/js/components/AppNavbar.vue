@@ -18,7 +18,7 @@ export default {
                     <h5 class="whitespace-nowrap font-bold text-slate-900 leading-5 text-end group-hover:text-white mt-1">
                         {{ Utils.user().name }}
                     </h5>
-                    <p class="whitespace-nowrap text-slate-700 leading-4 text-sm text-end group-hover:text-gray-200">
+                    <p class="whitespace-nowrap text-slate-700 leading-4 text-sm text-end group-hover:text-gray-200 ">
                         {{ Utils.user().email }}
                     </p>
                 </div>
