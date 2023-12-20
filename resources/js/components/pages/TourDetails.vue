@@ -118,33 +118,57 @@ export default {
                 this.activities.push(this.getActivityData(activity))
             }
         })
-        axios.post('api/tour', { id: id }).then((response) => {
+        axios.post('api/tour', { id: id }, {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.tour = response.data.data;
         })
-        axios.get('api/tours').then((response) => {
+        axios.get('api/tours', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.tours = response.data.data;
         })
-        axios.get('api/typeitineraries').then((response) => {
+        axios.get('api/typeitineraries', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.types = response.data.data;
         })
-        axios.get('api/contacts').then((response) => {
+        axios.get('api/contacts', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.contacts = response.data.data;
         })
-        axios.get('api/countries').then((response) => {
+        axios.get('api/countries', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.countries = response.data.data;
             this.setCities(this.countries[0].code)
         })
-        axios.get('api/places').then((response) => {
+        axios.get('api/places', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.places = response.data.data;
         })
-        axios.get('api/suppliers').then((response) => {
+        axios.get('api/suppliers', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.suppliers = response.data.data;
         })
     },
-    mounted() {
-        const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-
-    }
 }
 </script>
 <template>

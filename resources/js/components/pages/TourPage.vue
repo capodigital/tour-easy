@@ -39,7 +39,11 @@ export default {
     },
     mounted() {
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-        axios.get('api/tours/' + id).then((response) => {
+        axios.get('api/tours/' + id, {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             this.tour = response.data
         })
     }
@@ -90,8 +94,7 @@ export default {
                         VIDEOS POPULARES</h1>
                     <iframe width="100%" height="100%" style="border-radius: 1rem;"
                         src="https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr"
-                        title="Videos populares de Luis Fonsi" frameborder="0"
-                        class="min-h-screen"
+                        title="Videos populares de Luis Fonsi" frameborder="0" class="min-h-screen"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
                 </div>
@@ -101,8 +104,7 @@ export default {
                         PLAYLIST</h1>
                     <iframe style="border-radius:12px"
                         src="https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0"
-                        width="100%" height="100%" frameBorder="0"
-                        class="min-h-screen"
+                        width="100%" height="100%" frameBorder="0" class="min-h-screen"
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                         loading="lazy"></iframe>
 
@@ -111,7 +113,8 @@ export default {
             <div class="mt-10">
                 <div v-viewer="options" class="images md:grid">
                     <div v-for="(image, index) in images">
-                        <img class="image cursor-pointer w-full" :key="index" :src="image.thumbnail" :data-src="image.image" :alt="image.title">
+                        <img class="image cursor-pointer w-full" :key="index" :src="image.thumbnail" :data-src="image.image"
+                            :alt="image.title">
                     </div>
                 </div>
             </div>

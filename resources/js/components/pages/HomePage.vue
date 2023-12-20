@@ -48,7 +48,11 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/tours/' + item.id, { _method: 'delete' }).then((response) => {
+            axios.post('api/tours/' + item.id, { _method: 'delete' }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 for (let i in this.tours) {
                     if (this.tours[i].id == item.id) {
                         this.tours.splice(i, 1)
@@ -60,7 +64,11 @@ export default {
         send(e) {
             const data = new FormData(e.target)
             data.append('_method', this.tour.id == undefined ? 'post' : 'put');
-            axios.post(this.tour.id == undefined ? 'api/tours' : `api/tours/${this.tour.id}`, data).then((response) => {
+            axios.post(this.tour.id == undefined ? 'api/tours' : `api/tours/${this.tour.id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 if (this.tour.id == undefined) {
                     this.tours.unshift(response.data.data)
                 } else {

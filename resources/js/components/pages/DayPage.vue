@@ -13,7 +13,11 @@ export default {
     created() {
         const timestamp = location.hash.substring(location.hash.lastIndexOf('/') + 1)
         const date = new Date(Number(timestamp))
-        axios.get(`api/itineraries/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`).then((response) => {
+        axios.get(`api/itineraries/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`, {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
             for (let i in response.data.data) {
                 const activity = response.data.data[i]
                 const next = (Number(i) + 1 == response.data.data.length) ? { place: { name: '' } } : response.data.data[Number(i) + 1];

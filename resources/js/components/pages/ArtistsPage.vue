@@ -52,7 +52,11 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/artists/' + item.id, { _method: 'delete' }).then((response) => {
+            axios.post('api/artists/' + item.id, { _method: 'delete' }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 for (let i in this.artists) {
                     if (this.artists[i].id == item.id) {
                         this.artists.splice(i, 1)
@@ -64,7 +68,11 @@ export default {
         send(e) {
             const data = new FormData(e.target)
             data.append('_method', this.artist.id == undefined ? 'post' : 'put');
-            axios.post(this.artist.id == undefined ? 'api/artists' : `api/artists/${this.artist.id}`, data).then((response) => {
+            axios.post(this.artist.id == undefined ? 'api/artists' : `api/artists/${this.artist.id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 if (this.artist.id == undefined) {
                     console.log(this.artists)
                     this.artists.unshift(response.data.data)
@@ -301,12 +309,13 @@ export default {
 </template>
 <style scoped>
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px rgb(30 41 59) inset;
+    -webkit-box-shadow: 0 0 0px 1000px rgb(30 41 59) inset;
 }
+
 input:-webkit-autofill {
-  -webkit-text-fill-color:white
+    -webkit-text-fill-color: white
 }
 
 h1 {
