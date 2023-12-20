@@ -69,7 +69,7 @@ class CitiesController extends Controller
     public function citiesByCountry(Request $request)
     {
         $country = Countries::where('code',$request->code)->first();
-        $cities = $country->cities()->get();
+        $cities = $country->cities()->get()->sortBy('name');
 
         return response()->json($cities);
     }
