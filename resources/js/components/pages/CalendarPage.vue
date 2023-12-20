@@ -47,7 +47,7 @@ export default {
                         color: 'text-black',
                     })
                 }
-                for (let item of response.data) {
+                for (let item of response.data.data) {
                     const date = new Date(item.startdate);
                     this.forms[date.getDate() - 1 + initial].activities.push(item);
 
