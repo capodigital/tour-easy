@@ -48,6 +48,7 @@ export default {
                 activity.description = description
                 activity.type = activity.typeitinerary_id
                 this.activities.push(activity)
+                this.date = activity.startdate
             }
         })
     }
