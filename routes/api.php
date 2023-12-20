@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('user/login', [AuthController::class, 'authenticate']);
 
-
+Route::middleware('auth:sanctum')->group(function () {
 Route::resource('agencies', AgenciesController::class);
 Route::get('/all_agencies', [AgenciesController::class, 'all']);
 Route::post('/agency/user', [AgenciesController::class, 'agencyByUser']);
@@ -89,4 +89,4 @@ Route::resource('typeplaces', TypeplacesController::class);
 Route::resource('typeredes', TyperedesController::class);
 
 Route::resource('documents', DocumentsController::class);
-
+});

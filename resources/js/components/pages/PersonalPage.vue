@@ -102,14 +102,20 @@ export default {
         }
     },
     created() {
-        axios.get('api/contacts').then((response) => {
+        axios.get('api/contacts',{headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }}).then((response) => {
             this.contacts = response.data.data;
         });
-        axios.get('api/countries').then((response) => {
+        axios.get('api/countries',{headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }}).then((response) => {
             this.countries = response.data.data;
             this.setCities(this.countries[0].code)
         });
-        axios.get('src/languages.json').then((response) => {
+        axios.get('src/languages.json',{headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }}).then((response) => {
             this.languages = response.data;
         });
     },

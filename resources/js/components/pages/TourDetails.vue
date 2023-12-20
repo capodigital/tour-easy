@@ -26,7 +26,9 @@ export default {
     components: { TourActivity, ActivityDetails },
     methods: {
         setCities(country) {
-            axios.post('api/cities', { code: country }).then((response) => {
+            axios.post('api/cities', { code: country },{headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }}).then((response) => {
                 this.cities = response.data;
             });
         },
@@ -114,7 +116,9 @@ export default {
     },
     created() {
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-        axios.post('api/itineraries/tour', { id: id }).then((response) => {
+        axios.post('api/itineraries/tour', { id: id },{headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }}).then((response) => {
             for (let activity of response.data.data) {
                 console.log(activity)
                 this.activities.push(this.getActivityData(activity))
