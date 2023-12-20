@@ -37,7 +37,11 @@ export default {
     },
     methods: {
         setCities(country) {
-            axios.post('api/cities', { code: country }).then((response) => {
+            axios.post('api/cities', { code: country }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 this.cities = response.data;
             });
         },
@@ -45,7 +49,11 @@ export default {
             const data = new FormData(e.target)
             data.append('notify', 0);
             data.append('_method', this.contact.id == undefined ? 'post' : 'put');
-            axios.post(this.contact.id == undefined ? 'api/contacts' : `api/contacts/${this.contact.id}`, data).then((response) => {
+            axios.post(this.contact.id == undefined ? 'api/contacts' : `api/contacts/${this.contact.id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 if (this.contact.id == undefined) {
                     this.contacts.unshift(response.data.data)
                 } else {
@@ -79,7 +87,11 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/contacts/' + item.id, { _method: 'delete' }).then((response) => {
+            axios.post('api/contacts/' + item.id, { _method: 'delete' }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 for (let i in this.contacts) {
                     if (this.contacts[i].id == item.id) {
                         this.contacts.splice(i, 1)

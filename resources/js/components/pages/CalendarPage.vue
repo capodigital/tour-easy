@@ -28,7 +28,11 @@ export default {
         },
         init() {
             const today = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate())
-            axios.get("api/itineraries/" + (today.getMonth() + 1) + '/' + (today.getFullYear())).then((response) => {
+            axios.get("api/itineraries/" + (today.getMonth() + 1) + '/' + (today.getFullYear()), {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 this.forms = [];
                 today.setDate(1);
                 for (let i = 1; i < today.getDay(); i++) {
