@@ -27,6 +27,7 @@ export default {
                 { "id": "10", "name": "Web" }
             ],
             socialmedias: [{}],
+            tags: [],
             files: [{ type: 'link' }],
             preview: 'src/user_placeholder.png',
             show: false
@@ -97,6 +98,13 @@ export default {
                 this.preview = URL.createObjectURL(files[0])
             } else {
                 this.preview = 'src/user_4.jpg'
+            }
+        },
+        addTag(e) {
+            if (e.key === "Enter") {
+                e.preventDefault()
+                this.tags.push(e.target.value)
+                e.target.value = ''
             }
         }
     },
@@ -253,7 +261,7 @@ export default {
                             class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
                             type="button">Añadir</button>
                         <label class="text-slate-200 text-xs font-semibold">Documentos</label>
-                        <div class="mt-1 grid grid-cols-3 gap-2">
+                        <div class="mt-1 grid grid-cols-3 gap-2 mb-2">
                             <template v-for="(file, index) in files">
                                 <div class="flex items-center rounded border border-gray-300 px-2">
                                     <select v-model="file.type"
@@ -286,7 +294,15 @@ export default {
                                 </div>
                             </template>
                         </div>
+                        <label class="text-slate-200 text-xs font-semibold mt-5">Etiquetas</label>
+                        <div class="w-full mt-1 rounded border border-gray-300 p-2 whitespace-pre-wrap">
+                            <span @click="tags.splice(index, 1)" v-for="(tag, index) in tags" class="text-sm cursor-pointer me-1 text-black bg-gray-300 rounded px-2 py-1">{{ tag }} <i
+                                    class="bi bi-x"></i></span>
+                            <input @keydown="addTag"
+                                class="bg-transparent text-gray-300 focus:outline-none outline-none border-none" />
+                        </div>
                     </div>
+                    <input type="hidden" name="tags" :value="tags.join(', ')" />
                     <div class="flex justify-center">
                         <button type="button" @click="show = false"
                             class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
