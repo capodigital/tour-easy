@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AgenciesResource;
 use App\Models\Agencies;
+use App\Models\Artists;
 use App\Models\Documents;
 use App\Models\Socialmedias;
 use App\Models\User;
@@ -14,16 +15,20 @@ class AgenciesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {     
+            $agencies = Agencies::find($request->id);
+        } else {
+            $agencies = Artists::find($request->id)->agency()->first();
+        }
 
-
-        $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
         return AgenciesResource::collection($agencies);
     }
     public function all()
     {
-
         $agencies = Agencies::withTrashed()->get();
         return AgenciesResource::collection($agencies);
     }
@@ -57,8 +62,10 @@ class AgenciesController extends Controller
 
         ]);
 
-        $data = $request->only(['tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
-            'notes', 'phone', 'city_id', 'typeagency_id']);
+        $data = $request->only([
+            'tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
+            'notes', 'phone', 'city_id', 'typeagency_id'
+        ]);
 
         $data['password'] = bcrypt($request->password);
         //Almacenar los datos en la base de datos
@@ -139,8 +146,10 @@ class AgenciesController extends Controller
 
         ]);
 
-        $data = $request->only(['tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
-            'notes', 'phone', 'city_id', 'typeagency_id']);
+        $data = $request->only([
+            'tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
+            'notes', 'phone', 'city_id', 'typeagency_id'
+        ]);
 
 
         //Almacenar los datos en la base de datos
