@@ -39,6 +39,8 @@ class PlacesResource extends JsonResource
             'city' => new CitiesResource($city),
             'city_id' => $this->city_id, 
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
+            'documents' => DocumentsResource::collection($this->documents()->get()),
+
 
                            
         ];
