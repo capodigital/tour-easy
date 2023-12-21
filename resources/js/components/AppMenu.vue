@@ -35,8 +35,19 @@ export default {
     <footer
         class="flex justify-center w-full h-16 z-30 items-end relative overflow-hidden transition-all rounded-t-2xl bg-white bg-opacity-50">
         <div class="flex pb-3">
-            <a class="transition-all px-5" @click="active = -2" href="#calendar"
-                :class="{ 'text-gray-500': active != -2, 'text-black': active == -2 }">
+            <a class="transition-all px-3" @click="active = -2" href="#places"
+                :class="{ 'text-gray-500': active != -2, 'text-black': active == -3 }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    :stroke="active == -3 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-land-plot">
+                    <path d="m12 8 6-3-6-3v10" />
+                    <path d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12" />
+                    <path d="m6.49 12.85 11.02 6.3" />
+                    <path d="M17.51 12.85 6.5 19.15" />
+                </svg>
+            </a>
+            <a class="transition-all px-3" @click="active = -2" href="#calendar"
+                :class="{ 'text-gray-500': active != -2, 'text-black': active == -3 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -2 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-calendar-check">
@@ -47,7 +58,7 @@ export default {
                     <path d="m9 16 2 2 4-4" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = -1" href="#artists"
+            <a class="transition-all px-3" @click="active = -1" href="#artists"
                 :class="{ 'text-gray-500': active != -1, 'text-black': active == -1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -1 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -57,7 +68,7 @@ export default {
                     <line x1="12" x2="12" y1="19" y2="22" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = 0" href="#home"
+            <a class="transition-all px-3" @click="active = 0" href="#home"
                 :class="{ 'text-gray-500': active != 0, 'text-black': active == 0 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 0 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -66,7 +77,7 @@ export default {
                     <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = 1" href="#personal"
+            <a class="transition-all px-3" @click="active = 1" href="#personal"
                 :class="{ 'text-gray-500': active != 1, 'text-black': active == 1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 1 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -77,7 +88,7 @@ export default {
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
             </a>
-            <a class="transition-all px-5" @click="active = 2" href="#agencies"
+            <a class="transition-all px-3" @click="active = 2" href="#agencies"
                 :class="{ 'text-gray-500': active != 2, 'text-black': active == 2 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 2 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -94,11 +105,22 @@ export default {
                     <path d="M8 10h.01" />
                     <path d="M8 14h.01" />
                 </svg>
-
+            </a>
+            <a class="transition-all px-3" @click="active = 3" href="#tickets"
+                :class="{ 'text-gray-500': active != 3, 'text-black': active == 2 }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    :stroke="active == 2 ? '#000' : '#6b7280'" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-ticket">
+                    <path
+                        d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+                    <path d="M13 5v2" />
+                    <path d="M13 17v2" />
+                    <path d="M13 11v2" />
+                </svg>
             </a>
         </div>
         <div class="active-box h-10 w-full transition-all"
-            :style="{ 'left': 'calc(50vw - 1.5rem + ' + active * 4 + 'rem)' }">
+            :style="{ 'left': 'calc(50vw - 1.5rem + ' + active * 3 + 'rem)' }">
 
         </div>
     </footer>

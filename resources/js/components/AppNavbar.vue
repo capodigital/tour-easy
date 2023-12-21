@@ -16,11 +16,11 @@ export default {
 }
 </script>
 <template>
-    <nav class="w-screen h-16 flex items-center shadow-lg shadow-gray-300 bg-white">
+    <nav class="w-screen h-16 flex justify-between items-center shadow-lg shadow-gray-300 bg-white">
         <div class="px-2">
             <img src="src/logo.svg" class="h-12 w-12" />
         </div>
-        <div class="relative p-2 w-full text-center">
+        <div class="relative p-2 text-center">
             <h1 v-if="Utils.role() != 'user'" class="text-lg text-slate-700 font-bold">{{ Utils.username() }}</h1>
         </div>
         <div class="flex items-center justify-end px-1">
