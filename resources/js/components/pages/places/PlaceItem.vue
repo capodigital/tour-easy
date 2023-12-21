@@ -35,7 +35,7 @@ export default {
             </div>
 
             <div class="min-h-[6rem] p-3">
-                <h3 class="font-bold text-lg text-gray-900">{{ place.name }} ({{ place.typeplace }})</h3>
+                <h3 class="font-bold text-lg text-gray-900">{{ place.name }} ({{ place.typeplace.description }})</h3>
                 <p class="text-gray-500 text-sm leading-4 pe-10">{{ place.manager }}</p>
                 <p class="text-xs text-gray-500">{{ place.address }}</p>
                 <div class="flex items-center mt-2">
