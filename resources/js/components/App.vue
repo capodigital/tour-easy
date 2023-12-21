@@ -44,15 +44,18 @@ export default {
                 if (page == name) return true
             })
         },
+        init() {
+            window.addEventListener('hashchange', (e) => {
+                const separator = location.hash.lastIndexOf('/')
+                const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
+                this.showComponent(hash)
+            })
+        }
     },
     mounted() {
         const separator = location.hash.lastIndexOf('/')
         const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
-        window.onhashchange = () => {
-            const separator = location.hash.lastIndexOf('/')
-            const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
-            this.showComponent(hash)
-        }
+
         if (hash != "") {
             const exist = this.pages.find((page) => {
                 if (page == hash) return true
@@ -63,10 +66,16 @@ export default {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
+        }).then(() => {
+            // this.init()
         }).catch(() => {
             location.href = '#login'
         })
+
     },
+    created() {
+        this.init()
+    }
 };
 </script>
 <template>
