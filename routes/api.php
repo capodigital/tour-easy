@@ -43,7 +43,8 @@ Route::post('user/login', [AuthController::class, 'authenticate']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::resource('agencies', AgenciesController::class);
+        
+Route::resource('agencies', AgenciesController::class);
     Route::get('/all_agencies', [AgenciesController::class, 'all']);
     Route::post('/agency/user', [AgenciesController::class, 'agencyByUser']);
     Route::get('/deleted_agencies', [AgenciesController::class, 'deleted']);
@@ -61,6 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
     Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
     Route::post('/tour', [ToursController::class, 'tour']);
+    Route::post('/photos', [ToursController::class, 'photos']);
 
     Route::resource('contacts', ContactsController::class);
     Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);

@@ -95,7 +95,7 @@ export default {
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
                 case 4:
-                    name = `<b>Lugar: </b>`, description = `<b>Conductor: </b>${activity.carrier}`,
+                    name = activity.place.name, description = `<b>Conductor: </b>${activity.carrier}`,
                         date = `<br />${start}`;
                     break;
                 case 6:
