@@ -10,16 +10,28 @@ export default {
         update() {
             const separator = location.hash.lastIndexOf('/')
             const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
-            if (hash == "#home") {
-                this.active = 0;
-            } else if (hash == "#artists") {
-                this.active = -1;
-            } else if (hash == "#personal") {
-                this.active = 1;
-            } else if (hash == "#calendar") {
-                this.active = -2;
-            } else if (hash == "#agencies") {
-                this.active = 2;
+            switch (hash) {
+                case '#home':
+                    this.active = 0;
+                    break;
+                case '#artists':
+                    this.active = -1;
+                    break;
+                case '#personal':
+                    this.active = 1;
+                    break;
+                case '#calendar':
+                    this.active = -2;
+                    break;
+                case '#agencies':
+                    this.active = 2;
+                    break;
+                case '#tickets':
+                    this.active = 3;
+                    break;
+                case '#places':
+                    this.active = -3;
+                    break;
             }
         }
     },

@@ -12,16 +12,17 @@ export default {
             axios.post('api/user/login', new FormData(e.target)).then((response) => {
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('user', JSON.stringify(response.data.user))
-                if(response.data.user.stagename != undefined) {
+                if (response.data.user.stagename != undefined) {
                     localStorage.setItem('username', response.data.user.stagename)
                     localStorage.setItem('user_role', 'artist')
-                } else if(response.data.user.taxname != undefined) {
+                } else if (response.data.user.taxname != undefined) {
                     localStorage.setItem('username', response.data.user.taxname)
                     localStorage.setItem('user_role', 'agency')
                 } else {
                     localStorage.setItem('username', response.data.user.name)
                     localStorage.setItem('user_role', 'user')
                 }
+                this.$emit('login')
                 location.href = '#home'
             }).catch((error) => {
                 this.error = error.response.data.message
