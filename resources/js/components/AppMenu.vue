@@ -18,6 +18,8 @@ export default {
                 this.active = 1;
             } else if (hash == "#calendar") {
                 this.active = -2;
+            } else if (hash == "#agencies") {
+                this.active = 2;
             }
         }
     },

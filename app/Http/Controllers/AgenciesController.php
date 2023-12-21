@@ -16,7 +16,7 @@ class AgenciesController extends Controller
      */
     public function index()
     {
-        
+
 
         $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
         return AgenciesResource::collection($agencies);
@@ -54,12 +54,11 @@ class AgenciesController extends Controller
                 'required',
                 'string',
             ],
-            'confirm_password' => 'required|same:password'
-            
+
         ]);
 
         $data = $request->only(['tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
-        'notes', 'phone', 'city_id', 'typeagency_id']);
+            'notes', 'phone', 'city_id', 'typeagency_id']);
 
         $data['password'] = bcrypt($request->password);
         //Almacenar los datos en la base de datos
@@ -76,7 +75,7 @@ class AgenciesController extends Controller
                 ]);
             }
         }
-       
+
         if ($request->has('documents')) {
             foreach ($request->file('documents') as $document) {
                 $sizeInBytes = $document->getSize();
@@ -95,6 +94,7 @@ class AgenciesController extends Controller
                 ]);
             }
         }
+
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
                 Documents::create([
@@ -108,8 +108,6 @@ class AgenciesController extends Controller
                 ]);
             }
         }
-        
-
         $agency->refresh();
         return new AgenciesResource($agency);
     }
@@ -138,53 +136,60 @@ class AgenciesController extends Controller
         $request->validate([
             'tradename' => 'required',
             'email' => ['required', 'email', 'unique:agencies,email,' . $agency->id],
-            
+
         ]);
 
         $data = $request->only(['tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
-        'notes', 'phone', 'city_id', 'typeagency_id']);
+            'notes', 'phone', 'city_id', 'typeagency_id']);
 
-       
+
         //Almacenar los datos en la base de datos
         $agency->update($data);
-        
-        Socialmedias::where('socialmediaable_id', $agency->id)->delete();
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $agency->id,
-                'socialmediaable_type' => 'App\Models\Agencies'
-            ]);
-        }
-        Documents::where('documentable_id', $agency->id)->delete();
-        foreach ($request->documents as $document) {
-            $sizeInBytes = $document->getSize();
-            $sizeInMB = $sizeInBytes / 1024 / 1024;
-            $extension = $document->getClientOriginalExtension();
-            Documents::create([
-                'url' => null,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $sizeInMB,
-                'ext' => $extension,
-                'documentable_id' => $agency->id,
-                'documentable_type' => 'App\Models\Agencies'
-            ]);
-        }
-        foreach ($request->urls as $url) {
-            Documents::create([
-                'url' => $url,
-                'name' => null,
-                'document_path' => null,
-                'size' => null,
-                'ext' => null,
-                'documentable_id' => $agency->id,
-                'documentable_type' => 'App\Models\Agencies'
-            ]);
+
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
+                    'socialmediaable_id' => $agency->id,
+                    'socialmediaable_type' => 'App\Models\Agencies'
+                ]);
+            }
         }
 
+        if ($request->has('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
+                Documents::create([
+                    'url' => null,
+                    'name' => $name,
+                    'document_path' => $path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $agency->id,
+                    'documentable_type' => 'App\Models\Agencies'
+                ]);
+            }
+        }
+
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $agency->id,
+                    'documentable_type' => 'App\Models\Agencies'
+                ]);
+            }
+        }
         $agency->refresh();
         return new AgenciesResource($agency);
     }

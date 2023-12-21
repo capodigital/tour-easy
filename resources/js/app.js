@@ -24,6 +24,7 @@ import PersonalPage from "./components/pages/contacts/PersonalPage.vue";
 import TourPage from "./components/pages/tours/TourPage.vue";
 import CalendarPage from "./components/pages/calendar/CalendarPage.vue";
 import DayPage from "./components/pages/day/DayPage.vue";
+import AgenciesPage from "./components/pages/agencies/AgenciesPage.vue";
 
 const app = createApp(App);
 app.component("home", HomePage);
@@ -34,6 +35,7 @@ app.component("personal", PersonalPage);
 app.component("tour", TourPage);
 app.component("calendar", CalendarPage);
 app.component("day", DayPage);
+app.component("agencies", AgenciesPage);
 app.config.globalProperties.Utils = Utils;
 app.use(VueViewer);
 /** Implementar bus de eventos */
