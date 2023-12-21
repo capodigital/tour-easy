@@ -37,7 +37,7 @@ export default {
             <div class="min-h-[6rem] p-3">
                 <h3 class="font-bold text-lg text-gray-900">{{ place.name }} ({{ place.typeplace.description }})</h3>
                 <p class="text-gray-500 text-sm leading-4 pe-10">{{ place.manager }}</p>
-                <p class="text-xs text-gray-500">{{ place.address }}</p>
+                <p class="text-xs text-gray-500">{{ place.notes }}</p>
                 <div class="flex items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -87,7 +87,6 @@ export default {
                             place.address }}</a></p>
                     </div>
                 </div>
-                <hr class="my-2 border-gray-500" />
             </div>
             <div>
                 <div style="width: 100%">
