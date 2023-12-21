@@ -46,6 +46,7 @@ class Places extends Model
     public function toArray() {
         $data = parent::toArray();
         $data['socialmedias'] = $this->socialmedias;
+        $data['typeplace'] = $this->typeplace;
         return $data;
     }
     public function toArray1() {
@@ -53,5 +54,5 @@ class Places extends Model
         $data['documents'] = $this->documents;
         return $data;
     }
-    
+
 }
