@@ -35,36 +35,61 @@ class PlacesController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            
+
         ]);
 
-        $data = $request->only(['name', 'google_id', 'phone', 'extra_phone', 'manager', 'email',
-        'gis', 'notes', 'address', 'typeplace_id', 'city_id']);
+        $data = $request->only([
+            'name', 'google_id', 'phone', 'extra_phone', 'manager', 'email',
+            'gis', 'notes', 'address', 'typeplace_id', 'city_id', 'agency_id'
+        ]);
 
-        $data['agency_id'] = $request->user()->id;
         //Almacenar los datos en la base de datos
         $place = Places::create($data);
 
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $place->id,
-                'socialmediaable_type' => 'App\Models\Places'
-            ]);
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia->url,
+                    'description' => $socialmedia->description,
+                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'socialmediaable_id' => $place->id,
+                    'socialmediaable_type' => 'App\Models\Places'
+                ]);
+            }
         }
-        foreach ($request->documents as $document) {
-            Documents::create([
-                'url' => $document->url,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
-                'documentable_id' => $place->id,
-                'documentable_type' => 'App\Models\Places'
-            ]);
+
+        if ($request->has('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
+                Documents::create([
+                    'url' => null,
+                    'name' => $name,
+                    'document_path' => $path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $place->id,
+                    'documentable_type' => 'App\Models\Places'
+                ]);
+            }
         }
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $place->id,
+                    'documentable_type' => 'App\Models\Places'
+                ]);
+            }
+        }
+            
 
         $place->refresh();
         return new PlacesResource($place);
@@ -93,37 +118,61 @@ class PlacesController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            
+
         ]);
 
-        $data = $request->only(['name', 'google_id', 'phone', 'extra_phone', 'manager', 'email',
-        'gis', 'notes', 'address', 'typeplace_id', 'city_id']);
-       
-       
+        $data = $request->only([
+            'name', 'google_id', 'phone', 'extra_phone', 'manager', 'email',
+            'gis', 'notes', 'address', 'typeplace_id', 'city_id', 'agency_id'
+        ]);
+
+
         //Almacenar los datos en la base de datos
         $place->update($data);
-        
-        Socialmedias::where('socialmediaable_id', $place->id)->delete();
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
-                'socialmediaable_id' => $place->id,
-                'socialmediaable_type' => 'App\Models\Places'
-            ]);
+
+        if ($request->has('socialmedias')) {
+            foreach ($request->socialmedias as $socialmedia) {
+                Socialmedias::create([
+                    'url' => $socialmedia['url'],
+                    'description' => $socialmedia['description'],
+                    'typeredes_id' => $socialmedia['typeredes_id'],
+                    'socialmediaable_id' => $place->id,
+                    'socialmediaable_type' => 'App\Models\Places'
+                ]);
+            }
         }
-        Documents::where('documentable_id', $place->id)->delete();
-        foreach ($request->documents as $document) {
-            Documents::create([
-                'url' => $document->url,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $document->size,
-                'ext' => $document->ext,
-                'documentable_id' => $place->id,
-                'documentable_type' => 'App\Models\Places'
-            ]);
+
+        if ($request->has('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
+                Documents::create([
+                    'url' => null,
+                    'name' => $name,
+                    'document_path' => $path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $place->id,
+                    'documentable_type' => 'App\Models\Places'
+                ]);
+            }
+        }
+
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                Documents::create([
+                    'url' => $url,
+                    'name' => null,
+                    'document_path' => null,
+                    'size' => null,
+                    'ext' => null,
+                    'documentable_id' => $place->id,
+                    'documentable_type' => 'App\Models\Tours'
+                ]);
+            }
         }
 
         $place->refresh();

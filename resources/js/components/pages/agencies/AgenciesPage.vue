@@ -341,6 +341,15 @@ export default {
     </section>
 </template>
 <style scoped>
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(5, 19, 43) inset;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white
+}
 h1 {
     font-family: 'Archivo Black', sans-serif;
 }
