@@ -6,6 +6,7 @@ use App\Http\Resources\ToursResource;
 use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Documents;
+use App\Models\Photos;
 use App\Models\Socialmedias;
 use App\Models\Tours;
 use Illuminate\Http\Request;
@@ -240,5 +241,17 @@ class ToursController extends Controller
         $tour = Tours::find($request->id);
 
         return new ToursResource($tour);
+    }
+    public function photos(Request $request)
+    {
+        $agency_id = $request->agency_id;
+        foreach ($request->photos as $photo) {
+            $image = $photo->store('documents', 'photo');
+            $photo1 = new Photos();
+            $photo1->url = "src/$image";
+            $photo1->agency_id = $agency_id;
+            $photo1->save();
+            
+        }
     }
 }
