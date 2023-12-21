@@ -17,14 +17,14 @@ class AgenciesController extends Controller
      */
     public function index(Request $request)
     {
+        $agencies = [];
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
             $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
-        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {     
-            $agencies = Agencies::find($request->id);
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $agencies[] = Agencies::find($request->user()->id)->first();
         } else {
-            $agencies = Artists::find($request->id)->agency()->first();
+            $agencies[] = Artists::find($request->user()->id)->agency()->first();
         }
-
         return AgenciesResource::collection($agencies);
     }
     public function all()
