@@ -157,7 +157,7 @@ export default {
             </div>
         </div>
         <div :class="{ hidden: !show }"
-            class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
+            class="w-full bg-white bg-opacity-90 left-0 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
             <div>
                 <h1
                     class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">

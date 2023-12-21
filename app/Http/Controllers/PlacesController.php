@@ -170,7 +170,7 @@ class PlacesController extends Controller
                     'size' => null,
                     'ext' => null,
                     'documentable_id' => $place->id,
-                    'documentable_type' => 'App\Models\Tours'
+                    'documentable_type' => 'App\Models\Places'
                 ]);
             }
         }
