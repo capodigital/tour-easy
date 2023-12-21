@@ -271,7 +271,7 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-globe-americas text-gray-100"></i>
-                                <select v-model="contact.city_id" @change="setCities" name="city_id"
+                                <select v-model="contact.city_id" name="city_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
                                     </option>

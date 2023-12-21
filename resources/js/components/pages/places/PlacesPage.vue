@@ -10,6 +10,18 @@ export default {
             place: {},
             agencies: [],
             types: [],
+            socialtypes: [
+                { "id": "1", "name": "Facebook" },
+                { "id": "2", "name": "Twitter" },
+                { "id": "3", "name": "Instagram" },
+                { "id": "4", "name": "Tiktok" },
+                { "id": "5", "name": "Spotify" },
+                { "id": "6", "name": "Youtube" },
+                { "id": "7", "name": "AppleMusic" },
+                { "id": "8", "name": "AmazonMusic" },
+                { "id": "9", "name": "Tindal" },
+                { "id": "10", "name": "Web" }
+            ],
             countries: [],
             cities: [],
             socialmedias: [{}],
@@ -136,12 +148,12 @@ export default {
             <div class="flex">
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
-                    GIRAS ACTIVAS</h1>
+                    LUGARES</h1>
                 <button @click="add"
                     class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
             </div>
-            <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
-                <TourCard @edit="edit" @destroy="destroy" :tour="tour" v-for="tour in tours" />
+            <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
+                <PlaceItem @edit="edit" @destroy="destroy" :place="item" v-for="item in places" />
             </div>
         </div>
         <div :class="{ hidden: !show }"
@@ -149,7 +161,7 @@ export default {
             <div>
                 <h1
                     class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                    <template v-if="tour.id == undefined">
+                    <template v-if="place.id == undefined">
                         AÑADIR
                     </template>
                     <template v-else>
@@ -162,7 +174,7 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Nombre del lugar</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-envelope text-gray-100"></i>
+                                <i class="bi bi-globe text-gray-100"></i>
                                 <input v-model="place.name" name="name" type="text" placeholder="Nombre del lugar"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
@@ -170,76 +182,107 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Manager</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-envelope text-gray-100"></i>
+                                <i class="bi bi-person text-gray-100"></i>
                                 <input v-model="place.manager" name="manager" type="text" placeholder="Manager"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
                     </div>
+                    <div class="grid grid-cols-2 gap-x-2">
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Teléfono principal</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-telephone text-gray-100"></i>
+                                <input v-model="place.phone" name="phone" type="tel" placeholder="Teléfono principal"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Teléfono secundario</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-telephone text-gray-100"></i>
+                                <input v-model="place.extra_phone" name="extra_phone" type="tel"
+                                    placeholder="Teléfono secundario"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-2">
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-envelope text-gray-100"></i>
+                                <input v-model="place.email" name="email" type="email" placeholder="Correo electrónico"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Tipo de lugar</label>
+                            <div class="flex items-center rounded border border-gray-300 px-2">
+                                <select v-model="place.typeplace_id" name="typeplace_id"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    <option class="text-black" v-for="type in types" :value="type.id">{{
+                                        type.description
+                                    }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-2">
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Link de Google Maps</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-telephone text-gray-100"></i>
+                                <input v-model="place.google_id" name="google_id" type="text"
+                                    placeholder="Link de Google Maps"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Coordenadas</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-telephone text-gray-100"></i>
+                                <input v-model="place.gis" name="gis" type="text" placeholder="Coordenadas"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-2">
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">País</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-globe text-gray-100"></i>
+                                <select @change="(e) => setCities(e.target.value)"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    <option class="text-black" v-for="country in countries" :value="country.code">{{
+                                        country.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-globe-americas text-gray-100"></i>
+                                <select v-model="place.city_id" name="city_id"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Descripción</label>
+                        <label class="text-slate-200 text-xs font-semibold">Dirección</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                            <textarea rows="3" v-model="tour.notes" name="notes" placeholder="Datos adicionales"
+                            <textarea rows="3" v-model="place.address" name="address" placeholder="Dirección"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Agencia</label>
-                            <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="tour.agency_id" name="agency_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="agency in agencies" :value="agency.id">{{
-                                        agency.taxname
-                                    }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Artista</label>
-                            <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="tour.artist_id" name="artist_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="artist in artists" :value="artist.id">{{
-                                        artist.stagename
-                                    }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2 my-3">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="tour.startdate" name="startdate" type="date" placeholder="Fecha de inicio"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="tour.enddate" name="enddate" type="date" placeholder="Fecha de fin"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                    </div>
-                    <label class="text-slate-200 text-xs font-semibold">Listas de reproducción</label>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-spotify text-gray-100"></i>
-                                <input v-model="tour.spotify_list" name="spotify_list" type="text" placeholder="Spotify"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-youtube text-gray-100"></i>
-                                <input v-model="tour.youtube_list" name="youtube_list" type="text" placeholder="Youtube"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
+                            <textarea rows="3" v-model="place.notes" name="notes" placeholder="Datos adicionales"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                         </div>
                     </div>
                     <div>
@@ -316,7 +359,7 @@ export default {
                         </button>
                         <button type="submit"
                             class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            <template v-if="tour.id == undefined">
+                            <template v-if="place.id == undefined">
                                 Agregar
                             </template>
                             <template v-else>

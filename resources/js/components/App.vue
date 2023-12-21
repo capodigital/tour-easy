@@ -14,7 +14,7 @@ export default {
         const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
         const active = hash == "" ? "login" : hash.substring(1)
         return {
-            pages: ["#home", "#details", "#artists", "#login", "#personal", "#tour", "#calendar", "#day", "#agencies"],
+            pages: ["#home", "#details", "#artists", "#login", "#personal", "#tour", "#calendar", "#day", "#agencies", "#places"],
             active: active,
         }
     },
