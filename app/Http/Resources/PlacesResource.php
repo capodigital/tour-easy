@@ -19,7 +19,7 @@ class PlacesResource extends JsonResource
     {
         $agency = Agencies::find($this->agency_id);
         $city = Cities::find($this->city_id);
-        $typeplace = Typeplaces::find($this->typecontact_id);
+        $typeplace = Typeplaces::find($this->typeplace_id);
 
         return [
             'id' => $this->id,
