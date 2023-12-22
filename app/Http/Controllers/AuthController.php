@@ -41,6 +41,9 @@ class AuthController extends Controller
                 }
             }
         }
+        else if($user->agency_id!=null){
+            $user = new UserResource(User::where('email', $request->email)->first());
+        }
         //Verificar si la contraseña es correcta
         if (!Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([

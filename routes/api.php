@@ -18,6 +18,7 @@ use App\Http\Controllers\TypecontactsController;
 use App\Http\Controllers\TypeitinerariesController;
 use App\Http\Controllers\TypeplacesController;
 use App\Http\Controllers\TyperedesController;
+use App\Http\Controllers\UserController;
 use App\Models\Typeitineraries;
 use App\Models\Typeplaces;
 use Illuminate\Http\Request;
@@ -93,4 +94,6 @@ Route::resource('agencies', AgenciesController::class);
     Route::resource('typeredes', TyperedesController::class);
 
     Route::resource('documents', DocumentsController::class);
+
+    Route::resource('users', UserController::class);
 });

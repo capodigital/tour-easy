@@ -164,7 +164,7 @@ export default {
                     </svg>
                     <div>
                         <p class="text-white">Ciudad de llegada</p>
-                        <p class="text-gray-400 text-sm">{{ activity.citydestination.name }}</p>
+                        <p class="text-gray-400 text-sm">{{ activity.cityend.name }}</p>
                     </div>
                 </div>
             </template>

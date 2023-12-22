@@ -9,6 +9,7 @@ use App\Models\Documents;
 use App\Models\Photos;
 use App\Models\Socialmedias;
 use App\Models\Tours;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,9 +22,13 @@ class ToursController extends Controller
     {
         $tours = [];
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $tours = Agencies::find($user->agency_id)->tours()->get();
+            } else
             $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $tours[] = Agencies::find($request->user()->id)->tours()->get();
+            $tours = Agencies::find($request->user()->id)->tours()->get();
         } else {
             $tours[] = Tours::find($request->user()->id);
         }
