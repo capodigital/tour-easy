@@ -69,10 +69,9 @@ class ArtistsController extends Controller
             'confirm_password' => 'required|same:password'
 
         ]);
-        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags']);
+        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id']);
         $data['password'] = bcrypt($request->password);
-        // $data['agency_id'] = $request->user()->id;
-        $data['agency_id'] = 1;
+       
         $image = $request->file('image')->store('documents', 'src');
         $data['image'] = "src/$image";
 
