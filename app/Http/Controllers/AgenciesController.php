@@ -19,7 +19,11 @@ class AgenciesController extends Controller
     {
         $agencies = [];
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
-            $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $agencies[] = Agencies::find($user->agency_id)->first();
+            } else
+                $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
             $agencies[] = Agencies::find($request->user()->id)->first();
         } else {

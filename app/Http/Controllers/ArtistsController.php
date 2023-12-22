@@ -7,6 +7,7 @@ use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Documents;
 use App\Models\Socialmedias;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -20,13 +21,17 @@ class ArtistsController extends Controller
     {
         $artists = [];
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
-            $artists = Artists::withTrashed()->whereNull('deleted_at')->get();
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $artists[] = Agencies::find($user->agency_id)->artists()->get();
+            } else
+                $artists = Artists::withTrashed()->whereNull('deleted_at')->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
             $artists[] = Agencies::find($request->user()->id)->artists()->get();
         } else {
             $artists[] = Artists::find($request->user()->id);
         }
-        
+
         return ArtistsResource::collection($artists);
     }
     public function all()
