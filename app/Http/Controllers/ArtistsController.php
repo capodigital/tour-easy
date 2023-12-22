@@ -16,9 +16,17 @@ class ArtistsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $artists = Artists::withTrashed()->whereNull('deleted_at')->get();
+        $artists = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $artists = Artists::withTrashed()->whereNull('deleted_at')->get();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $artists[] = Agencies::find($request->user()->id)->artists()->get();
+        } else {
+            $artists[] = Artists::find($request->user()->id);
+        }
+        
         return ArtistsResource::collection($artists);
     }
     public function all()

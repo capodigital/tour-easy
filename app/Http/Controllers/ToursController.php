@@ -17,9 +17,17 @@ class ToursController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
+        $tours = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $tours[] = Agencies::find($request->user()->id)->tours()->get();
+        } else {
+            $tours[] = Tours::find($request->user()->id);
+        }
+        
         return ToursResource::collection($tours);
     }
     public function all()
