@@ -29,6 +29,7 @@ export default {
             ],
             countries: [],
             cities: [],
+            country_id: 'AF',
             languages: [],
             socialmedias: [{}],
             files: [{ type: 'link' }],
@@ -81,6 +82,8 @@ export default {
             this.show = true
         },
         edit(item) {
+            this.country_id = item.city.country.code
+            this.setCities(item.city.country.code)
             Object.assign(this.contact, item)
             this.socialmedias = this.contact.socialmedias
             this.files = []
@@ -274,7 +277,7 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">País</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-globe text-gray-100"></i>
-                                <select @change="(e) => setCities(e.target.value)"
+                                <select v-model="country_id" @change="(e) => setCities(e.target.value)"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="country in countries" :value="country.code">{{
                                         country.name }}</option>
