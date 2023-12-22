@@ -112,6 +112,20 @@ export default {
                 this.tags.push(e.target.value)
                 e.target.value = ''
             }
+        },
+        removeDocument(index) {
+            if (this.files[index].id == undefined) {
+                this.files.splice(index, 1)
+            } else {
+                axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
+                    }
+                }).then(() => {
+                    this.files.splice(index, 1)
+                    this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
+                })
+            }
         }
     },
     created() {
@@ -294,7 +308,7 @@ export default {
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </template>
 
-                                    <button type="button" class="text-white"><i class="bi bi-trash"></i></button>
+                                    <button @click="removeDocument(index)" type="button" class="text-white"><i class="bi bi-trash"></i></button>
                                 </div>
                             </template>
                         </div>
