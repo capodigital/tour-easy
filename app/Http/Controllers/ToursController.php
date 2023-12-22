@@ -24,11 +24,11 @@ class ToursController extends Controller
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
-                $tours[] = Agencies::find($user->agency_id)->tours()->get();
+                $tours = Agencies::find($user->agency_id)->tours()->get();
             } else
             $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $tours[] = Agencies::find($request->user()->id)->tours()->get();
+            $tours = Agencies::find($request->user()->id)->tours()->get();
         } else {
             $tours[] = Tours::find($request->user()->id);
         }

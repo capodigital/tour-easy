@@ -23,11 +23,11 @@ class ArtistsController extends Controller
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
-                $artists[] = Agencies::find($user->agency_id)->artists()->get();
+                $artists = Agencies::find($user->agency_id)->artists()->get();
             } else
                 $artists = Artists::withTrashed()->whereNull('deleted_at')->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $artists[] = Agencies::find($request->user()->id)->artists()->get();
+            $artists = Agencies::find($request->user()->id)->artists()->get();
         } else {
             $artists[] = Artists::find($request->user()->id);
         }
