@@ -22,6 +22,7 @@ export default {
             ],
             socialmedias: [{}],
             files: [{ type: 'link' }],
+            show: false,
         };
     },
     methods: {
@@ -108,7 +109,7 @@ export default {
                     this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
                 })
             }
-        }
+        },
     },
     created() {
         axios.get('api/agencies', {
@@ -148,8 +149,8 @@ export default {
                 <AgencyItem @edit="edit" @destroy="destroy" :agency="item" v-for="item in agencies" />
             </div>
         </div>
-        <div v-if="Utils.role() != 'artist'" :class="{ hidden: !show }"
-            class="w-full bg-white bg-opacity-90 left-0 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
+        <div v-if="Utils.role() != 'artist'" :class="{ 'hidden': !show, 'flex': show }"
+            class="w-full bg-white bg-opacity-90 left-0 h-screen md:h-auto absolute top-0 px-2 py-2 justify-center items-center">
             <div>
                 <h1
                     class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
@@ -329,7 +330,8 @@ export default {
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </template>
 
-                                    <button @click="removeDocument(index)" type="button" class="text-white"><i class="bi bi-trash"></i></button>
+                                    <button @click="removeDocument(index)" type="button" class="text-white"><i
+                                            class="bi bi-trash"></i></button>
                                 </div>
                             </template>
                         </div>
@@ -364,11 +366,11 @@ input:-webkit-autofill:focus {
 input:-webkit-autofill {
     -webkit-text-fill-color: white
 }
+
 h1 {
     font-family: 'Archivo Black', sans-serif;
 }
 
 form {
     max-height: calc(100vh - 7.5rem);
-}
-</style>
+}</style>

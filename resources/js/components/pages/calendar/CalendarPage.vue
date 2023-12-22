@@ -35,7 +35,11 @@ export default {
     },
     methods: {
         setCities(country) {
-            axios.post('api/cities', { code: country }).then((response) => {
+            axios.post('api/cities', { code: country }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 this.cities = response.data;
             });
         },
