@@ -6,6 +6,9 @@ export default {
         return {
             agencies: [],
             agency: {},
+            user: {
+                show: false,
+            },
             countries: [],
             cities: [],
             socialtypes: [
@@ -64,6 +67,31 @@ export default {
                 this.Utils.error(error.response)
             })
         },
+        manager(e) {
+            const data = new FormData(e.target)
+            data.append('_method', this.user.id == undefined ? 'post' : 'put');
+            axios.post(this.user.id == undefined ? 'api/users' : `api/users/${this.user.id}`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                if (this.user.id == undefined) {
+                    this.Utils.notify('Se ha creado correctamente el administrador')
+                } else {
+                    this.Utils.notify('Se han actualizado correctamente los datos del administrador')
+                }
+                for (let i in this.agencies) {
+                    if (this.agencies[i].id == response.data.data.id) {
+                        this.agencies[i] = response.data.data
+                        break
+                    }
+                }
+                this.user = { show: false }
+                this.show = false
+            }).catch((error) => {
+                this.Utils.error(error.response)
+            })
+        },
         add() {
             this.agency = {}
             this.socialmedias = [{}]
@@ -82,6 +110,10 @@ export default {
             }
             this.show = true
         },
+        editManager(user) {
+            Object.assign(this.user, user)
+            this.user.show = true
+        },
         destroy(item) {
             axios.post('api/agencies/' + item.id, { _method: 'delete' }, {
                 headers: {
@@ -92,6 +124,23 @@ export default {
                     if (this.agencies[i].id == item.id) {
                         this.agencies.splice(i, 1)
                         this.Utils.notify('Se ha eliminado correctamente la agencia')
+                        break
+                    }
+                }
+            }).catch((error) => {
+                this.Utils.error(error.response)
+            })
+        },
+        destroyManager(user) {
+            axios.post('api/users/' + user.id, { _method: 'delete' }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                for (let i in this.agencies) {
+                    if (this.agencies[i].id == user.agency_id) {
+                        this.agencies[i] = response.data.data
+                        this.Utils.notify('Se ha eliminado correctamente el administrador')
                         break
                     }
                 }
@@ -149,8 +198,77 @@ export default {
                     class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-                <AgencyItem @edit="edit" @destroy="destroy" :agency="item" v-for="item in agencies" />
+                <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
+                    @edit="edit" @destroy="destroy" :agency="item" v-for="item in agencies" />
+
             </div>
+        </div>
+        <div v-if="Utils.role() == 'agency'" :class="{ 'hidden': user.show == false, 'flex': user.show == true }"
+            class="w-full bg-white bg-opacity-90 left-0 h-screen absolute top-0 px-2 py-2 justify-center items-center">
+            <form @submit.prevent="manager"
+                class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 transition-all hover:scale-105 cursor-pointer">
+                <input type="hidden" :value="Utils.user().id" name="agency_id" />
+                <h1
+                    class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                    <template v-if="user.id == undefined">
+                        AÑADIR ADMINISTRADOR
+                    </template>
+                    <template v-else>
+                        EDITAR ADMINISTRADOR
+                    </template>
+                </h1>
+                <div>
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Nombre(s) y apellidos</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-person text-gray-100"></i>
+                            <input v-model="user.name" name="name" type="text" placeholder="Nombre(s) y apellidos"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-envelope text-gray-100"></i>
+                            <input v-model="user.email" name="email" type="email" placeholder="Correo electrónico"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        </div>
+                    </div>
+                    <template v-if="user.id == undefined">
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-key text-gray-100"></i>
+                                <input name="password" type="password" placeholder="Contraseña"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Confirmar contraseña</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <i class="bi bi-key text-gray-100"></i>
+                                <input name="confirm_password" type="password" placeholder="Confirmar contraseña"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                        </div>
+                    </template>
+                    <div class="flex justify-center">
+                        <button type="button" @click="user.show = false"
+                            class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                            Cerrar
+                        </button>
+                        <button type="submit"
+                            class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                            <template v-if="user.id == undefined">
+                                Agregar
+                            </template>
+                            <template v-else>
+                                Actualizar
+                            </template>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div v-if="Utils.role() != 'artist'" :class="{ 'hidden': !show, 'flex': show }"
             class="w-full bg-white bg-opacity-90 left-0 h-screen md:h-auto absolute top-0 px-2 py-2 justify-center items-center">
@@ -376,4 +494,5 @@ h1 {
 
 form {
     max-height: calc(100vh - 7.5rem);
-}</style>
+}
+</style>

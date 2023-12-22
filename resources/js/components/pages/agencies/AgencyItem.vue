@@ -117,6 +117,43 @@ export default {
                 </div>
             </div>
             <hr class="my-2 border-gray-500" />
+            <template v-if="Utils.role() == 'agency'">
+                <button type="button" @click="$emit('manageradd')" class="float-right text-sm text-black rounded px-1 py-0.5 bg-gray-200">Añadir</button>
+                <label class="text-sm text-white font-semibold">Administradores</label>
+                <div class="flex" v-for="user in agency.users">
+                    <i class="person-fill-gear text-2xl text-white"></i>
+                    <div class="w-9/12">
+                        <p class="text-white">{{user.name}}</p>
+                        <p class="text-gray-300 text-sm">{{user.email}}</p>
+                    </div>
+                    <div class="w-3/12 flex justify-end items-center">
+                        <button @click="$emit('manageredit', user)"
+                            class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-clipboard-edit">
+                                <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                                <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z" />
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5.5" />
+                                <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
+                            </svg>
+                        </button>
+                        <button @click="$emit('managerdestroy', user)"
+                            class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-trash-2">
+                                <path d="M3 6h18" />
+                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                <line x1="10" x2="10" y1="11" y2="17" />
+                                <line x1="14" x2="14" y1="11" y2="17" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <hr class="my-2 border-gray-500" />
+            </template>
             <div class="flex items-center mt-2">
                 <div>
                     <p class="text-white">Detalles adicionales</p>

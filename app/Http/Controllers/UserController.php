@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AgenciesResource;
 use App\Http\Resources\UserResource;
+use App\Models\Agencies;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -32,7 +34,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'agency_id' => 'required',
-            'email' => 'required|email|unique:user',
+            'email' => 'required|email|unique:users',
             'password' => [
                 'required',
                 'string',
@@ -42,18 +44,9 @@ class UserController extends Controller
         ]);
         $data = $request->only(['email', 'name', 'agency_id']);
         $data['password'] = bcrypt($request->password);
-       
-
         //Almacenar los datos en la base de datos
-        $user = User::create($data);
-       
-
-        
-
-        
-
-        $user->refresh();
-        return new UserResource($user);
+        User::create($data);
+        return new AgenciesResource(Agencies::find($request->agency_id));
     }
 
     /**
@@ -69,7 +62,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        
+
     }
 
     /**
@@ -80,18 +73,16 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'agency_id' => 'required',
-            'email' => ['required', 'email', 'unique:user,email,' . $user->id],
-
+            'email' => ['required', 'email', 'unique:users,email,' . $user->id],
         ]);
-
-        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'notes']);
-
-
+        $data = $request->except(['password']);
         //Almacenar los datos en la base de datos
         $user->update($data);
-
-        $user->refresh();
-        return new UserResource($user);
+        if ($user->agency_id != null) {
+            return new AgenciesResource(Agencies::find($request->agency_id));
+        } else {
+            return new UserResource($user);
+        }
     }
 
     /**
@@ -100,7 +91,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-
-        return response()->json($user);
+        if ($user->agency_id != null) {
+            return new AgenciesResource(Agencies::find($user->agency_id));
+        } else {
+            return response('');
+        }
     }
 }

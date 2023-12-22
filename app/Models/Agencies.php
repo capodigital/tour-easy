@@ -66,6 +66,11 @@ class Agencies extends Authenticatable
         return $this->hasMany(Places::class, 'agency_id');
     }
 
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'agency_id');
+    }
+
     public function toArray()
     {
         $data = parent::toArray();

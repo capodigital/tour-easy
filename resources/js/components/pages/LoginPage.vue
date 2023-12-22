@@ -19,8 +19,13 @@ export default {
                     localStorage.setItem('username', response.data.user.taxname)
                     localStorage.setItem('user_role', 'agency')
                 } else {
-                    localStorage.setItem('username', response.data.user.name)
-                    localStorage.setItem('user_role', 'user')
+                    if (response.data.user.agency_id != null) {
+                        localStorage.setItem('username', response.data.user.agency.taxname)
+                        localStorage.setItem('user_role', 'agency')
+                    } else {
+                        localStorage.setItem('username', response.data.user.name)
+                        localStorage.setItem('user_role', 'user')
+                    }
                 }
                 this.$emit('login')
                 location.href = '#home'

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Cities;
 use App\Models\Typeagencies;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -35,8 +36,9 @@ class AgenciesResource extends JsonResource
             'typeagency_id' => $this->typeagency_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
             'documents' => DocumentsResource::collection($this->documents()->get()),
+            // 'users' => User::where('agency_id', $this->id),
+            'users' => $this->users,
 
-                           
         ];
     }
 }
