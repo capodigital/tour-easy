@@ -31,6 +31,7 @@ export default {
             daySelect: null,
             initial: 0,
             show: false,
+            tour_id: 0,
         };
     },
     methods: {
@@ -168,9 +169,9 @@ export default {
     <div class="w-full px-4 py-4 overflow-auto scroll" style="font-family: Roboto">
         <h1 class="font-bold text-gray-800 text-2xl">CALENDARIO DE ACTIVIDADES</h1>
         <div class="my-2">
-            <div class="text-center flex items-center">
+            <div class="text-center sm:flex items-center">
                 <label class="me-2">Filtrar: </label>
-                <select v-model="month" @change="update" class="rounded border border-gray-500 px-3 py-1 me-2 w-32">
+                <select v-model="month" @change="update" class="rounded border border-gray-500 px-3 pe-8 py-1 me-2">
                     <option value="0">Enero</option>
                     <option value="1">Febrero</option>
                     <option value="2">Marzo</option>
@@ -184,9 +185,15 @@ export default {
                     <option value="10">Noviembre</option>
                     <option value="11">Diciembre</option>
                 </select>
-                <select v-model="year" @change="update" class="rounded border border-gray-500 px-3 py-1 w-[5.5rem]">
+                <select v-model="year" @change="update" class="rounded border border-gray-500 pe-8 px-3 py-1 me-2">
                     <option :value="2000 + n" v-for="n in 23">
                         {{ 2000 + n }}
+                    </option>
+                </select>
+                <select v-model="tour_id" class="rounded border border-gray-500 px-3 pe-8 py-1">
+                    <option value="0">Todas las giras</option>
+                    <option v-for="item in tours" :value="item.id">
+                        {{ item.tourname }}
                     </option>
                 </select>
             </div>
@@ -234,10 +241,13 @@ export default {
                                             actividades</div>
                                     </template>
                                     <template v-else>
-                                        <button @click="activity = item"
-                                            class="block rounded text-white w-full bg-green-500 py-1 px-2 mb-0.5 text-xs truncate"
-                                            v-for="item in day.activities">{{
-                                                types[Number(item.typeitinerary_id) - 1].description }}</button>
+                                        <template v-for="item in day.activities">
+                                            <button v-if="tour_id == 0 || item.tour_id == tour_id" @click="activity = item"
+                                                class="block rounded text-white w-full bg-green-500 py-1 px-2 mb-0.5 text-xs truncate">
+                                                {{ types[Number(item.typeitinerary_id) - 1].description }}
+                                            </button>
+                                        </template>
+
                                     </template>
                                     <button v-if="Utils.role() != 'artist'" @click="add(day.day)"
                                         class="w-full py-0.5 text-center border mt-0.5 border-gray-400 text-gray-400 rounded flex justify-center items-center">
