@@ -235,7 +235,7 @@ export default {
                                             v-for="item in day.activities">{{
                                                 types[Number(item.typeitinerary_id) - 1].description }}</button>
                                     </template>
-                                    <button @click="add(day.day)"
+                                    <button v-if="Utils.role() != 'artist'" @click="add(day.day)"
                                         class="w-full py-0.5 text-center border mt-0.5 border-gray-400 text-gray-400 rounded flex justify-center items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                             fill="none" stroke="rgb(156, 163, 175)" stroke-width="2" stroke-linecap="round"

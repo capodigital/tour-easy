@@ -134,7 +134,7 @@ export default {
                 class="font-bold w-full bg-gradient-to-tr from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 ARTISTAS DE LA AGENCIA
             </h1>
-            <button @click="add"
+            <button v-if="Utils.role() != 'artist'" @click="add"
                 class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">

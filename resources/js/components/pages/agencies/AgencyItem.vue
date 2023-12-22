@@ -12,7 +12,7 @@ export default {
             <div class="float-right">
                 <small class=" text-xs text-gray-400">{{ agency.taxcode }}</small>
                 <div class="flex mt-0.5">
-                    <div class="flex w-full justify-end">
+                    <div v-if="Utils.role() != 'artist'" class="flex w-full justify-end">
                         <button @click="$emit('edit', agency)"
                             class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"

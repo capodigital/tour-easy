@@ -127,14 +127,14 @@ export default {
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     AGENCIAS</h1>
-                <button @click="add"
+                <button v-if="Utils.role() != 'artist'" @click="add"
                     class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <AgencyItem @edit="edit" @destroy="destroy" :agency="item" v-for="item in agencies" />
             </div>
         </div>
-        <div :class="{ hidden: !show }"
+        <div v-if="Utils.role() != 'artist'" :class="{ hidden: !show }"
             class="w-full bg-white bg-opacity-90 left-0 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
             <div>
                 <h1

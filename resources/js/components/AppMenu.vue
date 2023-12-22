@@ -47,7 +47,7 @@ export default {
     <footer
         class="flex justify-center w-full h-16 z-30 items-end relative overflow-hidden transition-all rounded-t-2xl bg-white bg-opacity-50">
         <div class="flex pb-3">
-            <a class="transition-all px-3" @click="active = -2" href="#places"
+            <a v-if="Utils.role() != 'artist'" class="transition-all px-3" @click="active = -2" href="#places"
                 :class="{ 'text-gray-500': active != -2, 'text-black': active == -3 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -3 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
@@ -118,7 +118,7 @@ export default {
                     <path d="M8 14h.01" />
                 </svg>
             </a>
-            <a class="transition-all px-3" @click="active = 3" href="#tickets"
+            <a v-if="Utils.role() != 'artist'" class="transition-all px-3" @click="active = 3" href="#tickets"
                 :class="{ 'text-gray-500': active != 3, 'text-black': active == 2 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 2 ? '#000' : '#6b7280'" stroke-linecap="round" stroke-linejoin="round"

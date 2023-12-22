@@ -75,7 +75,16 @@ export default {
             })
         },
         getActivityData(activity) {
-            let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate
+            let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate, end = activity.enddate, complete = ''
+            if (new Date(start) > new Date()) {
+                complete = 'No completado'
+            } else {
+                if (new Date() < new Date(end)) {
+                    complete = 'En progreso'
+                } else {
+                    complete = 'Completado'
+                }
+            }
             let date = '';
             switch (Number(activity.typeitinerary_id)) {
                 case 1:
@@ -117,6 +126,7 @@ export default {
             item.description = description
             item.date = date
             item.start = start
+            item.complete = complete
             return item
         },
         contact(contact) {
@@ -265,7 +275,7 @@ export default {
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
             <TourActivity v-for="item in activities" @show="(item) => details = item" @edit="edit" @destroy="destroy"
                 :activity="item" />
-            <article @click="add"
+            <article @click="add" v-if="Utils.role() != 'artist'"
                 class="border-2 border-gray-500 rounded-2xl cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
                 <i class="bi bi-plus text-6xl text-gray-500"></i>
             </article>

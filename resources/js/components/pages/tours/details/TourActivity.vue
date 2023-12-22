@@ -21,7 +21,7 @@ export default {
                         <circle cx="12" cy="12" r="3" />
                     </svg>
                 </button>
-                <button @click="$emit('edit', activity)"
+                <button v-if="Utils.role() != 'artist'" @click="$emit('edit', activity)"
                     class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +32,7 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button @click="$emit('destroy', activity)"
+                <button v-if="Utils.role() != 'artist'" @click="$emit('destroy', activity)"
                     class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -55,15 +55,32 @@ export default {
         <div class="flex mt-4">
             <div class="flex w-full justify-between items-end">
                 <button
-                    :class="{ 'from-gray-400': activity.complete == undefined, 'to-gray-800': activity.complete == undefined, 'from-green-500': activity.complete, 'to-green-700': activity.complete }"
+                    :class="{ 'from-blue-500': activity.complete == 'No completado', 'to-blue-600': activity.complete == 'No completado', 'from-gray-400': activity.complete == 'No completado', 'to-gray-800': activity.complete == 'No completado', 'from-green-500': activity.complete == 'Completado', 'to-green-700': activity.complete == 'Completado' }"
                     class="rounded-lg border px-3 h-9 overlay-button me-1 flex justify-center items-center bg-gradient-to-br text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-check-square me-2">
+                    <svg v-if="activity.complete == 'Completado'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-check-square me-2">
                         <path d="m9 11 3 3L22 4" />
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                     </svg>
-                    Completado
+                    <svg v-else-if="activity.complete == 'No com'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-calendar-clock me-2">
+                        <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+                        <path d="M16 2v4" />
+                        <path d="M8 2v4" />
+                        <path d="M3 10h5" />
+                        <path d="M17.5 17.5 16 16.25V14" />
+                        <path d="M22 16a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z" />
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-x-octagon me-2">
+                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2" />
+                        <path d="m15 9-6 6" />
+                        <path d="m9 9 6 6" />
+                    </svg>
+                    {{ activity.complete }}
                 </button>
 
                 <div class="flex">

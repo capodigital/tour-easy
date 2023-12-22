@@ -17,7 +17,7 @@ export default {
                 <span class="float-right text-sm text-gray-400">{{ contact.typecontact.description }}</span>
                 <h2 class="font-semibold text-white mb-1">{{ contact.name }}
                 </h2>
-                <div class="flex">
+                <div v-if="Utils.role() != 'artist'" class="flex">
                     <button @click="$emit('edit', contact)"
                         class="rounded text-sm border hover:bg-white hover:text-black transition-all border-gray-100 text-gray-100 px-2 py-1 me-1"><i
                             class="bi bi-pencil-square"></i> Editar</button>
