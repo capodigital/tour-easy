@@ -203,278 +203,284 @@ export default {
 
             </div>
         </div>
-        <div v-if="Utils.role() == 'agency'" :class="{ 'hidden': user.show == false, 'flex': user.show == true }"
-            class="w-full bg-white bg-opacity-90 left-0 h-screen absolute top-0 px-2 py-2 justify-center items-center">
-            <form @submit.prevent="manager"
-                class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 transition-all hover:scale-105 cursor-pointer">
-                <input type="hidden" :value="Utils.user().id" name="agency_id" />
-                <h1
-                    class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                    <template v-if="user.id == undefined">
-                        AÑADIR ADMINISTRADOR
-                    </template>
-                    <template v-else>
-                        EDITAR ADMINISTRADOR
-                    </template>
-                </h1>
-                <div>
+        <transition name="bounce" mode="out-in">
+            <div v-if="Utils.role() == 'agency' && show"
+                class="w-full bg-white flex bg-opacity-90 left-0 h-screen absolute top-0 px-2 py-2 justify-center items-center">
+                <form @submit.prevent="manager"
+                    class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 transition-all hover:scale-105 cursor-pointer">
+                    <input type="hidden" :value="Utils.user().id" name="agency_id" />
+                    <h1
+                        class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                        <template v-if="user.id == undefined">
+                            AÑADIR ADMINISTRADOR
+                        </template>
+                        <template v-else>
+                            EDITAR ADMINISTRADOR
+                        </template>
+                    </h1>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Nombre(s) y apellidos</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-person text-gray-100"></i>
-                            <input v-model="user.name" name="name" type="text" placeholder="Nombre(s) y apellidos"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-envelope text-gray-100"></i>
-                            <input v-model="user.email" name="email" type="email" placeholder="Correo electrónico"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                    <template v-if="user.id == undefined">
                         <div>
-                            <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-key text-gray-100"></i>
-                                <input name="password" type="password" placeholder="Contraseña"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Confirmar contraseña</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-key text-gray-100"></i>
-                                <input name="confirm_password" type="password" placeholder="Confirmar contraseña"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                    </template>
-                    <div class="flex justify-center">
-                        <button type="button" @click="user.show = false"
-                            class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            Cerrar
-                        </button>
-                        <button type="submit"
-                            class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            <template v-if="user.id == undefined">
-                                Agregar
-                            </template>
-                            <template v-else>
-                                Actualizar
-                            </template>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div v-if="Utils.role() != 'artist'" :class="{ 'hidden': !show, 'flex': show }"
-            class="w-full bg-white bg-opacity-90 left-0 h-screen md:h-auto absolute top-0 px-2 py-2 justify-center items-center">
-            <div>
-                <h1
-                    class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                    <template v-if="agency.id == undefined">
-                        AÑADIR
-                    </template>
-                    <template v-else>
-                        EDITAR
-                    </template>
-                </h1>
-                <form @submit.prevent="send"
-                    class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Nombre de la agencia</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-building text-gray-100"></i>
-                                <input v-model="agency.taxname" name="taxname" type="text"
-                                    placeholder="Nombre de la agencia"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Nombre de la marca</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-badge-tm text-gray-100"></i>
-                                <input v-model="agency.tradename" name="tradename" type="text"
-                                    placeholder="Nombre de la marca"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Código fiscal</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-upc-scan text-gray-100"></i>
-                                <input v-model="agency.taxcode" name="taxcode" type="text" placeholder="Código fiscal"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Dueño de la agencia</label>
+                            <label class="text-slate-200 text-xs font-semibold">Nombre(s) y apellidos</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-person text-gray-100"></i>
-                                <input v-model="agency.owner" name="owner" type="text" placeholder="Dueño de la agencia"
+                                <input v-model="user.name" name="name" type="text" placeholder="Nombre(s) y apellidos"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
-                    </div>
-                    <div class="grid gap-x-2" :class="{ 'grid-cols-2': agency.id == undefined }">
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-envelope text-gray-100"></i>
-                                <input v-model="agency.email" name="email" type="email" placeholder="Correo electrónico"
+                                <input v-model="user.email" name="email" type="email" placeholder="Correo electrónico"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
-                        <div v-if="agency.id == undefined">
-                            <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-key text-gray-100"></i>
-                                <input name="password" type="password" placeholder="Contraseña"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Número de teléfono</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-telephone text-gray-100"></i>
-                                <input v-model="agency.phone" name="phone" type="tel" placeholder="Número de teléfono"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Dirección</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-map text-gray-100"></i>
-                                <input v-model="agency.address" name="address" type="text" placeholder="Dirección"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Descripción</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                            <textarea rows="3" v-model="agency.notes" name="notes" placeholder="Datos adicionales"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">País</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe text-gray-100"></i>
-                                <select v-model="country_id" @change="(e) => setCities(e.target.value)"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="country in countries" :value="country.code">{{
-                                        country.name }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe-americas text-gray-100"></i>
-                                <select v-model="agency.city_id" @change="setCities" name="city_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <button @click="socialmedias.push({})"
-                            class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
-                            type="button">Añadir</button>
-                        <label class="text-slate-200 text-xs font-semibold">Redes sociales</label>
-                        <div class="mt-1 grid grid-cols-3 gap-2">
-                            <template v-for="(socialmedia, index) in socialmedias">
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="socialmedia.typeredes_id"
-                                        :name="`socialmedias[${index}][typeredes_id]`"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" v-for="type in socialtypes" :value="type.id">{{ type.name
-                                        }}</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
-                                        placeholder="Link"
+                        <template v-if="user.id == undefined">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-key text-gray-100"></i>
+                                    <input name="password" type="password" placeholder="Contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <input v-model="socialmedia.description" :name="`socialmedias[${index}][description]`"
-                                        type="text" placeholder="Descripción"
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Confirmar contraseña</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-key text-gray-100"></i>
+                                    <input name="confirm_password" type="password" placeholder="Confirmar contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
-                            </template>
+                            </div>
+                        </template>
+                        <div class="flex justify-center">
+                            <button type="button" @click="user.show = false"
+                                class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                Cerrar
+                            </button>
+                            <button type="submit"
+                                class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                <template v-if="user.id == undefined">
+                                    Agregar
+                                </template>
+                                <template v-else>
+                                    Actualizar
+                                </template>
+                            </button>
                         </div>
-                    </div>
-                    <div class="mt-2">
-                        <button @click="files.push({ type: 'link' })"
-                            class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
-                            type="button">Añadir</button>
-                        <label class="text-slate-200 text-xs font-semibold">Documentos</label>
-                        <div class="mt-1 grid grid-cols-3 gap-2">
-                            <template v-for="(file, index) in files">
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="file.type"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" value="link">Google Drive</option>
-                                        <option class="text-black" value="local">Local</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2"
-                                    style="grid-column: span 2;">
-                                    <template v-if="file.type == 'link'">
-                                        <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
-                                            type="text" placeholder="Link"
-                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <input v-else v-model="file.url" type="text" placeholder="Link"
-                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
-                                            readonly>
-                                    </template>
-
-                                    <template v-else>
-                                        <input v-if="file.id != undefined" v-model="file.name" type="text"
-                                            placeholder="Link"
-                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
-                                            readonly>
-                                        <input v-else :name="`documents[${index}]`" type="file"
-                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    </template>
-
-                                    <button @click="removeDocument(index)" type="button" class="text-white"><i
-                                            class="bi bi-trash"></i></button>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <button type="button" @click="show = false"
-                            class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            Cerrar
-                        </button>
-                        <button type="submit"
-                            class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            <template v-if="agency.id == undefined">
-                                Agregar
-                            </template>
-                            <template v-else>
-                                Actualizar
-                            </template>
-                        </button>
                     </div>
                 </form>
             </div>
-        </div>
+        </transition>
+        <transition name="bounce" mode="out-in">
+            <div v-if="Utils.role() != 'artist' && show"
+                class="w-full flex bg-white bg-opacity-90 left-0 h-screen md:h-auto absolute top-0 px-2 py-2 justify-center items-center">
+                <div>
+                    <h1
+                        class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                        <template v-if="agency.id == undefined">
+                            AÑADIR
+                        </template>
+                        <template v-else>
+                            EDITAR
+                        </template>
+                    </h1>
+                    <form @submit.prevent="send"
+                        class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Nombre de la agencia</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-building text-gray-100"></i>
+                                    <input v-model="agency.taxname" name="taxname" type="text"
+                                        placeholder="Nombre de la agencia"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Nombre de la marca</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-badge-tm text-gray-100"></i>
+                                    <input v-model="agency.tradename" name="tradename" type="text"
+                                        placeholder="Nombre de la marca"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Código fiscal</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-upc-scan text-gray-100"></i>
+                                    <input v-model="agency.taxcode" name="taxcode" type="text" placeholder="Código fiscal"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Dueño de la agencia</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-person text-gray-100"></i>
+                                    <input v-model="agency.owner" name="owner" type="text" placeholder="Dueño de la agencia"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid gap-x-2" :class="{ 'grid-cols-2': agency.id == undefined }">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-envelope text-gray-100"></i>
+                                    <input v-model="agency.email" name="email" type="email" placeholder="Correo electrónico"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div v-if="agency.id == undefined">
+                                <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-key text-gray-100"></i>
+                                    <input name="password" type="password" placeholder="Contraseña"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Número de teléfono</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-telephone text-gray-100"></i>
+                                    <input v-model="agency.phone" name="phone" type="tel" placeholder="Número de teléfono"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Dirección</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-map text-gray-100"></i>
+                                    <input v-model="agency.address" name="address" type="text" placeholder="Dirección"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Descripción</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
+                                <textarea rows="3" v-model="agency.notes" name="notes" placeholder="Datos adicionales"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">País</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-globe text-gray-100"></i>
+                                    <select v-model="country_id" @change="(e) => setCities(e.target.value)"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="country in countries" :value="country.code">{{
+                                            country.name }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-globe-americas text-gray-100"></i>
+                                    <select v-model="agency.city_id" @change="setCities" name="city_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button @click="socialmedias.push({})"
+                                class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
+                                type="button">Añadir</button>
+                            <label class="text-slate-200 text-xs font-semibold">Redes sociales</label>
+                            <div class="mt-1 grid grid-cols-3 gap-2">
+                                <template v-for="(socialmedia, index) in socialmedias">
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <select v-model="socialmedia.typeredes_id"
+                                            :name="`socialmedias[${index}][typeredes_id]`"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
+                                                type.name
+                                            }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
+                                            placeholder="Link"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    </div>
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <input v-model="socialmedia.description"
+                                            :name="`socialmedias[${index}][description]`" type="text"
+                                            placeholder="Descripción"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <button @click="files.push({ type: 'link' })"
+                                class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
+                                type="button">Añadir</button>
+                            <label class="text-slate-200 text-xs font-semibold">Documentos</label>
+                            <div class="mt-1 grid grid-cols-3 gap-2">
+                                <template v-for="(file, index) in files">
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <select v-model="file.type"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <option class="text-black" value="link">Google Drive</option>
+                                            <option class="text-black" value="local">Local</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center rounded border border-gray-300 px-2"
+                                        style="grid-column: span 2;">
+                                        <template v-if="file.type == 'link'">
+                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                                type="text" placeholder="Link"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <input v-else v-model="file.url" type="text" placeholder="Link"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
+                                                readonly>
+                                        </template>
+
+                                        <template v-else>
+                                            <input v-if="file.id != undefined" v-model="file.name" type="text"
+                                                placeholder="Link"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
+                                                readonly>
+                                            <input v-else :name="`documents[${index}]`" type="file"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        </template>
+
+                                        <button @click="removeDocument(index)" type="button" class="text-white"><i
+                                                class="bi bi-trash"></i></button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <button type="button" @click="show = false"
+                                class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                Cerrar
+                            </button>
+                            <button type="submit"
+                                class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                <template v-if="agency.id == undefined">
+                                    Agregar
+                                </template>
+                                <template v-else>
+                                    Actualizar
+                                </template>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </transition>
     </section>
 </template>
 <style scoped>

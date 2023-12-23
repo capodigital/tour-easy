@@ -80,21 +80,21 @@ export default {
 </script>
 <template>
     <template v-if="active == 'tour'">
-        <transition name="bounce" mode="out-in">
+        <transition name="carousel" mode="out-in">
             <component :is="active"> </component>
         </transition>
     </template>
     <template v-else-if="active != 'login'">
         <AppNavbar />
         <main class="scroll overflow-auto">
-            <transition name="bounce" mode="out-in">
+            <transition name="carousel" mode="out-in">
                 <component :is="active"> </component>
             </transition>
         </main>
         <AppMenu />
     </template>
     <template v-else>
-        <transition name="bounce" mode="out-in">
+        <transition name="carousel" mode="out-in">
             <component :is="active"> </component>
         </transition>
     </template>

@@ -162,206 +162,210 @@ export default {
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             <ArtistsItem @edit="edit" @destroy="destroy" :artist="artist" v-for="artist in artists" />
         </div>
-        <div :class="{ hidden: !show }"
-            class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
-            <div>
-                <h1
-                    class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                    <template v-if="artist.id == undefined">
-                        AÑADIR
-                    </template>
-                    <template v-else>
-                        EDITAR
-                    </template>
-                </h1>
-                <form @submit.prevent="send"
-                    class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                    <input @change="updatePreview" type="file" class="hidden" name="image"
-                        :required="artist.id == undefined" />
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="flex items-center justify-center">
-                            <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
-                                class="rounded-full w-52 h-52 cursor-pointer" />
-                        </div>
+        <transition name="bounce" mode="out-in">
+            <div v-if="show"
+                class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
+                <div>
+                    <h1
+                        class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                        <template v-if="artist.id == undefined">
+                            AÑADIR
+                        </template>
+                        <template v-else>
+                            EDITAR
+                        </template>
+                    </h1>
+                    <form @submit.prevent="send"
+                        class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
+                        <input @change="updatePreview" type="file" class="hidden" name="image"
+                            :required="artist.id == undefined" />
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="flex items-center justify-center">
+                                <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
+                                    class="rounded-full w-52 h-52 cursor-pointer" />
+                            </div>
 
-                        <div class="grid grid-cols-1 gap-x-2">
-                            <div v-if="Utils.role() != 'agency' && artist.id == undefined">
-                                <label class="text-slate-200 text-xs font-semibold">Agencia</label>
-                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                    <select v-model="artist.agency_id" name="agency_id"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" v-for="item in agencies" :value="item.id">{{
-                                            item.taxname
-                                        }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
-                                <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
-                                    <i class="bi bi-person text-gray-100"></i>
-                                    <input v-model="artist.name" name="name" type="text" placeholder="Nombre(s)"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
-                                <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
-                                    <i class="bi bi-person text-gray-100"></i>
-                                    <input v-model="artist.lastname" name="lastname" type="text" placeholder="Apellidos"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="text-slate-200 text-xs font-semibold">Nombre artístico</label>
-                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                    <i class="bi bi-mic-fill text-gray-100"></i>
-                                    <input v-model="artist.stagename" name="stagename" type="text"
-                                        placeholder="Nombre artístico"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-envelope text-gray-100"></i>
-                                <input v-model="artist.email" name="email" type="email" placeholder="Correo electrónico"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Fecha de nacimiento</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="artist.birthday" name="birthday" type="date"
-                                    placeholder="Fecha de nacimiento"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2" v-if="artist.id == undefined">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-envelope text-gray-100"></i>
-                                <input name="password" type="password" placeholder="Contraseña"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-envelope text-gray-100"></i>
-                                <input name="confirm_password" type="password" placeholder="Confirmar contraseña"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                            <textarea v-model="artist.notes" name="notes" placeholder="Datos adicionales"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
-                        </div>
-                    </div>
-                    <div>
-                        <button @click="socialmedias.push({})"
-                            class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
-                            type="button">Añadir</button>
-                        <label class="text-slate-200 text-xs font-semibold">Redes sociales</label>
-                        <div class="mt-1 grid grid-cols-3 gap-2">
-                            <template v-for="(socialmedia, index) in socialmedias">
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="socialmedia.typeredes_id"
-                                        :name="`socialmedias[${index}][typeredes_id]`"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" v-for="type in socialtypes" :value="type.id">{{ type.name
-                                        }}</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
-                                        placeholder="Link"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <input v-model="socialmedia.description" :name="`socialmedias[${index}][description]`"
-                                        type="text" placeholder="Descripción"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <button @click="files.push({ type: 'link' })"
-                            class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
-                            type="button">Añadir</button>
-                        <label class="text-slate-200 text-xs font-semibold">Documentos</label>
-                        <div class="mt-1 grid grid-cols-3 gap-2 mb-2">
-                            <template v-for="(file, index) in files">
-                                <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="file.type"
-                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" value="link">Google Drive</option>
-                                        <option class="text-black" value="local">Local</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center rounded border border-gray-300 px-2"
-                                    style="grid-column: span 2;">
-                                    <template v-if="file.type == 'link'">
-                                        <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
-                                            type="text" placeholder="Link"
+                            <div class="grid grid-cols-1 gap-x-2">
+                                <div v-if="Utils.role() != 'agency' && artist.id == undefined">
+                                    <label class="text-slate-200 text-xs font-semibold">Agencia</label>
+                                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                        <select v-model="artist.agency_id" name="agency_id"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <input v-else v-model="file.url" type="text" placeholder="Link"
-                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
-                                            readonly>
-                                    </template>
-
-                                    <template v-else>
-                                        <input v-if="file.id != undefined" v-model="file.name" type="text"
+                                            <option class="text-black" v-for="item in agencies" :value="item.id">{{
+                                                item.taxname
+                                            }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
+                                    <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
+                                        <i class="bi bi-person text-gray-100"></i>
+                                        <input v-model="artist.name" name="name" type="text" placeholder="Nombre(s)"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
+                                    <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
+                                        <i class="bi bi-person text-gray-100"></i>
+                                        <input v-model="artist.lastname" name="lastname" type="text" placeholder="Apellidos"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="text-slate-200 text-xs font-semibold">Nombre artístico</label>
+                                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                        <i class="bi bi-mic-fill text-gray-100"></i>
+                                        <input v-model="artist.stagename" name="stagename" type="text"
+                                            placeholder="Nombre artístico"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-envelope text-gray-100"></i>
+                                    <input v-model="artist.email" name="email" type="email" placeholder="Correo electrónico"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Fecha de nacimiento</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-calendar-day text-gray-100"></i>
+                                    <input v-model="artist.birthday" name="birthday" type="date"
+                                        placeholder="Fecha de nacimiento"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-x-2" v-if="artist.id == undefined">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-envelope text-gray-100"></i>
+                                    <input name="password" type="password" placeholder="Contraseña"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-envelope text-gray-100"></i>
+                                    <input name="confirm_password" type="password" placeholder="Confirmar contraseña"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
+                                <textarea v-model="artist.notes" name="notes" placeholder="Datos adicionales"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <button @click="socialmedias.push({})"
+                                class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
+                                type="button">Añadir</button>
+                            <label class="text-slate-200 text-xs font-semibold">Redes sociales</label>
+                            <div class="mt-1 grid grid-cols-3 gap-2">
+                                <template v-for="(socialmedia, index) in socialmedias">
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <select v-model="socialmedia.typeredes_id"
+                                            :name="`socialmedias[${index}][typeredes_id]`"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
+                                                type.name
+                                            }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
                                             placeholder="Link"
-                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
-                                            readonly>
-                                        <input v-else :name="`documents[${index}]`" type="file"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    </template>
+                                    </div>
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <input v-model="socialmedia.description"
+                                            :name="`socialmedias[${index}][description]`" type="text"
+                                            placeholder="Descripción"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <button @click="files.push({ type: 'link' })"
+                                class="px-2 py-0.5 float-right rounded text-sm text-gray-300 border border-gray-300"
+                                type="button">Añadir</button>
+                            <label class="text-slate-200 text-xs font-semibold">Documentos</label>
+                            <div class="mt-1 grid grid-cols-3 gap-2 mb-2">
+                                <template v-for="(file, index) in files">
+                                    <div class="flex items-center rounded border border-gray-300 px-2">
+                                        <select v-model="file.type"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <option class="text-black" value="link">Google Drive</option>
+                                            <option class="text-black" value="local">Local</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center rounded border border-gray-300 px-2"
+                                        style="grid-column: span 2;">
+                                        <template v-if="file.type == 'link'">
+                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                                type="text" placeholder="Link"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <input v-else v-model="file.url" type="text" placeholder="Link"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
+                                                readonly>
+                                        </template>
 
-                                    <button @click="removeDocument(index)" type="button" class="text-white"><i
-                                            class="bi bi-trash"></i></button>
-                                </div>
-                            </template>
+                                        <template v-else>
+                                            <input v-if="file.id != undefined" v-model="file.name" type="text"
+                                                placeholder="Link"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
+                                                readonly>
+                                            <input v-else :name="`documents[${index}]`" type="file"
+                                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        </template>
+
+                                        <button @click="removeDocument(index)" type="button" class="text-white"><i
+                                                class="bi bi-trash"></i></button>
+                                    </div>
+                                </template>
+                            </div>
+                            <label class="text-slate-200 text-xs font-semibold mt-5">Etiquetas</label>
+                            <div class="w-full mt-1 rounded border border-gray-300 p-2 whitespace-pre-wrap">
+                                <span @click="tags.splice(index, 1)" v-for="(tag, index) in tags"
+                                    class="text-sm cursor-pointer me-1 text-black bg-gray-300 rounded px-2 py-1">{{ tag }}
+                                    <i class="bi bi-x"></i></span>
+                                <input @keydown="addTag"
+                                    class="bg-transparent text-gray-300 focus:outline-none outline-none border-none" />
+                            </div>
                         </div>
-                        <label class="text-slate-200 text-xs font-semibold mt-5">Etiquetas</label>
-                        <div class="w-full mt-1 rounded border border-gray-300 p-2 whitespace-pre-wrap">
-                            <span @click="tags.splice(index, 1)" v-for="(tag, index) in tags"
-                                class="text-sm cursor-pointer me-1 text-black bg-gray-300 rounded px-2 py-1">{{ tag }} <i
-                                    class="bi bi-x"></i></span>
-                            <input @keydown="addTag"
-                                class="bg-transparent text-gray-300 focus:outline-none outline-none border-none" />
+                        <input type="hidden" name="tags" :value="tags.join(', ')" />
+                        <div class="flex justify-center">
+                            <button type="button" @click="show = false"
+                                class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                Cerrar
+                            </button>
+                            <button type="submit"
+                                class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                <template v-if="artist.id == undefined">
+                                    Agregar
+                                </template>
+                                <template v-else>
+                                    Actualizar
+                                </template>
+                            </button>
                         </div>
-                    </div>
-                    <input type="hidden" name="tags" :value="tags.join(', ')" />
-                    <div class="flex justify-center">
-                        <button type="button" @click="show = false"
-                            class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            Cerrar
-                        </button>
-                        <button type="submit"
-                            class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            <template v-if="artist.id == undefined">
-                                Agregar
-                            </template>
-                            <template v-else>
-                                Actualizar
-                            </template>
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </transition>
     </div>
 </template>
 <style scoped>

@@ -345,166 +345,147 @@ export default {
                 <i class="bi bi-plus text-6xl text-gray-500"></i>
             </article>
         </div>
-        <div v-if="show_images"
-            class="w-full bg-white bg-opacity-90 h-screen absolute left-0 top-0 px-2 py-2 flex justify-center items-center">
-            <div class="images-modal overflow-auto scroll">
-                <div class="flex items-center">
-                    <h1
-                        class="font-bold bg-gradient-to-tr w-full  from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                        IMÁGENES DE LA GIRA
-                    </h1>
-                    <button @click="show_images = false" class="bg-slate-800 text-white rounded px-2 py-1">Cerrar</button>
-                </div>
-
-                <div v-viewer="options" class="images md:grid">
-                    <div class="relative" v-for="(image, index) in images">
-                        <button @click="remove(index)"
-                            class="absolute bg-transparent border-none z-50 focus:outline-none text-white top-1 right-1"><i
-                                class="bi bi-trash"></i></button>
-                        <div class="image cursor-pointer h-56 bg-cover bg-center"
-                            :style="{ 'background-image': `url(${image.url})` }" :key="index">
-                            <img class="opacity-0" :src="image.url" :alt="`${tour.tourname} - ${index}`" />
-                        </div>
-
+        <transition name="bounce" mode="out-in">
+            <div v-if="show_images"
+                class="w-full bg-white bg-opacity-90 h-screen absolute left-0 top-0 px-2 py-2 flex justify-center items-center">
+                <div class="images-modal overflow-auto scroll">
+                    <div class="flex items-center">
+                        <h1
+                            class="font-bold bg-gradient-to-tr w-full  from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                            IMÁGENES DE LA GIRA
+                        </h1>
+                        <button @click="show_images = false"
+                            class="bg-slate-800 text-white rounded px-2 py-1">Cerrar</button>
                     </div>
-                    <form @submit.prevent="saveImage">
-                        <input type="file" @change="updatePreview" class="hidden" id="tour-image" name="image" />
-                        <input type="hidden" name="tour_id" :value="tour.id" />
-                        <div @click="openPicker" :class="{ 'border-2': preview == null }"
-                            class="relative border-gray-500 h-full rounded cursor-pointer border-dashed min-h-[14rem] flex justify-center items-center">
-                            <i v-if="preview == null" class="bi bi-plus text-6xl text-gray-500"></i>
-                            <div class="h-56 w-full bg-cover" v-else :style="{ 'background-image': `url(${preview})` }">
-                                <!-- <img :src="preview" /> -->
-                                <button @click="preview = null"
-                                    class="absolute bg-transparent border-none z-50 focus:outline-none text-white top-1 right-1"><i
-                                        class="bi bi-trash"></i></button>
-                                <div
-                                    class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-                                    <button class="text-white text-4xl opacity-75 hover:opacity-100" type="submit"><i
-                                            class="bi bi-upload"></i></button>
+
+                    <div v-viewer="options" class="images md:grid">
+                        <div class="relative" v-for="(image, index) in images">
+                            <button @click="remove(index)"
+                                class="absolute bg-transparent border-none z-50 focus:outline-none text-white top-1 right-1"><i
+                                    class="bi bi-trash"></i></button>
+                            <div class="image cursor-pointer h-56 bg-cover bg-center"
+                                :style="{ 'background-image': `url(${image.url})` }" :key="index">
+                                <img class="opacity-0" :src="image.url" :alt="`${tour.tourname} - ${index}`" />
+                            </div>
+
+                        </div>
+                        <form @submit.prevent="saveImage">
+                            <input type="file" @change="updatePreview" class="hidden" id="tour-image" name="image" />
+                            <input type="hidden" name="tour_id" :value="tour.id" />
+                            <div @click="openPicker" :class="{ 'border-2': preview == null }"
+                                class="relative border-gray-500 h-full rounded cursor-pointer border-dashed min-h-[14rem] flex justify-center items-center">
+                                <i v-if="preview == null" class="bi bi-plus text-6xl text-gray-500"></i>
+                                <div class="h-56 w-full bg-cover" v-else :style="{ 'background-image': `url(${preview})` }">
+                                    <!-- <img :src="preview" /> -->
+                                    <button @click="preview = null"
+                                        class="absolute bg-transparent border-none z-50 focus:outline-none text-white top-1 right-1"><i
+                                            class="bi bi-trash"></i></button>
+                                    <div
+                                        class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+                                        <button class="text-white text-4xl opacity-75 hover:opacity-100" type="submit"><i
+                                                class="bi bi-upload"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </transition>
+        <transition name="bounce" mode="out-in">
+            <div v-if="show"
+                class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute left-0 top-0 px-2 py-2 flex justify-center items-center">
+                <div>
+                    <h1
+                        class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                        <template v-if="activity.id == undefined">
+                            AÑADIR
+                        </template>
+                        <template v-else>
+                            EDITAR
+                        </template>
+                    </h1>
+                    <form @submit.prevent="send"
+                        class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
+                        <div class="grid grid-cols-2 gap-x-2 mb-3">
+                            <div :class="{ hidden: tour.id != undefined }">
+                                <label class="text-slate-200 text-xs font-semibold">Gira</label>
+                                <div class="flex items-center rounded border border-gray-300 px-2">
+                                    <select :value="tour.id" name="tour_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="item in tours" :value="item.id">{{
+                                            item.tourname
+                                        }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Tipo de actividad</label>
+                                <div class="flex items-center rounded border border-gray-300 px-2">
+                                    <select v-model="activity.typeitinerary_id" name="typeitinerary_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="type in types" :value="type.id">{{
+                                            type.description
+                                        }}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div v-if="show"
-            class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute left-0 top-0 px-2 py-2 flex justify-center items-center">
-            <div>
-                <h1
-                    class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                    <template v-if="activity.id == undefined">
-                        AÑADIR
-                    </template>
-                    <template v-else>
-                        EDITAR
-                    </template>
-                </h1>
-                <form @submit.prevent="send"
-                    class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                    <div class="grid grid-cols-2 gap-x-2 mb-3">
-                        <div :class="{ hidden: tour.id != undefined }">
-                            <label class="text-slate-200 text-xs font-semibold">Gira</label>
-                            <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select :value="tour.id" name="tour_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="item in tours" :value="item.id">{{
-                                        item.tourname
-                                    }}</option>
-                                </select>
-                            </div>
-                        </div>
                         <div>
-                            <label class="text-slate-200 text-xs font-semibold">Tipo de actividad</label>
-                            <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="activity.typeitinerary_id" name="typeitinerary_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="type in types" :value="type.id">{{
-                                        type.description
-                                    }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Nombre</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-envelope text-gray-100"></i>
-                            <input v-model="activity.name" name="name" type="text" placeholder="Nombre de la actividad"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Descripción</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                            <textarea rows="3" v-model="activity.notes" name="notes" placeholder="Datos adicionales"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2 my-3" v-if="activity.typeitinerary_id == 1">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Prueba de sonido</label>
+                            <label class="text-slate-200 text-xs font-semibold">Nombre</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="activity.showcheck" name="showcheck" type="time"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Inicio del show</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="activity.showtime" name="showtime" type="time"
+                                <i class="bi bi-envelope text-gray-100"></i>
+                                <input v-model="activity.name" name="name" type="text" placeholder="Nombre de la actividad"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-2">
                         <div>
-                            <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="activity.startdate" name="startdate" type="datetime"
-                                    placeholder="Fecha de inicio"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                            <label class="text-slate-200 text-xs font-semibold">Descripción</label>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
+                                <textarea rows="3" v-model="activity.notes" name="notes" placeholder="Datos adicionales"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="activity.enddate" name="enddate" type="datetime" placeholder="Fecha de fin"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        <div class="grid grid-cols-2 gap-x-2 my-3" v-if="activity.typeitinerary_id == 1">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Prueba de sonido</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-calendar-day text-gray-100"></i>
+                                    <input v-model="activity.showcheck" name="showcheck" type="time"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Inicio del show</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-calendar-day text-gray-100"></i>
+                                    <input v-model="activity.showtime" name="showtime" type="time"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <label class="text-slate-200 text-xs font-semibold">Ciudad <template
-                            v-if="[4, 6, 7, 8].includes(activity.typeitinerary_id)"> de salida</template></label>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe text-gray-100"></i>
-                                <select @change="(e) => setCities(e.target.value)"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="country in countries" :value="country.code">{{
-                                        country.name }}</option>
-                                </select>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-calendar-day text-gray-100"></i>
+                                    <input v-model="activity.startdate" name="startdate" type="datetime"
+                                        placeholder="Fecha de inicio"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-calendar-day text-gray-100"></i>
+                                    <input v-model="activity.enddate" name="enddate" type="datetime"
+                                        placeholder="Fecha de fin"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe-americas text-gray-100"></i>
-                                <select v-model="activity.city_start_id" name="city_start_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <template v-if="[6, 7].includes(activity.typeitinerary_id)">
-                        <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
+                        <label class="text-slate-200 text-xs font-semibold">Ciudad <template
+                                v-if="[4, 6, 7, 8].includes(activity.typeitinerary_id)"> de salida</template></label>
                         <div class="grid grid-cols-2 gap-x-2">
                             <div>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
@@ -519,7 +500,7 @@ export default {
                             <div>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-globe-americas text-gray-100"></i>
-                                    <select v-model="activity.city_destination_id" name="city_destination_id"
+                                    <select v-model="activity.city_start_id" name="city_start_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
                                         </option>
@@ -527,55 +508,83 @@ export default {
                                 </div>
                             </div>
                         </div>
-                    </template>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div v-if="[1, 4, 6, 7, 8].includes(activity.typeitinerary_id)">
-                            <label class="text-slate-200 text-xs font-semibold">Contacto</label>
-                            <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="activity.contact_id" name="contact_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <template v-for="item in contacts">
-                                        <option v-if="contact(item)" class="text-black" :value="item.id">{{
-                                            item.name
-                                        }}</option>
-                                    </template>
-                                </select>
+                        <template v-if="[6, 7].includes(activity.typeitinerary_id)">
+                            <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
+                            <div class="grid grid-cols-2 gap-x-2">
+                                <div>
+                                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                        <i class="bi bi-globe text-gray-100"></i>
+                                        <select @change="(e) => setCities(e.target.value)"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <option class="text-black" v-for="country in countries" :value="country.code">{{
+                                                country.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                        <i class="bi bi-globe-americas text-gray-100"></i>
+                                        <select v-model="activity.city_destination_id" name="city_destination_id"
+                                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name
+                                            }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div v-if="[1, 4, 6, 7, 8].includes(activity.typeitinerary_id)">
+                                <label class="text-slate-200 text-xs font-semibold">Contacto</label>
+                                <div class="flex items-center rounded border border-gray-300 px-2">
+                                    <select v-model="activity.contact_id" name="contact_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <template v-for="item in contacts">
+                                            <option v-if="contact(item)" class="text-black" :value="item.id">{{
+                                                item.name
+                                            }}</option>
+                                        </template>
+                                    </select>
+                                </div>
+                            </div>
+                            <div v-if="[1, 5, 6, 7].includes(activity.typeitinerary_id)">
+                                <label class="text-slate-200 text-xs font-semibold">Lugar</label>
+                                <div class="flex items-center rounded border border-gray-300 px-2">
+                                    <select v-model="activity.place_id" name="place_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <template v-for="item in places">
+                                            <option v-if="place(item)" class="text-black" :value="item.id">{{
+                                                item.name
+                                            }}</option>
+                                        </template>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div v-if="[1, 5, 6, 7].includes(activity.typeitinerary_id)">
-                            <label class="text-slate-200 text-xs font-semibold">Lugar</label>
-                            <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="activity.place_id" name="place_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <template v-for="item in places">
-                                        <option v-if="place(item)" class="text-black" :value="item.id">{{
-                                            item.name
-                                        }}</option>
-                                    </template>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="flex justify-center">
-                        <button type="button" @click="show = false"
-                            class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            Cerrar
-                        </button>
-                        <button type="submit"
-                            class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                            <template v-if="activity.id == undefined">
-                                Agregar
-                            </template>
-                            <template v-else>
-                                Actualizar
-                            </template>
-                        </button>
-                    </div>
-                </form>
+                        <div class="flex justify-center">
+                            <button type="button" @click="show = false"
+                                class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                Cerrar
+                            </button>
+                            <button type="submit"
+                                class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                <template v-if="activity.id == undefined">
+                                    Agregar
+                                </template>
+                                <template v-else>
+                                    Actualizar
+                                </template>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-        <ActivityDetails @close="details = null" v-if="details != null" :activity="details" />
+        </transition>
+        <transition name="bounce" mode="out-in">
+            <ActivityDetails @close="details = null" v-if="details != null" :activity="details" />
+        </transition>
     </section>
 </template>
 <style scoped>
