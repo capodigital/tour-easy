@@ -31,7 +31,18 @@ class PhotosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $data = $request->only(['tour_id']);
+       
+        $image = $request->file('image')->store('photos', 'src');
+        $data['image'] = "src/$image";
+
+        //Almacenar los datos en la base de datos
+        $photo = Photos::create($data);
+        
+
+        $photo->refresh();
+        return new PhotosResource($photo);
     }
 
     /**
@@ -61,9 +72,11 @@ class PhotosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Photos $photos)
+    public function destroy(Photos $photo)
     {
-        //
+        $photo->delete();
+
+        return response()->json($photo);
     }
 
     public function photosByTour(Request $request)
