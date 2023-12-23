@@ -9,31 +9,9 @@ export default {
                     socialmedias: [],
                 },
                 tourcartel: '',
-            },
-            options: {
-                url: "data-src"
+                tourname: '',
             },
             images: [
-                { image: 'src/luis-fonsi/1.jpg', thumbnail: 'src/luis-fonsi/thumbnail/1.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/2.jpg', thumbnail: 'src/luis-fonsi/thumbnail/2.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/3.jpg', thumbnail: 'src/luis-fonsi/thumbnail/3.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/4.jpg', thumbnail: 'src/luis-fonsi/thumbnail/4.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/5.jpg', thumbnail: 'src/luis-fonsi/thumbnail/5.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/6.jpg', thumbnail: 'src/luis-fonsi/thumbnail/6.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/7.jpg', thumbnail: 'src/luis-fonsi/thumbnail/7.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/8.jpg', thumbnail: 'src/luis-fonsi/thumbnail/8.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/9.jpg', thumbnail: 'src/luis-fonsi/thumbnail/9.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/10.jpg', thumbnail: 'src/luis-fonsi/thumbnail/10.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/11.jpg', thumbnail: 'src/luis-fonsi/thumbnail/11.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/12.jpg', thumbnail: 'src/luis-fonsi/thumbnail/12.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/13.jpg', thumbnail: 'src/luis-fonsi/thumbnail/13.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/14.jpg', thumbnail: 'src/luis-fonsi/thumbnail/14.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/15.jpg', thumbnail: 'src/luis-fonsi/thumbnail/15.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/16.jpg', thumbnail: 'src/luis-fonsi/thumbnail/16.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/17.jpg', thumbnail: 'src/luis-fonsi/thumbnail/17.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/18.jpg', thumbnail: 'src/luis-fonsi/thumbnail/18.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/19.jpg', thumbnail: 'src/luis-fonsi/thumbnail/19.jpg', title: 'Luis fonsi - Gira 2023' },
-                { image: 'src/luis-fonsi/20.jpg', thumbnail: 'src/luis-fonsi/thumbnail/20.jpg', title: 'Luis fonsi - Gira 2023' },
             ]
         }
     },
@@ -45,6 +23,15 @@ export default {
             }
         }).then((response) => {
             this.tour = response.data
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        })
+        axios.post('api/photos/tour', { id: id }, {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.images = response.data.data
         }).catch((error) => {
             this.Utils.error(error.response)
         })
@@ -94,8 +81,7 @@ export default {
                     <h1
                         class="font-bold bg-gradient-to-tr text-center from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                         VIDEOS POPULARES</h1>
-                    <iframe width="100%" height="100%" style="border-radius: 1rem;"
-                        src="https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr"
+                    <iframe width="100%" height="100%" style="border-radius: 1rem;" :src="tour.youtube_list"
                         title="Videos populares de Luis Fonsi" frameborder="0" class="min-h-screen"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
@@ -104,9 +90,8 @@ export default {
                     <h1
                         class="font-bold bg-gradient-to-tr text-center from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                         PLAYLIST</h1>
-                    <iframe style="border-radius:12px"
-                        src="https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0"
-                        width="100%" height="100%" frameBorder="0" class="min-h-screen"
+                    <iframe style="border-radius:12px" :src="tour.spotify_list" width="100%" height="100%" frameBorder="0"
+                        class="min-h-screen"
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                         loading="lazy"></iframe>
 
@@ -114,9 +99,11 @@ export default {
             </div>
             <div class="mt-10">
                 <div v-viewer="options" class="images md:grid">
-                    <div v-for="(image, index) in images">
-                        <img class="image cursor-pointer w-full" :key="index" :src="image.thumbnail" :data-src="image.image"
-                            :alt="image.title">
+                    <div class="relative" v-for="(image, index) in images">
+                        <div class="image cursor-pointer h-56 bg-cover bg-center"
+                            :style="{ 'background-image': `url(${image.url})` }" :key="index">
+                            <img class="opacity-0" :src="image.url" :alt="`${tour.tourname} - ${index}`" />
+                        </div>
                     </div>
                 </div>
             </div>
