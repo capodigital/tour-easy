@@ -205,7 +205,7 @@ export default {
             })
         },
         openPicker() {
-            if(this.preview == null) {
+            if (this.preview == null) {
                 this.$el.querySelector('#tour-image').click()
             }
         }
@@ -359,19 +359,25 @@ export default {
                 <div v-viewer="options" class="images md:grid">
                     <div class="relative" v-for="(image, index) in images">
                         <button @click="remove(index)"
-                            class="absolute bg-transparent border-none focus:outline-none text-white top-1 right-1"><i
+                            class="absolute bg-transparent border-none z-50 focus:outline-none text-white top-1 right-1"><i
                                 class="bi bi-trash"></i></button>
-                        <img class="image cursor-pointer w-full" :key="index" :src="image.url"
-                            :alt="`${tour.tourname} - ${index}`">
+                        <div class="image cursor-pointer h-56 bg-cover bg-center"
+                            :style="{ 'background-image': `url(${image.url})` }" :key="index">
+                            <img class="opacity-0" :src="image.url" :alt="`${tour.tourname} - ${index}`" />
+                        </div>
+
                     </div>
                     <form @submit.prevent="saveImage">
                         <input type="file" @change="updatePreview" class="hidden" id="tour-image" name="image" />
                         <input type="hidden" name="tour_id" :value="tour.id" />
                         <div @click="openPicker" :class="{ 'border-2': preview == null }"
-                            class="relative border-gray-500 h-full rounded cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
+                            class="relative border-gray-500 h-full rounded cursor-pointer border-dashed min-h-[14rem] flex justify-center items-center">
                             <i v-if="preview == null" class="bi bi-plus text-6xl text-gray-500"></i>
-                            <div v-else>
-                                <img :src="preview" />
+                            <div class="h-56 w-full bg-cover" v-else :style="{ 'background-image': `url(${preview})` }">
+                                <!-- <img :src="preview" /> -->
+                                <button @click="preview = null"
+                                    class="absolute bg-transparent border-none z-50 focus:outline-none text-white top-1 right-1"><i
+                                        class="bi bi-trash"></i></button>
                                 <div
                                     class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
                                     <button class="text-white text-4xl opacity-75 hover:opacity-100" type="submit"><i
