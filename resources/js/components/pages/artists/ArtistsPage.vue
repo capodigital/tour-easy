@@ -32,7 +32,6 @@ export default {
                 document.type = document.url == null ? 'local' : 'link'
                 this.files.push(document)
             }
-            console.log(this.artist.tags)
             this.tags = this.artist.tags
             this.preview = item.image
             this.show = true

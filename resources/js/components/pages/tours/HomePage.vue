@@ -10,18 +10,6 @@ export default {
             tour: {},
             artists: [],
             agencies: [],
-            socialtypes: [
-                { "id": "1", "name": "Facebook" },
-                { "id": "2", "name": "Twitter" },
-                { "id": "3", "name": "Instagram" },
-                { "id": "4", "name": "Tiktok" },
-                { "id": "5", "name": "Spotify" },
-                { "id": "6", "name": "Youtube" },
-                { "id": "7", "name": "AppleMusic" },
-                { "id": "8", "name": "AmazonMusic" },
-                { "id": "9", "name": "Tindal" },
-                { "id": "10", "name": "Web" }
-            ],
             socialmedias: [{}],
             files: [{ type: 'link' }],
             preview: 'src/cartel-placeholder.jpeg',
@@ -99,7 +87,7 @@ export default {
             }
         }
     },
-    mounted() {
+    created() {
         axios.get('api/tours', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -124,6 +112,15 @@ export default {
             }
         }).then((response) => {
             this.artists = response.data.data
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        })
+        axios.get('api/typeredes', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.socialtypes = response.data.data
         }).catch((error) => {
             this.Utils.error(error.response)
         })

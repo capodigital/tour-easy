@@ -9,6 +9,8 @@ export default {
             tickets: [],
             currencies: [],
             itineraries: [],
+            tours: [],
+            tour_id: 1,
             ticket: {},
             show: false
         };
@@ -19,6 +21,8 @@ export default {
             this.show = true
         },
         edit(item) {
+            this.tour_id = item.tour_id
+            this.setItineraries(item.tour_id)
             Object.assign(this.ticket, item)
             this.show = true
         },
@@ -63,8 +67,17 @@ export default {
                 this.Utils.error(error.response)
             })
         },
+        setItineraries(id) {
+            axios.post('api/itineraries/tour', { id: id }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.itineraries = response.data.data
+            })
+        }
     },
-    mounted() {
+    created() {
         axios.get('api/tickets', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -74,12 +87,14 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         })
-        axios.get('api/itineraries', {
+        axios.get('api/tours', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
-            this.itineraries = response.data.data
+            this.tours = response.data.data
+            if (this.tours.length > 0)
+                this.setItineraries(this.tours[0].id)
         }).catch((error) => {
             this.Utils.error(error.response)
         })
@@ -123,15 +138,28 @@ export default {
                 </h1>
                 <form @submit.prevent="send"
                     class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Itinerario</label>
-                        <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select v-model="ticket.itinerary_id" name="itinerary_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="itinerary in itineraries" :value="itinerary.id">
-                                    {{ itinerary.name }} ({{ itinerary.tour.tourname }})
-                                </option>
-                            </select>
+                    <div class="grid grid-cols-2 gap-x-2 mb-3">
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Gira</label>
+                            <div class="flex items-center rounded border border-gray-300 px-2">
+                                <select @change="(e) => setItineraries(e.target.value)" v-model="tour_id"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    <option class="text-black" v-for="item in tours" :value="item.id">
+                                        {{ item.tourname }} ({{ item.artist.stagename }})
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-slate-200 text-xs font-semibold">Itinerario</label>
+                            <div class="flex items-center rounded border border-gray-300 px-2">
+                                <select v-model="ticket.itinerary_id" name="itinerary_id"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                    <option class="text-black" v-for="itinerary in itineraries" :value="itinerary.id">
+                                        {{ itinerary.startdate }} - {{ itinerary.name }}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-x-2">
