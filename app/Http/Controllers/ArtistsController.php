@@ -70,8 +70,11 @@ class ArtistsController extends Controller
 
         ]);
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id']);
+        if(!$request->has('agency_id')) {
+            $data['agency_id'] = $request->user()->id;
+        }
         $data['password'] = bcrypt($request->password);
-       
+
         $image = $request->file('image')->store('documents', 'src');
         $data['image'] = "src/$image";
 

@@ -6,26 +6,9 @@ export default {
         return {
             artists: [],
             artist: {},
-            types: [
-                { "id": "1", "description": "Artista" },
-                { "id": "2", "description": "Manager" },
-                { "id": "3", "description": "Promotor" },
-                { "id": "4", "description": "Chofer" },
-                { "id": "5", "description": "Crew" },
-                { "id": "6", "description": "Tech" }
-            ],
-            socialtypes: [
-                { "id": "1", "name": "Facebook" },
-                { "id": "2", "name": "Twitter" },
-                { "id": "3", "name": "Instagram" },
-                { "id": "4", "name": "Tiktok" },
-                { "id": "5", "name": "Spotify" },
-                { "id": "6", "name": "Youtube" },
-                { "id": "7", "name": "AppleMusic" },
-                { "id": "8", "name": "AmazonMusic" },
-                { "id": "9", "name": "Tindal" },
-                { "id": "10", "name": "Web" }
-            ],
+            agencies: [],
+            types: [],
+            socialtypes: [],
             socialmedias: [{}],
             tags: [],
             files: [{ type: 'link' }],
@@ -49,6 +32,8 @@ export default {
                 document.type = document.url == null ? 'local' : 'link'
                 this.files.push(document)
             }
+            console.log(this.artist.tags)
+            this.tags = this.artist.tags
             this.preview = item.image
             this.show = true
         },
@@ -111,6 +96,10 @@ export default {
                 e.preventDefault()
                 this.tags.push(e.target.value)
                 e.target.value = ''
+            } else if (e.key == "Backspace") {
+                if (e.target.value == '') {
+                    this.tags.pop();
+                }
             }
         },
         removeDocument(index) {
@@ -136,7 +125,27 @@ export default {
         }).then((response) => {
             this.artists = response.data.data;
         });
-
+        axios.get('api/agencies', {
+            headers: {
+                Authorization: `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.agencies = response.data.data;
+        });
+        axios.get('api/typeredes', {
+            headers: {
+                Authorization: `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.socialtypes = response.data.data;
+        });
+        axios.get('api/typecontacts', {
+            headers: {
+                Authorization: `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.types = response.data.data;
+        });
     },
     components: { ArtistsItem }
 }
@@ -171,10 +180,23 @@ export default {
                     <input @change="updatePreview" type="file" class="hidden" name="image"
                         :required="artist.id == undefined" />
                     <div class="grid grid-cols-2 gap-2">
-                        <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
-                            class="rounded-full w-52 h-52 cursor-pointer" />
+                        <div class="flex items-center justify-center">
+                            <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
+                                class="rounded-full w-52 h-52 cursor-pointer" />
+                        </div>
 
                         <div class="grid grid-cols-1 gap-x-2">
+                            <div v-if="Utils.role() != 'agency' && artist.id == undefined">
+                                <label class="text-slate-200 text-xs font-semibold">Agencia</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <select v-model="artist.agency_id" name="agency_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="item in agencies" :value="item.id">{{
+                                            item.taxname
+                                        }}</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
                                 <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
@@ -308,7 +330,8 @@ export default {
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </template>
 
-                                    <button @click="removeDocument(index)" type="button" class="text-white"><i class="bi bi-trash"></i></button>
+                                    <button @click="removeDocument(index)" type="button" class="text-white"><i
+                                            class="bi bi-trash"></i></button>
                                 </div>
                             </template>
                         </div>
