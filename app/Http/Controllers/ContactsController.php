@@ -44,8 +44,9 @@ class ContactsController extends Controller
             'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id', 'agency_id'
         ]);
 
-        // $data['agency_id'] = $request->user()->id;
-        // $data['agency_id'] = 1;
+        if(!$request->has('agency_id')) {
+            $data['agency_id'] = $request->user()->id;
+        }
         //Almacenar los datos en la base de datos
         $contact = Contacts::create($data);
 
@@ -127,7 +128,7 @@ class ContactsController extends Controller
 
         $data = $request->only([
             'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
-            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id', 'agency_id'
+            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
         ]);
 
         //Almacenar los datos en la base de datos

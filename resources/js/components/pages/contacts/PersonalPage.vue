@@ -7,26 +7,7 @@ export default {
         return {
             contacts: [],
             contact: {},
-            types: [
-                { "id": "1", "description": "Artista" },
-                { "id": "2", "description": "Manager" },
-                { "id": "3", "description": "Promotor" },
-                { "id": "4", "description": "Chofer" },
-                { "id": "5", "description": "Crew" },
-                { "id": "6", "description": "Tech" }
-            ],
-            socialtypes: [
-                { "id": "1", "name": "Facebook" },
-                { "id": "2", "name": "Twitter" },
-                { "id": "3", "name": "Instagram" },
-                { "id": "4", "name": "Tiktok" },
-                { "id": "5", "name": "Spotify" },
-                { "id": "6", "name": "Youtube" },
-                { "id": "7", "name": "AppleMusic" },
-                { "id": "8", "name": "AmazonMusic" },
-                { "id": "9", "name": "Tindal" },
-                { "id": "10", "name": "Web" }
-            ],
+            agencies: [],
             countries: [],
             cities: [],
             country_id: 'AF',
@@ -135,6 +116,15 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         });
+        axios.get('api/agencies', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.agencies = response.data.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        });
         axios.get('api/countries', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -142,6 +132,24 @@ export default {
         }).then((response) => {
             this.countries = response.data.data;
             this.setCities(this.countries[0].code)
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        });
+        axios.get('api/typecontacts', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.types = response.data.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        });
+        axios.get('api/typeredes', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.socialtypes = response.data.data;
         }).catch((error) => {
             this.Utils.error(error.response)
         });
@@ -191,6 +199,17 @@ export default {
                 </h1>
                 <form @submit.prevent="send"
                     class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
+                    <div v-if="Utils.role() != 'agency' && contact.id == undefined">
+                        <label class="text-slate-200 text-xs font-semibold">Agencia</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <select v-model="contact.agency_id" name="agency_id"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                <option class="text-black" v-for="item in agencies" :value="item.id">{{
+                                    item.taxname
+                                }}</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="grid grid-cols-2 gap-x-2">
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
