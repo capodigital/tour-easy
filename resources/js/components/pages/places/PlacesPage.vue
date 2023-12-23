@@ -72,6 +72,8 @@ export default {
                         break
                     }
                 }
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         },
         send(e) {

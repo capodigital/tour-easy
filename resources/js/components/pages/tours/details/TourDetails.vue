@@ -20,7 +20,10 @@ export default {
             countries: [],
             cities: [],
             places: [],
+            show_images: false,
+            images: [],
             show: false,
+            preview: null
         };
     },
     components: { TourActivity, ActivityDetails },
@@ -43,13 +46,20 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/itineraries/' + item.id, { _method: 'delete' }).then((response) => {
+            axios.post('api/itineraries/' + item.id, { _method: 'delete' }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
                 for (let i in this.activities) {
                     if (this.activities[i].id == item.id) {
+                        this.Utils.notify('Se eliminó la actividad correctamente');
                         this.activities.splice(i, 1)
                         break
                     }
                 }
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         },
         send(e) {
@@ -61,17 +71,21 @@ export default {
                 }
             }).then((response) => {
                 if (this.activity.id == undefined) {
+                    this.Utils.notify('Se ha creado la actividad correctamente');
                     this.activities.push(this.getActivityData(response.data.data))
                 } else {
                     for (let i in this.activities) {
                         if (this.activities[i].id == this.activity.id) {
                             this.activities[i] = this.getActivityData(response.data.data)
+                            this.Utils.notify('Se ha actualizado la actividad correctamente')
                             break
                         }
                     }
                 }
                 this.activity = { tour_id: this.tour.id }
                 this.show = false
+            }).catch((error) => {
+                this.Utils.error(error.response)
             })
         },
         getActivityData(activity) {
@@ -155,6 +169,40 @@ export default {
                 default:
                     return false
             }
+        },
+        remove(index) {
+            axios.post('api/photos/' + this.images[index].id, { _method: 'delete' }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.images.splice(index, 1)
+                this.Utils.notify('Se eliminó la imagen correctamente');
+            }).catch((error) => {
+                this.Utils.error(error.response)
+            })
+        },
+        updatePreview(e) {
+            const files = e.target.files
+            if (files && files.length) {
+                this.preview = URL.createObjectURL(files[0])
+            } else {
+                this.preview = null
+            }
+        },
+        saveImage(e) {
+            const data = new FormData(e.target)
+            axios.post('api/photos', data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.preview = null
+                this.images.push(response.data.data)
+                this.Utils.notify('Se subió la imagen correctamente')
+            }).catch((error) => {
+                this.Utils.error(error.response)
+            })
         }
     },
     created() {
@@ -167,6 +215,13 @@ export default {
             for (let activity of response.data.data) {
                 this.activities.push(this.getActivityData(activity))
             }
+        })
+        axios.post('api/photos/tour', { id: id }, {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.images = response.data.data
         })
         axios.post('api/tour', { id: id }, {
             headers: {
@@ -225,6 +280,11 @@ export default {
     <section>
         <div class="tour-images">
             <div class="stage bg-cover bg-no-repeat">
+                <div class="absolute top-2 right-2">
+                    <button @click="show_images = true"
+                        class="rounded text-white text-sm z-50 border border-white px-2 py-1 hover:bg-white hover:text-black transition-all">Ver
+                        imágenes</button>
+                </div>
                 <div class="absolute bottom-0 left-0 flex justify-center items-end z-30 w-full pb-3 md:pb-10">
                     <div class="text-center">
                         <h1
@@ -280,8 +340,45 @@ export default {
                 <i class="bi bi-plus text-6xl text-gray-500"></i>
             </article>
         </div>
+        <div v-if="show_images"
+            class="w-full bg-white bg-opacity-90 h-screen absolute left-0 top-0 px-2 py-2 flex justify-center items-center">
+            <div class="images-modal overflow-auto scroll">
+                <div class="flex items-center">
+                    <h1
+                        class="font-bold bg-gradient-to-tr w-full  from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                        IMÁGENES DE LA GIRA
+                    </h1>
+                    <button @click="show_images = false" class="bg-slate-800 text-white rounded px-2 py-1">Cerrar</button>
+                </div>
+
+                <div v-viewer="options" class="images md:grid">
+                    <div class="relative" v-for="(image, index) in images">
+                        <button @click="remove(index)"
+                            class="absolute bg-transparent border-none focus:outline-none text-white top-1 right-1"><i
+                                class="bi bi-trash"></i></button>
+                        <img class="image cursor-pointer w-full" :key="index" :src="image.url"
+                            :alt="`${tour.tourname} - ${index}`">
+                    </div>
+                    <form @submit.prevent="saveImage">
+                        <input type="file" @change="updatePreview" class="hidden" id="tour-image" name="image" />
+                        <div @click="$el.querySelector('#tour-image').click()" :class="{ 'border-2': preview == null }"
+                            class="relative border-gray-500 rounded cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
+                            <i v-if="preview == null" class="bi bi-plus text-6xl text-gray-500"></i>
+                            <div v-else>
+                                <img :src="preview" />
+                                <div
+                                    class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+                                    <button class="text-white text-4xl opacity-75 hover:opacity-100" type="submit"><i
+                                            class="bi bi-upload"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div v-if="show"
-            class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute top-0 px-2 py-2 flex justify-center items-center">
+            class="w-full bg-white bg-opacity-90 h-screen md:h-auto absolute left-0 top-0 px-2 py-2 flex justify-center items-center">
             <div>
                 <h1
                     class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
@@ -356,7 +453,7 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="activity.startdate" name="startdate" type="date"
+                                <input v-model="activity.startdate" name="startdate" type="datetime"
                                     placeholder="Fecha de inicio"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                             </div>
@@ -365,7 +462,7 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input v-model="activity.enddate" name="enddate" type="date" placeholder="Fecha de fin"
+                                <input v-model="activity.enddate" name="enddate" type="datetime" placeholder="Fecha de fin"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
@@ -490,7 +587,13 @@ h1 {
     left: 0;
 }
 
-form {
-    max-height: calc(100vh - 7.5rem);
+form,
+.images-modal {
+    max-height: calc(100vh - 8rem);
+}
+
+.images {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1px;
 }
 </style>
