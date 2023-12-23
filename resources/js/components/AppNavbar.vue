@@ -11,13 +11,16 @@ export default {
             }).then(() => {
                 location.href = "#login"
             })
+        },
+        home() {
+            location.href = '#home'
         }
     }
 }
 </script>
 <template>
     <nav class="w-screen h-16 flex justify-between items-center shadow-lg shadow-gray-300 bg-white">
-        <div class="px-2">
+        <div @click="home" class="px-2 cursor-pointer">
             <img src="src/logo.svg" class="h-12 w-12" />
         </div>
         <div class="relative p-2 text-center">
