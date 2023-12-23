@@ -17,6 +17,7 @@ class AgenciesResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        
         $city = Cities::find($this->city_id);
         $typeagency = Typeagencies::find($this->typeagency_id);
         return [

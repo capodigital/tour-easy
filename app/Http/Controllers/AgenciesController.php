@@ -38,7 +38,6 @@ class AgenciesController extends Controller
     }
     public function deleted()
     {
-
         $agencies = Agencies::onlyTrashed()->get();
         return AgenciesResource::collection($agencies);
     }
