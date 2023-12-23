@@ -31,15 +31,15 @@ class PhotosController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $data = $request->only(['tour_id']);
-       
+
         $image = $request->file('image')->store('photos', 'src');
-        $data['image'] = "src/$image";
+        $data['url'] = "src/$image";
 
         //Almacenar los datos en la base de datos
         $photo = Photos::create($data);
-        
+
 
         $photo->refresh();
         return new PhotosResource($photo);

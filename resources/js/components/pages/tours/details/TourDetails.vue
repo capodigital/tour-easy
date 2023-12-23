@@ -203,6 +203,11 @@ export default {
             }).catch((error) => {
                 this.Utils.error(error.response)
             })
+        },
+        openPicker() {
+            if(this.preview == null) {
+                this.$el.querySelector('#tour-image').click()
+            }
         }
     },
     created() {
@@ -361,8 +366,9 @@ export default {
                     </div>
                     <form @submit.prevent="saveImage">
                         <input type="file" @change="updatePreview" class="hidden" id="tour-image" name="image" />
-                        <div @click="$el.querySelector('#tour-image').click()" :class="{ 'border-2': preview == null }"
-                            class="relative border-gray-500 rounded cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
+                        <input type="hidden" name="tour_id" :value="tour.id" />
+                        <div @click="openPicker" :class="{ 'border-2': preview == null }"
+                            class="relative border-gray-500 h-full rounded cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
                             <i v-if="preview == null" class="bi bi-plus text-6xl text-gray-500"></i>
                             <div v-else>
                                 <img :src="preview" />
