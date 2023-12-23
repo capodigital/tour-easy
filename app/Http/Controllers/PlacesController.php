@@ -42,6 +42,9 @@ class PlacesController extends Controller
             'name', 'google_id', 'phone', 'extra_phone', 'manager', 'email',
             'gis', 'notes', 'address', 'typeplace_id', 'city_id', 'agency_id'
         ]);
+        if(!$request->has('agency_id')) {
+            $data['agency_id'] = $request->user()->id;
+        }
 
         //Almacenar los datos en la base de datos
         $place = Places::create($data);

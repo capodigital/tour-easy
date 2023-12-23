@@ -189,6 +189,17 @@ export default {
                 </h1>
                 <form @submit.prevent="send"
                     class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
+                    <div v-if="Utils.role() != 'agency' && place.id == undefined">
+                        <label class="text-slate-200 text-xs font-semibold">Agencia</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <select v-model="place.agency_id" name="agency_id"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                <option class="text-black" v-for="item in agencies" :value="item.id">{{
+                                    item.taxname
+                                }}</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="grid grid-cols-2 gap-x-2">
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Nombre del lugar</label>
