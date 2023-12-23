@@ -18,7 +18,7 @@ export default {
                     this.active = -1;
                     break;
                 case '#personal':
-                    this.active = 1;
+                    this.active = 3;
                     break;
                 case '#calendar':
                     this.active = -2;
@@ -27,7 +27,7 @@ export default {
                     this.active = 2;
                     break;
                 case '#tickets':
-                    this.active = 3;
+                    this.active = 1;
                     break;
                 case '#places':
                     this.active = -3;
@@ -89,15 +89,16 @@ export default {
                     <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
             </a>
-            <a class="transition-all px-3" @click="active = 1" href="#personal"
+            <a class="transition-all px-3" @click="active = 1" href="#tickets"
                 :class="{ 'text-gray-500': active != 1, 'text-black': active == 1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    :stroke="active == 1 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-users">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    :stroke="active == 1 ? '#000' : '#6b7280'" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-ticket">
+                    <path
+                        d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+                    <path d="M13 5v2" />
+                    <path d="M13 17v2" />
+                    <path d="M13 11v2" />
                 </svg>
             </a>
             <a class="transition-all px-3" @click="active = 2" href="#agencies"
@@ -118,18 +119,17 @@ export default {
                     <path d="M8 14h.01" />
                 </svg>
             </a>
-            <a v-if="Utils.role() != 'artist'" class="transition-all px-3" @click="active = 3" href="#tickets"
-                :class="{ 'text-gray-500': active != 3, 'text-black': active == 2 }">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    :stroke="active == 2 ? '#000' : '#6b7280'" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-ticket">
-                    <path
-                        d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
-                    <path d="M13 5v2" />
-                    <path d="M13 17v2" />
-                    <path d="M13 11v2" />
-                </svg>
-            </a>
+            <a v-if="Utils.role() != 'artist'" class="transition-all px-3" @click="active = 3" href="#personal"
+            :class="{ 'text-gray-500': active != 3, 'text-black': active == 3 }">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                :stroke="active == 3 ? '#000' : '#6b7280'" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="lucide lucide-users">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+        </a>
         </div>
         <div class="active-box h-10 w-full transition-all"
             :style="{ 'left': 'calc(50vw - 1.5rem + ' + active * 3 + 'rem)' }">
