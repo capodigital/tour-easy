@@ -55,7 +55,7 @@ export default {
         <div class="flex mt-4">
             <div class="flex w-full justify-between items-end">
                 <button
-                    :class="{ 'from-blue-500': activity.complete == 'No completado', 'to-blue-600': activity.complete == 'No completado', 'from-gray-400': activity.complete == 'No completado', 'to-gray-800': activity.complete == 'No completado', 'from-green-500': activity.complete == 'Completado', 'to-green-700': activity.complete == 'Completado' }"
+                    :class="{ 'from-blue-500': activity.complete == 'En progreso', 'to-blue-600': activity.complete == 'En progreso', 'from-gray-400': activity.complete == 'No completado', 'to-gray-800': activity.complete == 'No completado', 'from-green-500': activity.complete == 'Completado', 'to-green-700': activity.complete == 'Completado' }"
                     class="rounded-lg border px-3 h-9 overlay-button me-1 flex justify-center items-center bg-gradient-to-br text-white">
                     <svg v-if="activity.complete == 'Completado'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"

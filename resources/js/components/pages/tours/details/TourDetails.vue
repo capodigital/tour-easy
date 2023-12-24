@@ -70,6 +70,12 @@ export default {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then((response) => {
+                const item = response.data.data
+                if (item.place == null) {
+                    item.place = {
+                        name: '',
+                    }
+                }
                 if (this.activity.id == undefined) {
                     this.Utils.notify('Se ha creado la actividad correctamente');
                     this.activities.push(this.getActivityData(response.data.data))
@@ -85,6 +91,7 @@ export default {
                 this.activity = { tour_id: this.tour.id }
                 this.show = false
             }).catch((error) => {
+                console.log(error)
                 this.Utils.error(error.response)
             })
         },
@@ -114,11 +121,11 @@ export default {
                         date = `<br />${start}`;
                     break;
                 case 5:
-                    name = activity.name, description = `<b>Proveedor: </b>${activity.supplier.company_name}.<br /><b>Lugar: </b>${activity.place.name}`,
+                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
                 case 4:
-                    name = activity.place.name, description = `<b>Conductor: </b>${activity.carrier}`,
+                    name = activity.place.name, description = `<b>Conductor: </b>${activity.contact.name}`,
                         date = `<br />${start}`;
                     break;
                 case 6:
@@ -159,6 +166,8 @@ export default {
         place(place) {
             switch (this.activity.typeitinerary_id) {
                 case 1:
+                case 2:
+                case 3:
                     return place.typeplace_id == 1
                 case 5:
                     return place.typeplace_id == 2
@@ -285,17 +294,17 @@ export default {
     <section>
         <div class="tour-images">
             <div class="stage bg-cover bg-no-repeat">
-                <div class="absolute top-2 right-2">
-                    <button @click="show_images = true"
-                        class="rounded text-white text-sm z-50 border border-white px-2 py-1 hover:bg-white hover:text-black transition-all">Ver
-                        imágenes</button>
-                </div>
+
                 <div class="absolute bottom-0 left-0 flex justify-center items-end z-30 w-full pb-3 md:pb-10">
+
                     <div class="text-center">
                         <h1
                             class="md:text-4xl font-bold bg-gradient-to-tr from-slate-100 to-slate-300 text-xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                             {{ tour.tourname }}</h1>
                         <p class="text-2xl">{{ tour.artist.name }}</p>
+                        <button @click="show_images = true"
+                            class="rounded text-white text-sm z-50 border border-white px-2 py-1 hover:bg-white hover:text-black transition-all">Ver
+                            imágenes</button>
                     </div>
                 </div>
                 <div class="hero">
@@ -469,7 +478,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input v-model="activity.startdate" name="startdate" type="datetime"
+                                    <input v-model="activity.startdate" name="startdate" type="date"
                                         placeholder="Fecha de inicio"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                                 </div>
@@ -478,8 +487,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input v-model="activity.enddate" name="enddate" type="datetime"
-                                        placeholder="Fecha de fin"
+                                    <input v-model="activity.enddate" name="enddate" type="date" placeholder="Fecha de fin"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -508,7 +516,7 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        <template v-if="[6, 7].includes(activity.typeitinerary_id)">
+                        <template v-if="[6, 7, 8].includes(activity.typeitinerary_id)">
                             <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
                             <div class="grid grid-cols-2 gap-x-2">
                                 <div>
@@ -548,7 +556,7 @@ export default {
                                     </select>
                                 </div>
                             </div>
-                            <div v-if="[1, 5, 6, 7].includes(activity.typeitinerary_id)">
+                            <div v-if="[1, 2, 3, 5, 6, 7].includes(activity.typeitinerary_id)">
                                 <label class="text-slate-200 text-xs font-semibold">Lugar</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
                                     <select v-model="activity.place_id" name="place_id"
@@ -561,6 +569,17 @@ export default {
                                     </select>
                                 </div>
                             </div>
+                            <!-- <div v-if="activity.typeitinerary_id == 5">
+                                <label class="text-slate-200 text-xs font-semibold">Hotel</label>
+                                <div class="flex items-center rounded border border-gray-300 px-2">
+                                    <select v-model="activity.supplier_id" name="supplier_id"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <option class="text-black" v-for="item in suppliers" :value="item.id">{{
+                                            item.company_name
+                                        }}</option>
+                                    </select>
+                                </div>
+                            </div> -->
                         </div>
 
                         <div class="flex justify-center">

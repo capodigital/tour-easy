@@ -159,8 +159,10 @@ export default {
                         <input @change="updatePreview" type="file" class="hidden" name="tourcartel"
                             :required="tour.id == undefined" />
                         <label class="text-slate-200 text-xs font-semibold">Cartel de la gira</label>
-                        <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
-                            class="rounded mb-4 w-full h-auto cursor-pointer" />
+                        <div @click="$el.querySelector('[type=file]').click()" :style="{'background': `url(${preview})`}" class="w-full h-[15rem] cursor-pointer bg-cover bg-center">
+                            <!-- <img  id="preview" :src="preview"
+                                class="rounded mb-4 w-full h-auto cursor-pointer" /> -->
+                        </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Nombre de la gira</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
@@ -334,4 +336,5 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 7.5rem);
-}</style>
+}
+</style>
