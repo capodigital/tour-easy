@@ -286,3 +286,8 @@ select.select-dark {
         transform: translate3d(0, 0, 0);
     }
 }
+
+input[type="date"]::-webkit-inner-spin-button,
+::-webkit-calendar-picker-indicator {
+    filter: drop-shadow(16px 16px 20px rgb(255, 255, 255)) invert(100%);
+}
