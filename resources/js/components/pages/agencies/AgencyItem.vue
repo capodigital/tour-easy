@@ -117,7 +117,7 @@ export default {
                 </div>
             </div>
             <hr class="my-2 border-gray-500" />
-            <template v-if="Utils.role() == 'agency'">
+            <template v-if="Utils.role() == 'agency' && Utils.manager() == null">
                 <button type="button" @click="$emit('manageradd')" class="float-right text-sm text-black rounded px-1 py-0.5 bg-gray-200">Añadir</button>
                 <label class="text-sm text-white font-semibold">Administradores</label>
                 <div class="flex" v-for="user in agency.users">

@@ -15,16 +15,20 @@ export default {
                 if (response.data.user.stagename != undefined) {
                     localStorage.setItem('username', response.data.user.stagename)
                     localStorage.setItem('user_role', 'artist')
+                    localStorage.setItem('manager', null)
                 } else if (response.data.user.taxname != undefined) {
                     localStorage.setItem('username', response.data.user.taxname)
                     localStorage.setItem('user_role', 'agency')
+                    localStorage.setItem('manager', null)
                 } else {
                     if (response.data.user.agency_id != null) {
                         localStorage.setItem('username', response.data.user.agency.taxname)
                         localStorage.setItem('user_role', 'agency')
+                        localStorage.setItem('manager', response.data.user.name)
                     } else {
                         localStorage.setItem('username', response.data.user.name)
                         localStorage.setItem('user_role', 'user')
+                        localStorage.setItem('manager', null)
                     }
                 }
                 this.$emit('login')

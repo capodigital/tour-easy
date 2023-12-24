@@ -97,6 +97,10 @@ export default class Utils {
         return localStorage.getItem("user_role");
     }
 
+    static manager() {
+        return localStorage.getItem("manager");
+    }
+
     static user() {
         return JSON.parse(localStorage.getItem("user"));
     }
