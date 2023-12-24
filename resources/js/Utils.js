@@ -177,15 +177,28 @@ export default class Utils {
             return true;
         }
         for (let key of keys) {
-            if (item[key] != undefined && item[key] != null) {
-                if (
-                    item[key]
-                        .toString()
-                        .toLowerCase()
-                        .includes(value.toLowerCase())
-                ) {
-                    return true;
+            const separator = key.indexOf(".");
+            let compare = "";
+            if (separator > 0) {
+                const mainKey = key.substring(0, separator);
+                const subKey = key.substring(separator + 1);
+                if (item[mainKey] != null && item[mainKey] != undefined) {
+                    if (
+                        item[mainKey][subKey] != null &&
+                        item[mainKey][subKey] != undefined
+                    ) {
+                        compare = item[mainKey][subKey];
+                    }
                 }
+            } else {
+                if (item[key] != undefined && item[key] != null) {
+                    compare = item[key];
+                }
+            }
+            if (
+                compare.toString().toLowerCase().includes(value.toLowerCase())
+            ) {
+                return true;
             }
         }
         return false;

@@ -163,7 +163,7 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <template v-for="item in tours">
-                    <TourCard @edit="edit" @destroy="destroy" @complete="complete" :tour="item" v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes'], item, filter)" />
+                    <TourCard @edit="edit" @destroy="destroy" @complete="complete" :tour="item" v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter)" />
                 </template>
             </div>
         </div>

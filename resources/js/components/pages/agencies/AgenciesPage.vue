@@ -212,7 +212,7 @@ export default {
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">
                     <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
-                        @edit="edit" @destroy="destroy" :agency="item" v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes'], item, filter)" />
+                        @edit="edit" @destroy="destroy" :agency="item" v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />
                 </template>
 
 

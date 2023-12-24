@@ -170,7 +170,7 @@ export default {
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             <template v-for="item in artists">
-                <ArtistsItem @edit="edit" @destroy="destroy" :artist="item" v-if="Utils.filter(['name', 'lastname', 'stagename', 'email'], item, filter)" />
+                <ArtistsItem @edit="edit" @destroy="destroy" :artist="item" v-if="Utils.filter(['name', 'lastname', 'stagename', 'email', 'agency.tradename', 'agency.taxname'], item, filter)" />
             </template>
         </div>
         <transition name="bounce" mode="out-in">

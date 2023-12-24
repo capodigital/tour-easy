@@ -183,7 +183,7 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in places">
-                    <PlaceItem @edit="edit" @destroy="destroy" :place="item" v-if="Utils.filter(['name', 'email', 'phone', 'extra_phone', 'address', 'manager', 'notes'], item, filter)" />
+                    <PlaceItem @edit="edit" @destroy="destroy" :place="item" v-if="Utils.filter(['name', 'email', 'phone', 'extra_phone', 'address', 'manager', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typeplace.description'], item, filter)" />
                 </template>
             </div>
         </div>

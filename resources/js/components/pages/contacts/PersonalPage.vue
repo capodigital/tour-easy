@@ -190,7 +190,7 @@ export default {
                     </div>
                     <div class="container overflow-auto scroll">
                         <template v-for="item in contacts">
-                            <PersonalItem @edit="edit" @destroy="destroy"  :contact="item" v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes'], item, filter)" />
+                            <PersonalItem @edit="edit" @destroy="destroy"  :contact="item" v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typecontact.description'], item, filter)" />
                         </template>
                     </div>
                 </div>

@@ -131,7 +131,7 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <template v-for="item in tickets">
-                    <TicketItem @edit="edit" @destroy="destroy" :ticket="item" v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes'], item, filter)" />
+                    <TicketItem @edit="edit" @destroy="destroy" :ticket="item" v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes', 'itinerary.name'], item, filter)" />
                 </template>
             </div>
         </div>
