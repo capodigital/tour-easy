@@ -4,6 +4,7 @@ import ArtistsItem from './ArtistsItem.vue'
 export default {
     data() {
         return {
+            filter: '',
             artists: [],
             artist: {},
             agencies: [],
@@ -159,11 +160,18 @@ export default {
                 class="font-bold w-full bg-gradient-to-tr from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 ARTISTAS DE LA AGENCIA
             </h1>
+            <div class="flex items-center rounded border border-gray-400 px-2 me-2">
+                <i class="bi bi-funnel-fill text-gray-400"></i>
+                <input v-model="filter" type="text" placeholder="Escribe para filtrar"
+                    class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+            </div>
             <button v-if="Utils.role() != 'artist'" @click="add"
                 class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
-            <ArtistsItem @edit="edit" @destroy="destroy" :artist="artist" v-for="artist in artists" />
+            <template v-for="item in artists">
+                <ArtistsItem @edit="edit" @destroy="destroy" :artist="item" v-if="Utils.filter(['name', 'lastname', 'stagename', 'email'], item, filter)" />
+            </template>
         </div>
         <transition name="bounce" mode="out-in">
             <div v-if="show"

@@ -169,6 +169,25 @@ export default class Utils {
         button.classList.remove("items-center");
         button.classList.remove("justify-center");
         button.disabled = false;
-        button.querySelector('.spinner-border').remove();
+        button.querySelector(".spinner-border").remove();
+    }
+
+    static filter(keys, item, value) {
+        if (value == "") {
+            return true;
+        }
+        for (let key of keys) {
+            if (item[key] != undefined && item[key] != null) {
+                if (
+                    item[key]
+                        .toString()
+                        .toLowerCase()
+                        .includes(value.toLowerCase())
+                ) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

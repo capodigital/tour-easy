@@ -6,6 +6,7 @@ export default {
     components: { PlaceItem },
     data() {
         return {
+            filter: '',
             places: [],
             place: {},
             agencies: [],
@@ -171,11 +172,19 @@ export default {
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     LUGARES</h1>
+                <div></div>
+                <div class="flex items-center rounded border border-gray-400 px-2 me-2">
+                    <i class="bi bi-funnel-fill text-gray-400"></i>
+                    <input v-model="filter" type="text" placeholder="Escribe para filtrar"
+                        class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+                </div>
                 <button @click="add"
                     class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
-                <PlaceItem @edit="edit" @destroy="destroy" :place="item" v-for="item in places" />
+                <template v-for="item in places">
+                    <PlaceItem @edit="edit" @destroy="destroy" :place="item" v-if="Utils.filter(['name', 'email', 'phone', 'extra_phone', 'address', 'manager', 'notes'], item, filter)" />
+                </template>
             </div>
         </div>
         <transition name="bounce" mode="out-in">

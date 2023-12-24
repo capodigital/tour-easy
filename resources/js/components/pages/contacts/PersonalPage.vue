@@ -5,6 +5,7 @@ import PersonalItem from './PersonalItem.vue'
 export default {
     data() {
         return {
+            filter: '',
             contacts: [],
             contact: {},
             agencies: [],
@@ -179,11 +180,18 @@ export default {
                             class="font-bold w-full bg-gradient-to-tr from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                             PERSONAL DE LA AGENCIA
                         </h1>
+                        <div class="flex items-center rounded border border-gray-400 px-2 me-2">
+                            <i class="bi bi-funnel-fill text-gray-400"></i>
+                            <input v-model="filter" type="text" placeholder="Escribe para filtrar"
+                                class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+                        </div>
                         <button @click="add"
                             class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
                     </div>
                     <div class="container overflow-auto scroll">
-                        <PersonalItem @edit="edit" @destroy="destroy" v-for="contact in contacts" :contact="contact" />
+                        <template v-for="item in contacts">
+                            <PersonalItem @edit="edit" @destroy="destroy"  :contact="item" v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes'], item, filter)" />
+                        </template>
                     </div>
                 </div>
             </div>
@@ -434,4 +442,5 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 11.5rem);
-}</style>
+}
+</style>
