@@ -43,6 +43,7 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target)
+            this.Utils.lock(e.target)
             data.append('_method', this.ticket.id == undefined ? 'post' : 'put');
             axios.post(this.ticket.id == undefined ? 'api/tickets' : `api/tickets/${this.ticket.id}`, data, {
                 headers: {
@@ -63,7 +64,9 @@ export default {
                 }
                 this.ticket = {}
                 this.show = false
+                this.Utils.unlock(e.target)
             }).catch((error) => {
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             })
         },

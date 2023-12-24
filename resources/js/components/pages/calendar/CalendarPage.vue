@@ -57,6 +57,7 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target);
+            this.Utils.lock(e.target)
             axios.post('api/itineraries', data, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
@@ -67,7 +68,9 @@ export default {
                 this.activity = { tour_id: this.tour.id };
                 this.Utils.notify('Se ha creado correctamente la actividad')
                 this.show = false;
+                this.Utils.unlock(e.target)
             }).catch((error) => {
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             });
         },

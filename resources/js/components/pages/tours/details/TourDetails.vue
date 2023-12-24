@@ -64,6 +64,7 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target)
+            this.Utils.lock(e.target)
             data.append('_method', this.activity.id == undefined ? 'post' : 'put');
             axios.post(this.activity.id == undefined ? 'api/itineraries' : `api/itineraries/${this.activity.id}`, data, {
                 headers: {
@@ -90,8 +91,9 @@ export default {
                 }
                 this.activity = { tour_id: this.tour.id }
                 this.show = false
+                this.Utils.unlock(e.target)
             }).catch((error) => {
-                console.log(error)
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             })
         },

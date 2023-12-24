@@ -55,6 +55,7 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target)
+            this.Utils.lock(e.target)
             data.append('_method', this.artist.id == undefined ? 'post' : 'put');
             axios.post(this.artist.id == undefined ? 'api/artists' : `api/artists/${this.artist.id}`, data, {
                 headers: {
@@ -78,7 +79,9 @@ export default {
                 this.files = [{ type: 'link' }]
                 this.show = false
                 this.preview = 'src/user_placeholder.png'
+                this.Utils.unlock(e.target)
             }).catch((error) => {
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             })
         },

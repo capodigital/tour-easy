@@ -52,6 +52,7 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target)
+            this.Utils.lock(e.target)
             data.append('_method', this.tour.id == undefined ? 'post' : 'put');
             axios.post(this.tour.id == undefined ? 'api/tours' : `api/tours/${this.tour.id}`, data, {
                 headers: {
@@ -74,7 +75,9 @@ export default {
                 this.socialmedias = [{}]
                 this.files = [{ type: 'link' }]
                 this.show = false
+                this.Utils.unlock(e.target)
             }).catch((error) => {
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             })
         },

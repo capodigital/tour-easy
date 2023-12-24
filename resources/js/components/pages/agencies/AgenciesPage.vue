@@ -41,6 +41,7 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target)
+            this.Utils.lock(e.target)
             data.append('_method', this.agency.id == undefined ? 'post' : 'put');
             axios.post(this.agency.id == undefined ? 'api/agencies' : `api/agencies/${this.agency.id}`, data, {
                 headers: {
@@ -63,12 +64,15 @@ export default {
                 this.socialmedias = [{}]
                 this.files = [{ type: 'link' }]
                 this.show = false
+                this.Utils.unlock(e.target)
             }).catch((error) => {
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             })
         },
         manager(e) {
             const data = new FormData(e.target)
+            this.Utils.lock(e.target)
             data.append('_method', this.user.id == undefined ? 'post' : 'put');
             axios.post(this.user.id == undefined ? 'api/users' : `api/users/${this.user.id}`, data, {
                 headers: {
@@ -88,7 +92,9 @@ export default {
                 }
                 this.user = { show: false }
                 this.show = false
+                this.Utils.unlock(e.target)
             }).catch((error) => {
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             })
         },

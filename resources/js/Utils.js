@@ -150,4 +150,25 @@ export default class Utils {
         );
         alert.fire();
     }
+
+    static lock(form) {
+        const button = form.querySelector("[type=submit]");
+        button.classList.add("flex");
+        button.classList.add("items-center");
+        button.classList.add("justify-center");
+        button.disabled = true;
+        button.insertAdjacentHTML(
+            "afterbegin",
+            '<div class="spinner-border me-2" role="status"><span class="visually-hidden">Loading...</span></div>'
+        );
+    }
+
+    static unlock(form) {
+        const button = form.querySelector("[type=submit]");
+        button.classList.remove("flex");
+        button.classList.remove("items-center");
+        button.classList.remove("justify-center");
+        button.disabled = false;
+        button.querySelector('.spinner-border').remove();
+    }
 }

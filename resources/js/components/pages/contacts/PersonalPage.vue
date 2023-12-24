@@ -29,6 +29,7 @@ export default {
         },
         send(e) {
             const data = new FormData(e.target)
+            this.Utils.lock(e.target)
             data.append('notify', 0);
             data.append('_method', this.contact.id == undefined ? 'post' : 'put');
             axios.post(this.contact.id == undefined ? 'api/contacts' : `api/contacts/${this.contact.id}`, data, {
@@ -52,7 +53,9 @@ export default {
                 this.socialmedias = [{}]
                 this.files = [{ type: 'link' }]
                 this.show = false
+                this.Utils.unlock(e.target)
             }).catch((error) => {
+                this.Utils.unlock(e.target)
                 this.Utils.error(error.response)
             })
         },
@@ -177,7 +180,7 @@ export default {
                             PERSONAL DE LA AGENCIA
                         </h1>
                         <button @click="add"
-                            class="float-right sm:hidden bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
+                            class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
                     </div>
                     <div class="container overflow-auto scroll">
                         <PersonalItem @edit="edit" @destroy="destroy" v-for="contact in contacts" :contact="contact" />
@@ -404,7 +407,7 @@ export default {
                         </div>
                         <div class="flex justify-center">
                             <button type="button" @click="show = false"
-                                class="mt-8 me-2 md:hidden overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
                                 Cerrar
                             </button>
                             <button type="submit"
