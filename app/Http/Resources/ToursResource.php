@@ -34,6 +34,7 @@ class ToursResource extends JsonResource
             'agency_id' => $this->agency_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
             'documents' => DocumentsResource::collection($this->documents()->get()),
+            'active'=> $this->active
 
 
                            

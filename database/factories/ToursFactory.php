@@ -39,6 +39,7 @@ class ToursFactory extends Factory
                 return Artists::all()->random()->id;
             },
             'tourcartel' => fake()->unique()->randomElement($cartels),
+            'active'=>true
         ];
     }
 }

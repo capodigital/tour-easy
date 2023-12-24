@@ -16,7 +16,7 @@ class Tours extends Model
     use SoftDeletes;
     protected $fillable = [
         'tourname', 'startdate', 'enddate', 'tourcartel', 'agency_id', 'artist_id', 'notes',
-        'spotify_list', 'youtube_list'
+        'spotify_list', 'youtube_list', 'active'
     ];
 
     public function agency(): BelongsTo

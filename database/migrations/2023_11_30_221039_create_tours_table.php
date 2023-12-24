@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->string('spotify_list')->nullable();
             $table->string('youtube_list')->nullable();
+            $table->boolean('active')->default(true)->nullable();
             $table->softDeletes();
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
             $table->foreignId('artist_id')->nullable()->references('id')->on('artists')->onDelete('set null');
