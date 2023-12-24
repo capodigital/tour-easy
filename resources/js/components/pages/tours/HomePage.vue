@@ -50,6 +50,21 @@ export default {
                 }
             })
         },
+        complete(item) {
+            axios.post('api/tour/noactive', { id: item.id }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                for (let i in this.tours) {
+                    if (this.tours[i].id == item.id) {
+                        this.tours.splice(i, 1)
+                        this.Utils.notify('Se ha completado correctamente la gira')
+                        break
+                    }
+                }
+            })
+        },
         send(e) {
             const data = new FormData(e.target)
             this.Utils.lock(e.target)
@@ -141,7 +156,7 @@ export default {
                     class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
-                <TourCard @edit="edit" @destroy="destroy" :tour="tour" v-for="tour in tours" />
+                <TourCard @edit="edit" @destroy="destroy" @complete="complete" :tour="tour" v-for="tour in tours" />
             </div>
         </div>
         <transition name="bounce" mode="out-in">
@@ -162,7 +177,8 @@ export default {
                         <input @change="updatePreview" type="file" class="hidden" name="tourcartel"
                             :required="tour.id == undefined" />
                         <label class="text-slate-200 text-xs font-semibold">Cartel de la gira</label>
-                        <div @click="$el.querySelector('[type=file]').click()" :style="{'background': `url(${preview})`}" class="w-full h-[15rem] cursor-pointer bg-cover bg-center">
+                        <div @click="$el.querySelector('[type=file]').click()" :style="{ 'background': `url(${preview})` }"
+                            class="w-full h-[15rem] cursor-pointer bg-cover bg-center">
                             <!-- <img  id="preview" :src="preview"
                                 class="rounded mb-4 w-full h-auto cursor-pointer" /> -->
                         </div>

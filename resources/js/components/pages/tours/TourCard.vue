@@ -65,7 +65,8 @@ export default {
                         <path d="M12 21v-1" />
                     </svg>
                 </a>
-                <button v-if="Utils.role() != 'artist'" @click="$emit('edit', tour)" class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
+                <button v-if="Utils.role() != 'artist'" @click="$emit('edit', tour)"
+                    class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clipboard-edit">
@@ -75,7 +76,8 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button v-if="Utils.role() != 'artist'" @click="$emit('destroy', tour)" class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
+                <button v-if="Utils.role() != 'artist'" @click="$emit('destroy', tour)"
+                    class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-2">
@@ -84,6 +86,15 @@ export default {
                         <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
                         <line x1="10" x2="10" y1="11" y2="17" />
                         <line x1="14" x2="14" y1="11" y2="17" />
+                    </svg>
+                </button>
+                <button v-if="Utils.role() != 'artist' && !tour.active" @click="$emit('complete', tour)"
+                    class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-check-square">
+                        <path d="m9 11 3 3L22 4" />
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                     </svg>
                 </button>
             </div>
@@ -99,7 +110,7 @@ export default {
                     Detalles
                 </a>
             </div>
-        </div>
+    </div>
 </div></template>
 <style scoped>h3,
 p {
