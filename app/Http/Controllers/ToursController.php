@@ -24,11 +24,11 @@ class ToursController extends Controller
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
-                $tours = Agencies::find($user->agency_id)->tours()->get();
+                $tours = Agencies::find($user->agency_id)->tours()->where('active',true)->get();
             } else
             $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $tours = Agencies::find($request->user()->id)->tours()->get();
+            $tours = Agencies::find($request->user()->id)->tours()->where('active',true)->get();
         } else {
             $tours[] = Tours::find($request->user()->id);
         }
@@ -72,6 +72,7 @@ class ToursController extends Controller
         ]);
 
         $data['agency_id'] = $request->agency_id;
+        $data['active'] = true;
         $image = $request->file('tourcartel')->store('tours', 'src');
         $data['tourcartel'] = "src/$image";
 
@@ -163,6 +164,7 @@ class ToursController extends Controller
             $image = $request->file('tourcartel')->store('tours');
             $data['tourcartel'] = $image;
         }
+       
 
         //Almacenar los datos en la base de datos
         $tour->update($data);
@@ -253,6 +255,15 @@ class ToursController extends Controller
     {
         $tour = Tours::find($request->id);
 
+        return new ToursResource($tour);
+    }
+    public function noactive(Request $request)
+    {
+        $tour = Tours::find($request->id);
+
+        $tour->active=false;
+        $tour->save();
+        $tour->refresh();
         return new ToursResource($tour);
     }
     public function photos(Request $request)

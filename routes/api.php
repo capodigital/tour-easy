@@ -64,6 +64,7 @@ Route::resource('agencies', AgenciesController::class);
     Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
     Route::post('/tour', [ToursController::class, 'tour']);
     Route::post('/photos', [ToursController::class, 'photos']);
+    Route::post('/tour/noactive', [ToursController::class, 'noactive']);
 
     Route::resource('contacts', ContactsController::class);
     Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);
