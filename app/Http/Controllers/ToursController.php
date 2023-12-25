@@ -32,7 +32,7 @@ class ToursController extends Controller
         } else {
             $tours[] = Tours::find($request->user()->id);
         }
-        
+
         return ToursResource::collection($tours);
     }
     public function all()
@@ -71,7 +71,13 @@ class ToursController extends Controller
             'spotify_list', 'youtube_list'
         ]);
 
-        $data['agency_id'] = $request->agency_id;
+        if(!$request->has('agency_id')) {
+            if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+                $data['agency_id'] = $request->user()->agency_id;
+            } else {
+                $data['agency_id'] = $request->user()->id;
+            }
+        }
         $data['active'] = true;
         $image = $request->file('tourcartel')->store('tours', 'src');
         $data['tourcartel'] = "src/$image";
@@ -162,9 +168,9 @@ class ToursController extends Controller
             Storage::disk('src')->delete($tour->tourcartel);
             //Almacenar la nueva foto de perfil
             $image = $request->file('tourcartel')->store('tours');
-            $data['tourcartel'] = $image;
+            $data['tourcartel'] = "src/$image";
         }
-       
+
 
         //Almacenar los datos en la base de datos
         $tour->update($data);
@@ -240,7 +246,7 @@ class ToursController extends Controller
 
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
             $tours = Tours::all()->where('active',true)->sortBy('startdate');
-        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {     
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
             $tours = $agency->tours()->where('active',true)->get()->sortBy('startdate');
         } else {
             $artist = Artists::find($request->user()->id);
@@ -275,7 +281,7 @@ class ToursController extends Controller
             $photo1->url = "src/$image";
             $photo1->agency_id = $agency_id;
             $photo1->save();
-            
+
         }
     }
 }
