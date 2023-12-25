@@ -188,7 +188,7 @@ export default {
                         <button @click="add"
                             class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
                     </div>
-                    <div class="container overflow-auto scroll">
+                    <div class="container overflow-auto">
                         <template v-for="item in contacts">
                             <PersonalItem @edit="edit" @destroy="destroy"  :contact="item" v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typecontact.description'], item, filter)" />
                         </template>
@@ -210,7 +210,7 @@ export default {
                         </template>
                     </h1>
                     <form @submit.prevent="send"
-                        class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
+                        class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto">
                         <div v-if="Utils.role() != 'agency' && contact.id == undefined">
                             <label class="text-slate-200 text-xs font-semibold">Agencia</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
