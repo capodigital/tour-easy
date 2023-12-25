@@ -182,7 +182,7 @@ export default {
                     </h1>
                     <form @submit.prevent="send"
                         class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                        <input @change="updatePreview" type="file" class="hidden" name="tourcartel"
+                        <input required @change="updatePreview" type="file" class="hidden" name="tourcartel"
                             :required="tour.id == undefined" />
                         <label class="text-slate-200 text-xs font-semibold">Cartel de la gira</label>
                         <div @click="$el.querySelector('[type=file]').click()" :style="{ 'background': `url(${preview})` }"
@@ -194,14 +194,14 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">Nombre de la gira</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-envelope text-gray-100"></i>
-                                <input v-model="tour.tourname" name="tourname" type="text" placeholder="Nombre de la gira"
+                                <input required v-model="tour.tourname" name="tourname" type="text" placeholder="Nombre de la gira"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Descripción</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea rows="3" v-model="tour.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required rows="3" v-model="tour.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -209,7 +209,7 @@ export default {
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Agencia</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="tour.agency_id" name="agency_id"
+                                    <select required v-model="tour.agency_id" name="agency_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="agency in agencies" :value="agency.id">{{
                                             agency.taxname
@@ -220,7 +220,7 @@ export default {
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Artista</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="tour.artist_id" name="artist_id"
+                                    <select required v-model="tour.artist_id" name="artist_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="artist in artists" :value="artist.id">{{
                                             artist.stagename
@@ -234,7 +234,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input v-model="tour.startdate" name="startdate" type="date"
+                                    <input required v-model="tour.startdate" name="startdate" type="date"
                                         placeholder="Fecha de inicio"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                                 </div>
@@ -243,7 +243,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input v-model="tour.enddate" name="enddate" type="date" placeholder="Fecha de fin"
+                                    <input required v-model="tour.enddate" name="enddate" type="date" placeholder="Fecha de fin"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -253,14 +253,14 @@ export default {
                             <div>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-spotify text-gray-100"></i>
-                                    <input v-model="tour.spotify_list" name="spotify_list" type="text" placeholder="Spotify"
+                                    <input required v-model="tour.spotify_list" name="spotify_list" type="text" placeholder="Spotify"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
                             <div>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-youtube text-gray-100"></i>
-                                    <input v-model="tour.youtube_list" name="youtube_list" type="text" placeholder="Youtube"
+                                    <input required v-model="tour.youtube_list" name="youtube_list" type="text" placeholder="Youtube"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                                 </div>
                             </div>
@@ -273,7 +273,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2">
                                 <template v-for="(socialmedia, index) in socialmedias">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select v-model="socialmedia.typeredes_id"
+                                        <select required v-model="socialmedia.typeredes_id"
                                             :name="`socialmedias[${index}][typeredes_id]`"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
@@ -282,12 +282,12 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
+                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
                                             placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.description"
+                                        <input required v-model="socialmedia.description"
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -303,7 +303,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2">
                                 <template v-for="(file, index) in files">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select v-model="file.type"
+                                        <select required v-model="file.type"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" value="link">Google Drive</option>
                                             <option class="text-black" value="local">Local</option>
@@ -312,7 +312,7 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
                                                 type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input v-else v-model="file.url" type="text" placeholder="Link"
@@ -321,7 +321,7 @@ export default {
                                         </template>
 
                                         <template v-else>
-                                            <input v-if="file.id != undefined" v-model="file.name" type="text"
+                                            <input required v-if="file.id != undefined" v-model="file.name" type="text"
                                                 placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
                                                 readonly>

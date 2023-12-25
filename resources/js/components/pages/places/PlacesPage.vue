@@ -205,7 +205,7 @@ export default {
                         <div v-if="Utils.role() != 'agency' && place.id == undefined">
                             <label class="text-slate-200 text-xs font-semibold">Agencia</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <select v-model="place.agency_id" name="agency_id"
+                                <select required v-model="place.agency_id" name="agency_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="item in agencies" :value="item.id">{{
                                         item.taxname
@@ -218,7 +218,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Nombre del lugar</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-globe text-gray-100"></i>
-                                    <input v-model="place.name" name="name" type="text" placeholder="Nombre del lugar"
+                                    <input required v-model="place.name" name="name" type="text" placeholder="Nombre del lugar"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -226,7 +226,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Manager</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input v-model="place.manager" name="manager" type="text" placeholder="Manager"
+                                    <input required v-model="place.manager" name="manager" type="text" placeholder="Manager"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -236,7 +236,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Teléfono principal</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input v-model="place.phone" name="phone" type="tel" placeholder="Teléfono principal"
+                                    <input required v-model="place.phone" name="phone" type="tel" placeholder="Teléfono principal"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -244,7 +244,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Teléfono secundario</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input v-model="place.extra_phone" name="extra_phone" type="tel"
+                                    <input required v-model="place.extra_phone" name="extra_phone" type="tel"
                                         placeholder="Teléfono secundario"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -255,14 +255,14 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input v-model="place.email" name="email" type="email" placeholder="Correo electrónico"
+                                    <input required v-model="place.email" name="email" type="email" placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Tipo de lugar</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="place.typeplace_id" name="typeplace_id"
+                                    <select required v-model="place.typeplace_id" name="typeplace_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="type in types" :value="type.id">{{
                                             type.description
@@ -276,7 +276,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Link de Google Maps</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input v-model="place.google_id" name="google_id" type="text"
+                                    <input required v-model="place.google_id" name="google_id" type="text"
                                         placeholder="Link de Google Maps"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -285,7 +285,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Coordenadas</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input v-model="place.gis" name="gis" type="text" placeholder="Coordenadas"
+                                    <input required v-model="place.gis" name="gis" type="text" placeholder="Coordenadas"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -295,7 +295,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">País</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-globe text-gray-100"></i>
-                                    <select v-model="country_id" @change="(e) => setCities(e.target.value)"
+                                    <select required v-model="country_id" @change="(e) => setCities(e.target.value)"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="country in countries" :value="country.code">{{
                                             country.name }}</option>
@@ -306,7 +306,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-globe-americas text-gray-100"></i>
-                                    <select v-model="place.city_id" name="city_id"
+                                    <select required v-model="place.city_id" name="city_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
                                         </option>
@@ -317,14 +317,14 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Dirección</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea rows="3" v-model="place.address" name="address" placeholder="Dirección"
+                                <textarea required rows="3" v-model="place.address" name="address" placeholder="Dirección"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea rows="3" v-model="place.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required rows="3" v-model="place.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -336,7 +336,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2">
                                 <template v-for="(socialmedia, index) in socialmedias">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select v-model="socialmedia.typeredes_id"
+                                        <select required v-model="socialmedia.typeredes_id"
                                             :name="`socialmedias[${index}][typeredes_id]`"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
@@ -345,12 +345,12 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
+                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
                                             placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.description"
+                                        <input required v-model="socialmedia.description"
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -366,7 +366,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2">
                                 <template v-for="(file, index) in files">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select v-model="file.type"
+                                        <select required v-model="file.type"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" value="link">Google Drive</option>
                                             <option class="text-black" value="local">Local</option>
@@ -375,20 +375,20 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
                                                 type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                            <input v-else v-model="file.url" type="text" placeholder="Link"
+                                            <input required v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
                                                 readonly>
                                         </template>
 
                                         <template v-else>
-                                            <input v-if="file.id != undefined" v-model="file.name" type="text"
+                                            <input required v-if="file.id != undefined" v-model="file.name" type="text"
                                                 placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
                                                 readonly>
-                                            <input v-else :name="`documents[${index}]`" type="file"
+                                            <input required v-else :name="`documents[${index}]`" type="file"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         </template>
 

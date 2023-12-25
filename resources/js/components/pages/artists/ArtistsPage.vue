@@ -200,7 +200,7 @@ export default {
                                 <div v-if="Utils.role() != 'agency' && artist.id == undefined">
                                     <label class="text-slate-200 text-xs font-semibold">Agencia</label>
                                     <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                        <select v-model="artist.agency_id" name="agency_id"
+                                        <select required v-model="artist.agency_id" name="agency_id"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" v-for="item in agencies" :value="item.id">{{
                                                 item.taxname
@@ -212,7 +212,7 @@ export default {
                                     <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
                                     <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                         <i class="bi bi-person text-gray-100"></i>
-                                        <input v-model="artist.name" name="name" type="text" placeholder="Nombre(s)"
+                                        <input required v-model="artist.name" name="name" type="text" placeholder="Nombre(s)"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                 </div>
@@ -220,7 +220,7 @@ export default {
                                     <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                                     <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                         <i class="bi bi-person text-gray-100"></i>
-                                        <input v-model="artist.lastname" name="lastname" type="text" placeholder="Apellidos"
+                                        <input required v-model="artist.lastname" name="lastname" type="text" placeholder="Apellidos"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                 </div>
@@ -228,7 +228,7 @@ export default {
                                     <label class="text-slate-200 text-xs font-semibold">Nombre artístico</label>
                                     <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                         <i class="bi bi-mic-fill text-gray-100"></i>
-                                        <input v-model="artist.stagename" name="stagename" type="text"
+                                        <input required v-model="artist.stagename" name="stagename" type="text"
                                             placeholder="Nombre artístico"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
@@ -240,7 +240,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input v-model="artist.email" name="email" type="email" placeholder="Correo electrónico"
+                                    <input required v-model="artist.email" name="email" type="email" placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -248,7 +248,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de nacimiento</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input v-model="artist.birthday" name="birthday" type="date"
+                                    <input required v-model="artist.birthday" name="birthday" type="date"
                                         placeholder="Fecha de nacimiento"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                                 </div>
@@ -259,7 +259,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input name="password" type="password" placeholder="Contraseña"
+                                    <input required name="password" type="password" placeholder="Contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -267,7 +267,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input name="confirm_password" type="password" placeholder="Confirmar contraseña"
+                                    <input required name="confirm_password" type="password" placeholder="Confirmar contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -275,7 +275,7 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea v-model="artist.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required v-model="artist.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -287,7 +287,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2">
                                 <template v-for="(socialmedia, index) in socialmedias">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select v-model="socialmedia.typeredes_id"
+                                        <select required v-model="socialmedia.typeredes_id"
                                             :name="`socialmedias[${index}][typeredes_id]`"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
@@ -296,12 +296,12 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
+                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
                                             placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.description"
+                                        <input required v-model="socialmedia.description"
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -317,7 +317,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2 mb-2">
                                 <template v-for="(file, index) in files">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select v-model="file.type"
+                                        <select required v-model="file.type"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" value="link">Google Drive</option>
                                             <option class="text-black" value="local">Local</option>
@@ -326,16 +326,16 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
                                                 type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                            <input v-else v-model="file.url" type="text" placeholder="Link"
+                                            <input required v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
                                                 readonly>
                                         </template>
 
                                         <template v-else>
-                                            <input v-if="file.id != undefined" v-model="file.name" type="text"
+                                            <input required v-if="file.id != undefined" v-model="file.name" type="text"
                                                 placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
                                                 readonly>
@@ -353,7 +353,7 @@ export default {
                                 <span @click="tags.splice(index, 1)" v-for="(tag, index) in tags"
                                     class="text-sm cursor-pointer me-1 text-black bg-gray-300 rounded px-2 py-1">{{ tag }}
                                     <i class="bi bi-x"></i></span>
-                                <input @keydown="addTag"
+                                <input required @keydown="addTag"
                                     class="bg-transparent text-gray-300 focus:outline-none outline-none border-none" />
                             </div>
                         </div>

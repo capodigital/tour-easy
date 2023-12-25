@@ -154,7 +154,7 @@ export default {
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Gira</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select @change="(e) => setItineraries(e.target.value)" v-model="tour_id"
+                                    <select required @change="(e) => setItineraries(e.target.value)" v-model="tour_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="item in tours" :value="item.id">
                                             {{ item.tourname }} ({{ item.artist.stagename }})
@@ -165,7 +165,7 @@ export default {
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Itinerario</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="ticket.itinerary_id" name="itinerary_id"
+                                    <select required v-model="ticket.itinerary_id" name="itinerary_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="itinerary in itineraries" :value="itinerary.id">
                                             {{ itinerary.startdate }} - {{ itinerary.name }}
@@ -179,7 +179,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input v-model="ticket.name" name="name" type="text" placeholder="Nombre(s)"
+                                    <input required v-model="ticket.name" name="name" type="text" placeholder="Nombre(s)"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -187,7 +187,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input v-model="ticket.lastname" name="lastname" type="text" placeholder="Apellidos"
+                                    <input required v-model="ticket.lastname" name="lastname" type="text" placeholder="Apellidos"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -197,7 +197,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input v-model="ticket.email" name="email" type="email" placeholder="Correo electrónico"
+                                    <input required v-model="ticket.email" name="email" type="email" placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -205,7 +205,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Billetera electrónica</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-wallet text-gray-100"></i>
-                                    <input v-model="ticket.wallet" name="wallet" type="text"
+                                    <input required v-model="ticket.wallet" name="wallet" type="text"
                                         placeholder="Billetera electrónica"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -215,7 +215,7 @@ export default {
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Moneda</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
-                                    <select v-model="ticket.chain" name="chain"
+                                    <select required v-model="ticket.chain" name="chain"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="currency in currencies"
                                             :value="`${currency.currency} (${currency.abbreviation})`">
@@ -228,7 +228,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Monto total</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-cash text-gray-100"></i>
-                                    <input v-model="ticket.amount" name="amount" type="text" placeholder="Monto total"
+                                    <input required v-model="ticket.amount" name="amount" type="text" placeholder="Monto total"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -236,7 +236,7 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Descripción</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea rows="3" v-model="ticket.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required rows="3" v-model="ticket.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
