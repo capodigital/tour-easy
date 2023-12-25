@@ -14,7 +14,8 @@ export default {
             socialmedias: [{}],
             files: [{ type: 'link' }],
             preview: 'src/cartel-placeholder.jpeg',
-            show: false
+            show: false,
+            active: 0,
         };
     },
     methods: {
@@ -59,7 +60,8 @@ export default {
             }).then((response) => {
                 for (let i in this.tours) {
                     if (this.tours[i].id == item.id) {
-                        this.tours.splice(i, 1)
+                        // this.tours.splice(i, 1)
+                        this.tours[i].active = 1;
                         this.Utils.notify('Se ha completado correctamente la gira')
                         break
                     }
@@ -152,7 +154,14 @@ export default {
             <div class="flex">
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
-                    GIRAS ACTIVAS</h1>
+                    GIRAS</h1>
+                <div class="form-check items-center">
+                    <input required aria-label="Ver giras terminadas" @change="(e) => active = e.target.checked ? 1 : 0"
+                        class="form-check-input me-0.5" type="checkbox" />
+                    <label class="form-check-label leading-4 text-sm text-center">
+                        Ver giras terminadas
+                    </label>
+                </div>
                 <div class="flex items-center rounded border border-gray-400 px-2 me-2">
                     <i class="bi bi-funnel-fill text-gray-400"></i>
                     <input v-model="filter" type="text" placeholder="Escribe para filtrar"
@@ -164,7 +173,7 @@ export default {
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <template v-for="item in tours">
                     <TourCard @edit="edit" @destroy="destroy" @complete="complete" :tour="item"
-                        v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter)" />
+                        v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && item.active == active" />
                 </template>
             </div>
         </div>
@@ -367,4 +376,5 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 7.5rem);
-}</style>
+}
+</style>

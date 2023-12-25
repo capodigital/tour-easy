@@ -24,11 +24,11 @@ class ToursController extends Controller
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
-                $tours = Agencies::find($user->agency_id)->tours()->where('active',true)->get()->sortBy('startdate');
+                $tours = Agencies::find($user->agency_id)->tours()->get()->sortBy('startdate');
             } else
             $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $tours = Agencies::find($request->user()->id)->tours()->where('active',true)->get()->sortBy('startdate');
+            $tours = Agencies::find($request->user()->id)->tours()->get()->sortBy('startdate');
         } else {
             $tours[] = Tours::find($request->user()->id);
         }
@@ -245,12 +245,12 @@ class ToursController extends Controller
         $agency = Agencies::find($request->id);
 
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
-            $tours = Tours::all()->where('active',true)->sortBy('startdate');
+            $tours = Tours::all()->sortBy('startdate');
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $tours = $agency->tours()->where('active',true)->get()->sortBy('startdate');
+            $tours = $agency->tours()->get()->sortBy('startdate');
         } else {
             $artist = Artists::find($request->user()->id);
-            $tours = $artist->tours()->where('active',true)->get()->sortBy('startdate');
+            $tours = $artist->tours()->get()->sortBy('startdate');
         }
 
 
@@ -267,7 +267,7 @@ class ToursController extends Controller
     {
         $tour = Tours::find($request->id);
 
-        $tour->active=false;
+        $tour->active = true;
         $tour->save();
         $tour->refresh();
         return new ToursResource($tour);

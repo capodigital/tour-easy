@@ -14,7 +14,8 @@ export default {
             tags: [],
             files: [{ type: 'link' }],
             preview: 'src/user_placeholder.png',
-            show: false
+            show: false,
+            same_password: true,
         };
     },
     methods: {
@@ -118,6 +119,16 @@ export default {
                     this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
                 })
             }
+        },
+        comparePasswords() {
+            if(this.artist.confirm_password != '' && this.artist.confirm_password != undefined) {
+                if(this.artist.password != this.artist.confirm_password) {
+                    this.same_password = false
+                    console.log('n o son iguales')
+                    return
+                }
+            }
+            this.same_password = true
         }
     },
     created() {
@@ -264,21 +275,22 @@ export default {
                         <div class="grid grid-cols-2 gap-x-2" v-if="artist.id == undefined">
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
-                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                     <i class="bi bi-key text-gray-100"></i>
-                                    <input required name="password" type="password" placeholder="Contraseña"
+                                    <input @input="comparePasswords" v-model="artist.password" required name="password" type="password" placeholder="Contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
                             <div>
-                                <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
-                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                <label class="text-slate-200 text-xs font-semibold">Confirmar Contraseña</label>
+                                <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                     <i class="bi bi-key text-gray-100"></i>
-                                    <input required name="confirm_password" type="password"
+                                    <input @input="comparePasswords" v-model="artist.confirm_password" required name="confirm_password" type="password"
                                         placeholder="Confirmar contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
+                            <small v-if="!same_password" class="text-center text-gray-300 col-start-1 col-end-3 mt-1">Las contraseñas no coinciden</small>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
