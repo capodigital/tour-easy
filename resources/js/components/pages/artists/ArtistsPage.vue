@@ -91,7 +91,7 @@ export default {
             if (files && files.length) {
                 this.preview = URL.createObjectURL(files[0])
             } else {
-                this.preview = 'src/user_4.jpg'
+                this.preview = 'src/user_placeholder.png'
             }
         },
         addTag(e) {
@@ -170,7 +170,8 @@ export default {
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             <template v-for="item in artists">
-                <ArtistsItem @edit="edit" @destroy="destroy" :artist="item" v-if="Utils.filter(['name', 'lastname', 'stagename', 'email', 'agency.tradename', 'agency.taxname'], item, filter)" />
+                <ArtistsItem @edit="edit" @destroy="destroy" :artist="item"
+                    v-if="Utils.filter(['name', 'lastname', 'stagename', 'email', 'agency.tradename', 'agency.taxname'], item, filter)" />
             </template>
         </div>
         <transition name="bounce" mode="out-in">
@@ -192,8 +193,11 @@ export default {
                             :required="artist.id == undefined" />
                         <div class="grid grid-cols-2 gap-2">
                             <div class="flex items-center justify-center">
-                                <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
-                                    class="rounded-full w-52 h-52 cursor-pointer" />
+                                <div class="text-center">
+                                    <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
+                                        class="rounded-full w-52 h-52 cursor-pointer mb-3" />
+                                    <label v-if="preview == 'src/user_placeholder.png'" class="text-center text-gray-300 mt-2 mx-auto">Imagen obligatoria</label>
+                                </div>
                             </div>
 
                             <div class="grid grid-cols-1 gap-x-2">
@@ -212,7 +216,8 @@ export default {
                                     <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
                                     <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                         <i class="bi bi-person text-gray-100"></i>
-                                        <input required v-model="artist.name" name="name" type="text" placeholder="Nombre(s)"
+                                        <input required v-model="artist.name" name="name" type="text"
+                                            placeholder="Nombre(s)"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                 </div>
@@ -220,7 +225,8 @@ export default {
                                     <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                                     <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                         <i class="bi bi-person text-gray-100"></i>
-                                        <input required v-model="artist.lastname" name="lastname" type="text" placeholder="Apellidos"
+                                        <input required v-model="artist.lastname" name="lastname" type="text"
+                                            placeholder="Apellidos"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                 </div>
@@ -240,7 +246,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input required v-model="artist.email" name="email" type="email" placeholder="Correo electrónico"
+                                    <input required v-model="artist.email" name="email" type="email"
+                                        placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -258,7 +265,7 @@ export default {
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                    <i class="bi bi-envelope text-gray-100"></i>
+                                    <i class="bi bi-key text-gray-100"></i>
                                     <input required name="password" type="password" placeholder="Contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -266,8 +273,9 @@ export default {
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                    <i class="bi bi-envelope text-gray-100"></i>
-                                    <input required name="confirm_password" type="password" placeholder="Confirmar contraseña"
+                                    <i class="bi bi-key text-gray-100"></i>
+                                    <input required name="confirm_password" type="password"
+                                        placeholder="Confirmar contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -296,8 +304,8 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
-                                            placeholder="Link"
+                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
+                                            type="text" placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
@@ -326,8 +334,8 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
-                                                type="text" placeholder="Link"
+                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`"
+                                                v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input required v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
@@ -397,5 +405,4 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 7.5rem);
-}
-</style>
+}</style>
