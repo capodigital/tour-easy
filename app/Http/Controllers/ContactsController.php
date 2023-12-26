@@ -45,7 +45,7 @@ class ContactsController extends Controller
             'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id', 'agency_id'
         ]);
 
-        if(!$request->has('agency_id')) {
+        if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
                 $data['agency_id'] = $request->user()->agency_id;
             } else {
@@ -57,13 +57,15 @@ class ContactsController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $contact->id,
-                    'socialmediaable_type' => 'App\Models\Contacts'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $contact->id,
+                        'socialmediaable_type' => 'App\Models\Contacts'
+                    ]);
+                }
             }
         }
 
@@ -142,13 +144,15 @@ class ContactsController extends Controller
         Socialmedias::where('socialmediaable_id', $contact->id)->delete();
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $contact->id,
-                    'socialmediaable_type' => 'App\Models\Contacts'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $contact->id,
+                        'socialmediaable_type' => 'App\Models\Contacts'
+                    ]);
+                }
             }
         }
 

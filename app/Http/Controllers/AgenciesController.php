@@ -76,13 +76,15 @@ class AgenciesController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $agency->id,
-                    'socialmediaable_type' => 'App\Models\Agencies'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $agency->id,
+                        'socialmediaable_type' => 'App\Models\Agencies'
+                    ]);
+                }
             }
         }
 
@@ -160,13 +162,15 @@ class AgenciesController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $agency->id,
-                    'socialmediaable_type' => 'App\Models\Agencies'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $agency->id,
+                        'socialmediaable_type' => 'App\Models\Agencies'
+                    ]);
+                }
             }
         }
 

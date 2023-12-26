@@ -42,7 +42,7 @@ class PlacesController extends Controller
             'name', 'google_id', 'phone', 'extra_phone', 'manager', 'email',
             'gis', 'notes', 'address', 'typeplace_id', 'city_id', 'agency_id'
         ]);
-        if(!$request->has('agency_id')) {
+        if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
                 $data['agency_id'] = $request->user()->agency_id;
             } else {
@@ -55,13 +55,15 @@ class PlacesController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $place->id,
-                    'socialmediaable_type' => 'App\Models\Places'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $place->id,
+                        'socialmediaable_type' => 'App\Models\Places'
+                    ]);
+                }
             }
         }
 
@@ -139,13 +141,15 @@ class PlacesController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $place->id,
-                    'socialmediaable_type' => 'App\Models\Places'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $place->id,
+                        'socialmediaable_type' => 'App\Models\Places'
+                    ]);
+                }
             }
         }
 

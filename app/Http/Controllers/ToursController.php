@@ -26,11 +26,11 @@ class ToursController extends Controller
             if ($user->agency_id != null) {
                 $tours = Agencies::find($user->agency_id)->tours()->get()->sortBy('startdate');
             } else
-            $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
+                $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
             $tours = Agencies::find($request->user()->id)->tours()->get()->sortBy('startdate');
         } else {
-            $tours = Tours::where('artist_id',$request->user()->id)->get();
+            $tours = Tours::where('artist_id', $request->user()->id)->get();
         }
 
         return ToursResource::collection($tours);
@@ -71,7 +71,7 @@ class ToursController extends Controller
             'spotify_list', 'youtube_list'
         ]);
 
-        if(!$request->has('agency_id')) {
+        if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
                 $data['agency_id'] = $request->user()->agency_id;
             } else {
@@ -87,13 +87,15 @@ class ToursController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $tour->id,
-                    'socialmediaable_type' => 'App\Models\Tours'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $tour->id,
+                        'socialmediaable_type' => 'App\Models\Tours'
+                    ]);
+                }
             }
         }
 
@@ -177,13 +179,15 @@ class ToursController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $tour->id,
-                    'socialmediaable_type' => 'App\Models\Tours'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $tour->id,
+                        'socialmediaable_type' => 'App\Models\Tours'
+                    ]);
+                }
             }
         }
 
