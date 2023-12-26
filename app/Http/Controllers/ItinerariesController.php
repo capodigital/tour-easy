@@ -26,8 +26,8 @@ class ItinerariesController extends Controller
             } else
                 $itineraries = Itineraries::all();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $user = User::find($request->user()->id);
-            $agency = Agencies::find($user->agency_id);
+            
+            $agency = Agencies::find($request->user()->id);
             $itineraries = $agency->tours()->where('active', true)->with('itineraries')->get();
         } else {
             $artist = Artists::find($request->user()->id);
