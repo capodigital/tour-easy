@@ -131,21 +131,23 @@ export default {
                     </div>
                     <hr class="my-2 border-gray-500" />
                 </template>
-                <div v-if="!([4, 8].includes(Number(activity.typeitinerary_id)))" class="flex items-center mt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-map-pinned me-2">
-                        <path d="M18 8c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 12 0" />
-                        <circle cx="12" cy="8" r="2" />
-                        <path
-                            d="M8.835 14H5a1 1 0 0 0-.9.7l-2 6c-.1.1-.1.2-.1.3 0 .6.4 1 1 1h18c.6 0 1-.4 1-1 0-.1 0-.2-.1-.3l-2-6a1 1 0 0 0-.9-.7h-3.835" />
-                    </svg>
-                    <div>
-                        <p class="text-white">Lugar</p>
-                        <p class="text-gray-400 text-sm">{{ activity.place.name }}</p>
+                <template v-if="!([4, 8].includes(Number(activity.typeitinerary_id)))">
+                    <div class="flex items-center mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-map-pinned me-2">
+                            <path d="M18 8c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 12 0" />
+                            <circle cx="12" cy="8" r="2" />
+                            <path
+                                d="M8.835 14H5a1 1 0 0 0-.9.7l-2 6c-.1.1-.1.2-.1.3 0 .6.4 1 1 1h18c.6 0 1-.4 1-1 0-.1 0-.2-.1-.3l-2-6a1 1 0 0 0-.9-.7h-3.835" />
+                        </svg>
+                        <div>
+                            <p class="text-white">Lugar</p>
+                            <p class="text-gray-400 text-sm">{{ activity.place.name }}</p>
+                        </div>
                     </div>
-                </div>
-                <hr class="my-2 border-gray-500" />
+                    <hr class="my-2 border-gray-500" />
+                </template>
                 <div class="flex items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -187,6 +189,8 @@ export default {
         </article>
     </div>
 </template>
-<style scoped>article {
+<style scoped>
+article {
     max-height: calc(100vh - 7.5rem);
-}</style>
+}
+</style>
