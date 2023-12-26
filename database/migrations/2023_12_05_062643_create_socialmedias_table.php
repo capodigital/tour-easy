@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('socialmedias', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
-            $table->string('url');
+            $table->text('description')->nullable();
+            $table->string('url')->nullable();
             $table->foreignId('typeredes_id')->nullable()->references('id')->on('typeredes');
-            $table->unsignedBigInteger('socialmediaable_id');
-            $table->string('socialmediaable_type');
+            $table->unsignedBigInteger('socialmediaable_id')->nullable();
+            $table->string('socialmediaable_type')->nullable();
             $table->timestamps();
         });
     }

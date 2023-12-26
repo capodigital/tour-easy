@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->string('document_path')->nullable()->default(null);
             $table->integer('size')->nullable()->default(null);
             $table->string('ext')->nullable()->default(null);
-            $table->unsignedBigInteger('documentable_id');
-            $table->string('documentable_type');
+            $table->unsignedBigInteger('documentable_id')->nullable();
+            $table->string('documentable_type')->nullable();
             $table->timestamps();
         });
     }
