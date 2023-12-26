@@ -43,7 +43,11 @@ class PlacesController extends Controller
             'gis', 'notes', 'address', 'typeplace_id', 'city_id', 'agency_id'
         ]);
         if(!$request->has('agency_id')) {
-            $data['agency_id'] = $request->user()->id;
+            if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+                $data['agency_id'] = $request->user()->agency_id;
+            } else {
+                $data['agency_id'] = $request->user()->id;
+            }
         }
 
         //Almacenar los datos en la base de datos

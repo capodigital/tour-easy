@@ -45,7 +45,11 @@ class ContactsController extends Controller
         ]);
 
         if(!$request->has('agency_id')) {
-            $data['agency_id'] = $request->user()->id;
+            if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+                $data['agency_id'] = $request->user()->agency_id;
+            } else {
+                $data['agency_id'] = $request->user()->id;
+            }
         }
         //Almacenar los datos en la base de datos
         $contact = Contacts::create($data);

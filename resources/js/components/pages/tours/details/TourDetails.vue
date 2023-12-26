@@ -23,6 +23,7 @@ export default {
             show_images: false,
             images: [],
             show: false,
+            uploading: false,
             preview: null
         };
     },
@@ -203,6 +204,7 @@ export default {
         },
         saveImage(e) {
             const data = new FormData(e.target)
+            this.uploading = true
             axios.post('api/photos', data, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
@@ -211,7 +213,9 @@ export default {
                 this.preview = null
                 this.images.push(response.data.data)
                 this.Utils.notify('Se subió la imagen correctamente')
+                this.uploading = false
             }).catch((error) => {
+                this.uploading = false
                 this.Utils.error(error.response)
             })
         },
@@ -387,13 +391,14 @@ export default {
                                 class="relative border-gray-500 h-full rounded cursor-pointer border-dashed min-h-[14rem] flex justify-center items-center">
                                 <i v-if="preview == null" class="bi bi-plus text-6xl text-gray-500"></i>
                                 <div class="h-56 w-full bg-cover" v-else :style="{ 'background-image': `url(${preview})` }">
-                                    <!-- <img :src="preview" /> -->
-                                    <button @click="preview = null"
+                                    <button v-if="uploading != true" @click="preview = null"
                                         class="absolute bg-transparent border-none z-50 focus:outline-none text-white top-1 right-1"><i
                                             class="bi bi-trash"></i></button>
                                     <div
                                         class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-                                        <button class="text-white text-4xl opacity-75 hover:opacity-100" type="submit"><i
+                                        <div v-if="uploading" class="spinner-border me-2" role="status"><span
+                                            class="visually-hidden">Loading...</span></div>
+                                        <button v-else class="text-white text-4xl opacity-75 hover:opacity-100" type="submit"><i
                                                 class="bi bi-upload"></i></button>
                                     </div>
                                 </div>
@@ -446,14 +451,16 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">Nombre</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-envelope text-gray-100"></i>
-                                <input required v-model="activity.name" name="name" type="text" placeholder="Nombre de la actividad"
+                                <input required v-model="activity.name" name="name" type="text"
+                                    placeholder="Nombre de la actividad"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Descripción</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea required rows="3" v-model="activity.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required rows="3" v-model="activity.notes" name="notes"
+                                    placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -489,7 +496,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input required v-model="activity.enddate" name="enddate" type="date" placeholder="Fecha de fin"
+                                    <input required v-model="activity.enddate" name="enddate" type="date"
+                                        placeholder="Fecha de fin"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -637,5 +645,4 @@ form,
 .images {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 1px;
-}
-</style>
+}</style>

@@ -86,7 +86,7 @@ export default {
     </template>
     <template v-else-if="active != 'login'">
         <AppNavbar />
-        <main class="scroll overflow-auto">
+        <main class="overflow-auto">
             <transition name="carousel" mode="out-in">
                 <component :is="active"> </component>
             </transition>

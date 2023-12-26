@@ -24,7 +24,7 @@ export default {
                     if (response.data.user.agency_id != null) {
                         localStorage.setItem('username', response.data.user.agency.taxname)
                         localStorage.setItem('user_role', 'agency')
-                        localStorage.setItem('manager', response.data.user.name)
+                        localStorage.setItem('manager', response.data.user.id)
                     } else {
                         localStorage.setItem('username', response.data.user.name)
                         localStorage.setItem('user_role', 'user')
