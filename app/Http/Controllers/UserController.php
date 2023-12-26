@@ -35,10 +35,7 @@ class UserController extends Controller
             'name' => 'required',
             'agency_id' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => [
-                'required',
-                'string',
-            ],
+            'password' => ['required','string'],
             'confirm_password' => 'required|same:password'
 
         ]);
@@ -74,8 +71,11 @@ class UserController extends Controller
             'name' => 'required',
             'agency_id' => 'required',
             'email' => ['required', 'email', 'unique:users,email,' . $user->id],
+            'password' => ['required','string'],
+            'confirm_password' => 'required|same:password'
         ]);
         $data = $request->except(['password']);
+        $data['password'] = bcrypt($request->password);
         //Almacenar los datos en la base de datos
         $user->update($data);
         if ($user->agency_id != null) {

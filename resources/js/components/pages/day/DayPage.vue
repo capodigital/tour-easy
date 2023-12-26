@@ -13,6 +13,8 @@ export default {
     created() {
         const timestamp = location.hash.substring(location.hash.lastIndexOf('/') + 1)
         const date = new Date(Number(timestamp))
+        console.log(date)
+        this.date = date
         axios.get(`api/itineraries/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`, {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -20,10 +22,18 @@ export default {
         }).then((response) => {
             for (let i in response.data.data) {
                 const activity = response.data.data[i]
-                //const next = (Number(i) + 1 == response.data.data.length) ? { place: { name: '' } } : response.data.data[Number(i) + 1];
-                let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate
+                let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate, end = activity.enddate, complete = ''
+                if (new Date(start) > new Date()) {
+                    complete = 'No completado'
+                } else {
+                    if (new Date() < new Date(end)) {
+                        complete = 'En progreso'
+                    } else {
+                        complete = 'Completado'
+                    }
+                }
                 let date = '';
-                switch (activity.typeitinerary_id) {
+                switch (Number(activity.typeitinerary_id)) {
                     case 1:
                         name = activity.name, description = `<b>Prueba de sonidos: </b>${activity.showcheck}.<br /><b>Puertas abiertas: </b>${activity.showtime}.<br /><b>Lugar: </b>${activity.place.name}`,
                             date = `<br />${start}`;
@@ -37,11 +47,11 @@ export default {
                             date = `<br />${start}`;
                         break;
                     case 5:
-                        name = activity.name, description = `<b>Proveedor: </b>${activity.supplier.company_name}.<br /><b>Lugar: </b>${activity.place.name}`,
+                        name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
                             date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                     case 4:
-                        name = activity.place.name, description = `<b>Conductor: </b>${activity.carrier}`,
+                        name = activity.place.name, description = `<b>Conductor: </b>${activity.contact.name}`,
                             date = `<br />${start}`;
                         break;
                     case 6:
@@ -57,11 +67,15 @@ export default {
                             date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                         break;
                 }
-                activity.name = name
-                activity.description = description
-                activity.type = activity.typeitinerary_id
-                this.activities.push(activity)
-                this.date = activity.startdate
+                const item = activity
+                item.name = name
+                item.type = type
+                item.description = description
+                item.date = date
+                item.start = start
+                item.complete = complete
+                this.activities.push(item)
+
             }
         })
     }

@@ -272,7 +272,7 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-x-2" v-if="artist.id == undefined">
+                        <div class="grid grid-cols-2 gap-x-2">
                             <div>
                                 <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
                                 <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
