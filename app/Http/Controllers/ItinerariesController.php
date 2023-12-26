@@ -125,8 +125,8 @@ class ItinerariesController extends Controller
             } else
                 $itineraries = Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $user = User::find($request->user()->id);
-            $agency = Agencies::find($user->agency_id);
+           
+            $agency = Agencies::find($request->user()->id);
             $itineraries = $agency->tours()->where('active', true)->with(['itineraries' => function ($query) use ($month, $year) {
                 $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
             }])
@@ -154,8 +154,8 @@ class ItinerariesController extends Controller
             } else
                 $itineraries = Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->whereDay('startdate', $day)->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $user = User::find($request->user()->id);
-            $agency = Agencies::find($user->agency_id);
+            
+            $agency = Agencies::find($request->user()->id);
             $itineraries = $agency->tours()->where('active', true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
                 }])->get()->pluck('itineraries')->collapse();
