@@ -61,10 +61,7 @@ class ArtistsController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:artists',
-            'password' => [
-                'required',
-                'string',
-            ],
+            'password' => ['required','string'],
             'image' => ['required', 'image'],
             'confirm_password' => 'required|same:password'
 
@@ -156,7 +153,8 @@ class ArtistsController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => ['required', 'email', 'unique:artists,email,' . $artist->id],
-
+            'password' => ['required','string'],
+            'confirm_password' => 'required|same:password'
         ]);
 
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'notes']);
@@ -168,6 +166,8 @@ class ArtistsController extends Controller
             $image = $request->file('image')->store('girls');
             $data['image'] = $image;
         }
+
+        $data['password'] = bcrypt($request->password);
 
         //Almacenar los datos en la base de datos
         $artist->update($data);
