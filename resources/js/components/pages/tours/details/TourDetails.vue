@@ -50,6 +50,13 @@ export default {
         },
         edit(item) {
             Object.assign(this.activity, item)
+            console.log(this.activity)
+            if(item.citystart != null) {
+                this.setCities(item.citystart.country.code, 'start')
+            }
+            if(item.cityend != null) {
+                this.setCities(item.cityend.country.code, 'end')
+            }
             this.show = true
         },
         destroy(item) {
@@ -59,7 +66,7 @@ export default {
                     headers: {
                         'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }).then((response) => {
+                }).then(() => {
                     for (let i in this.activities) {
                         if (this.activities[i].id == item.id) {
                             this.Utils.notify('Se eliminó la actividad correctamente');
@@ -137,7 +144,7 @@ export default {
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
                 case 4:
-                    name = activity.place.name, description = `<b>Conductor: </b>${activity.contact.name}`,
+                    name = activity.name, description = `<b>Conductor: </b>${activity.contact.name}`,
                         date = `<br />${start}`;
                     break;
                 case 6:
@@ -516,7 +523,7 @@ export default {
                             </div>
                         </div>
                         <label class="text-slate-200 text-xs font-semibold">Ciudad <template
-                                v-if="[4, 6, 7, 8].includes(activity.typeitinerary_id)"> de salida</template></label>
+                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de salida</template></label>
                         <div class="grid grid-cols-2 gap-x-2">
                             <div>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
@@ -539,7 +546,7 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        <template v-if="[6, 7, 8].includes(activity.typeitinerary_id)">
+                        <template v-if="[6, 7, 8].includes(Number(activity.typeitinerary_id))">
                             <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
                             <div class="grid grid-cols-2 gap-x-2">
                                 <div>
@@ -566,7 +573,7 @@ export default {
                             </div>
                         </template>
                         <div class="grid grid-cols-2 gap-x-2">
-                            <div v-if="[1, 4, 6, 7, 8].includes(activity.typeitinerary_id)">
+                            <div v-if="[1, 4, 6, 7, 8].includes(Number(activity.typeitinerary_id))">
                                 <label class="text-slate-200 text-xs font-semibold">Contacto</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
                                     <select required v-model="activity.contact_id" name="contact_id"
@@ -579,7 +586,7 @@ export default {
                                     </select>
                                 </div>
                             </div>
-                            <div v-if="[1, 2, 3, 5, 6, 7].includes(activity.typeitinerary_id)">
+                            <div v-if="[1, 2, 3, 5, 6, 7].includes(Number(activity.typeitinerary_id))">
                                 <label class="text-slate-200 text-xs font-semibold">Lugar</label>
                                 <div class="flex items-center rounded border border-gray-300 px-2">
                                     <select required v-model="activity.place_id" name="place_id"

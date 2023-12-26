@@ -263,7 +263,7 @@ export default {
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
-                        <template>
+                        <template v-if="user.id == undefined">
                             <div>
                                 <label required class="text-slate-200 text-xs font-semibold">Contraseña</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">

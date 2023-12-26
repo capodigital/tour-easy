@@ -10,8 +10,10 @@ use App\Models\Photos;
 use App\Models\Socialmedias;
 use App\Models\Tours;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ToursController extends Controller
 {
@@ -70,6 +72,12 @@ class ToursController extends Controller
             'tourname', 'startdate', 'enddate', 'artist_id', 'notes',
             'spotify_list', 'youtube_list'
         ]);
+
+        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+            throw ValidationException::withMessages([
+                'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
+            ]);
+        }
 
         if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
@@ -160,6 +168,12 @@ class ToursController extends Controller
         $request->validate([
             'tourname' => 'required',
         ]);
+
+        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+            throw ValidationException::withMessages([
+                'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
+            ]);
+        }
 
         $data = $request->only([
             'tourname', 'startdate', 'enddate', 'artist_id', 'notes',

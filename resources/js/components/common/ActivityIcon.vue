@@ -13,14 +13,14 @@ export default {
     },
     mounted() {
         if(this.activity.type == undefined) {
-            this.activity.type = this.activity.typeitinerary_id
+            this.activity.type = Number(this.activity.typeitinerary_id)
         }
     }
 }
 </script>
 <template>
     <div>
-        <svg v-if="activity.type == 4" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-if="Number(activity.type) == 4" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-bus">
             <path d="M8 6v6" />
@@ -32,13 +32,13 @@ export default {
             <path d="M9 18h5" />
             <circle cx="16" cy="18" r="2" />
         </svg>
-        <svg v-else-if="activity.type == 'photos'" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size"
+        <svg v-else-if="Number(activity.type) == 'photos'" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size"
             viewBox="0 0 24 24" fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-check-square">
             <path d="m9 11 3 3L22 4" />
             <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
         </svg>
-        <svg v-else-if="activity.type == 5" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-else-if="Number(activity.type) == 5" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-hotel">
             <path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z" />
@@ -51,7 +51,7 @@ export default {
             <path d="M8 11h.01" />
             <path d="M10 22v-6.5m4 0V22" />
         </svg>
-        <svg v-else-if="activity.type == 1" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-else-if="Number(activity.type) == 1" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-theater">
             <path d="M2 10s3-3 3-8" />
@@ -64,14 +64,14 @@ export default {
             <path d="M2 22v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" />
             <path d="M14 22v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" />
         </svg>
-        <svg v-else-if="activity.type == 6" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-else-if="Number(activity.type) == 6" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-plane-takeoff">
             <path d="M2 22h20" />
             <path
                 d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z" />
         </svg>
-        <svg v-else-if="activity.type == 7" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-else-if="Number(activity.type) == 7" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-train-front">
             <path d="M8 3.1V7a4 4 0 0 0 8 0V3.1" />
@@ -81,7 +81,7 @@ export default {
             <path d="m8 19-2 3" />
             <path d="m16 19 2 3" />
         </svg>
-        <svg v-else-if="activity.type == 8" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-else-if="Number(activity.type) == 8" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-arrow-right-left">
             <path d="m16 3 4 4-4 4" />
@@ -89,7 +89,7 @@ export default {
             <path d="m8 21-4-4 4-4" />
             <path d="M4 17h16" />
         </svg>
-        <svg v-else-if="activity.type == 2" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-else-if="Number(activity.type) == 2" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-alarm-clock">
             <circle cx="12" cy="13" r="8" />
@@ -99,7 +99,7 @@ export default {
             <path d="M6.38 18.7 4 21" />
             <path d="M17.64 18.67 20 21" />
         </svg>
-        <svg v-else-if="activity.type == 3" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
+        <svg v-else-if="Number(activity.type) == 3" xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 24 24"
             fill="none" :stroke="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-building">
             <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />

@@ -35,7 +35,7 @@ export default {
         </div>
         <div class="w-full transition-all overflow-hidden px-4" :class="{ 'h-0 p-0': collapse, 'h-auto p-2': !collapse }">
             <div class="flex items-center mt-2">
-                <ActivityIcon :activity="activity" size="20" />
+                <ActivityIcon :activity="activity" :size="20" />
                 <div class="ps-2">
                     <p class="text-white">Tipo de actividad</p>
                     <p class="text-gray-400 text-sm">{{ activity.typeitinerary.description }}</p>
@@ -84,7 +84,7 @@ export default {
                 </div>
             </div>
             <hr class="my-2 border-gray-500" />
-            <template v-if="activity.typeitinerary_id == 1">
+            <template v-if="Number(activity.typeitinerary_id) == 1">
                 <div class="flex items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -112,7 +112,7 @@ export default {
                 </div>
                 <hr class="my-2 border-gray-500" />
             </template>
-            <template v-if="[4, 5, 6, 7, 8].includes(activity.type)">
+            <template v-if="[1, 4, 6, 7, 8].includes(Number(activity.typeitinerary_id))">
                 <div class="flex items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -153,7 +153,7 @@ export default {
                     <p class="text-gray-400 text-sm">{{ activity.citystart.name }}</p>
                 </div>
             </div>
-            <template v-if="activity.typeitinerary_id == 6 || activity.typeitinerary_id == 7">
+            <template v-if="Number(activity.typeitinerary_id) == 6 || Number(activity.typeitinerary_id) == 7">
                 <hr class="my-2 border-gray-500" />
                 <div class="flex items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"

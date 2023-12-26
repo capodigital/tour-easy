@@ -42,7 +42,7 @@ export default {
                 <p class="text-gray-500 text-sm leading-4 mt-1 pe-10">{{ ticket.email }}</p>
                 <p class="text-xs text-gray-500 mt-2">{{ ticket.notes }}</p>
                 <div class="flex items-center mt-2">
-                    <ActivityIcon :activity="ticket.itinerary" size="20" stroke="#000" />
+                    <ActivityIcon :activity="ticket.itinerary" :size="20" stroke="#000" />
                     <div class="ms-2">
                         <p class="text-gray-800">Actividad</p>
                         <p class="text-gray-500 text-sm">{{ ticket.itinerary.name }} ({{ ticket.itinerary.tour.tourname }})</p>

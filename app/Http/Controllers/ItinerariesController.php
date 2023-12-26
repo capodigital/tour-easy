@@ -8,7 +8,9 @@ use App\Models\Artists;
 use App\Models\Itineraries;
 use App\Models\Tours;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ItinerariesController extends Controller
 {
@@ -26,7 +28,7 @@ class ItinerariesController extends Controller
             } else
                 $itineraries = Itineraries::all();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            
+
             $agency = Agencies::find($request->user()->id);
             $itineraries = $agency->tours()->where('active', true)->with('itineraries')->get();
         } else {
@@ -53,6 +55,12 @@ class ItinerariesController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+
+        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+            throw ValidationException::withMessages([
+                'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
+            ]);
+        }
 
         $itinerary = new Itineraries($request->input());
         $itinerary->save();
@@ -88,6 +96,11 @@ class ItinerariesController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+            throw ValidationException::withMessages([
+                'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
+            ]);
+        }
         $itinerary->update($request->all());
 
         return new ItinerariesResource($itinerary);
@@ -125,7 +138,7 @@ class ItinerariesController extends Controller
             } else
                 $itineraries = Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-           
+
             $agency = Agencies::find($request->user()->id);
             $itineraries = $agency->tours()->where('active', true)->with(['itineraries' => function ($query) use ($month, $year) {
                 $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
@@ -154,7 +167,7 @@ class ItinerariesController extends Controller
             } else
                 $itineraries = Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->whereDay('startdate', $day)->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            
+
             $agency = Agencies::find($request->user()->id);
             $itineraries = $agency->tours()->where('active', true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
