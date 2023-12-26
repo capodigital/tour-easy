@@ -12,20 +12,20 @@ export default {
             this.cancel()
             setTimeout(() => {
                 this.hidden = true;
-            }, 400)
+            }, 310)
         },
         _accept() {
             this.show = false
             this.accept()
             setTimeout(() => {
                 this.hidden = true;
-            }, 400)
+            }, 310)
         }
     },
     mounted() {
         setTimeout(() => {
             this.show = true
-        }, 50)
+        }, 10)
     }
 }
 </script>

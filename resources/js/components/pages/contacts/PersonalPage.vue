@@ -283,7 +283,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Teléfono secundario</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input required v-model="contact.extra_phone" name="extra_phone" type="tel"
+                                    <input v-model="contact.extra_phone" name="extra_phone" type="tel"
                                         placeholder="Teléfono secundario"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -342,14 +342,14 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea required v-model="contact.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea v-model="contact.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Posición</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea required name="position" v-model="contact.position" placeholder="Posición"
+                                <textarea name="position" v-model="contact.position" placeholder="Posición"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -361,7 +361,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2">
                                 <template v-for="(socialmedia, index) in socialmedias">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select required v-model="socialmedia.typeredes_id"
+                                        <select v-model="socialmedia.typeredes_id"
                                             :name="`socialmedias[${index}][typeredes_id]`"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
@@ -370,12 +370,12 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
+                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
                                             type="text" placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input required v-model="socialmedia.description"
+                                        <input v-model="socialmedia.description"
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -391,7 +391,7 @@ export default {
                             <div class="mt-1 grid grid-cols-3 gap-2">
                                 <template v-for="(file, index) in files">
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <select required v-model="file.type"
+                                        <select v-model="file.type"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" value="link">Google Drive</option>
                                             <option class="text-black" value="local">Local</option>
@@ -400,20 +400,20 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`"
+                                            <input v-if="file.id == undefined" :name="`urls[${index}]`"
                                                 v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                            <input required v-else v-model="file.url" type="text" placeholder="Link"
+                                            <input v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
                                                 readonly>
                                         </template>
 
                                         <template v-else>
-                                            <input required v-if="file.id != undefined" v-model="file.name" type="text"
+                                            <input v-if="file.id != undefined" v-model="file.name" type="text"
                                                 placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
                                                 readonly>
-                                            <input required v-else :name="`documents[${index}]`" type="file"
+                                            <input v-else :name="`documents[${index}]`" type="file"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         </template>
 
