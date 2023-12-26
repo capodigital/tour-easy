@@ -33,6 +33,11 @@ export default class Utils {
         return time.substring(comma + 2);
     }
 
+    static date(date) {
+        date = new Date(date);
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+
     static elapsedtime(time, today) {
         if (today == undefined) {
             today = new Date();

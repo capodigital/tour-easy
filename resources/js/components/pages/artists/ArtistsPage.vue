@@ -8,7 +8,9 @@ export default {
         return {
             filter: '',
             artists: [],
-            artist: {},
+            artist: {
+                birthday: new Date().toLocaleDateString()
+            },
             agencies: [],
             types: [],
             socialtypes: [],
@@ -22,7 +24,9 @@ export default {
     },
     methods: {
         add() {
-            this.artist = {}
+            this.artist = {
+                birthday: this.Utils.date(new Date())
+            }
             this.socialmedias = [{}]
             this.files = [{ type: 'link' }]
             this.preview = 'src/user_placeholder.png'
@@ -339,7 +343,7 @@ export default {
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                            <button @click="socialmedias.splice(index, 1)" type="button" class="text-white"><i
+                                        <button @click="socialmedias.splice(index, 1)" type="button" class="text-white"><i
                                                 class="bi bi-trash"></i></button>
                                     </div>
 
