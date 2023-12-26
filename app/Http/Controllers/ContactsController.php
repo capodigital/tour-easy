@@ -36,6 +36,7 @@ class ContactsController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'email' => 'required|email|unique:contacts',
 
         ]);
 
