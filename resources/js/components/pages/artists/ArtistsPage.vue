@@ -215,10 +215,11 @@ export default {
                     </h1>
                     <form @submit.prevent="send"
                         class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                        <input @change="updatePreview" type="file" class="hidden" name="image"
-                            :required="artist.id == undefined" />
+
                         <div class="grid grid-cols-2 gap-2">
                             <div class="flex items-center justify-center">
+                                <input @change="updatePreview" type="file" class="opacity-5 w-1 h-1" name="image"
+                                :required="artist.id == undefined" />
                                 <div class="text-center">
                                     <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
                                         class="rounded-full w-52 h-52 cursor-pointer mb-3" />

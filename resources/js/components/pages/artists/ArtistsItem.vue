@@ -1,13 +1,16 @@
 <script>
+import DocumentsItem from '../../common/DocumentsItem.vue';
+
 export default {
     props: {
         artist: Object
     },
     methods: {
         tags(tags) {
-            return tags.split(',')
+            return tags.split(',');
         }
-    }
+    },
+    components: { DocumentsItem }
 }
 </script>
 <template>
@@ -93,6 +96,10 @@ export default {
                 </a>
             </div>
         </div>
+        <div class="px-2">
+            <DocumentsItem :documents="artist.documents" />
+        </div>
+        <hr class="my-2 border-gray-500" />
         <div class="p-2">
             <p class="text-sm text-white">Géneros</p>
             <div class="justify-start p-2 whitespace-pre-wrap">
@@ -101,7 +108,6 @@ export default {
                     {{ tag }}
                 </div>
             </div>
-
         </div>
         <div class="px-2 pb-3 grid gap-2"
             :class="{ 'grid-cols-1': Utils.role() == 'artist', 'grid-cols-2': Utils.role() != 'artist' }">

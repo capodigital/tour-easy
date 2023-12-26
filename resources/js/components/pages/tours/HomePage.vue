@@ -67,7 +67,7 @@ export default {
                     for (let i in this.tours) {
                         if (this.tours[i].id == item.id) {
                             // this.tours.splice(i, 1)
-                            this.tours[i].active = 1;
+                            this.tours[i].active = 0;
                             this.Utils.notify('Se ha completado correctamente la gira')
                             break
                         }
@@ -180,7 +180,7 @@ export default {
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <template v-for="item in tours">
                     <TourCard @edit="edit" @destroy="destroy" @complete="complete" :tour="item"
-                        v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && (item.active == active || item.active == 0)" />
+                        v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && (item.active == 1 || active == 1)" />
                 </template>
             </div>
         </div>
@@ -199,13 +199,13 @@ export default {
                     </h1>
                     <form @submit.prevent="send"
                         class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
-                        <input @change="updatePreview" type="file" class="hidden" name="tourcartel"
+                        <input @change="updatePreview" type="file" class="opacity-5 w-1 h-1" name="tourcartel"
                             :required="tour.id == undefined" />
                         <label class="text-slate-200 text-xs font-semibold">Cartel de la gira</label>
-                        <div class="text-center">
+                        <div class="text-center relative">
                             <div @click="$el.querySelector('[type=file]').click()"
                                 :style="{ 'background': `url(${preview})` }"
-                                class="w-full h-[15rem] cursor-pointer bg-cover bg-center rounded">
+                                class="w-full h-[15rem] cursor-pointer bg-cover bg-center rounded z-50">
                             </div>
                             <label v-if="preview == 'src/cartel-placeholder.jpeg'"
                                 class="text-center text-gray-300 mt-2 mx-auto">Imagen obligatoria</label>

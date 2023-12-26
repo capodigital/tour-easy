@@ -185,7 +185,7 @@ export default {
                     <div class="flex mb-1">
                         <h1
                             class="font-bold w-full bg-gradient-to-tr from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                            PERSONAL DE LA AGENCIA
+                            PERSONAL
                         </h1>
                         <div class="flex items-center rounded border border-gray-400 px-2 me-2">
                             <i class="bi bi-funnel-fill text-gray-400"></i>

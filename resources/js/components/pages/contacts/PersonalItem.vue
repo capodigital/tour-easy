@@ -1,4 +1,6 @@
 <script>
+import DocumentsItem from '../../common/DocumentsItem.vue';
+
 export default {
     props: {
         contact: Object,
@@ -6,8 +8,9 @@ export default {
     data() {
         return {
             collapse: true,
-        }
-    }
+        };
+    },
+    components: { DocumentsItem }
 }
 </script>
 <template>
@@ -50,5 +53,6 @@ export default {
                     <img :src="socialmedia.typered.logo.replace('http://localhost/', '')" class="" />
                 </a>
             </div>
+            <DocumentsItem :documents="contact.documents" />
         </div>
 </article></template>

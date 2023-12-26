@@ -1,8 +1,11 @@
 <script>
+import DocumentsItem from '../../common/DocumentsItem.vue';
+
 export default {
     props: {
         place: Object
-    }
+    },
+    components: { DocumentsItem }
 }
 </script>
 <template>
@@ -87,6 +90,8 @@ export default {
                             place.address }}</a></p>
                     </div>
                 </div>
+                <hr class="my-2 border-gray-500" />
+                <DocumentsItem dark="true" :documents="place.documents" />
             </div>
             <div>
                 <div style="width: 100%">
@@ -95,7 +100,8 @@ export default {
                         :src="`https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=es&amp;q=${place.gis}+(Ejemplo)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`"><a
                             href="https://www.gps.ie/car-satnav-gps/">Sat Navs</a>
                     </iframe>
+                </div>
             </div>
         </div>
     </div>
-</div></template>
+</template>

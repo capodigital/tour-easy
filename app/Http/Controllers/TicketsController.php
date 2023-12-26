@@ -14,7 +14,7 @@ class TicketsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($request)
+    public function index(Request $request)
     {
         $tickets = [];
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
@@ -25,7 +25,7 @@ class TicketsController extends Controller
             } else
                 $tickets = Tickets::all();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-           
+
             $agency = Agencies::find($request->user()->id);
             $tickets = $agency->tours()->with(['itineraries.tickets'])->get()->pluck('itineraries')->collapse()->pluck('tickets')->collapse();
 
@@ -58,9 +58,9 @@ class TicketsController extends Controller
        $ticket->save();
 
        $ticket->refresh();
-        
 
-      
+
+
         return new TicketsResource($ticket);
     }
 

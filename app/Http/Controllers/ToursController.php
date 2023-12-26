@@ -267,7 +267,7 @@ class ToursController extends Controller
     {
         $tour = Tours::find($request->id);
 
-        $tour->active = true;
+        $tour->active = false;
         $tour->save();
         $tour->refresh();
         return new ToursResource($tour);
