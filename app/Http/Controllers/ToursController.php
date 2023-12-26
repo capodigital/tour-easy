@@ -30,7 +30,7 @@ class ToursController extends Controller
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
             $tours = Agencies::find($request->user()->id)->tours()->get()->sortBy('startdate');
         } else {
-            $tours[] = Tours::find($request->user()->id);
+            $tours = Tours::where('artist_id',$request->user()->id)->get();
         }
 
         return ToursResource::collection($tours);
