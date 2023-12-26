@@ -26,6 +26,7 @@ export default {
             this.socialmedias = [{}]
             this.files = [{ type: 'link' }]
             this.preview = 'src/user_placeholder.png'
+            this.tags = []
             this.show = true
         },
         edit(item) {
@@ -338,7 +339,10 @@ export default {
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                            <button @click="socialmedias.splice(index, 1)" type="button" class="text-white"><i
+                                                class="bi bi-trash"></i></button>
                                     </div>
+
                                 </template>
                             </div>
                         </div>
@@ -386,7 +390,7 @@ export default {
                                 <span @click="tags.splice(index, 1)" v-for="(tag, index) in tags"
                                     class="text-sm cursor-pointer me-1 text-black bg-gray-300 rounded px-2 py-1">{{ tag }}
                                     <i class="bi bi-x"></i></span>
-                                <input required @keydown="addTag"
+                                <input @keydown="addTag"
                                     class="bg-transparent text-gray-300 focus:outline-none outline-none border-none" />
                             </div>
                         </div>

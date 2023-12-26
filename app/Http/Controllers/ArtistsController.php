@@ -174,13 +174,15 @@ class ArtistsController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia['url'],
-                    'description' => $socialmedia['description'],
-                    'typeredes_id' => $socialmedia['typeredes_id'],
-                    'socialmediaable_id' => $artist->id,
-                    'socialmediaable_type' => 'App\Models\Artists'
-                ]);
+                if (isset($socialmedia['typeredes_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'socialmediaable_id' => $artist->id,
+                        'socialmediaable_type' => 'App\Models\Artists'
+                    ]);
+                }
             }
         }
 
@@ -205,15 +207,17 @@ class ArtistsController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $artist->id,
-                    'documentable_type' => 'App\Models\Artists'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $artist->id,
+                        'documentable_type' => 'App\Models\Artists'
+                    ]);
+                }
             }
         }
 

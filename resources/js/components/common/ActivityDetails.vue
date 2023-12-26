@@ -108,7 +108,7 @@ export default {
                     </div>
                     <hr class="my-2 border-gray-500" />
                 </template>
-                <template v-if="[4, 5, 6, 7, 8].includes(activity.type)">
+                <template v-if="[4, 6, 7, 8].includes(activity.type)">
                     <div class="flex items-center mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
