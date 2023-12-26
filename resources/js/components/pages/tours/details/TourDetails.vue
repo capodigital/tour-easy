@@ -19,7 +19,8 @@ export default {
             suppliers: [],
             types: [],
             countries: [],
-            cities: [],
+            start_cities: [],
+            end_cities: [],
             places: [],
             show_images: false,
             images: [],
@@ -30,13 +31,17 @@ export default {
     },
     components: { TourActivity, ActivityDetails },
     methods: {
-        setCities(country) {
+        setCities(country, type) {
             axios.post('api/cities', { code: country }, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then((response) => {
-                this.cities = response.data;
+                if(type == 'start') {
+                    this.start_cities = response.data;
+                } else {
+                    this.end_cities = response.data;
+                }
             });
         },
         add() {
@@ -284,7 +289,8 @@ export default {
             }
         }).then((response) => {
             this.countries = response.data.data;
-            this.setCities(this.countries[0].code)
+            this.setCities(this.countries[0].code, 'start')
+            this.setCities(this.countries[0].code, 'end')
         })
         axios.get('api/places', {
             headers: {
@@ -515,7 +521,7 @@ export default {
                             <div>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-globe text-gray-100"></i>
-                                    <select required @change="(e) => setCities(e.target.value)"
+                                    <select required @change="(e) => setCities(e.target.value, 'start')"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="country in countries" :value="country.code">{{
                                             country.name }}</option>
@@ -527,7 +533,7 @@ export default {
                                     <i class="bi bi-globe-americas text-gray-100"></i>
                                     <select required v-model="activity.city_start_id" name="city_start_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
+                                        <option class="text-black" v-for="city in start_cities" :value="city.id">{{ city.name }}
                                         </option>
                                     </select>
                                 </div>
@@ -539,7 +545,7 @@ export default {
                                 <div>
                                     <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                         <i class="bi bi-globe text-gray-100"></i>
-                                        <select required @change="(e) => setCities(e.target.value)"
+                                        <select required @change="(e) => setCities(e.target.value, 'end')"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <option class="text-black" v-for="country in countries" :value="country.code">{{
                                                 country.name }}</option>
@@ -551,7 +557,7 @@ export default {
                                         <i class="bi bi-globe-americas text-gray-100"></i>
                                         <select required v-model="activity.city_destination_id" name="city_destination_id"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                            <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name
+                                            <option class="text-black" v-for="city in end_cities" :value="city.id">{{ city.name
                                             }}
                                             </option>
                                         </select>
