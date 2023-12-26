@@ -163,7 +163,7 @@ export default {
             })
         },
         removeDocument(index) {
-            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este artista?')
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este documento?')
             confirm.fire().then((result) => {
                 if (this.files[index].id == undefined) {
                     this.files.splice(index, 1)
@@ -211,7 +211,7 @@ export default {
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     AGENCIAS</h1>
-                <div class="flex items-center rounded border border-gray-400 px-2 me-2">
+                <div v-if="Utils.role() == 'user'" class="flex items-center rounded border border-gray-400 px-2 me-2">
                     <i class="bi bi-funnel-fill text-gray-400"></i>
                     <input v-model="filter" type="text" placeholder="Escribe para filtrar"
                         class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
@@ -230,7 +230,7 @@ export default {
             </div>
         </div>
         <transition name="bounce" mode="out-in">
-            <div v-if="Utils.role() == 'agency' && show"
+            <div v-if="Utils.role() == 'agency' && user.show"
                 class="w-full bg-white flex bg-opacity-90 left-0 h-screen absolute top-0 px-2 py-2 justify-center items-center">
                 <form @submit.prevent="manager"
                     class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 transition-all hover:scale-105 cursor-pointer">
@@ -398,8 +398,7 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Descripción</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea rows="3" v-model="agency.notes" name="notes"
-                                    placeholder="Datos adicionales"
+                                <textarea rows="3" v-model="agency.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -444,8 +443,8 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
-                                            type="text" placeholder="Link"
+                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
+                                            placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
@@ -453,6 +452,8 @@ export default {
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <button @click="socialmedias.splice(index, 1)" type="button" class="text-white"><i
+                                                class="bi bi-trash"></i></button>
                                     </div>
                                 </template>
                             </div>
@@ -474,8 +475,8 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input v-if="file.id == undefined" :name="`urls[${index}]`"
-                                                v-model="file.url" type="text" placeholder="Link"
+                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                                type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"

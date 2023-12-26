@@ -249,7 +249,7 @@ export default {
                     <option value="11">Diciembre</option>
                 </select>
                 <select v-model="year" @change="update" class="rounded border border-gray-500 pe-8 px-3 py-1 me-2">
-                    <option :value="2000 + n" v-for="n in 23">
+                    <option :value="2000 + n" v-for="n in 24">
                         {{ 2000 + n }}
                     </option>
                 </select>

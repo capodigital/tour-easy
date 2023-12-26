@@ -365,6 +365,8 @@ export default {
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <button @click="socialmedias.splice(index, 1)" type="button" class="text-white"><i
+                                                class="bi bi-trash"></i></button>
                                     </div>
                                 </template>
                             </div>

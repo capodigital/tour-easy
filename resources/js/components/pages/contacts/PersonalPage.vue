@@ -370,8 +370,8 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
-                                            type="text" placeholder="Link"
+                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
+                                            placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
@@ -379,6 +379,8 @@ export default {
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <button @click="socialmedias.splice(index, 1)" type="button" class="text-white"><i
+                                                class="bi bi-trash"></i></button>
                                     </div>
                                 </template>
                             </div>
@@ -400,8 +402,8 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input v-if="file.id == undefined" :name="`urls[${index}]`"
-                                                v-model="file.url" type="text" placeholder="Link"
+                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                                type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"

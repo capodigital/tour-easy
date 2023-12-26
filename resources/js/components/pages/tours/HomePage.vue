@@ -111,7 +111,7 @@ export default {
             if (files && files.length) {
                 this.preview = URL.createObjectURL(files[0])
             } else {
-                this.preview = 'src/user_4.jpg'
+                this.preview = 'src/cartel-placeholder.jpeg'
             }
         }
     },
@@ -202,8 +202,13 @@ export default {
                         <input @change="updatePreview" type="file" class="hidden" name="tourcartel"
                             :required="tour.id == undefined" />
                         <label class="text-slate-200 text-xs font-semibold">Cartel de la gira</label>
-                        <div @click="$el.querySelector('[type=file]').click()" :style="{ 'background': `url(${preview})` }"
-                            class="w-full h-[15rem] cursor-pointer bg-cover bg-center">
+                        <div class="text-center">
+                            <div @click="$el.querySelector('[type=file]').click()"
+                                :style="{ 'background': `url(${preview})` }"
+                                class="w-full h-[15rem] cursor-pointer bg-cover bg-center rounded">
+                            </div>
+                            <label v-if="preview == 'src/cartel-placeholder.jpeg'"
+                                class="text-center text-gray-300 mt-2 mx-auto">Imagen obligatoria</label>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Nombre de la gira</label>
@@ -311,6 +316,8 @@ export default {
                                             :name="`socialmedias[${index}][description]`" type="text"
                                             placeholder="Descripción"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                        <button @click="socialmedias.splice(index, 1)" type="button" class="text-white"><i
+                                                class="bi bi-trash"></i></button>
                                     </div>
                                 </template>
                             </div>
