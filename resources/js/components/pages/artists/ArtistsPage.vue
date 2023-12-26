@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios'
 import ArtistsItem from './ArtistsItem.vue'
+import Confirm from "../../modals/Confirm"
+
 export default {
     data() {
         return {
@@ -39,20 +41,25 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/artists/' + item.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este artista?')
+            confirm.fire().then((result) => {
+                if (result.status == "accept") {
+                    axios.post('api/artists/' + item.id, { _method: 'delete' }, {
+                        headers: {
+                            'Authorization': `Bearer ${this.Utils.token()}`
+                        }
+                    }).then((response) => {
+                        for (let i in this.artists) {
+                            if (this.artists[i].id == item.id) {
+                                this.artists.splice(i, 1)
+                                this.Utils.notify('Se ha eliminado correctamente el artista')
+                                break
+                            }
+                        }
+                    }).catch((error) => {
+                        this.Utils.error(error.response)
+                    })
                 }
-            }).then((response) => {
-                for (let i in this.artists) {
-                    if (this.artists[i].id == item.id) {
-                        this.artists.splice(i, 1)
-                        this.Utils.notify('Se ha eliminado correctamente el artista')
-                        break
-                    }
-                }
-            }).catch((error) => {
-                this.Utils.error(error.response)
             })
         },
         send(e) {
@@ -107,22 +114,25 @@ export default {
             }
         },
         removeDocument(index) {
-            if (this.files[index].id == undefined) {
-                this.files.splice(index, 1)
-            } else {
-                axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
-                    headers: {
-                        'Authorization': `Bearer ${this.Utils.token()}`
-                    }
-                }).then(() => {
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este artista?')
+            confirm.fire().then((result) => {
+                if (this.files[index].id == undefined) {
                     this.files.splice(index, 1)
-                    this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
-                })
-            }
+                } else {
+                    axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
+                        headers: {
+                            'Authorization': `Bearer ${this.Utils.token()}`
+                        }
+                    }).then(() => {
+                        this.files.splice(index, 1)
+                        this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
+                    })
+                }
+            })
         },
         comparePasswords() {
-            if(this.artist.confirm_password != '' && this.artist.confirm_password != undefined) {
-                if(this.artist.password != this.artist.confirm_password) {
+            if (this.artist.confirm_password != '' && this.artist.confirm_password != undefined) {
+                if (this.artist.password != this.artist.confirm_password) {
                     this.same_password = false
                     console.log('n o son iguales')
                     return
@@ -207,7 +217,8 @@ export default {
                                 <div class="text-center">
                                     <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
                                         class="rounded-full w-52 h-52 cursor-pointer mb-3" />
-                                    <label v-if="preview == 'src/user_placeholder.png'" class="text-center text-gray-300 mt-2 mx-auto">Imagen obligatoria</label>
+                                    <label v-if="preview == 'src/user_placeholder.png'"
+                                        class="text-center text-gray-300 mt-2 mx-auto">Imagen obligatoria</label>
                                 </div>
                             </div>
 
@@ -277,7 +288,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
                                 <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                     <i class="bi bi-key text-gray-100"></i>
-                                    <input @input="comparePasswords" v-model="artist.password" required name="password" type="password" placeholder="Contraseña"
+                                    <input @input="comparePasswords" v-model="artist.password" required name="password"
+                                        type="password" placeholder="Contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -285,12 +297,13 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Confirmar Contraseña</label>
                                 <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
                                     <i class="bi bi-key text-gray-100"></i>
-                                    <input @input="comparePasswords" v-model="artist.confirm_password" required name="confirm_password" type="password"
-                                        placeholder="Confirmar contraseña"
+                                    <input @input="comparePasswords" v-model="artist.confirm_password" required
+                                        name="confirm_password" type="password" placeholder="Confirmar contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
-                            <small v-if="!same_password" class="text-center text-gray-300 col-start-1 col-end-3 mt-1">Las contraseñas no coinciden</small>
+                            <small v-if="!same_password" class="text-center text-gray-300 col-start-1 col-end-3 mt-1">Las
+                                contraseñas no coinciden</small>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
@@ -417,4 +430,5 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 7.5rem);
-}</style>
+}
+</style>

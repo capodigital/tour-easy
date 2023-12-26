@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import TicketItem from './TicketItem.vue';
+import Confirm from '../../modals/Confirm';
 
 export default {
     components: { TicketItem },
@@ -28,18 +29,21 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/tickets/' + item.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.tickets) {
-                    if (this.tickets[i].id == item.id) {
-                        this.tickets.splice(i, 1)
-                        this.Utils.notify('Se ha eliminado correctamente el ticket')
-                        break
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este ticket?')
+            confirm.fire().then((result) => {
+                axios.post('api/tickets/' + item.id, { _method: 'delete' }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }
+                }).then((response) => {
+                    for (let i in this.tickets) {
+                        if (this.tickets[i].id == item.id) {
+                            this.tickets.splice(i, 1)
+                            this.Utils.notify('Se ha eliminado correctamente el ticket')
+                            break
+                        }
+                    }
+                })
             })
         },
         send(e) {
@@ -131,7 +135,8 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <template v-for="item in tickets">
-                    <TicketItem @edit="edit" @destroy="destroy" :ticket="item" v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes', 'itinerary.name'], item, filter)" />
+                    <TicketItem @edit="edit" @destroy="destroy" :ticket="item"
+                        v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes', 'itinerary.name'], item, filter)" />
                 </template>
             </div>
         </div>
@@ -187,7 +192,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input required v-model="ticket.lastname" name="lastname" type="text" placeholder="Apellidos"
+                                    <input required v-model="ticket.lastname" name="lastname" type="text"
+                                        placeholder="Apellidos"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -197,7 +203,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input required v-model="ticket.email" name="email" type="email" placeholder="Correo electrónico"
+                                    <input required v-model="ticket.email" name="email" type="email"
+                                        placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -228,7 +235,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Monto total</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-cash text-gray-100"></i>
-                                    <input required v-model="ticket.amount" name="amount" type="text" placeholder="Monto total"
+                                    <input required v-model="ticket.amount" name="amount" type="text"
+                                        placeholder="Monto total"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -236,7 +244,8 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Descripción</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea required rows="3" v-model="ticket.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required rows="3" v-model="ticket.notes" name="notes"
+                                    placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -269,5 +278,4 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 7.5rem);
-}
-</style>
+}</style>

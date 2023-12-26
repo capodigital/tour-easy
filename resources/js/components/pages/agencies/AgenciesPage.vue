@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios'
-import AgencyItem from './AgencyItem.vue';
+import AgencyItem from './AgencyItem.vue'
+import Confirm from "../../modals/Confirm"
 export default {
     data() {
         return {
@@ -122,52 +123,61 @@ export default {
             this.user.show = true
         },
         destroy(item) {
-            axios.post('api/agencies/' + item.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.agencies) {
-                    if (this.agencies[i].id == item.id) {
-                        this.agencies.splice(i, 1)
-                        this.Utils.notify('Se ha eliminado correctamente la agencia')
-                        break
-                    }
-                }
-            }).catch((error) => {
-                this.Utils.error(error.response)
-            })
-        },
-        destroyManager(user) {
-            axios.post('api/users/' + user.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.agencies) {
-                    if (this.agencies[i].id == user.agency_id) {
-                        this.agencies[i] = response.data.data
-                        this.Utils.notify('Se ha eliminado correctamente el administrador')
-                        break
-                    }
-                }
-            }).catch((error) => {
-                this.Utils.error(error.response)
-            })
-        },
-        removeDocument(index) {
-            if (this.files[index].id == undefined) {
-                this.files.splice(index, 1)
-            } else {
-                axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar esta agencia?')
+            confirm.fire().then((result) => {
+                axios.post('api/agencies/' + item.id, { _method: 'delete' }, {
                     headers: {
                         'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }).then(() => {
-                    this.files.splice(index, 1)
-                    this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
+                }).then((response) => {
+                    for (let i in this.agencies) {
+                        if (this.agencies[i].id == item.id) {
+                            this.agencies.splice(i, 1)
+                            this.Utils.notify('Se ha eliminado correctamente la agencia')
+                            break
+                        }
+                    }
+                }).catch((error) => {
+                    this.Utils.error(error.response)
                 })
-            }
+            })
+        },
+        destroyManager(user) {
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este documento?')
+            confirm.fire().then((result) => {
+                axios.post('api/users/' + user.id, { _method: 'delete' }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
+                    }
+                }).then((response) => {
+                    for (let i in this.agencies) {
+                        if (this.agencies[i].id == user.agency_id) {
+                            this.agencies[i] = response.data.data
+                            this.Utils.notify('Se ha eliminado correctamente el administrador')
+                            break
+                        }
+                    }
+                }).catch((error) => {
+                    this.Utils.error(error.response)
+                })
+            })
+        },
+        removeDocument(index) {
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este artista?')
+            confirm.fire().then((result) => {
+                if (this.files[index].id == undefined) {
+                    this.files.splice(index, 1)
+                } else {
+                    axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
+                        headers: {
+                            'Authorization': `Bearer ${this.Utils.token()}`
+                        }
+                    }).then(() => {
+                        this.files.splice(index, 1)
+                        this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
+                    })
+                }
+            })
         },
     },
     created() {
@@ -212,7 +222,8 @@ export default {
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">
                     <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
-                        @edit="edit" @destroy="destroy" :agency="item" v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />
+                        @edit="edit" @destroy="destroy" :agency="item"
+                        v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />
                 </template>
 
 
@@ -238,7 +249,8 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">Nombre(s) y apellidos</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-person text-gray-100"></i>
-                                <input required v-model="user.name" name="name" type="text" placeholder="Nombre(s) y apellidos"
+                                <input required v-model="user.name" name="name" type="text"
+                                    placeholder="Nombre(s) y apellidos"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
@@ -246,7 +258,8 @@ export default {
                             <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-envelope text-gray-100"></i>
-                                <input required v-model="user.email" name="email" type="email" placeholder="Correo electrónico"
+                                <input required v-model="user.email" name="email" type="email"
+                                    placeholder="Correo electrónico"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                         </div>
@@ -263,7 +276,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Confirmar contraseña</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-key text-gray-100"></i>
-                                    <input required name="confirm_password" type="password" placeholder="Confirmar contraseña"
+                                    <input required name="confirm_password" type="password"
+                                        placeholder="Confirmar contraseña"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -327,7 +341,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Código fiscal</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-upc-scan text-gray-100"></i>
-                                    <input required v-model="agency.taxcode" name="taxcode" type="text" placeholder="Código fiscal"
+                                    <input required v-model="agency.taxcode" name="taxcode" type="text"
+                                        placeholder="Código fiscal"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -335,7 +350,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Dueño de la agencia</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input required v-model="agency.owner" name="owner" type="text" placeholder="Dueño de la agencia"
+                                    <input required v-model="agency.owner" name="owner" type="text"
+                                        placeholder="Dueño de la agencia"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -345,7 +361,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input required v-model="agency.email" name="email" type="email" placeholder="Correo electrónico"
+                                    <input required v-model="agency.email" name="email" type="email"
+                                        placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -363,7 +380,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Número de teléfono</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input required v-model="agency.phone" name="phone" type="tel" placeholder="Número de teléfono"
+                                    <input required v-model="agency.phone" name="phone" type="tel"
+                                        placeholder="Número de teléfono"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -371,7 +389,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Dirección</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-map text-gray-100"></i>
-                                    <input required v-model="agency.address" name="address" type="text" placeholder="Dirección"
+                                    <input required v-model="agency.address" name="address" type="text"
+                                        placeholder="Dirección"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -379,7 +398,8 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Descripción</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea required rows="3" v-model="agency.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required rows="3" v-model="agency.notes" name="notes"
+                                    placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -424,8 +444,8 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
-                                            placeholder="Link"
+                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
+                                            type="text" placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
@@ -454,8 +474,8 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
-                                                type="text" placeholder="Link"
+                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`"
+                                                v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input required v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"

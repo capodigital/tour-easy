@@ -1,8 +1,9 @@
 <script>
+import axios from 'axios'
 import TourActivity from './TourActivity.vue';
 import ActivityDetails from '../../../common/ActivityDetails.vue';
 import AnimMixin from './AnimMixin';
-import axios from 'axios'
+import Confirm from '../../../modals/Confirm';
 export default {
     mixins: [AnimMixin],
     data() {
@@ -47,20 +48,23 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/itineraries/' + item.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.activities) {
-                    if (this.activities[i].id == item.id) {
-                        this.Utils.notify('Se eliminó la actividad correctamente');
-                        this.activities.splice(i, 1)
-                        break
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar esta actividad?')
+            confirm.fire().then((result) => {
+                axios.post('api/itineraries/' + item.id, { _method: 'delete' }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }
-            }).catch((error) => {
-                this.Utils.error(error.response)
+                }).then((response) => {
+                    for (let i in this.activities) {
+                        if (this.activities[i].id == item.id) {
+                            this.Utils.notify('Se eliminó la actividad correctamente');
+                            this.activities.splice(i, 1)
+                            break
+                        }
+                    }
+                }).catch((error) => {
+                    this.Utils.error(error.response)
+                })
             })
         },
         send(e) {
@@ -183,15 +187,18 @@ export default {
             }
         },
         remove(index) {
-            axios.post('api/photos/' + this.images[index].id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                this.images.splice(index, 1)
-                this.Utils.notify('Se eliminó la imagen correctamente');
-            }).catch((error) => {
-                this.Utils.error(error.response)
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar esta imagen?')
+            confirm.fire().then((result) => {
+                axios.post('api/photos/' + this.images[index].id, { _method: 'delete' }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
+                    }
+                }).then((response) => {
+                    this.images.splice(index, 1)
+                    this.Utils.notify('Se eliminó la imagen correctamente');
+                }).catch((error) => {
+                    this.Utils.error(error.response)
+                })
             })
         },
         updatePreview(e) {
@@ -397,9 +404,9 @@ export default {
                                     <div
                                         class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
                                         <div v-if="uploading" class="spinner-border me-2" role="status"><span
-                                            class="visually-hidden">Loading...</span></div>
-                                        <button v-else class="text-white text-4xl opacity-75 hover:opacity-100" type="submit"><i
-                                                class="bi bi-upload"></i></button>
+                                                class="visually-hidden">Loading...</span></div>
+                                        <button v-else class="text-white text-4xl opacity-75 hover:opacity-100"
+                                            type="submit"><i class="bi bi-upload"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -645,4 +652,5 @@ form,
 .images {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 1px;
-}</style>
+}
+</style>

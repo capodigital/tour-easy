@@ -16,6 +16,7 @@
 <body class="bg-gradient-to-br from-gray-100 to-gray-300 overflow-hidden">
     <div id="app" class="relative"></div>
     <div id="alerts" class="fixed top-10 right-5"></div>
+    <div id="confirm"></div>
     @vite('resources/js/app.js')
 </body>
 

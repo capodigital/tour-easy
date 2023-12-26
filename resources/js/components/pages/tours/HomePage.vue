@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import TourCard from './TourCard.vue';
+import Confirm from '../../modals/Confirm';
 
 export default {
     components: { TourCard },
@@ -38,34 +39,40 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/tours/' + item.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.tours) {
-                    if (this.tours[i].id == item.id) {
-                        this.tours.splice(i, 1)
-                        this.Utils.notify('Se ha eliminado correctamente la gira')
-                        break
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar esta gira?')
+            confirm.fire().then((result) => {
+                axios.post('api/tours/' + item.id, { _method: 'delete' }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }
+                }).then((response) => {
+                    for (let i in this.tours) {
+                        if (this.tours[i].id == item.id) {
+                            this.tours.splice(i, 1)
+                            this.Utils.notify('Se ha eliminado correctamente la gira')
+                            break
+                        }
+                    }
+                })
             })
         },
         complete(item) {
-            axios.post('api/tour/noactive', { id: item.id }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.tours) {
-                    if (this.tours[i].id == item.id) {
-                        // this.tours.splice(i, 1)
-                        this.tours[i].active = 1;
-                        this.Utils.notify('Se ha completado correctamente la gira')
-                        break
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea completar esta gira?')
+            confirm.fire().then((result) => {
+                axios.post('api/tour/noactive', { id: item.id }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }
+                }).then((response) => {
+                    for (let i in this.tours) {
+                        if (this.tours[i].id == item.id) {
+                            // this.tours.splice(i, 1)
+                            this.tours[i].active = 1;
+                            this.Utils.notify('Se ha completado correctamente la gira')
+                            break
+                        }
+                    }
+                })
             })
         },
         send(e) {

@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios'
 import PersonalItem from './PersonalItem.vue'
+import Confirm from '../../modals/Confirm';
 
 export default {
     data() {
@@ -79,35 +80,41 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/contacts/' + item.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.contacts) {
-                    if (this.contacts[i].id == item.id) {
-                        this.contacts.splice(i, 1)
-                        this.Utils.notify('Se ha eliminado correctamente el contacto')
-                        break
-                    }
-                }
-            }).catch((error) => {
-                this.Utils.error(error.response)
-            })
-        },
-        removeDocument(index) {
-            if (this.files[index].id == undefined) {
-                this.files.splice(index, 1)
-            } else {
-                axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este contacto?')
+            confirm.fire().then((result) => {
+                axios.post('api/contacts/' + item.id, { _method: 'delete' }, {
                     headers: {
                         'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }).then(() => {
-                    this.files.splice(index, 1)
-                    this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
+                }).then((response) => {
+                    for (let i in this.contacts) {
+                        if (this.contacts[i].id == item.id) {
+                            this.contacts.splice(i, 1)
+                            this.Utils.notify('Se ha eliminado correctamente el contacto')
+                            break
+                        }
+                    }
+                }).catch((error) => {
+                    this.Utils.error(error.response)
                 })
-            }
+            })
+        },
+        removeDocument(index) {
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este documento?')
+            confirm.fire().then((result) => {
+                if (this.files[index].id == undefined) {
+                    this.files.splice(index, 1)
+                } else {
+                    axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
+                        headers: {
+                            'Authorization': `Bearer ${this.Utils.token()}`
+                        }
+                    }).then(() => {
+                        this.files.splice(index, 1)
+                        this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
+                    })
+                }
+            })
         }
     },
     created() {
@@ -190,7 +197,8 @@ export default {
                     </div>
                     <div class="container overflow-auto">
                         <template v-for="item in contacts">
-                            <PersonalItem @edit="edit" @destroy="destroy"  :contact="item" v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typecontact.description'], item, filter)" />
+                            <PersonalItem @edit="edit" @destroy="destroy" :contact="item"
+                                v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typecontact.description'], item, filter)" />
                         </template>
                     </div>
                 </div>
@@ -235,7 +243,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input required v-model="contact.lastname" name="lastname" type="text" placeholder="Apellidos"
+                                    <input required v-model="contact.lastname" name="lastname" type="text"
+                                        placeholder="Apellidos"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -265,7 +274,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Teléfono principal</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input required v-model="contact.phone" name="phone" type="tel" placeholder="Teléfono principal"
+                                    <input required v-model="contact.phone" name="phone" type="tel"
+                                        placeholder="Teléfono principal"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -360,8 +370,8 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
-                                            placeholder="Link"
+                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
+                                            type="text" placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
@@ -390,8 +400,8 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
-                                                type="text" placeholder="Link"
+                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`"
+                                                v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input required v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"

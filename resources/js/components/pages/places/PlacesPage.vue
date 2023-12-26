@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import PlaceItem from './PlaceItem.vue';
+import Confirm from '../../modals/Confirm';
 
 export default {
     components: { PlaceItem },
@@ -61,20 +62,23 @@ export default {
             this.show = true
         },
         destroy(item) {
-            axios.post('api/places/' + item.id, { _method: 'delete' }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                for (let i in this.places) {
-                    if (this.places[i].id == item.id) {
-                        this.places.splice(i, 1)
-                        this.Utils.notify('Se ha eliminado correctamente el lugar')
-                        break
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este lugar?')
+            confirm.fire().then((result) => {
+                axios.post('api/places/' + item.id, { _method: 'delete' }, {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
                     }
-                }
-            }).catch((error) => {
-                this.Utils.error(error.response)
+                }).then((response) => {
+                    for (let i in this.places) {
+                        if (this.places[i].id == item.id) {
+                            this.places.splice(i, 1)
+                            this.Utils.notify('Se ha eliminado correctamente el lugar')
+                            break
+                        }
+                    }
+                }).catch((error) => {
+                    this.Utils.error(error.response)
+                })
             })
         },
         send(e) {
@@ -109,18 +113,21 @@ export default {
             })
         },
         removeDocument(index) {
-            if (this.files[index].id == undefined) {
-                this.files.splice(index, 1)
-            } else {
-                axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
-                    headers: {
-                        'Authorization': `Bearer ${this.Utils.token()}`
-                    }
-                }).then(() => {
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este documento?')
+            confirm.fire().then((result) => {
+                if (this.files[index].id == undefined) {
                     this.files.splice(index, 1)
-                    this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
-                })
-            }
+                } else {
+                    axios.post('api/documents/' + this.files[index].id, { _method: 'delete' }, {
+                        headers: {
+                            'Authorization': `Bearer ${this.Utils.token()}`
+                        }
+                    }).then(() => {
+                        this.files.splice(index, 1)
+                        this.Utils.notify('Se ha eliminado correctamente el documento del servidor')
+                    })
+                }
+            })
         }
     },
     mounted() {
@@ -183,7 +190,8 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in places">
-                    <PlaceItem @edit="edit" @destroy="destroy" :place="item" v-if="Utils.filter(['name', 'email', 'phone', 'extra_phone', 'address', 'manager', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typeplace.description'], item, filter)" />
+                    <PlaceItem @edit="edit" @destroy="destroy" :place="item"
+                        v-if="Utils.filter(['name', 'email', 'phone', 'extra_phone', 'address', 'manager', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typeplace.description'], item, filter)" />
                 </template>
             </div>
         </div>
@@ -218,7 +226,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Nombre del lugar</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-globe text-gray-100"></i>
-                                    <input required v-model="place.name" name="name" type="text" placeholder="Nombre del lugar"
+                                    <input required v-model="place.name" name="name" type="text"
+                                        placeholder="Nombre del lugar"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -236,7 +245,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Teléfono principal</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input required v-model="place.phone" name="phone" type="tel" placeholder="Teléfono principal"
+                                    <input required v-model="place.phone" name="phone" type="tel"
+                                        placeholder="Teléfono principal"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -255,7 +265,8 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input required v-model="place.email" name="email" type="email" placeholder="Correo electrónico"
+                                    <input required v-model="place.email" name="email" type="email"
+                                        placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -324,7 +335,8 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea required rows="3" v-model="place.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea required rows="3" v-model="place.notes" name="notes"
+                                    placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -345,8 +357,8 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
-                                            placeholder="Link"
+                                        <input required v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
+                                            type="text" placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
@@ -375,8 +387,8 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
-                                                type="text" placeholder="Link"
+                                            <input required v-if="file.id == undefined" :name="`urls[${index}]`"
+                                                v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input required v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
