@@ -7,14 +7,14 @@ export default {
         return {
             forms: [],
             types: [
-                { "id": "1", "description": "Show" },
-                { "id": "2", "description": "Actividad" },
-                { "id": "3", "description": "Servicio" },
-                { "id": "4", "description": "Transporte terrestre" },
-                { "id": "5", "description": "Hotel" },
-                { "id": "6", "description": "Avión" },
-                { "id": "7", "description": "Tren" },
-                { "id": "8", "description": "Transfer" }
+                { description: "Show" },
+                { description: "Actividad" },
+                { description: "Servicio" },
+                { description: "Transporte terrestre" },
+                { description: "Hotel" },
+                { description: "Avión" },
+                { description: "Tren" },
+                { description: "Transfer" }
             ],
             month: today.getMonth(),
             year: today.getFullYear(),
@@ -24,7 +24,6 @@ export default {
             tours: [],
             contacts: [],
             suppliers: [],
-            types: [],
             countries: [],
             cities: [],
             places: [],
@@ -33,6 +32,11 @@ export default {
             show: false,
             tour_id: 0,
         };
+    },
+    watch: {
+        activity() {
+            console.log(this.activity)
+        }
     },
     methods: {
         setCities(country) {
@@ -102,7 +106,7 @@ export default {
                 }
                 for (let item of response.data.data) {
                     const date = new Date(item.startdate);
-                    this.forms[date.getDate() - 1 + initial].activities.push(item);
+                    this.forms[date.getDate() - 1 + initial].activities.push(this.getActivityData(item));
                 }
                 for (let i = 1; i < 8 - today.getDay(); i++) {
                     this.forms.push({
@@ -113,6 +117,61 @@ export default {
             }).catch((error) => {
                 this.Utils.error(error.response)
             });
+        },
+        getActivityData(activity) {
+            let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate, end = activity.enddate, complete = ''
+            if (new Date(start) > new Date()) {
+                complete = 'No completado'
+            } else {
+                if (new Date() < new Date(end)) {
+                    complete = 'En progreso'
+                } else {
+                    complete = 'Completado'
+                }
+            }
+            let date = '';
+            switch (Number(activity.typeitinerary_id)) {
+                case 1:
+                    name = activity.name, description = `<b>Prueba de sonidos: </b>${activity.showcheck}.<br /><b>Puertas abiertas: </b>${activity.showtime}.<br /><b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                    break;
+                case 2:
+                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                    break;
+                case 3:
+                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
+                        date = `<br />${start}`;
+                    break;
+                case 5:
+                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+                case 4:
+                    name = activity.place.name, description = `<b>Conductor: </b>${activity.contact.name}`,
+                        date = `<br />${start}`;
+                    break;
+                case 6:
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Aerolinea: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+                case 7:
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Ferroviaria: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+                case 8:
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Transporte: </b>${activity.contact.name}.<br /><b>Conductor: </b>${activity.place.name}`,
+                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
+                    break;
+            }
+            const item = activity
+            item.name = name
+            item.type = type
+            item.description = description
+            item.date = date
+            item.start = start
+            item.complete = complete
+            return item
         },
         timestamp(day) {
             const date = new Date(this.year, this.month, day);
@@ -128,13 +187,13 @@ export default {
         }).then((response) => {
             this.tours = response.data.data;
         });
-        axios.get('api/typeitineraries', {
-            headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }
-        }).then((response) => {
-            this.types = response.data.data;
-        });
+        // axios.get('api/typeitineraries', {
+        //     headers: {
+        //         'Authorization': `Bearer ${this.Utils.token()}`
+        //     }
+        // }).then((response) => {
+        //     this.types = response.data.data;
+        // });
         axios.get('api/contacts', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
