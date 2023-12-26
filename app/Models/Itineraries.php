@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Itineraries extends Model
 {
@@ -42,6 +43,10 @@ class Itineraries extends Model
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Suppliers::class, 'supplier_id');
+    }
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Tickets::class,'itinerary_id');
     }
     
     

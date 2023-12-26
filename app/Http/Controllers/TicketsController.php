@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TicketsResource;
+use App\Models\Agencies;
+use App\Models\Artists;
 use App\Models\Tickets;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketsController extends Controller
@@ -11,9 +14,26 @@ class TicketsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($request)
     {
-        $tickets = Tickets::all();
+        $tickets = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $agency = Agencies::find($user->agency_id);
+                $tickets = $agency->tours()->with(['itineraries.tickets'])->get()->pluck('itineraries')->collapse()->pluck('tickets')->collapse();
+            } else
+                $tickets = Tickets::all();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+           
+            $agency = Agencies::find($request->user()->id);
+            $tickets = $agency->tours()->with(['itineraries.tickets'])->get()->pluck('itineraries')->collapse()->pluck('tickets')->collapse();
+
+        } else {
+            $artist = Artists::find($request->user()->id);
+            $tickets = $artist->tours()->where('active', true)->with(['itineraries.tickets'])->get()->pluck('itineraries')->collapse()->pluck('tickets')->collapse();
+        }
+
         return TicketsResource::collection($tickets);
     }
 
