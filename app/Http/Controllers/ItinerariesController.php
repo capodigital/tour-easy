@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ItinerariesResource;
+use App\Models\Agencies;
+use App\Models\Artists;
 use App\Models\Itineraries;
 use App\Models\Tours;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ItinerariesController extends Controller
@@ -12,9 +15,25 @@ class ItinerariesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($request)
     {
-        $itineraries = Itineraries::all();
+        $itineraries = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $agency = Agencies::find($user->agency_id);
+                $itineraries = $agency->tours()->where('active',true)->with('itineraries')->get();
+            } else
+            $itineraries = Itineraries::all();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $user = User::find($request->user()->id);
+            $agency = Agencies::find($user->agency_id);
+            $itineraries = $agency->tours()->where('active',true)->with('itineraries')->get();
+        } else {
+            $artist = Artists::find($request->user()->id);
+            $itineraries = $artist->tours()->where('active',true)->with('itineraries')->get();
+        }
+        
         return ItinerariesResource::collection($itineraries);
     }
 
