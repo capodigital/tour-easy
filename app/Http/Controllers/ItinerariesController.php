@@ -113,7 +113,23 @@ class ItinerariesController extends Controller
 
     public function month(Request $request, $month, $year)
     {
-        return ItinerariesResource::collection(Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get());
+        $itineraries = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $agency = Agencies::find($user->agency_id);
+                $itineraries = $agency->tours()->where('active',true)->with('itineraries')->whereYear('startdate', $year)->whereMonth('startdate', $month)->get();
+            } else
+            $itineraries = Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $user = User::find($request->user()->id);
+            $agency = Agencies::find($user->agency_id);
+            $itineraries = $agency->tours()->where('active',true)->with('itineraries')->whereYear('startdate', $year)->whereMonth('startdate', $month)->get();
+        } else {
+            $artist = Artists::find($request->user()->id);
+            $itineraries = $artist->tours()->where('active',true)->with('itineraries')->whereYear('startdate', $year)->whereMonth('startdate', $month)->get();
+        }
+        return ItinerariesResource::collection($itineraries);
     }
     public function day(Request $request, $day, $month, $year)
     {
