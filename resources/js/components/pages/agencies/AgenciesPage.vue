@@ -186,7 +186,7 @@ export default {
         changeAgencyPassword(form) {
             this.Utils.lock(form)
             const data = new FormData(form)
-            axios.post(`api/agencies/${this.agency_password_id}/password`, data, {
+            axios.post(`api/agencies/password/${this.agency_password_id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
@@ -201,7 +201,7 @@ export default {
         changeUserPassword(form) {
             this.Utils.lock(form)
             const data = new FormData(form)
-            axios.post(`api/users/${this.user_password_id}/password`, data, {
+            axios.post(`api/users/password/${this.user_password_id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }

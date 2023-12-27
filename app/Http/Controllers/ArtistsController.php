@@ -9,6 +9,7 @@ use App\Models\Documents;
 use App\Models\Socialmedias;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -150,14 +151,19 @@ class ArtistsController extends Controller
     {
     }
 
-    public function updatePassword(Request $request, Artists $artist) {
+    public function updatePassword(Request $request, $artist) {
         $request->validate([
             'current_password' => 'required|current_password',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
         ]);
-        // $artist->password = bcrypt($request->password);
-        $artist->update(['password' => bcrypt($request->password)]);
+       // dd($artist);
+        $artista=DB::table('artists')
+            ->where('id', $artist)
+            ->update(['password' => bcrypt($request->password)]);
+        //$artist->password = bcrypt($request->password);
+        //$artist->save();
+        //$artist->update(['password' => bcrypt($request->password)]);
         return response('');
     }
 

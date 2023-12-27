@@ -50,12 +50,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/agency/user', [AgenciesController::class, 'agencyByUser']);
     Route::get('/deleted_agencies', [AgenciesController::class, 'deleted']);
     Route::post('/agencies/{id}/restore', [AgenciesController::class, 'restore']);
+    Route::post('/agencies/password/{agency}', [AgenciesController::class, 'updatePassword']);
+
 
     Route::resource('artists', ArtistsController::class);
     Route::get('/all_artists', [ArtistsController::class, 'all']);
     Route::get('/deleted_artists', [ArtistsController::class, 'deleted']);
     Route::post('/artists/{id}/restore', [ArtistsController::class, 'restore']);
-    Route::post('/artists/{id}/password', [ArtistsController::class, 'updatePassword']);
+    Route::post('/artists/password/{artist}', [ArtistsController::class, 'updatePassword']);
     Route::post('/artists/agency', [ArtistsController::class, 'artistsByAgency']);
 
     Route::resource('tours', ToursController::class);
@@ -98,4 +100,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('documents', DocumentsController::class);
 
     Route::resource('users', UserController::class);
+    Route::post('/users/password/{user}', [UserController::class, 'updatePassword']);
+
 });
