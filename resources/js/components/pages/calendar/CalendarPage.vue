@@ -288,7 +288,7 @@ export default {
                         {{ item.tourname }}
                     </option>
                 </select>
-                <div class="form-check items-center">
+                <div class="form-check items-center ms-1 flex">
                     <input required aria-label="Ver giras terminadas" @change="(e) => active = e.target.checked ? 1 : 0"
                         class="form-check-input me-0.5" type="checkbox" />
                     <label class="form-check-label leading-4 text-sm text-center">
@@ -342,7 +342,7 @@ export default {
                                     <template v-else>
                                         <template v-for="item in day.activities">
                                             <button
-                                                v-if="(tour_id == 0 || item.tour_id == tour_id) && (active == 0 || item.itinerary.tour.active == active)"
+                                                v-if="(tour_id == 0 || item.tour_id == tour_id) && (active == 1 || item.tour.active == 1)"
                                                 @click="details = item"
                                                 class="block rounded text-white w-full bg-green-500 py-1 px-2 mb-0.5 text-xs truncate">
                                                 {{ types[Number(item.typeitinerary_id) - 1].description }}
