@@ -24,16 +24,16 @@ class ItinerariesController extends Controller
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 $agency = Agencies::find($user->agency_id);
-                $itineraries = $agency->tours()->with('itineraries')->get();
+                $itineraries = $agency->tours()->where('active',true)->with('itineraries')->get();
             } else
-                $itineraries = Itineraries::all();
+                $itineraries = Itineraries::where('active',true)->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
-            $itineraries = $agency->tours()->with('itineraries')->get();
+            $itineraries = $agency->tours()->where('active',true)->with('itineraries')->get();
         } else {
             $artist = Artists::find($request->user()->id);
-            $itineraries = $artist->tours()->with('itineraries')->get();
+            $itineraries = $artist->tours()->where('active',true)->with('itineraries')->get();
         }
 
         return ItinerariesResource::collection($itineraries);
@@ -145,7 +145,7 @@ class ItinerariesController extends Controller
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 $agency = Agencies::find($user->agency_id);
-                $itineraries = $agency->tours()->with(['itineraries' => function ($query) use ($month, $year) {
+                $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
                 }])->get()
                 ->pluck('itineraries')->collapse();
@@ -154,14 +154,14 @@ class ItinerariesController extends Controller
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
-            $itineraries = $agency->tours()->with(['itineraries' => function ($query) use ($month, $year) {
+            $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
                 $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
             }])
                 ->get()
                 ->pluck('itineraries')->collapse();
         } else {
             $artist = Artists::find($request->user()->id);
-            $itineraries = $artist->tours()->with(['itineraries' => function ($query) use ($month, $year) {
+            $itineraries = $artist->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
                 $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
             }])->get()
                 ->pluck('itineraries')->collapse();
@@ -175,7 +175,7 @@ class ItinerariesController extends Controller
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 $agency = Agencies::find($user->agency_id);
-                $itineraries = $agency->tours()->with(['itineraries' => function ($query) use ($month, $year, $day) {
+                $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
                 }])->get()->pluck('itineraries')->collapse();
             } else
@@ -183,12 +183,12 @@ class ItinerariesController extends Controller
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
-            $itineraries = $agency->tours()->with(['itineraries' => function ($query) use ($month, $year, $day) {
+            $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
                 }])->get()->pluck('itineraries')->collapse();
         } else {
             $artist = Artists::find($request->user()->id);
-            $itineraries = $artist->tours()->with(['itineraries' => function ($query) use ($month, $year, $day) {
+            $itineraries = $artist->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
                 }])->get()->pluck('itineraries')->collapse();
         }
