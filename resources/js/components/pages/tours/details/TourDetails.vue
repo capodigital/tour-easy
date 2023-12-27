@@ -328,6 +328,7 @@ export default {
                             class="md:text-4xl font-bold bg-gradient-to-tr from-slate-100 to-slate-300 text-xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                             {{ tour.tourname }}</h1>
                         <p class="text-2xl">{{ tour.artist.name }}</p>
+                        <p class="text-lg">{{ tour.startdate }}----{{ tour.enddate }}</p>
                         <button @click="show_images = true"
                             class="rounded text-white text-sm z-50 border border-white px-2 py-1 hover:bg-white hover:text-black transition-all">Ver
                             imágenes</button>

@@ -72,11 +72,9 @@ class UserController extends Controller
             'name' => 'required',
             'agency_id' => 'required',
             'email' => ['required', 'email', 'unique:users,email,' . $user->id],
-            'password' => ['required','string'],
-            'confirm_password' => 'required|same:password'
+            
         ]);
-        $data = $request->except(['password']);
-        $data['password'] = bcrypt($request->password);
+        $data = $request->only(['email', 'name', 'agency_id']);
         //Almacenar los datos en la base de datos
         $user->update($data);
         if ($user->agency_id != null) {
