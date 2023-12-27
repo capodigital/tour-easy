@@ -90,19 +90,19 @@ class ContactsController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $contact->id,
-                    'documentable_type' => 'App\Models\Contacts'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $contact->id,
+                        'documentable_type' => 'App\Models\Contacts'
+                    ]);
+                }
             }
         }
-
-
 
         $contact->refresh();
         return new ContactsResource($contact);
@@ -176,15 +176,17 @@ class ContactsController extends Controller
         }
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $contact->id,
-                    'documentable_type' => 'App\Models\Contacts'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $contact->id,
+                        'documentable_type' => 'App\Models\Contacts'
+                    ]);
+                }
             }
         }
         $contact->refresh();

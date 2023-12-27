@@ -174,15 +174,17 @@ class PlacesController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $place->id,
-                    'documentable_type' => 'App\Models\Places'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $place->id,
+                        'documentable_type' => 'App\Models\Places'
+                    ]);
+                }
             }
         }
 

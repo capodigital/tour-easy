@@ -9,10 +9,10 @@ export default {
 }
 </script>
 <template>
-    <div class="bg-white rounded-2xl shadow-md shadow-gray-500 transition-all hover:scale-105 cursor-pointer">
+    <div class="bg-white rounded-2xl shadow-md shadow-gray-500 transition-all hover:scale-105 cursor-pointer relative pb-[300px]">
         <div class="">
             <div class="flex float-right p-3">
-                <button @click="$emit('edit', place)"
+                <button title="Editar lugar" @click="$emit('edit', place)"
                     class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -23,7 +23,7 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button @click="$emit('destroy', place)"
+                <button title="Eliminar lugar" @click="$emit('destroy', place)"
                     class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -93,7 +93,7 @@ export default {
                 <hr class="my-2 border-gray-500" />
                 <DocumentsItem dark="true" :documents="place.documents" />
             </div>
-            <div>
+            <div class="absolute bottom-0 left-0 w-full h-[300px]">
                 <div style="width: 100%">
                     <iframe class="rounded-b-2xl" width="100%" height="300" frameborder="0" scrolling="no" marginheight="0"
                         marginwidth="0"

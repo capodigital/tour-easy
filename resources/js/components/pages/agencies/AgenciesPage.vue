@@ -231,9 +231,9 @@ export default {
         </div>
         <transition name="bounce" mode="out-in">
             <div v-if="Utils.role() == 'agency' && user.show"
-                class="w-full bg-white flex bg-opacity-90 left-0 h-screen absolute top-0 px-2 py-2 justify-center items-center">
+                class="w-full bg-white flex bg-opacity-90 left-0 h-screen absolute top-0 px-2 py-2 justify-center items-center pb-10">
                 <form @submit.prevent="manager"
-                    class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 transition-all hover:scale-105 cursor-pointer">
+                    class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 overflow-auto transition-all cursor-pointer">
                     <input type="hidden" :value="Utils.user().id" name="agency_id" />
                     <h1
                         class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">

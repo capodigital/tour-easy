@@ -13,6 +13,7 @@ export default {
             itineraries: [],
             tours: [],
             tour_id: 1,
+            tour_filter: 0,
             ticket: {},
             show: false
         };
@@ -125,18 +126,31 @@ export default {
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     TICKETS</h1>
-                <div class="flex items-center rounded border border-gray-400 px-2 me-2">
-                    <i class="bi bi-funnel-fill text-gray-400"></i>
-                    <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                        class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+                <div>
+                    <div class="flex items-center rounded border border-gray-400 px-2 me-2">
+                        <i class="bi bi-funnel-fill text-gray-400"></i>
+                        <input v-model="filter" type="text" placeholder="Escribe para filtrar"
+                            class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+                    </div>
+
                 </div>
-                <button v-if="Utils.role() != 'artist'" @click="add"
-                    class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
+                <div>
+                    <button v-if="Utils.role() != 'artist'" @click="add"
+                        class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
+                </div>
+            </div>
+            <div class="flex justify-end mt-1">
+                <select v-model="tour_filter" class="rounded border border-gray-500 px-3 pe-8 py-1 mt-1">
+                    <option value="0">Todas las giras</option>
+                    <option v-for="item in tours" :value="item.id">
+                        {{ item.tourname }}
+                    </option>
+                </select>
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <template v-for="item in tickets">
                     <TicketItem @edit="edit" @destroy="destroy" :ticket="item"
-                        v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes', 'itinerary.name'], item, filter)" />
+                        v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes', 'itinerary.name'], item, filter) && (tour_filter == 0 || tour_filter == item.itinerary.tour_id)" />
                 </template>
             </div>
         </div>
@@ -244,8 +258,7 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Descripción</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea rows="3" v-model="ticket.notes" name="notes"
-                                    placeholder="Datos adicionales"
+                                <textarea rows="3" v-model="ticket.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -278,4 +291,5 @@ h1 {
 form,
 .container {
     max-height: calc(100vh - 7.5rem);
-}</style>
+}
+</style>

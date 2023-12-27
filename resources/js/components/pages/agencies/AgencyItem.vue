@@ -13,7 +13,7 @@ export default {
                 <small class=" text-xs text-gray-400">{{ agency.taxcode }}</small>
                 <div class="flex mt-0.5">
                     <div v-if="Utils.role() != 'artist'" class="flex w-full justify-end">
-                        <button @click="$emit('edit', agency)"
+                        <button title="Editar agencia" @click="$emit('edit', agency)"
                             class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                                 stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -24,7 +24,7 @@ export default {
                                 <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                             </svg>
                         </button>
-                        <button @click="$emit('destroy', agency)"
+                        <!-- <button @click="$emit('destroy', agency)"
                             class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                                 stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -35,7 +35,7 @@ export default {
                                 <line x1="10" x2="10" y1="11" y2="17" />
                                 <line x1="14" x2="14" y1="11" y2="17" />
                             </svg>
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>

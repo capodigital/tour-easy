@@ -340,7 +340,7 @@ export default {
                                         </template>
 
                                     </template>
-                                    <button v-if="Utils.role() != 'artist'" @click="add(day.day)"
+                                    <button title="Agregar actividad" v-if="Utils.role() != 'artist'" @click="add(day.day)"
                                         class="w-full py-0.5 text-center border mt-0.5 border-gray-400 text-gray-400 rounded flex justify-center items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                             fill="none" stroke="rgb(156, 163, 175)" stroke-width="2" stroke-linecap="round"
@@ -431,8 +431,8 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-x-2">
-                            <div>
+                        <div class="grid grid-cols-1 gap-x-2">
+                            <div class="hidden">
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>

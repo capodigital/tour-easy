@@ -88,8 +88,21 @@ export default {
             {{ Utils.datetime(date, Utils.TEXT_DATE) }}
         </h1>
         <div class="flex justify-center">
-            <div>
+            <div v-if="activities.length > 0">
                 <DayItem v-for="activity in activities" :activity="activity" />
+            </div>
+            <div v-else class="no-result flex justify-center items-center">
+                <div class="text-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none"
+                        stroke="rgb(107, 114, 128)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search-x m-auto">
+                        <path d="m13.5 8.5-5 5" />
+                        <path d="m8.5 8.5 5 5" />
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                    <p class="text-center text-gray-500">No hay eventos para este día</p>
+                </div>
             </div>
         </div>
     </div>
@@ -97,5 +110,8 @@ export default {
 <style scoped>
 h1 {
     font-family: 'Archivo Black', sans-serif;
+}
+.no-result {
+    height: calc(100vh - 10rem);
 }
 </style>

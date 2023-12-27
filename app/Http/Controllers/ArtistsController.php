@@ -63,7 +63,8 @@ class ArtistsController extends Controller
             'email' => 'required|email|unique:artists',
             'password' => ['required', 'string'],
             'image' => ['required', 'image'],
-            'confirm_password' => 'required|same:password'
+            'confirm_password' => 'required|same:password',
+            'birthday' => 'required|before:today'
 
         ]);
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id']);
@@ -116,15 +117,17 @@ class ArtistsController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $artist->id,
-                    'documentable_type' => 'App\Models\Artists'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $artist->id,
+                        'documentable_type' => 'App\Models\Artists'
+                    ]);
+                }
             }
         }
 
@@ -155,7 +158,7 @@ class ArtistsController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => ['required', 'email', 'unique:artists,email,' . $artist->id],
-            
+            'birthday' => 'required|before:today'
         ]);
 
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'notes']);

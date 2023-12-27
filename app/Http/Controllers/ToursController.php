@@ -73,7 +73,7 @@ class ToursController extends Controller
             'spotify_list', 'youtube_list'
         ]);
 
-        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+        if (Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
             ]);
@@ -128,15 +128,17 @@ class ToursController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $tour->id,
-                    'documentable_type' => 'App\Models\Tours'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $tour->id,
+                        'documentable_type' => 'App\Models\Tours'
+                    ]);
+                }
             }
         }
 
@@ -169,7 +171,7 @@ class ToursController extends Controller
             'tourname' => 'required',
         ]);
 
-        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+        if (Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
             ]);
@@ -226,15 +228,17 @@ class ToursController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $tour->id,
-                    'documentable_type' => 'App\Models\Tours'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $tour->id,
+                        'documentable_type' => 'App\Models\Tours'
+                    ]);
+                }
             }
         }
 

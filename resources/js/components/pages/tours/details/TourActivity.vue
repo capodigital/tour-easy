@@ -12,7 +12,7 @@ export default {
     <article class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer">
         <div class="float-right">
             <div class="flex">
-                <button @click="$emit('show', activity)"
+                <button title="Ver detalles de la actividad" @click="$emit('show', activity)"
                     class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -21,7 +21,7 @@ export default {
                         <circle cx="12" cy="12" r="3" />
                     </svg>
                 </button>
-                <button v-if="Utils.role() != 'artist'" @click="$emit('edit', activity)"
+                <button title="Editar actividad" v-if="Utils.role() != 'artist'" @click="$emit('edit', activity)"
                     class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +32,7 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button v-if="Utils.role() != 'artist'" @click="$emit('destroy', activity)"
+                <button title="Eliminar actividad" v-if="Utils.role() != 'artist'" @click="$emit('destroy', activity)"
                     class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -63,7 +63,7 @@ export default {
                         <path d="m9 11 3 3L22 4" />
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                     </svg>
-                    <svg v-else-if="activity.complete == 'No com'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    <svg v-else-if="activity.complete == 'No completado'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="lucide lucide-calendar-clock me-2">
                         <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
@@ -86,7 +86,6 @@ export default {
                 <div class="flex">
                     <div>
                         <small class="text-end text-gray-500 leading-4" v-html="activity.date"></small>
-
                     </div>
                 </div>
             </div>
@@ -98,4 +97,5 @@ export default {
 h3,
 p {
     font-family: 'Roboto', sans-serif;
-}</style>
+}
+</style>

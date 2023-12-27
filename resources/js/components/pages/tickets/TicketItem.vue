@@ -12,7 +12,7 @@ export default {
     <div class="bg-white rounded-2xl shadow-md shadow-gray-500 transition-all hover:scale-105 cursor-pointer">
         <div class="">
             <div v-if="Utils.role() != 'artist'" class="flex float-right p-3">
-                <button @click="$emit('edit', ticket)"
+                <button title="Editar ticket" @click="$emit('edit', ticket)"
                     class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -23,7 +23,7 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button @click="$emit('destroy', ticket)"
+                <button title="Eliminar ticket" @click="$emit('destroy', ticket)"
                     class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

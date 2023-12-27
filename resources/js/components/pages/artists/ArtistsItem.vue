@@ -14,7 +14,7 @@ export default {
 }
 </script>
 <template>
-    <article class="shadow-md shadow-gray-500 rounded-md">
+    <article class="shadow-md shadow-gray-500 rounded-md pb-12 relative">
         <div class="relative h-80 w-full bg-cover bg-center rounded-t-md"
             :style="{ 'background': `url(${artist.image.replace('http://localhost/', '')})` }">
             <div
@@ -85,6 +85,7 @@ export default {
                 </div>
             </div>
         </div>
+        <p class="text-xs text-gray-400 px-2">{{artist.notes}}</p>
 
         <div class="p-2">
             <p class="text-sm text-white">Redes sociales</p>
@@ -109,13 +110,13 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="px-2 pb-3 grid gap-2"
+        <div class="px-2 pb-3 grid gap-2 absolute bottom-0 left-0 w-full"
             :class="{ 'grid-cols-1': Utils.role() == 'artist', 'grid-cols-2': Utils.role() != 'artist' }">
-            <button type="button" @click="$emit('edit', artist)"
+            <button title="Editar artista" type="button" @click="$emit('edit', artist)"
                 class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
                 <i class="bi bi-pencil-square"></i> Editar
             </button>
-            <button v-if="Utils.role() != 'artist'" type="button" @click="$emit('destroy', artist)"
+            <button title="Eliminar artista" v-if="Utils.role() != 'artist'" type="button" @click="$emit('destroy', artist)"
                 class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
                 <i class="bi bi-trash"></i> Eliminar
             </button>

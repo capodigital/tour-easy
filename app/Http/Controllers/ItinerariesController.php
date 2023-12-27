@@ -54,11 +54,19 @@ class ItinerariesController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'startdate' => 'date|after:today'
         ]);
 
         if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
+            ]);
+        }
+
+        $tour = Tours::find($request->tour_id);
+        if(Carbon::parse($request->enddate) > $tour->enddate) {
+            throw ValidationException::withMessages([
+                'enddate' => ['La fecha de fin no puede ser mayor que la fecha de fin de la gira.'],
             ]);
         }
 
@@ -95,10 +103,16 @@ class ItinerariesController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'startdate' => 'date|after:today'
         ]);
         if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
+            ]);
+        }
+        if(Carbon::parse($request->enddate) > $itinerary->tour->enddate) {
+            throw ValidationException::withMessages([
+                'enddate' => ['La fecha de fin no puede ser mayor que la fecha de fin de la gira.'],
             ]);
         }
         $itinerary->update($request->all());

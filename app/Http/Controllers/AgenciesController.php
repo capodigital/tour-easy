@@ -109,15 +109,17 @@ class AgenciesController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $agency->id,
-                    'documentable_type' => 'App\Models\Agencies'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $agency->id,
+                        'documentable_type' => 'App\Models\Agencies'
+                    ]);
+                }
             }
         }
         $agency->refresh();
@@ -195,15 +197,17 @@ class AgenciesController extends Controller
 
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $agency->id,
-                    'documentable_type' => 'App\Models\Agencies'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $agency->id,
+                        'documentable_type' => 'App\Models\Agencies'
+                    ]);
+                }
             }
         }
         $agency->refresh();
