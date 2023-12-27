@@ -284,9 +284,14 @@ export default {
                 </select>
                 <select v-model="tour_id" class="rounded border border-gray-500 px-3 pe-8 py-1">
                     <option value="0">Todas las giras</option>
-                    <option v-for="item in tours" :value="item.id">
-                        {{ item.tourname }}
-                    </option>
+                    <template v-for="item in tours" :value="item.id">
+                        <option v-if="active == 1 || item.active == 1">
+
+                            {{ item.tourname }}
+
+                        </option>
+                    </template>
+
                 </select>
                 <div class="form-check items-center ms-1 flex">
                     <input required aria-label="Ver giras terminadas" @change="(e) => active = e.target.checked ? 1 : 0"
