@@ -150,7 +150,9 @@ class ItinerariesController extends Controller
                 }])->get()
                 ->pluck('itineraries')->collapse();
             } else
-                $itineraries = Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->get();
+                $itineraries = Tours::where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
+                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
+                }])->get()->pluck('itineraries')->collapse();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
@@ -179,7 +181,9 @@ class ItinerariesController extends Controller
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
                 }])->get()->pluck('itineraries')->collapse();
             } else
-                $itineraries = Itineraries::whereYear('startdate', $year)->whereMonth('startdate', $month)->whereDay('startdate', $day)->get();
+                $itineraries = Tours::where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
+                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
+                }])->get()->pluck('itineraries')->collapse();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
