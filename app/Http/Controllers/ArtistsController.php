@@ -155,8 +155,7 @@ class ArtistsController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => ['required', 'email', 'unique:artists,email,' . $artist->id],
-            'password' => ['required', 'string'],
-            'confirm_password' => 'required|same:password'
+            
         ]);
 
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'notes']);
