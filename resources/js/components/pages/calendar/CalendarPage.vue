@@ -436,7 +436,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input disabled readonly v-model="activity.startdate" name="startdate" type="date"
+                                    <input readonly v-model="activity.startdate" name="startdate" type="date"
                                         placeholder="Fecha de inicio"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                                 </div>
