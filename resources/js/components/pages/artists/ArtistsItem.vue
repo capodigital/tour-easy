@@ -28,7 +28,7 @@ export default {
                         class="text-sm me-1 text-white px-2 py-1 w-full rounded shadow-md">
                         <i class="bi bi-trash"></i>
                     </button>
-                    <button title="Cambiar contraseña artista" type="button" @click="$emit('password', artist.id)"
+                    <button title="Cambiar contraseña artista" v-if="Utils.role() == 'artist'" type="button" @click="$emit('password', artist.id)"
                         class="text-sm me-1 text-white px-2 py-1 w-full rounded shadow-md">
                         <i class="bi bi-key"></i>
                     </button>

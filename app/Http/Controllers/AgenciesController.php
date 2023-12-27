@@ -9,6 +9,7 @@ use App\Models\Documents;
 use App\Models\Socialmedias;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgenciesController extends Controller
 {
@@ -132,6 +133,21 @@ class AgenciesController extends Controller
     public function show(Agencies $agencies)
     {
         //
+    }
+    public function updatePassword(Request $request, $agency) {
+        $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+        ]);
+       // dd($artist);
+        $agencia=DB::table('agencies')
+            ->where('id', $agency)
+            ->update(['password' => bcrypt($request->password)]);
+        //$artist->password = bcrypt($request->password);
+        //$artist->save();
+        //$artist->update(['password' => bcrypt($request->password)]);
+        return response('');
     }
 
     /**

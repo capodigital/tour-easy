@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Agencies;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -96,5 +97,21 @@ class UserController extends Controller
         } else {
             return response('');
         }
+    }
+
+    public function updatePassword(Request $request, $user) {
+        $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+        ]);
+       // dd($artist);
+        $usuario=DB::table('users')
+            ->where('id', $user)
+            ->update(['password' => bcrypt($request->password)]);
+        //$artist->password = bcrypt($request->password);
+        //$artist->save();
+        //$artist->update(['password' => bcrypt($request->password)]);
+        return response('');
     }
 }

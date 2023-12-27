@@ -150,7 +150,7 @@ export default {
         changePassword(form) {
             this.Utils.lock(form)
             const data = new FormData(form)
-            axios.post(`api/artists/${this.password_id}/password`, data, {
+            axios.post(`api/artists/password/${this.password_id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
