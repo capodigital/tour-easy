@@ -92,7 +92,7 @@ export default {
             }).then((response) => {
                 this.forms = [];
                 today.setDate(1);
-                for (let i = 1; i < today.getDay()+1; i++) {
+                for (let i = 1; i < today.getDay() + 1; i++) {
                     this.forms.push({
                         day: '',
                         out: true,
@@ -284,12 +284,11 @@ export default {
                 </select>
                 <select v-model="tour_id" class="rounded border border-gray-500 px-3 pe-8 py-1">
                     <option value="0">Todas las giras</option>
-
-                    <option v-for="item in tours" :value="item.id">
-                       
+                    <template v-for="item in tours">
+                        <option v-if="item.active == 1" :value="item.id">
                             {{ item.tourname }}
-                       
-                    </option>
+                        </option>
+                    </template>
                 </select>
                 <!-- <div class="form-check items-center ms-1 flex">
                     <input required aria-label="Ver giras terminadas" @change="(e) => active = e.target.checked ? 1 : 0"
