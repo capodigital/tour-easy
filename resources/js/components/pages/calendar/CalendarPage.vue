@@ -291,13 +291,13 @@ export default {
                         </template>
                     </option>
                 </select>
-                <div class="form-check items-center ms-1 flex">
+                <!-- <div class="form-check items-center ms-1 flex">
                     <input required aria-label="Ver giras terminadas" @change="(e) => active = e.target.checked ? 1 : 0"
                         class="form-check-input me-0.5" type="checkbox" />
                     <label class="form-check-label leading-4 text-sm text-center">
                         Ver giras terminadas
                     </label>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="overflow-x-auto scroll">
