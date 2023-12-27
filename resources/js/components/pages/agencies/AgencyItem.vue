@@ -179,12 +179,14 @@ export default {
                 </div>
             </div>
             <hr class="my-2 border-gray-500" />
+
             <div class="flex items-center mt-2">
                 <div>
                     <p class="text-white">Detalles adicionales</p>
                     <p class="text-gray-400 text-sm">{{ agency.notes }}</p>
                 </div>
             </div>
+            <hr class="my-2 border-gray-500" />
             <div class="px-2">
                 <DocumentsItem :documents="agency.documents" />
             </div>
