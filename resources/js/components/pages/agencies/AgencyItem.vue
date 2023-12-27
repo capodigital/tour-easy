@@ -1,4 +1,5 @@
 <script>
+import DocumentsItem from '../../common/DocumentsItem.vue';
 export default {
     props: {
         agency: Object,
@@ -181,6 +182,9 @@ export default {
                     <p class="text-gray-400 text-sm">{{ agency.notes }}</p>
                 </div>
             </div>
+            <div class="px-2">
+            <DocumentsItem :documents="agency.documents" />
+        </div>
         </div>
 
 </div></template>

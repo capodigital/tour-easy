@@ -273,10 +273,10 @@ export default {
                     <h1
                         class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                         <template v-if="user.id == undefined">
-                            AÑADIR ADMINISTRADOR
+                            AÑADIR MANAGER
                         </template>
                         <template v-else>
-                            EDITAR ADMINISTRADOR
+                            EDITAR MANAGER
                         </template>
                     </h1>
                     <div>
