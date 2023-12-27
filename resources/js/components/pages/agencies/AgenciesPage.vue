@@ -143,6 +143,7 @@ export default {
                 }).catch((error) => {
                     this.Utils.error(error.response)
                 })
+
             })
         },
         destroyManager(user) {
@@ -254,7 +255,8 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">
-                    <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager" @agency_password="(id) => agency_password_id = id" @user_password="(id) => user_password_id = id"
+                    <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
+                        @agency_password="(id) => agency_password_id = id" @user_password="(id) => user_password_id = id"
                         @edit="edit" @destroy="destroy" :agency="item"
                         v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />
                 </template>
@@ -316,7 +318,7 @@ export default {
                             </div>
                         </template>
                         <div class="flex justify-center">
-                            <button type="button" @click="user.show = false"
+                            <button type="button" @click="user = { show: false }"
                                 class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
                                 Cerrar
                             </button>
@@ -550,7 +552,8 @@ export default {
             </div>
         </transition>
         <transition name="bounce" mode="out-in">
-            <PasswordModal v-if="agency_password_id != null" @send="changeAgencyPassword" @close="agency_password_id = null" />
+            <PasswordModal v-if="agency_password_id != null" @send="changeAgencyPassword"
+                @close="agency_password_id = null" />
         </transition>
         <transition name="bounce" mode="out-in">
             <PasswordModal v-if="user_password_id != null" @send="changeUserPassword" @close="user_password_id = null" />
