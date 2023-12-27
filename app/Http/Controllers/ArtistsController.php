@@ -68,7 +68,7 @@ class ArtistsController extends Controller
             'birthday' => 'required|before:today'
 
         ]);
-        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id']);
+        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id','notes']);
         if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
                 $data['agency_id'] = $request->user()->agency_id;

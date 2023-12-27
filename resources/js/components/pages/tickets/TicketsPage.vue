@@ -139,7 +139,7 @@ export default {
                         class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
                 </div>
             </div>
-            <div class="flex justify-end mt-1">
+            <div  class="flex justify-end mt-1">
                 <select v-model="tour_filter" class="rounded border border-gray-500 px-3 pe-8 py-1 mt-1">
                     <option value="0">Todas las giras</option>
                     <option v-for="item in tours" :value="item.id">
