@@ -167,7 +167,7 @@ export default {
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
                 case 8:
-                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Transporte: </b>${activity.contact.name}.<br /><b>Conductor: </b>${activity.place.name}`,
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Conductor: </b>${activity.place.name}`,
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
             }
@@ -284,11 +284,11 @@ export default {
                 </select>
                 <select v-model="tour_id" class="rounded border border-gray-500 px-3 pe-8 py-1">
                     <option value="0">Todas las giras</option>
-                    
+
                     <option v-for="item in tours" :value="item.id" >
                         <template v-if="active == 1 || item.active == 1">
                             {{ item.tourname }}
-                        </template>         
+                        </template>
                     </option>
                 </select>
                 <div class="form-check items-center ms-1 flex">
