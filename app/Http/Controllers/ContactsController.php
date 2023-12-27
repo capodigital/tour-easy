@@ -37,7 +37,7 @@ class ContactsController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:contacts',
-
+            'birthday' => 'required|before:today'
         ]);
 
         $data = $request->only([
@@ -131,11 +131,12 @@ class ContactsController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'birthday' => 'required|before:today'
         ]);
 
         $data = $request->only([
             'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
-            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
+            'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id',
         ]);
 
         //Almacenar los datos en la base de datos
