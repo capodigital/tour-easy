@@ -92,7 +92,7 @@ export default {
             }).then((response) => {
                 this.forms = [];
                 today.setDate(1);
-                for (let i = 1; i < today.getDay(); i++) {
+                for (let i = 1; i < today.getDay()+1; i++) {
                     this.forms.push({
                         day: '',
                         out: true,
