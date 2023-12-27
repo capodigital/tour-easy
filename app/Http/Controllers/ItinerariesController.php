@@ -66,7 +66,7 @@ class ItinerariesController extends Controller
         $tour = Tours::find($request->tour_id);
         if(Carbon::parse($request->enddate) > $tour->enddate) {
             throw ValidationException::withMessages([
-                'enddate' => ['La fecha de fin no puede ser mayor que la fecha de fin de la gira.'],
+                'enddate' => ['La fecha de este evento esta fuera de las fechas de la gira.'],
             ]);
         }
 

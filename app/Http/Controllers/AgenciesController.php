@@ -76,6 +76,7 @@ class AgenciesController extends Controller
         $agency = Agencies::create($data);
 
         if ($request->has('socialmedias')) {
+            Socialmedias::where('socialmediaable_id',$agency->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
                     Socialmedias::create([

@@ -140,6 +140,7 @@ class PlacesController extends Controller
         $place->update($data);
 
         if ($request->has('socialmedias')) {
+            Socialmedias::where('socialmediaable_id',$place->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
                     Socialmedias::create([

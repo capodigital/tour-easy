@@ -194,6 +194,7 @@ class ArtistsController extends Controller
         $artist->update($data);
 
         if ($request->has('socialmedias')) {
+            Socialmedias::where('socialmediaable_id',$artist->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
                     Socialmedias::create([
