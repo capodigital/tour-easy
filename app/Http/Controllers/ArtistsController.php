@@ -150,6 +150,17 @@ class ArtistsController extends Controller
     {
     }
 
+    public function updatePassword(Request $request, Artists $artist) {
+        $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+        ]);
+        // $artist->password = bcrypt($request->password);
+        $artist->update(['password' => bcrypt($request->password)]);
+        return response('');
+    }
+
     /**
      * Update the specified resource in storage.
      */

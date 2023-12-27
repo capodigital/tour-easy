@@ -2,6 +2,7 @@
 import axios from 'axios'
 import ArtistsItem from './ArtistsItem.vue'
 import Confirm from "../../modals/Confirm"
+import PasswordModal from '../../common/PasswordModal.vue';
 
 export default {
     data() {
@@ -20,6 +21,7 @@ export default {
             preview: 'src/user_placeholder.png',
             show: false,
             same_password: true,
+            password_id: null,
         };
     },
     methods: {
@@ -144,6 +146,21 @@ export default {
                 }
             }
             this.same_password = true
+        },
+        changePassword(form) {
+            this.Utils.lock(form)
+            const data = new FormData(form)
+            axios.post(`api/artists/${this.password_id}/password`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.Utils.notify('Se ha cambiado las contraseña correctamente')
+                this.password_id = null
+            }).catch((error) => {
+                this.Utils.unlock(form)
+                this.Utils.error(error.response)
+            })
         }
     },
     created() {
@@ -176,7 +193,7 @@ export default {
             this.types = response.data.data;
         });
     },
-    components: { ArtistsItem }
+    components: { ArtistsItem, PasswordModal }
 }
 </script>
 <template>
@@ -196,7 +213,7 @@ export default {
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             <template v-for="item in artists">
-                <ArtistsItem @edit="edit" @destroy="destroy" :artist="item"
+                <ArtistsItem @edit="edit" @destroy="destroy" @password="(id) => password_id = id" :artist="item"
                     v-if="Utils.filter(['name', 'lastname', 'stagename', 'email', 'agency.tradename', 'agency.taxname'], item, filter)" />
             </template>
         </div>
@@ -219,7 +236,7 @@ export default {
                         <div class="grid grid-cols-2 gap-2">
                             <div class="flex items-center justify-center">
                                 <input @change="updatePreview" type="file" class="opacity-5 w-1 h-1" name="image"
-                                :required="artist.id == undefined" />
+                                    :required="artist.id == undefined" />
                                 <div class="text-center">
                                     <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
                                         class="rounded-full w-52 h-52 cursor-pointer mb-3" />
@@ -335,8 +352,8 @@ export default {
                                         </select>
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
-                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`"
-                                            type="text" placeholder="Link"
+                                        <input v-model="socialmedia.url" :name="`socialmedias[${index}][url]`" type="text"
+                                            placeholder="Link"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     </div>
                                     <div class="flex items-center rounded border border-gray-300 px-2">
@@ -368,8 +385,8 @@ export default {
                                     <div class="flex items-center rounded border border-gray-300 px-2"
                                         style="grid-column: span 2;">
                                         <template v-if="file.type == 'link'">
-                                            <input v-if="file.id == undefined" :name="`urls[${index}]`"
-                                                v-model="file.url" type="text" placeholder="Link"
+                                            <input v-if="file.id == undefined" :name="`urls[${index}]`" v-model="file.url"
+                                                type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                             <input v-else v-model="file.url" type="text" placeholder="Link"
                                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3"
@@ -417,6 +434,9 @@ export default {
                     </form>
                 </div>
             </div>
+        </transition>
+        <transition name="bounce" mode="out-in">
+            <PasswordModal v-if="password_id != null" @send="changePassword" @close="password_id = null" />
         </transition>
     </div>
 </template>

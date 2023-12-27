@@ -14,11 +14,30 @@ export default {
 }
 </script>
 <template>
-    <article class="shadow-md shadow-gray-500 rounded-md pb-12 relative">
+    <article class="shadow-md shadow-gray-500 rounded-md">
         <div class="relative h-80 w-full bg-cover bg-center rounded-t-md"
             :style="{ 'background': `url(${artist.image.replace('http://localhost/', '')})` }">
+            <div class="absolute top-0 left-0 w-full bg-gradient-to-b from-black to-transparent flex justify-end p-2">
+                <div class="px-2 pb-3 flex">
+                    <button title="Editar artista" type="button" @click="$emit('edit', artist)"
+                        class="text-sm me-1 text-white px-2 py-1 w-full rounded shadow-md">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button title="Eliminar artista" v-if="Utils.role() != 'artist'" type="button"
+                        @click="$emit('destroy', artist)"
+                        class="text-sm me-1 text-white px-2 py-1 w-full rounded shadow-md">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    <button title="Cambiar contraseña artista" type="button" @click="$emit('password', artist.id)"
+                        class="text-sm me-1 text-white px-2 py-1 w-full rounded shadow-md">
+                        <i class="bi bi-key"></i>
+                    </button>
+                </div>
+            </div>
+
             <div
                 class="w-full h-24 bg-gradient-to-t from-black to-transparent absolute bottom-0 flex justify-center items-end pb-3">
+
                 <h2 class="text-center text-white text-xl font-semibold">{{ artist.name }} {{ artist.lastname }}</h2>
             </div>
         </div>
@@ -85,7 +104,7 @@ export default {
                 </div>
             </div>
         </div>
-        <p class="text-xs text-gray-400 px-2">{{artist.notes}}</p>
+        <p class="text-xs text-gray-400 px-2">{{ artist.notes }}</p>
 
         <div class="p-2">
             <p class="text-sm text-white">Redes sociales</p>
@@ -110,17 +129,22 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="px-2 pb-3 grid gap-2 absolute bottom-0 left-0 w-full"
-            :class="{ 'grid-cols-1': Utils.role() == 'artist', 'grid-cols-2': Utils.role() != 'artist' }">
+        <!-- <div class="px-2 pb-3 grid gap-2 absolute bottom-0 left-0 w-full"
+            :class="{ 'grid-cols-2': Utils.role() == 'artist', 'grid-cols-3': Utils.role() != 'artist' }">
             <button title="Editar artista" type="button" @click="$emit('edit', artist)"
-                class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-1 py-1 w-full rounded-xl rounded-tr">
                 <i class="bi bi-pencil-square"></i> Editar
             </button>
             <button title="Eliminar artista" v-if="Utils.role() != 'artist'" type="button" @click="$emit('destroy', artist)"
-                class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-1 py-1 w-full rounded-xl rounded-tr">
                 <i class="bi bi-trash"></i> Eliminar
             </button>
-        </div>
+            <button title="Eliminar artista" v-if="Utils.role() != 'artist'" type="button"
+                @click="$emit('password', artist.id)"
+                class="mt-0 text-sm me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-1 py-1 w-full rounded-xl rounded-tr">
+                <i class="bi bi-key"></i> Cambiar contraseña
+            </button>
+        </div> -->
     </article>
 </template>
 <style scoped>

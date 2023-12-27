@@ -2,12 +2,15 @@
 import axios from 'axios'
 import AgencyItem from './AgencyItem.vue'
 import Confirm from "../../modals/Confirm"
+import PasswordModal from "../../common/PasswordModal.vue"
 export default {
     data() {
         return {
             filter: '',
             agencies: [],
             agency: {},
+            agency_password_id: null,
+            user_password_id: null,
             user: {
                 show: false,
             },
@@ -179,6 +182,36 @@ export default {
                 }
             })
         },
+        changeAgencyPassword(form) {
+            this.Utils.lock(form)
+            const data = new FormData(form)
+            axios.post(`api/agencies/${this.agency_password_id}/password`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.Utils.notify('Se ha cambiado la contraseña correctamente')
+                this.agency_password_id = null
+            }).catch((error) => {
+                this.Utils.unlock(form)
+                this.Utils.error(error.response)
+            })
+        },
+        changeUserPassword(form) {
+            this.Utils.lock(form)
+            const data = new FormData(form)
+            axios.post(`api/users/${this.user_password_id}/password`, data, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.Utils.notify('Se ha cambiado la contraseña correctamente')
+                this.user_password_id = null
+            }).catch((error) => {
+                this.Utils.unlock(form)
+                this.Utils.error(error.response)
+            })
+        }
     },
     created() {
         axios.get('api/agencies', {
@@ -201,7 +234,7 @@ export default {
             this.Utils.error(error.response)
         });
     },
-    components: { AgencyItem }
+    components: { AgencyItem, PasswordModal }
 }
 </script>
 <template>
@@ -221,7 +254,7 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">
-                    <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
+                    <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager" @agency_password="(id) => agency_password_id = id" @user_password="(id) => user_password_id = id"
                         @edit="edit" @destroy="destroy" :agency="item"
                         v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />
                 </template>
@@ -515,6 +548,12 @@ export default {
                     </form>
                 </div>
             </div>
+        </transition>
+        <transition name="bounce" mode="out-in">
+            <PasswordModal v-if="agency_password_id != null" @send="changeAgencyPassword" @close="agency_password_id = null" />
+        </transition>
+        <transition name="bounce" mode="out-in">
+            <PasswordModal v-if="user_password_id != null" @send="changeUserPassword" @close="user_password_id = null" />
         </transition>
     </section>
 </template>
