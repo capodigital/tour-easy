@@ -57,7 +57,7 @@ export default {
         },
         add(day) {
             this.activity = {
-                startdate: `${this.year}-${this.month + 1}-${day}`,
+                startdate: `${this.year}-${(this.month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`,
                 typeitinerary_id: 1,
             };
             this.show = true;
