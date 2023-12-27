@@ -78,7 +78,7 @@ class ArtistsController extends Controller
         }
         $data['password'] = bcrypt($request->password);
 
-        $image = $request->file('image')->store('documents', 'src');
+        $image = $request->file('image')->store('artists', 'src');
         $data['image'] = "src/$image";
 
         //Almacenar los datos en la base de datos
@@ -184,8 +184,8 @@ class ArtistsController extends Controller
             //Eliminar la vieja foto de perfil
             Storage::disk('src')->delete($artist->image);
             //Almacenar la nueva foto de perfil
-            $image = $request->file('image')->store('girls');
-            $data['image'] = $image;
+            $image = $request->file('image')->store('src');
+            $data['image'] = "src/$image";
         }
 
         $data['password'] = bcrypt($request->password);
