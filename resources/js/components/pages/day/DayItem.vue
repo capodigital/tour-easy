@@ -56,7 +56,7 @@ export default {
                     </svg>
                     <div>
                         <p class="text-white">Fecha y hora de inicio</p>
-                        <p class="text-gray-400 text-sm">{{ Utils.datetime(activity.startdate, Utils.FULL_DATE_TIME) }}</p>
+                        <p class="text-gray-400 text-sm">{{ Utils.date(activity.startdate, Utils.FULL_DATE_TIME) }}</p>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@ export default {
                     </svg>
                     <div>
                         <p class="text-white">Fecha y hora de fin</p>
-                        <p class="text-gray-400 text-sm">{{ Utils.datetime(activity.enddate, Utils.FULL_DATE_TIME) }}</p>
+                        <p class="text-gray-400 text-sm">{{ Utils.date(activity.enddate, Utils.FULL_DATE_TIME) }}</p>
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@ export default {
                 </div>
                 <hr class="my-2 border-gray-500" />
             </template>
-            <template v-if="!([4].includes(Number(activity.typeitinerary_id)))">
+            <template v-if="!([4, 8].includes(Number(activity.typeitinerary_id)))">
                 <div class="flex items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

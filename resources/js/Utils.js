@@ -22,6 +22,9 @@ export default class Utils {
     };
 
     static datetime(datetime, format) {
+        if (datetime.length <= 11) {
+            datetime += " 00:00:00";
+        }
         const date = new Date(datetime);
         return date.toLocaleDateString("es", format);
     }
@@ -34,6 +37,9 @@ export default class Utils {
     }
 
     static date(date) {
+        if (date.length <= 11) {
+            date += " 00:00:00";
+        }
         date = new Date(date);
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     }
