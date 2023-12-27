@@ -286,9 +286,9 @@ export default {
                     <option value="0">Todas las giras</option>
 
                     <option v-for="item in tours" :value="item.id">
-                        <template v-if="active == 1 || item.active == 1">
+                       
                             {{ item.tourname }}
-                        </template>
+                       
                     </option>
                 </select>
                 <!-- <div class="form-check items-center ms-1 flex">
