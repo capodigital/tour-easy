@@ -249,7 +249,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Monto total</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-cash text-gray-100"></i>
-                                    <input required v-model="ticket.amount" name="amount" type="text"
+                                    <input required v-model="ticket.amount" name="amount" type="number"
                                         placeholder="Monto total"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
