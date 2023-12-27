@@ -1,6 +1,7 @@
 <script>
 import DocumentsItem from '../../common/DocumentsItem.vue';
 export default {
+    components: { DocumentsItem },
     props: {
         agency: Object,
     }
@@ -25,7 +26,9 @@ export default {
                                 <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                             </svg>
                         </button>
-                        <button title="Cambiar contraseña agencia" v-if="Utils.role() == 'agency' && (Utils.manager() == null || Utils.manager() == 'null')" @click="$emit('agency_password', agency.id)"
+                        <button title="Cambiar contraseña agencia"
+                            v-if="Utils.role() == 'agency' && (Utils.manager() == null || Utils.manager() == 'null')"
+                            @click="$emit('agency_password', agency.id)"
                             class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                                 stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -183,8 +186,8 @@ export default {
                 </div>
             </div>
             <div class="px-2">
-            <DocumentsItem :documents="agency.documents" />
-        </div>
+                <DocumentsItem :documents="agency.documents" />
+            </div>
         </div>
 
-</div></template>
+    </div></template>
