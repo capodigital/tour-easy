@@ -28,6 +28,7 @@ return new class extends Migration
             $table->foreignId('city_id')->nullable()->references('id')->on('cities')->onDelete('set null');
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

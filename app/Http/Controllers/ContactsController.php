@@ -21,6 +21,16 @@ class ContactsController extends Controller
         $contacts = Contacts::all();
         return ContactsResource::collection($contacts);
     }
+    public function all()
+    {
+        $contacts = Contacts::withTrashed()->get();
+        return ContactsResource::collection($contacts);
+    }
+    public function deleted()
+    {
+        $contacts = Contacts::onlyTrashed()->get();
+        return ContactsResource::collection($contacts);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -203,6 +213,12 @@ class ContactsController extends Controller
         $contact->delete();
         Socialmedias::where('socialmediaable_id', $contact->id)->delete();
         Documents::where('documentable_id', $contact->id)->delete();
+
+        return response()->json($contact);
+    }
+    public function restore(Contacts $contact)
+    {
+        $contact->restore();
 
         return response()->json($contact);
     }

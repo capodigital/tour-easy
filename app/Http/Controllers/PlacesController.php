@@ -19,6 +19,16 @@ class PlacesController extends Controller
         $places = Places::all();
         return PlacesResource::collection($places);
     }
+    public function all()
+    {
+        $places = Places::withTrashed()->get();
+        return PlacesResource::collection($places);
+    }
+    public function deleted()
+    {
+        $places = Places::onlyTrashed()->get();
+        return PlacesResource::collection($places);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -199,6 +209,12 @@ class PlacesController extends Controller
     public function destroy(Places $place)
     {
         $place->delete();
+
+        return response()->json($place);
+    }
+    public function restore(Places $place)
+    {
+        $place->restore();
 
         return response()->json($place);
     }

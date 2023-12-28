@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Places extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    
     protected $fillable = [
         'name', 'google_id', 'phone', 'extra_phone', 'manager',
         'email', 'gis', 'notes', 'address', 'typeplace_id', 'city_id', 'agency_id'
