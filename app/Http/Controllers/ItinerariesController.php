@@ -54,7 +54,7 @@ class ItinerariesController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'startdate' => 'date|after:today'
+            'startdate' => 'date|after:yesterday'
         ]);
 
         if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
