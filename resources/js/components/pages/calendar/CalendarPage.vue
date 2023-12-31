@@ -111,7 +111,6 @@ export default {
                 }
                 for (let item of response.data.data) {
                     const date = new Date(item.startdate + ' 00:00:00');
-                    console.log(item.name, item.startdate, date)
                     this.forms[date.getDate() - 1 + initial].activities.push(this.getActivityData(item));
                 }
                 for (let i = 1; i < 8 - today.getDay(); i++) {
@@ -137,6 +136,18 @@ export default {
                 }
             }
             let date = '';
+            if (activity.contact == null) {
+                activity.contact = {
+                    id: 0,
+                    name: 'Contacto eliminado'
+                }
+            }
+            if (activity.place == null) {
+                activity.place = {
+                    id: 0,
+                    name: 'Lugar eliminado'
+                }
+            }
             switch (Number(activity.typeitinerary_id)) {
                 case 1:
                     name = activity.name, description = `<b>Prueba de sonidos: </b>${activity.showcheck}.<br /><b>Puertas abiertas: </b>${activity.showtime}.<br /><b>Lugar: </b>${activity.place.name}`,

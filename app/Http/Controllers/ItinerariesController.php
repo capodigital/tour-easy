@@ -72,11 +72,7 @@ class ItinerariesController extends Controller
 
         $itinerary = new Itineraries($request->input());
         $itinerary->save();
-
         $itinerary->refresh();
-
-
-
         return new ItinerariesResource($itinerary);
     }
 
@@ -133,7 +129,7 @@ class ItinerariesController extends Controller
     public function itinerariesByTour(Request $request)
     {
         $tour = Tours::find($request->id);
-        $itineraries = $tour->itineraries()->get()->sortBy('startdate');
+        $itineraries = $tour->itineraries()->get();
 
         return ItinerariesResource::collection($itineraries);
     }

@@ -94,6 +94,9 @@ export default {
                             break
                         }
                     }
+                    if(item.id == this.contact.id) {
+                        this.show = false
+                    }
                 }).catch((error) => {
                     this.Utils.error(error.response)
                 })

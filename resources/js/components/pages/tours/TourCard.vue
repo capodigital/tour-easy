@@ -76,7 +76,8 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button title="Eliminar gira" v-if="Utils.role() != 'artist'" @click="$emit('destroy', tour)"
+                <button title="Eliminar gira" v-if="Utils.role() != 'artist' && tour.itineraries_count == 0"
+                    @click="$emit('destroy', tour)"
                     class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -88,7 +89,8 @@ export default {
                         <line x1="14" x2="14" y1="11" y2="17" />
                     </svg>
                 </button>
-                <button title="Completar gira" v-if="Utils.role() != 'artist' && tour.active" @click="$emit('complete', tour)"
+                <button title="Completar gira" v-if="Utils.role() != 'artist' && tour.active"
+                    @click="$emit('complete', tour)"
                     class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -110,9 +112,11 @@ export default {
                     Detalles
                 </a>
             </div>
+        </div>
     </div>
-</div></template>
-<style scoped>h3,
+</template>
+<style scoped>
+h3,
 p {
     font-family: 'Roboto', sans-serif;
 }</style>

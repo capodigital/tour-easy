@@ -32,6 +32,18 @@ export default {
                         complete = 'Completado'
                     }
                 }
+                if (activity.contact == null) {
+                    activity.contact = {
+                        id: 0,
+                        name: 'Contacto eliminado'
+                    }
+                }
+                if (activity.place == null) {
+                    activity.place = {
+                        id: 0,
+                        name: 'Lugar eliminado'
+                    }
+                }
                 let date = '';
                 switch (Number(activity.typeitinerary_id)) {
                     case 1:
@@ -111,6 +123,7 @@ export default {
 h1 {
     font-family: 'Archivo Black', sans-serif;
 }
+
 .no-result {
     height: calc(100vh - 10rem);
 }

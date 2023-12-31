@@ -37,7 +37,7 @@ export default {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then((response) => {
-                if(type == 'start') {
+                if (type == 'start') {
                     this.start_cities = response.data;
                 } else {
                     this.end_cities = response.data;
@@ -51,10 +51,10 @@ export default {
         edit(item) {
             Object.assign(this.activity, item)
             console.log(this.activity)
-            if(item.citystart != null) {
+            if (item.citystart != null) {
                 this.setCities(item.citystart.country.code, 'start')
             }
-            if(item.cityend != null) {
+            if (item.cityend != null) {
                 this.setCities(item.cityend.country.code, 'end')
             }
             this.show = true
@@ -123,6 +123,18 @@ export default {
                     complete = 'En progreso'
                 } else {
                     complete = 'Completado'
+                }
+            }
+            if (activity.contact == null) {
+                activity.contact = {
+                    id: 0,
+                    name: 'Contacto eliminado'
+                }
+            }
+            if (activity.place == null) {
+                activity.place = {
+                    id: 0,
+                    name: 'Lugar eliminado'
                 }
             }
             let date = '';
@@ -242,6 +254,13 @@ export default {
             if (this.preview == null) {
                 this.$el.querySelector('#tour-image').click()
             }
+        },
+        sort(activities) {
+            const sort = activities.sort((a, b) => {
+                return new Date(a.startdate).valueOf() - new Date(b.startdate).valueOf()
+                // return -1;
+            })
+            return sort
         }
     },
     created() {
@@ -374,7 +393,7 @@ export default {
             </div>
         </div>
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
-            <TourActivity v-for="item in activities" @show="(item) => details = item" @edit="edit" @destroy="destroy"
+            <TourActivity v-for="item in sort(activities)" @show="(item) => details = item" @edit="edit" @destroy="destroy"
                 :activity="item" />
             <article @click="add" v-if="Utils.role() != 'artist'"
                 class="border-2 border-gray-500 rounded-2xl cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
@@ -524,7 +543,8 @@ export default {
                             </div>
                         </div>
                         <label class="text-slate-200 text-xs font-semibold">Ciudad <template
-                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de salida</template></label>
+                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de
+                                salida</template></label>
                         <div class="grid grid-cols-2 gap-x-2">
                             <div>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
@@ -541,7 +561,8 @@ export default {
                                     <i class="bi bi-globe-americas text-gray-100"></i>
                                     <select required v-model="activity.city_start_id" name="city_start_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                        <option class="text-black" v-for="city in start_cities" :value="city.id">{{ city.name }}
+                                        <option class="text-black" v-for="city in start_cities" :value="city.id">{{
+                                            city.name }}
                                         </option>
                                     </select>
                                 </div>
@@ -565,7 +586,8 @@ export default {
                                         <i class="bi bi-globe-americas text-gray-100"></i>
                                         <select required v-model="activity.city_destination_id" name="city_destination_id"
                                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                            <option class="text-black" v-for="city in end_cities" :value="city.id">{{ city.name
+                                            <option class="text-black" v-for="city in end_cities" :value="city.id">{{
+                                                city.name
                                             }}
                                             </option>
                                         </select>
@@ -666,5 +688,4 @@ form,
 .images {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 1px;
-}
-</style>
+}</style>
