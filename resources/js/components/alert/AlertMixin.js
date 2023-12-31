@@ -23,7 +23,7 @@ export default {
     },
     mounted() {
         const toast = new Toast(this.$el, {
-            delay: 2000,
+            delay: 3500,
         });
         toast.show();
         //Actualizar barra de progreso
@@ -31,9 +31,12 @@ export default {
         let progressWidth = 100;
         const interval = setInterval(() => {
             progress.style.width = `${progressWidth}%`;
-            if (progressWidth < 0) clearInterval(interval);
+            if (progressWidth < 0) {
+                clearInterval(interval);
+                this.close();
+            }
             if (!this.toastMouseHover) progressWidth--;
-        }, 20);
+        }, 30);
         //Detectar si el puntero se encuentra encima o fuera de la notificación
         this.$el.addEventListener("mouseover", () => {
             this.toastMouseHover = true;
