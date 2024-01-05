@@ -37,6 +37,8 @@ class ToursResource extends JsonResource
             'documents' => DocumentsResource::collection($this->documents()->get()),
             'active' => $this->active,
             'itineraries_count' => count($this->itineraries),
+            'deleted_at' => $this->deleted_at,
+
         ];
     }
 }
