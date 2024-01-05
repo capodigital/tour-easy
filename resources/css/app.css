@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
- /* Scrolls
+/* Scrolls
 .scroll::-webkit-scrollbar {
     width: 8px;
     border-radius: 0.5rem;
@@ -51,6 +51,26 @@ body::before {
     top: 0;
     left: 0;
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='30' height='30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.227 0c.687 0 1.227.54 1.227 1.227s-.54 1.227-1.227 1.227S0 1.914 0 1.227.54 0 1.227 0z' fill='rgba(0,0,0,0.1)'/%3E%3C/svg%3E");
+}
+h1 {
+    font-family: "Archivo Black", sans-serif;
+}
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 input:-webkit-autofill,
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 input:-webkit-autofill:hover,
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #080b0e inset;
+}
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 select:-webkit-autofill,
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 select:-webkit-autofill:hover,
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #080b0e inset;
+}
+
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 input:-webkit-autofill {
+    -webkit-text-fill-color: white;
+}
+.bg-gradient-to-tr.from-slate-700.via-black.to-slate-950 select:-webkit-autofill {
+    -webkit-text-fill-color: white;
 }
 .overlay-button {
     position: relative;
@@ -415,4 +435,9 @@ input[type="date"]::-webkit-inner-spin-button,
 .form-check-input:disabled ~ .form-check-label {
     cursor: default;
     opacity: 0.5;
+}
+.modal-content {
+    max-height: calc(100vh - 15rem);
+    padding: 0.5rem;
+    position: relative;
 }

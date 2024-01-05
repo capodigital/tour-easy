@@ -172,6 +172,8 @@ export default class Utils {
             "afterbegin",
             '<div class="spinner-border me-2" role="status"><span class="visually-hidden">Loading...</span></div>'
         );
+        const close = form.querySelector(".close");
+        close.disabled = true;
     }
 
     static unlock(form) {
@@ -181,6 +183,8 @@ export default class Utils {
         button.classList.remove("justify-center");
         button.disabled = false;
         button.querySelector(".spinner-border").remove();
+        const close = form.querySelector(".close");
+        close.disabled = false;
     }
 
     static filter(keys, item, value) {
