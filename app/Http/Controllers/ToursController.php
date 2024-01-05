@@ -28,7 +28,7 @@ class ToursController extends Controller
             if ($user->agency_id != null) {
                 $tours = Agencies::find($user->agency_id)->tours()->get()->sortBy('startdate');
             } else
-                $tours = Tours::withTrashed()->whereNull('deleted_at')->get()->sortBy('startdate');
+                $tours = Tours::withTrashed()->get()->sortBy('startdate');
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
             $tours = Agencies::find($request->user()->id)->tours()->get()->sortBy('startdate');
         } else {

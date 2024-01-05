@@ -39,7 +39,7 @@ class AgenciesResource extends JsonResource
             'documents' => DocumentsResource::collection($this->documents()->get()),
             // 'users' => User::where('agency_id', $this->id),
             'users' => $this->users,
-
+            
         ];
     }
 }
