@@ -36,7 +36,6 @@ INSERT INTO `countries` (`code`, `name`) VALUES
 ('US', 'United States'),
 ('MX', 'Mexico'),
 ('CA', 'Canada'),
-('A1', 'Anonymous Proxy'),
 ('SY', 'Syrian Arab Republic'),
 ('CY', 'Cyprus'),
 ('CZ', 'Czech Republic'),
