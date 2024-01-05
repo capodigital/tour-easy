@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-    <div class="absolute top-0 right-0 bg-black bg-opacity-50 w-screen h-screen" v-if="!hidden">
+    <div class="absolute top-0 right-0 bg-black bg-opacity-50 w-screen h-screen z-[200]" v-if="!hidden">
         <transition name="scale" mode="out-in">
             <div v-if="show"
                 class="absolute bottom-2 z-50 right-8 w-96 bg-gradient-to-tr from-slate-800 to-slate-950 rounded-lg shadow shadow-gray-500 p-4 flex">
