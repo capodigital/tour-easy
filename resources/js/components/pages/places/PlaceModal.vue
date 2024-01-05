@@ -1,5 +1,6 @@
 <script>
 import CustomModal from '../../common/CustomModal.vue';
+import Confirm from '../../modals/Confirm';
 import axios from 'axios';
 
 export default {

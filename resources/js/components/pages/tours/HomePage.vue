@@ -118,7 +118,7 @@ export default {
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     GIRAS</h1>
-                <div class="form-check items-center">
+                <div class="form-check items-center" v-if="Utils.role() == 'user'">
                     <input required aria-label="Ver giras terminadas" @change="(e) => deleted = e.target.checked ? 1 : 0"
                         class="form-check-input me-0.5" type="checkbox" />
                     <label class="form-check-label leading-4 text-sm text-center">

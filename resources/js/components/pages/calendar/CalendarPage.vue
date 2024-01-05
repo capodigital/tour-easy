@@ -280,7 +280,7 @@ export default {
                                                 v-if="(tour_id == 0 || item.tour_id == tour_id) && (active == 1 || item.tour.active == 1)"
                                                 @click="details = item"
                                                 class="block rounded text-white w-full bg-green-500 py-1 px-2 mb-0.5 text-xs truncate">
-                                                {{ item.id }}: {{ types[Number(item.typeitinerary_id) - 1].description }}
+                                                {{ types[Number(item.typeitinerary_id) - 1].description }}
                                             </button>
                                         </template>
 

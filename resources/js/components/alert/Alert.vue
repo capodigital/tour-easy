@@ -10,8 +10,8 @@
 </script>
 
 <template>
-    <div class="toast items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="flex relative bg-white rounded-md shadow-md shadow-gray-500" style="z-index: 100;">
+    <div class="toast items-center border-0 z-[500]" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="flex relative bg-white rounded-md shadow-md shadow-gray-500 z-[500]">
             <div class="toast-body flex items-center">
                 <div class="mx-2 flex items-center justify-center">
                     <i class="text-6xl" :class="config.icon" :style="{ color: config.color }"></i>
