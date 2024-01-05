@@ -5,7 +5,7 @@ import axios from 'axios';
 export default {
     components: { CustomModal },
     props: {
-        id: Number,
+        tour: Object,
     },
     data() {
         return {
@@ -48,6 +48,7 @@ export default {
             }).then((response) => {
                 this.preview = null
                 this.images.push(response.data.data)
+                this.$emit('update', this.images)
                 this.Utils.notify('Se subió la imagen correctamente')
                 this.uploading = false
             }).catch((error) => {
@@ -62,7 +63,7 @@ export default {
         },
     },
     created() {
-        axios.post('api/photos/tour', { id: this.id }, {
+        axios.post('api/photos/tour', { id: this.tour.id }, {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
@@ -120,3 +121,13 @@ export default {
         </form>
     </CustomModal>
 </template>
+<style scoped>
+.images {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1px;
+}
+
+.modal-content {
+    max-height: calc(100vh - 7rem);
+}
+</style>

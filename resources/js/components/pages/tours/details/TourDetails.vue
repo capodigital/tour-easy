@@ -193,73 +193,131 @@ export default {
             <figure>
                 <img :src="images.length > 0 ? images[0].url : 'src/image-placeholder.jpg'" />
                 <input type="radio" name="radio-set" checked="checked" />
-                <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                <figcaption><span>
+                        <p>{{ tour.tourname }}</p>
+                        <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                        <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                    </span></figcaption>
 
                 <figure>
                     <img :src="images.length > 1 ? images[1].url : 'src/image-placeholder.jpg'" />
                     <input type="radio" name="radio-set" />
-                    <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                    <figcaption><span>
+                            <p>{{ tour.tourname }}</p>
+                            <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                            <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                        </span></figcaption>
 
                     <figure>
                         <img :src="images.length > 2 ? images[2].url : 'src/image-placeholder.jpg'" />
                         <input type="radio" name="radio-set" />
-                        <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                        <figcaption><span>
+                                <p>{{ tour.tourname }}</p>
+                                <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                            </span></figcaption>
 
                         <figure>
                             <img :src="images.length > 3 ? images[3].url : 'src/image-placeholder.jpg'" />
                             <input type="radio" name="radio-set" />
-                            <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                            <figcaption><span>
+                                    <p>{{ tour.tourname }}</p>
+                                    <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                    <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                                </span></figcaption>
 
                             <figure>
                                 <img :src="images.length > 4 ? images[4].url : 'src/image-placeholder.jpg'" />
                                 <input type="radio" name="radio-set" />
-                                <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                <figcaption><span>
+                                        <p>{{ tour.tourname }}</p>
+                                        <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                        <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                                    </span></figcaption>
 
                                 <figure>
                                     <img :src="images.length > 5 ? images[5].url : 'src/image-placeholder.jpg'" />
                                     <input type="radio" name="radio-set" />
-                                    <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                    <figcaption><span>
+                                            <p>{{ tour.tourname }}</p>
+                                            <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                            <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                                        </span></figcaption>
 
                                     <figure>
                                         <img :src="images.length > 6 ? images[6].url : 'src/image-placeholder.jpg'" />
                                         <input type="radio" name="radio-set" />
-                                        <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                        <figcaption><span>
+                                                <p>{{ tour.tourname }}</p>
+                                                <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                                <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                                            </span></figcaption>
 
                                         <figure>
                                             <img :src="images.length > 7 ? images[7].url : 'src/image-placeholder.jpg'" />
                                             <input id="ia-selector-last" type="radio" name="radio-set" />
-                                            <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                            <figcaption><span>
+                                                    <p>{{ tour.tourname }}</p>
+                                                    <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                                    <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
+                                                </span></figcaption>
 
                                             <figure>
                                                 <img
                                                     :src="images.length > 8 ? images[8].url : 'src/image-placeholder.jpg'" />
                                                 <input id="ia-selector-last" type="radio" name="radio-set" />
-                                                <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                                <figcaption><span>
+                                                        <p>{{ tour.tourname }}</p>
+                                                        <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                                        <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}
+                                                        </p>
+                                                    </span></figcaption>
 
                                                 <figure>
                                                     <img
                                                         :src="images.length > 9 ? images[9].url : 'src/image-placeholder.jpg'" />
                                                     <input id="ia-selector-last" type="radio" name="radio-set" />
-                                                    <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                                    <figcaption><span>
+                                                            <p>{{ tour.tourname }}</p>
+                                                            <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                                            <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate
+                                                            }}</p>
+                                                        </span></figcaption>
 
                                                     <figure>
                                                         <img
                                                             :src="images.length > 10 ? images[10].url : 'src/image-placeholder.jpg'" />
                                                         <input id="ia-selector-last" type="radio" name="radio-set" />
-                                                        <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                                        <figcaption><span>
+                                                                <p>{{ tour.tourname }}</p>
+                                                                <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                                                <p class="text-xs mt-2">{{ tour.startdate }} - {{
+                                                                    tour.enddate }}</p>
+                                                            </span></figcaption>
 
                                                         <figure>
                                                             <img
                                                                 :src="images.length > 11 ? images[11].url : 'src/image-placeholder.jpg'" />
                                                             <input id="ia-selector-last" type="radio" name="radio-set" />
-                                                            <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                                            <figcaption><span>
+                                                                    <p>{{ tour.tourname }}</p>
+                                                                    <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
+                                                                    <p class="text-xs mt-2">{{ tour.startdate }} - {{
+                                                                        tour.enddate }}</p>
+                                                                </span></figcaption>
 
                                                             <figure>
                                                                 <img
                                                                     :src="images.length > 12 ? images[12].url : 'src/image-placeholder.jpg'" />
                                                                 <input id="ia-selector-last" type="radio"
                                                                     name="radio-set" />
-                                                                <figcaption><span><p>{{ tour.tourname }}</p><p class="text-xs mt-2">{{ tour.artist.stagename }}</p><p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p></span></figcaption>
+                                                                <figcaption><span>
+                                                                        <p>{{ tour.tourname }}</p>
+                                                                        <p class="text-xs mt-2">{{ tour.artist.stagename }}
+                                                                        </p>
+                                                                        <p class="text-xs mt-2">{{ tour.startdate }} - {{
+                                                                            tour.enddate }}</p>
+                                                                    </span></figcaption>
 
                                                                 <figure>
                                                                     <img
@@ -328,6 +386,14 @@ export default {
             </figure>
 
         </div>
+        <div class="flex px-2">
+            <h1
+                class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
+                ACTIVIDADES</h1>
+            <button @click="show_images = true"
+                class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded whitespace-nowrap">Ver más
+                imágenes</button>
+        </div>
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
             <TourActivity v-for="item in sort(activities)" @show="(item) => details = item" @edit="edit" @destroy="destroy"
                 :activity="item" />
@@ -337,7 +403,7 @@ export default {
             </article>
         </div>
         <transition name="bounce" mode="out-in">
-            <ImageModal :id="tour.id" v-if="show_images" @close="show_images = false" />
+            <ImageModal :tour="tour" v-if="show_images" @update="(items) => images = items" @close="show_images = false" />
         </transition>
         <transition name="bounce" mode="out-in">
             <ActivityModal @close="show = false" @send="send" :activity="activity" :tour="tour" v-if="show" />
@@ -352,31 +418,7 @@ h1 {
     font-family: 'Archivo Black', sans-serif;
 }
 
-.stage {
-    background-image: url("/src/background.jpg");
 
-    position: relative;
-}
-
-.stage::before {
-    background-color: rgba(0, 0, 0, 0.712);
-    content: " ";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
-
-form,
-.images-modal {
-    max-height: calc(100vh - 8rem);
-}
-
-.images {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 1px;
-}
 
 .ia-container {
     width: calc(100vw - 40px);
