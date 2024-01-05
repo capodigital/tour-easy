@@ -13,6 +13,7 @@ export default {
             tour: {},
             show: false,
             active: 0,
+            deleted: 0,
         };
     },
     methods: {
@@ -118,6 +119,13 @@ export default {
                     class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     GIRAS</h1>
                 <div class="form-check items-center">
+                    <input required aria-label="Ver giras terminadas" @change="(e) => deleted = e.target.checked ? 1 : 0"
+                        class="form-check-input me-0.5" type="checkbox" />
+                    <label class="form-check-label leading-4 text-sm text-center">
+                        Ver giras eliminadas
+                    </label>
+                </div>
+                <div class="form-check items-center">
                     <input required aria-label="Ver giras terminadas" @change="(e) => active = e.target.checked ? 1 : 0"
                         class="form-check-input me-0.5" type="checkbox" />
                     <label class="form-check-label leading-4 text-sm text-center">
@@ -135,7 +143,7 @@ export default {
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
                 <template v-for="item in tours">
                     <TourCard @edit="edit" @destroy="destroy" @complete="complete" :tour="item"
-                        v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && (item.active == 1 || active == 1)" />
+                        v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && (item.active == 1 || active == 1) && (item.deleted_at == null || deleted == 1)" />
                 </template>
             </div>
         </div>
