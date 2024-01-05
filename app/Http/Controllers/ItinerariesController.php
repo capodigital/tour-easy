@@ -10,6 +10,7 @@ use App\Models\Tours;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class ItinerariesController extends Controller
@@ -64,7 +65,8 @@ class ItinerariesController extends Controller
         }
 
         $tour = Tours::find($request->tour_id);
-        if(Carbon::parse($request->enddate) > $tour->enddate) {
+        $end = Carbon::parse($tour->enddate . " 00:00:00")->addDay();
+        if(Carbon::parse($request->enddate) >= $end) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de este evento esta fuera de las fechas de la gira.'],
             ]);
@@ -106,9 +108,11 @@ class ItinerariesController extends Controller
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
             ]);
         }
-        if(Carbon::parse($request->enddate) > $itinerary->tour->enddate) {
+
+        $end = Carbon::parse($itinerary->tour->enddate . " 00:00:00")->addDay();
+        if(Carbon::parse($request->enddate) >= $end) {
             throw ValidationException::withMessages([
-                'enddate' => ['La fecha de fin no puede ser mayor que la fecha de fin de la gira.'],
+                'enddate' => ['La fecha de este evento esta fuera de las fechas de la gira.'],
             ]);
         }
         $itinerary->update($request->all());
