@@ -17,8 +17,16 @@ class AgenciesResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        
+
         $city = Cities::find($this->city_id);
+        if ($city == null) {
+            $city = [
+                'id' => 0,
+                'name' => 'Ciudad eliminada',
+            ];
+        } else {
+            $city = new CitiesResource($city);
+        }
         $typeagency = Typeagencies::find($this->typeagency_id);
         return [
             'id' => $this->id,
@@ -31,7 +39,7 @@ class AgenciesResource extends JsonResource
             'web' => $this->web,
             'notes' => $this->notes,
             'phone' => $this->phone,
-            'city' => new CitiesResource($city),
+            'city' => $city,
             'city_id' => $this->city_id,
             'typeagency' => new TypeagenciesResource($typeagency),
             'typeagency_id' => $this->typeagency_id,
@@ -39,7 +47,7 @@ class AgenciesResource extends JsonResource
             'documents' => DocumentsResource::collection($this->documents()->get()),
             // 'users' => User::where('agency_id', $this->id),
             'users' => $this->users,
-            
+
         ];
     }
 }

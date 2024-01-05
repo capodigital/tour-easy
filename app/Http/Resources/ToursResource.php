@@ -20,6 +20,25 @@ class ToursResource extends JsonResource
     {
         $agency = Agencies::find($this->agency_id);
         $artist = Artists::find($this->artist_id);
+        if ($artist == null) {
+            $artist = [
+                'id' => 0,
+                'name' => 'Artista eliminado',
+                'lastname' => '',
+                'stagename' => 'Artista eliminado',
+            ];
+        } else {
+            $artist = new ArtistsResource($artist);
+        }
+        if ($agency == null) {
+            $agency = [
+                'id' => 0,
+                'tradename' => 'Agencia eliminada',
+                'taxname' => 'Agencia eliminada'
+            ];
+        } else {
+            $agency = new AgenciesResource($agency);
+        }
         return [
             'id' => $this->id,
             'tourname' => $this->tourname,
@@ -29,9 +48,9 @@ class ToursResource extends JsonResource
             'notes' => $this->notes,
             'youtube_list' => $this->youtube_list,
             'spotify_list' => $this->spotify_list,
-            'artist' => new ArtistsResource($artist),
+            'artist' => $artist,
             'artist_id' => $this->artist_id,
-            'agency' => new AgenciesResource($agency),
+            'agency' => $agency,
             'agency_id' => $this->agency_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
             'documents' => DocumentsResource::collection($this->documents()->get()),

@@ -16,7 +16,14 @@ class TicketsResource extends JsonResource
     public function toArray(Request $request): array
     {
         $itinerary = Itineraries::find($this->itinerary_id);
-
+        if ($itinerary == null) {
+            $itinerary = [
+                'id' => 0,
+                'name' => 'Actividad eliminada',
+            ];
+        } else {
+            $itinerary = new ItinerariesResource($itinerary);
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -27,10 +34,10 @@ class TicketsResource extends JsonResource
             'chain' => $this->chain,
             'notes' => $this->notes,
             'itinerary_id' => $this->itinerary_id,
-            'itinerary' => new ItinerariesResource($itinerary),
-           
-                           
+            'itinerary' => $itinerary,
+
+
         ];
     }
-    
+
 }
