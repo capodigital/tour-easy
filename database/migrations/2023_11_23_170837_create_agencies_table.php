@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('taxname', 100)->unique()->nullable();
             $table->string('taxcode', 30)->unique()->nullable();
             $table->string('owner', 50)->nullable();
+            $table->string('image', 150)->nullable();
             $table->string('address', 250)->nullable();
             $table->string('email', 250)->unique()->nullable();
             $table->string('password');

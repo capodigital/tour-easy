@@ -17,7 +17,7 @@ class Agencies extends Authenticatable
     use SoftDeletes;
     protected $fillable = [
         'tradename', 'taxname', 'taxcode', 'owner', 'address', 'email', 'notes', 'phone',
-        'city_id', 'password', 'typeagency_id'
+        'city_id', 'password', 'typeagency_id', 'image'
     ];
     protected $hidden = [
         'password',

@@ -10,6 +10,7 @@ use App\Models\Socialmedias;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AgenciesController extends Controller
 {
@@ -63,6 +64,7 @@ class AgenciesController extends Controller
                 'required',
                 'string',
             ],
+            'image' => ['required', 'image'],
 
         ]);
 
@@ -71,7 +73,12 @@ class AgenciesController extends Controller
             'notes', 'phone', 'city_id', 'typeagency_id'
         ]);
 
+       
+
         $data['password'] = bcrypt($request->password);
+
+        $image = $request->file('image')->store('agencies', 'src');
+        $data['image'] = "src/$image";
         //Almacenar los datos en la base de datos
         $agency = Agencies::create($data);
 
@@ -174,6 +181,14 @@ class AgenciesController extends Controller
             'tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
             'notes', 'phone', 'city_id', 'typeagency_id'
         ]);
+        
+        if ($request->has('image')) {
+            //Eliminar la vieja foto de perfil
+            Storage::disk('src')->delete($agency->image);
+            //Almacenar la nueva foto de perfil
+            $image = $request->file('image')->store('src');
+            $data['image'] = "src/$image";
+        }
 
 
         //Almacenar los datos en la base de datos

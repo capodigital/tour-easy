@@ -33,6 +33,7 @@ class AgenciesResource extends JsonResource
             'tradename' => $this->tradename,
             'taxname' => $this->taxname,
             'taxcode' => $this->taxcode,
+            'image' => $this->image,
             'owner' => $this->owner,
             'address' => $this->address,
             'email' => $this->email,
