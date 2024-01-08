@@ -255,10 +255,10 @@
         </div>
     </div>
 
-    <!-- Button MoreTours -->
+    <!-- Button MoreTours 
     <div class="buttonWhite2">
         <button>MORE TOURS</button>
-    </div>
+    </div>-->
 
 
 
