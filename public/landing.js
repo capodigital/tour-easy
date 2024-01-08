@@ -12,7 +12,11 @@ function initTours() {
             container.innerHTML = "";
             for (const tour of tours.data) {
                 const img = document.createElement("img");
+                img.style.cursor = 'pointer';
                 img.src = tour.tourcartel;
+                img.addEventListener('click', () => {
+                    location.href = `/admin#tour/${tour.id}`
+                })
                 container.append(img);
             }
         });
@@ -26,6 +30,9 @@ function initArtists() {
             // container.innerHTML = "";
             for (const artist of artists.data) {
                 const img = document.createElement("img");
+                img.addEventListener('click', () => {
+                    location.href = `/admin#artist/${artist.id}`
+                })
                 img.src = artist.image;
                 if (container.firstElementChild.children.length < 3) {
                     container.firstElementChild.append(img);

@@ -14,7 +14,7 @@ export default {
         const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
         const active = hash == "" ? "login" : hash.substring(1)
         return {
-            pages: ["#home", "#details", "#artists", "#login", "#personal", "#tour", "#calendar", "#day", "#agencies", "#places", "#tickets"],
+            pages: ["#home", "#details", "#artists", "#login", "#personal", "#tour", "#artist", "#calendar", "#day", "#agencies", "#places", "#tickets"],
             active: active,
         }
     },
@@ -79,7 +79,7 @@ export default {
 };
 </script>
 <template>
-    <template v-if="active == 'tour'">
+    <template v-if="active == 'tour' || active == 'artist'">
         <transition name="carousel" mode="out-in">
             <component :is="active"> </component>
         </transition>

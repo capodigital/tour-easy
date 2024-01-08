@@ -104,6 +104,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+Route::get('public/tours/{tour}', [ToursController::class, 'show']);
+Route::get('public/artists/{artists}', [ArtistsController::class, 'show']);
+
 //Rutas accesibles por la landing page
 Route::get('landing/tours', [ToursController::class, 'landing']);
 Route::get('landing/artists', [ArtistsController::class, 'landing']);

@@ -29,8 +29,8 @@
         </div>
         <!--Sesion y registro-->
         <div class="botonesRegistro">
-            <button class="botonLogin">Log In</button>
-            <button class="botonRegistro">Sign Up</button>
+            <a href="/admin" class="botonLogin">Log In</a>
+            {{-- <button class="botonRegistro">Sign Up</button> --}}
         </div>
     </div>
 

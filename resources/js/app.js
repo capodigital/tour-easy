@@ -27,6 +27,7 @@ import DayPage from "./components/pages/day/DayPage.vue";
 import AgenciesPage from "./components/pages/agencies/AgenciesPage.vue";
 import PlacesPage from "./components/pages/places/PlacesPage.vue";
 import TicketsPage from "./components/pages/tickets/TicketsPage.vue";
+import ArtistPage from "./components/pages/artists/ArtistPage.vue";
 
 const app = createApp(App);
 app.component("home", HomePage);
@@ -35,6 +36,7 @@ app.component("artists", ArtistsPage);
 app.component("login", LoginPage);
 app.component("personal", PersonalPage);
 app.component("tour", TourPage);
+app.component("artist", ArtistPage);
 app.component("calendar", CalendarPage);
 app.component("day", DayPage);
 app.component("agencies", AgenciesPage);

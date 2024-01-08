@@ -214,6 +214,7 @@ body {
 .segundoCarrusel {
     display: flex;
     width: 100%;
+
     /* height: 300px; */
     overflow: auto;
     scroll-snap-type: x mandatory;
@@ -221,8 +222,8 @@ body {
 }
 
 .postalContainer {
-    flex: 0 0 40%;
-    width: 200px;
+    /* flex: 0 0 40%; */
+    min-width: 400px;
     /* height: 300px; */
     position: relative;
     margin-left: 20px;
@@ -602,4 +603,7 @@ body {
 .artists-container > div > img {
     width: 100%;
     border-radius: 1rem;
+}
+button {
+    cursor: pointer;
 }

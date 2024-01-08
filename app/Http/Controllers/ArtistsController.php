@@ -150,7 +150,7 @@ class ArtistsController extends Controller
      */
     public function show(Artists $artists)
     {
-        //
+        return response()->json(new ArtistsResource($artists));
     }
 
     /**
