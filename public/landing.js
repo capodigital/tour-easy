@@ -1,6 +1,7 @@
 window.addEventListener("load", () => {
     initTours();
     initArtists();
+    initAgencies();
 });
 
 function initTours() {
@@ -33,6 +34,45 @@ function initArtists() {
                 } else if (container.lastElementChild.children.length < 3) {
                     container.lastElementChild.append(img);
                 }
+            }
+        });
+}
+
+function initAgencies() {
+    fetch("api/landing/agencies")
+        .then((response) => response.json())
+        .then((agencies) => {
+            const container = document.querySelector(".segundoCarrusel");
+            container.innerHTML = "";
+            for (const agency of agencies.data) {
+                const div = document.createElement("div");
+                div.classList.add("postalContainer");
+                div.style.backgroundImage = `url(${agency.image})`;
+                div.innerHTML = `
+                    <div class="nombrePostal">
+                        <div class="nombreNombrePostal">${agency.taxname}</div>
+                    </div>
+                    <div class="infoContainer">
+                        <div class="infoPostal">
+                            Información
+                        </div>
+                        <div class="numeroPostal">
+                            <img src="img/whatsapp.png" alt="" width="20" height="20">
+                            <div>
+                                <p>Número de teléfono</p>
+                                <p class="numerNumeroPostal">${agency.phone}</p>
+                            </div>
+                        </div>
+                        <div class="numeroPostal">
+                            <img src="img/mail.png" alt="" width="20" height="20">
+                            <div>
+                                <p>Correo electrónico</p>
+                                <p class="numerNumeroPostal">${agency.email}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.append(div);
             }
         });
 }

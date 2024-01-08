@@ -9,9 +9,12 @@ export default {
 </script>
 <template>
     <div
-        class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 transition-all hover:scale-105 cursor-pointer">
+        class="bg-gradient-to-tr from-slate-700 to-slate-950 rounded-2xl shadow-md shadow-gray-500 transition-all hover:scale-105 cursor-pointer">
         <div class="">
-            <div class="float-right">
+            <div class="relative h-80 w-full bg-cover bg-center rounded-t-md"
+                :style="{ 'background': `url(${agency.image.replace('http://localhost/', '')})` }">
+            </div>
+            <div class="float-right px-4">
                 <small class=" text-xs text-gray-400">{{ agency.taxcode }}</small>
                 <div class="flex mt-0.5">
                     <div v-if="Utils.role() != 'artist'" class="flex w-full justify-end">
@@ -52,11 +55,11 @@ export default {
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div class="px-4">
                 <h3 class="font-bold text-lg text-gray-200">{{ agency.taxname }}</h3>
                 <p class="text-gray-500 text-sm leading-4 pe-10">{{ agency.tradename }}</p>
             </div>
-            <div class="grid grid-cols-1 gap-x-2 mt-4">
+            <div class="grid grid-cols-1 gap-x-2 mt-4 px-4">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -192,4 +195,5 @@ export default {
             </div>
         </div>
 
-    </div></template>
+    </div>
+</template>

@@ -203,27 +203,33 @@ body {
 .infoContainer {
     display: flex;
     flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background: linear-gradient(to top, #000, transparent);
 }
 
 .segundoCarrusel {
     display: flex;
     width: 100%;
-    height: 300px;
-    overflow-x: scroll;
+    /* height: 300px; */
+    overflow: auto;
     scroll-snap-type: x mandatory;
     margin-top: 40px;
 }
 
 .postalContainer {
-    overflow-x: scroll;
     flex: 0 0 40%;
     width: 200px;
-    height: 300px;
+    /* height: 300px; */
+    position: relative;
     margin-left: 20px;
     margin-right: 20px;
+    padding-bottom: 10rem;
     object-fit: contain;
     scroll-snap-align: center;
-    background-image: url(./img/rectangle-23-4.png);
     background-size: cover;
     border-radius: 30px;
 }
@@ -232,11 +238,15 @@ body {
     display: flex;
     flex-direction: column;
     height: 100px;
+    padding-top: 0.5rem;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    background: linear-gradient(to bottom, #000, rgb(0, 0, 0), transparent);
 }
 
 .nombreNombrePostal {
     color: white;
-    font-size: 1.2rem;
+    font-size: 2em;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -254,17 +264,29 @@ body {
     justify-content: center;
     align-content: center;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 .numeroPostal {
     display: flex;
     flex-direction: row;
-    height: 50px;
-    width: 50px;
+    width: 100%;
     align-content: center;
     align-items: center;
     color: white;
+    padding: .75rem 1.5rem;
+}
+.numeroPostal > img {
+    margin-right: .75rem;
+}
+.numeroPostal > div > p {
+    white-space: nowrap;
+    margin: 0;
+}
+.numeroPostal > div > p:last-child {
+    color: #bdbdbd;
+    font-size: .85em;
 }
 
 .etiquetaButton {
@@ -303,7 +325,7 @@ body {
     display: flex;
     flex-direction: row;
     margin-top: 60px;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 
 @media screen and (max-width: 667px) {
@@ -356,6 +378,7 @@ body {
 .filaImagenes img {
     margin: 6px;
     width: 22vw;
+    border-radius: 2rem;
 }
 
 @media screen and (max-width: 667px) {
@@ -557,8 +580,8 @@ body {
 }
 
 .columnaIzquierda {
-    border-radius: .5rem;
-    padding: .5rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
 }
 
 .artists-container {

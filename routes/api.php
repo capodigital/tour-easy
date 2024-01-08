@@ -107,3 +107,4 @@ Route::middleware('auth:sanctum')->group(function () {
 //Rutas accesibles por la landing page
 Route::get('landing/tours', [ToursController::class, 'landing']);
 Route::get('landing/artists', [ArtistsController::class, 'landing']);
+Route::get('landing/agencies', [AgenciesController::class, 'landing']);

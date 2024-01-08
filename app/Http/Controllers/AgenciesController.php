@@ -33,6 +33,15 @@ class AgenciesController extends Controller
         }
         return AgenciesResource::collection($agencies);
     }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function landing(Request $request)
+    {
+        return AgenciesResource::collection(Agencies::all());
+    }
+
     public function all()
     {
         $agencies = Agencies::withTrashed()->get();
@@ -69,21 +78,26 @@ class AgenciesController extends Controller
         ]);
 
         $data = $request->only([
-            'tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
-            'notes', 'phone', 'city_id', 'typeagency_id'
+            'tradename',
+            'email',
+            'taxname',
+            'taxcode',
+            'owner',
+            'address',
+            'notes',
+            'phone',
+            'city_id',
+            'typeagency_id'
         ]);
 
-       
-
         $data['password'] = bcrypt($request->password);
-
         $image = $request->file('image')->store('agencies', 'src');
         $data['image'] = "src/$image";
         //Almacenar los datos en la base de datos
         $agency = Agencies::create($data);
 
         if ($request->has('socialmedias')) {
-            Socialmedias::where('socialmediaable_id',$agency->id)->delete();
+            Socialmedias::where('socialmediaable_id', $agency->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
                     Socialmedias::create([
@@ -142,14 +156,15 @@ class AgenciesController extends Controller
     {
         //
     }
-    public function updatePassword(Request $request, $agency) {
+    public function updatePassword(Request $request, $agency)
+    {
         $request->validate([
             'current_password' => 'required|current_password',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
         ]);
-       // dd($artist);
-        $agencia=DB::table('agencies')
+        // dd($artist);
+        $agencia = DB::table('agencies')
             ->where('id', $agency)
             ->update(['password' => bcrypt($request->password)]);
         //$artist->password = bcrypt($request->password);
@@ -178,13 +193,23 @@ class AgenciesController extends Controller
         ]);
 
         $data = $request->only([
-            'tradename', 'email', 'taxname', 'taxcode', 'owner', 'address',
-            'notes', 'phone', 'city_id', 'typeagency_id'
+            'tradename',
+            'email',
+            'taxname',
+            'taxcode',
+            'owner',
+            'address',
+            'notes',
+            'phone',
+            'city_id',
+            'typeagency_id'
         ]);
-        
+
         if ($request->has('image')) {
             //Eliminar la vieja foto de perfil
-            Storage::disk('src')->delete($agency->image);
+            if ($agency->image != null) {
+                Storage::disk('src')->delete($agency->image);
+            }
             //Almacenar la nueva foto de perfil
             $image = $request->file('image')->store('src');
             $data['image'] = "src/$image";

@@ -76,25 +76,31 @@
         <div class="postalContainer">
             <div class="nombrePostal">
                 <div class="nombreNombrePostal">SPLASHI.CO</div>
-                <img class="logoNombrePostal" src="img/splashi.png" alt="">
+                {{-- <img class="logoNombrePostal" src="img/splashi.png" alt=""> --}}
             </div>
             <div class="infoContainer">
                 <div class="infoPostal">
-                    Info.
+                    Información
                 </div>
                 <div class="numeroPostal">
-                    <img src="img/whatsapp.png" alt="" width="10" height="10">
-                    <p class="numerNumeroPostal"> +34(900377023)</p>
+                    <img src="img/whatsapp.png" alt="" width="20" height="20">
+                    <div>
+                        <p>Número de teléfono</p>
+                        <p class="numerNumeroPostal"> +34(900377023)</p>
+                    </div>
                 </div>
                 <div class="numeroPostal">
-                    <img src="img/mail.png" alt="" width="10" height="10">
-                    <p class="numerNumeroPostal">algunemail@gmail.com</p>
+                    <img src="img/mail.png" alt="" width="20" height="20">
+                    <div>
+                        <p>Correo electrónico</p>
+                        <p class="numerNumeroPostal"> algunemail@gmail.com</p>
+                    </div>
                 </div>
             </div>
-            <div class="etiquetaButton">
+            {{-- <div class="etiquetaButton">
                 <button class="etiquetaButtonLeft">Etiqueta</button>
                 <button class="etiquetaButtonRight">Etiqueta</button>
-            </div>
+            </div> --}}
         </div>
         <!-- Postal-2 -->
         <div class="postalContainer">

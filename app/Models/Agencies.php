@@ -16,8 +16,18 @@ class Agencies extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
     protected $fillable = [
-        'tradename', 'taxname', 'taxcode', 'owner', 'address', 'email', 'notes', 'phone',
-        'city_id', 'password', 'typeagency_id', 'image'
+        'tradename',
+        'taxname',
+        'taxcode',
+        'owner',
+        'address',
+        'email',
+        'notes',
+        'phone',
+        'city_id',
+        'password',
+        'typeagency_id',
+        'image'
     ];
     protected $hidden = [
         'password',
@@ -27,6 +37,15 @@ class Agencies extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function getImagePathAttribute()
+    {
+        if ($this->image !== null) {
+            return asset($this->image);
+        } else {
+            return asset("src/image-placeholder.jpg");
+        }
+    }
 
     public function city(): BelongsTo
     {
@@ -75,12 +94,14 @@ class Agencies extends Authenticatable
     {
         $data = parent::toArray();
         $data['socialmedias'] = $this->socialmedias;
+        $data['image'] = $this->imagePath;
         return $data;
     }
     public function toArray1()
     {
         $data = parent::toArray();
         $data['documents'] = $this->documents;
+        $data['image'] = $this->imagePath;
         return $data;
     }
 }

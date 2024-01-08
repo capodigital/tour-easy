@@ -16,9 +16,18 @@ export default {
             socialmedias: [{}],
             country_id: 'AF',
             files: [{ type: 'link' }],
+            preview: 'src/user_placeholder.png',
         }
     },
     methods: {
+        updatePreview(e) {
+            const files = e.target.files
+            if (files && files.length) {
+                this.preview = URL.createObjectURL(files[0])
+            } else {
+                this.preview = 'src/user_placeholder.png'
+            }
+        },
         removeDocument(index) {
             const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este documento?')
             confirm.fire().then((result) => {
@@ -54,6 +63,7 @@ export default {
                 document.type = document.url == null ? 'local' : 'link'
                 this.files.push(document)
             }
+            this.preview = this.agency.image.replace('http://localhost/', '')
         }
         axios.get('api/typeredes', {
             headers: {
@@ -94,45 +104,61 @@ export default {
                 </template>
             </h1>
             <div class="overflow-auto modal-content">
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Nombre de la agencia</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-building text-gray-100"></i>
-                            <input required v-model="agency.taxname" name="taxname" type="text"
-                                placeholder="Nombre de la agencia"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div class="flex items-center justify-center">
+                        <input @change="updatePreview" type="file" class="opacity-5 w-1 h-1" name="image"
+                            :required="agency.id == undefined" />
+                        <div class="text-center">
+                            <img @click="$el.querySelector('[type=file]').click()" id="preview" :src="preview"
+                                class="rounded-lg w-64 h-64 cursor-pointer mb-3" />
+                            <label v-if="preview == 'src/image-placeholder.jpg'"
+                                class="text-center text-gray-300 mt-2 mx-auto">Imagen obligatoria</label>
                         </div>
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Nombre de la marca</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-badge-tm text-gray-100"></i>
-                            <input required v-model="agency.tradename" name="tradename" type="text"
-                                placeholder="Nombre de la marca"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        <div class="grid grid-cols-1 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Nombre de la agencia</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-building text-gray-100"></i>
+                                    <input required v-model="agency.taxname" name="taxname" type="text"
+                                        placeholder="Nombre de la agencia"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Nombre de la marca</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-badge-tm text-gray-100"></i>
+                                    <input required v-model="agency.tradename" name="tradename" type="text"
+                                        placeholder="Nombre de la marca"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-x-2">
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Código fiscal</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-upc-scan text-gray-100"></i>
+                                    <input required v-model="agency.taxcode" name="taxcode" type="text"
+                                        placeholder="Código fiscal"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-slate-200 text-xs font-semibold">Dueño de la agencia</label>
+                                <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                                    <i class="bi bi-person text-gray-100"></i>
+                                    <input required v-model="agency.owner" name="owner" type="text"
+                                        placeholder="Dueño de la agencia"
+                                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Código fiscal</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-upc-scan text-gray-100"></i>
-                            <input required v-model="agency.taxcode" name="taxcode" type="text" placeholder="Código fiscal"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Dueño de la agencia</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-person text-gray-100"></i>
-                            <input required v-model="agency.owner" name="owner" type="text"
-                                placeholder="Dueño de la agencia"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                </div>
+
                 <div class="grid gap-x-2" :class="{ 'grid-cols-2': agency.id == undefined }">
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
