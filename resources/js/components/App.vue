@@ -69,7 +69,8 @@ export default {
         }).then(() => {
             // this.init()
         }).catch(() => {
-            location.href = '#login'
+            if (this.active != "tour" && this.active != "artist")
+                location.href = '#login'
         })
 
     },

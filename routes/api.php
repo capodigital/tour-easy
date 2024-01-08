@@ -88,7 +88,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/cities', [CitiesController::class, 'citiesByCountry']);
 
     Route::resource('photos', PhotosController::class);
-    Route::post('/photos/tour', [PhotosController::class, 'photosByTour']);
+
 
     Route::resource('tickets', TicketsController::class);
     Route::resource('typecontacts', TypecontactsController::class);
@@ -106,6 +106,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('public/tours/{tour}', [ToursController::class, 'show']);
 Route::get('public/artists/{artists}', [ArtistsController::class, 'show']);
+Route::post('/photos/tour', [PhotosController::class, 'photosByTour']);
 
 //Rutas accesibles por la landing page
 Route::get('landing/tours', [ToursController::class, 'landing']);

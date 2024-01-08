@@ -17,7 +17,7 @@ export default {
     },
     mounted() {
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-        axios.get('api/tours/' + id, {
+        axios.get('api/public/tours/' + id, {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
