@@ -37,6 +37,15 @@ class ToursController extends Controller
 
         return ToursResource::collection($tours);
     }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function landing(Request $request)
+    {
+        return ToursResource::collection(Tours::where('active', 1)->get());
+    }
+
     public function all()
     {
         $tours = Tours::withTrashed()->orderBy('startdate')->get()->sortBy('startdate');
@@ -69,8 +78,13 @@ class ToursController extends Controller
         ]);
 
         $data = $request->only([
-            'tourname', 'startdate', 'enddate', 'artist_id', 'notes',
-            'spotify_list', 'youtube_list'
+            'tourname',
+            'startdate',
+            'enddate',
+            'artist_id',
+            'notes',
+            'spotify_list',
+            'youtube_list'
         ]);
 
         if (Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
@@ -178,8 +192,13 @@ class ToursController extends Controller
         }
 
         $data = $request->only([
-            'tourname', 'startdate', 'enddate', 'artist_id', 'notes',
-            'spotify_list', 'youtube_list'
+            'tourname',
+            'startdate',
+            'enddate',
+            'artist_id',
+            'notes',
+            'spotify_list',
+            'youtube_list'
         ]);
         if ($request->has('tourcartel')) {
             //Eliminar la vieja foto de perfil
@@ -194,7 +213,7 @@ class ToursController extends Controller
         $tour->update($data);
 
         if ($request->has('socialmedias')) {
-            Socialmedias::where('socialmediaable_id',$tour->id)->delete();
+            Socialmedias::where('socialmediaable_id', $tour->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
                     Socialmedias::create([

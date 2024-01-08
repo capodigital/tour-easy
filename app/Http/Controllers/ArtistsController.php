@@ -35,6 +35,15 @@ class ArtistsController extends Controller
 
         return ArtistsResource::collection($artists);
     }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function landing(Request $request)
+    {
+        return ArtistsResource::collection(Artists::all());
+    }
+
     public function all()
     {
         $artists = Artists::withTrashed()->get();
@@ -68,7 +77,7 @@ class ArtistsController extends Controller
             'birthday' => 'required|before:today'
 
         ]);
-        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id','notes']);
+        $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id', 'notes']);
         if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
                 $data['agency_id'] = $request->user()->agency_id;
@@ -151,14 +160,15 @@ class ArtistsController extends Controller
     {
     }
 
-    public function updatePassword(Request $request, $artist) {
+    public function updatePassword(Request $request, $artist)
+    {
         $request->validate([
             'current_password' => 'required|current_password',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
         ]);
-       // dd($artist);
-        $artista=DB::table('artists')
+        // dd($artist);
+        $artista = DB::table('artists')
             ->where('id', $artist)
             ->update(['password' => bcrypt($request->password)]);
         //$artist->password = bcrypt($request->password);
@@ -194,7 +204,7 @@ class ArtistsController extends Controller
         $artist->update($data);
 
         if ($request->has('socialmedias')) {
-            Socialmedias::where('socialmediaable_id',$artist->id)->delete();
+            Socialmedias::where('socialmediaable_id', $artist->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
                     Socialmedias::create([

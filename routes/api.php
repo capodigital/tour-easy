@@ -103,3 +103,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/users/password/{user}', [UserController::class, 'updatePassword']);
 
 });
+
+//Rutas accesibles por la landing page
+Route::get('landing/tours', [ToursController::class, 'landing']);
+Route::get('landing/artists', [ArtistsController::class, 'landing']);
