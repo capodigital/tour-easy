@@ -430,7 +430,7 @@ export default {
                         </div>
                         <div class="flex justify-center">
                             <button type="button" @click="show = false"
-                                class="mt-8 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                                class="mt-8 me-2 close overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
                                 Cerrar
                             </button>
                             <button type="submit"

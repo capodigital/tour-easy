@@ -82,7 +82,8 @@ export default {
                     class="font-bold bg-gradient-to-tr w-full  from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                     IMÁGENES DE LA GIRA
                 </h1>
-                <button @click="$emit('close')" class="bg-slate-800 text-white rounded px-2 py-1">Cerrar</button>
+                <button @click="$emit('close')" :disabled="uploading"
+                    class="bg-slate-800 text-white rounded px-2 disabled:opacity-50 py-1">Cerrar</button>
             </div>
             <div class="overflow-auto modal-content">
                 <div v-viewer="options" class="images md:grid">

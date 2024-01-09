@@ -5,7 +5,7 @@ export default {
     },
     methods: {
         close(e) {
-            if (e.target.classList.contains('custom-modal')) {
+            if (e.target.classList.contains('custom-modal') && sessionStorage.getItem('lock') != 'locked') {
                 this.$emit('close')
             }
         }

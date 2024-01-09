@@ -174,6 +174,7 @@ export default class Utils {
         );
         const close = form.querySelector(".close");
         close.disabled = true;
+        sessionStorage.setItem("lock", "locked");
     }
 
     static unlock(form) {
@@ -185,6 +186,7 @@ export default class Utils {
         button.querySelector(".spinner-border").remove();
         const close = form.querySelector(".close");
         close.disabled = false;
+        sessionStorage.removeItem("lock");
     }
 
     static filter(keys, item, value) {
