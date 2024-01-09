@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="style.css" />
 
     <title>MAD MUSIC Tour Planner</title>
+    <style>
+        a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: .25rem;
+            margin-right: .25rem;
+        }
+    </style>
 
 </head>
 
@@ -21,11 +29,11 @@
         </div>
         <!--Botones centrales-->
         <div class="botonesCentrales">
-            <button>About Us</button>
-            <button>Services</button>
-            <button>Contacts</button>
-            <button>More</button>
-            <button>Pricing</button>
+            <a href="#tours">Giras</a>
+            <a href="#agencies">Agencias</a>
+            <a href="#highlighting">Highlighting</a>
+            <a href="#artists">Artistas</a>
+            {{-- <a href="#">Pricing</a> --}}
         </div>
         <!--Sesion y registro-->
         <div class="botonesRegistro">
@@ -41,7 +49,7 @@
     </div>
 
     <!--Primer Carrusel-->
-    <div class="primerCarrusel">
+    <div id="tours" class="primerCarrusel">
         <img src="./img/foto-1.jpeg" alt="">
         <img src="./img/foto-2.jpeg" alt="">
         <img src="./img/foto-3.jpeg" alt="">
@@ -53,13 +61,13 @@
     </div>
 
     <!--Botones Explore y Tours-->
-    <div class="buttonWhite">
+    {{-- <div class="buttonWhite">
         <button>Explore</button>
         <button>Tours</button>
-    </div>
+    </div> --}}
 
     <!-- 2 Posts-->
-    <div class="post_2">
+    <div id="agencies" class="post_2">
         <div class="post_2_1">
             <div class="ours">Ours</div>
             <div class="agencies">agencies</div>
@@ -201,7 +209,7 @@
     </div>
 
     <!-- Flayer HighLight -->
-    <div class="highlightContainer">
+    <div id="highlighting" class="highlightContainer">
         <!--Columna izquierda-->
         <div class="columnaIzquierda">
             <div>
@@ -237,7 +245,7 @@
         </div>
         <div class="forthis">FOR THIS 2024</div>
         {{-- <img class="collage" src="img/collage.png" alt=""> --}}
-        <div class="artists-container">
+        <div id="artists" class="artists-container">
             <div>
             </div>
             <div>
