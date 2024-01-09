@@ -68,7 +68,8 @@ class ArtistsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        
+        $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:artists',
             'password' => ['required', 'string'],
@@ -76,7 +77,13 @@ class ArtistsController extends Controller
             'confirm_password' => 'required|same:password',
             'birthday' => 'required|before:today'
 
-        ]);
+        ];
+        
+        $customMessages = [
+            'birthday.before' => 'El campo fecha debe ser una fecha anterior a hoy',
+        ];
+        
+        $request->validate($rules, $customMessages);
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id', 'notes']);
         if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
@@ -182,11 +189,18 @@ class ArtistsController extends Controller
      */
     public function update(Request $request, Artists $artist)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required',
-            'email' => ['required', 'email', 'unique:artists,email,' . $artist->id],
+            'email' => 'required|email|unique:artists',
             'birthday' => 'required|before:today'
-        ]);
+
+        ];
+        
+        $customMessages = [
+            'birthday.before' => 'El campo fecha debe ser una fecha anterior a hoy',
+        ];
+        
+        $request->validate($rules, $customMessages);
 
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'notes']);
 

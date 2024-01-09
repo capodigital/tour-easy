@@ -70,12 +70,19 @@ class ToursController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        
+        $rules = [
             'tourname' => 'required',
             'tourcartel' => ['required', 'image'],
+            'startdate' => 'date|after_or_equal:today'
 
-
-        ]);
+        ];
+        
+        $customMessages = [
+            'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
+        ];
+        
+        $request->validate($rules, $customMessages);
 
         $data = $request->only([
             'tourname',
@@ -181,9 +188,18 @@ class ToursController extends Controller
      */
     public function update(Request $request, Tours $tour)
     {
-        $request->validate([
+        $rules = [
             'tourname' => 'required',
-        ]);
+            'startdate' => 'date|after_or_equal:today'
+
+        ];
+        
+        $customMessages = [
+            'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
+        ];
+        
+        $request->validate($rules, $customMessages);
+
 
         if (Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
