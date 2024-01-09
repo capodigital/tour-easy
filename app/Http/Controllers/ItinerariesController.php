@@ -53,10 +53,17 @@ class ItinerariesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        
+        $rules = [
             'name' => 'required',
             'startdate' => 'date|after_or_equal:today'
-        ]);
+        ];
+        
+        $customMessages = [
+            'startdate.before' => 'El campo fecha debe ser una fecha anterior a hoy',
+        ];
+        
+        $request->validate($rules, $customMessages);
 
         if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
