@@ -60,7 +60,7 @@ class ItinerariesController extends Controller
         ];
         
         $customMessages = [
-            'startdate.before' => 'El campo fecha debe ser una fecha anterior a hoy',
+            'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
         ];
         
         $request->validate($rules, $customMessages);
@@ -106,10 +106,16 @@ class ItinerariesController extends Controller
      */
     public function update(Request $request, Itineraries $itinerary)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required',
             'startdate' => 'date|after_or_equal:today'
-        ]);
+        ];
+        
+        $customMessages = [
+            'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
+        ];
+        
+        $request->validate($rules, $customMessages);
         if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
