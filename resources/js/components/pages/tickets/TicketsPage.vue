@@ -117,7 +117,7 @@ export default {
                 </div>
             </div>
             <div class="flex justify-end mt-1">
-                <select v-model="tour_filter" class="rounded border border-gray-500 px-3 pe-8 py-1 mt-1">
+                <select v-model="tour_filter" class="rounded border border-gray-500 px-3 pe-8 py-1 mt-1 max-w-[calc(100vw-2rem)]">
                     <option value="0">Todas las giras</option>
                     <option v-for="item in tours" :value="item.id">
                         {{ item.tourname }}

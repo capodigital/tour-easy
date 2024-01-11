@@ -45,7 +45,7 @@ export default {
 </script>
 <template>
     <footer
-        class="flex justify-center w-full h-16 z-30 items-end relative overflow-hidden transition-all rounded-t-2xl bg-white bg-opacity-50">
+        class="flex fixed bottom-0 z-[30] justify-center w-full h-16 items-end overflow-hidden transition-all rounded-t-2xl bg-white">
         <div class="flex pb-3">
             <a v-if="Utils.role() != 'artist'" class="transition-all px-3" @click="active = -2" href="#places"
                 :class="{ 'text-gray-500': active != -2, 'text-black': active == -3 }">
@@ -133,7 +133,6 @@ export default {
         </div>
         <div class="active-box h-10 w-full transition-all"
             :style="{ 'left': 'calc(50vw - 1.5rem + ' + active * 3 + 'rem)' }">
-
         </div>
     </footer>
 </template>

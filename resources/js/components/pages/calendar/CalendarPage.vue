@@ -52,8 +52,6 @@ export default {
                 }
             }).then((response) => {
                 const date = new Date(response.data.data.startdate);
-                console.log(this.forms)
-                console.log(date.getDate())
                 this.forms[date.getDate() + this.initial].activities.push(this.getActivityData(response.data.data));
                 this.Utils.notify('Se ha creado correctamente la actividad')
                 this.show = false;
@@ -196,33 +194,35 @@ export default {
         <div class="my-2">
             <div class="text-center sm:flex items-center">
                 <label class="me-2">Filtrar: </label>
-                <select v-model="month" @change="update" class="rounded border border-gray-500 px-3 pe-8 py-1 me-2">
-                    <option value="0">Enero</option>
-                    <option value="1">Febrero</option>
-                    <option value="2">Marzo</option>
-                    <option value="3">Abril</option>
-                    <option value="4">Mayo</option>
-                    <option value="5">Junio</option>
-                    <option value="6">Julio</option>
-                    <option value="7">Agosto</option>
-                    <option value="8">Septiembre</option>
-                    <option value="9">Octubre</option>
-                    <option value="10">Noviembre</option>
-                    <option value="11">Diciembre</option>
-                </select>
-                <select v-model="year" @change="update" class="rounded border border-gray-500 pe-8 px-3 py-1 me-2">
-                    <option :value="2000 + n" v-for="n in 24">
-                        {{ 2000 + n }}
-                    </option>
-                </select>
-                <select v-model="tour_id" class="rounded border border-gray-500 px-3 pe-8 py-1">
-                    <option value="0">Todas las giras</option>
-                    <template v-for="item in tours">
-                        <option v-if="item.active == 1" :value="item.id">
-                            {{ item.tourname }}
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
+                    <select v-model="month" @change="update" class="rounded border border-gray-500 px-3 pe-8 py-1">
+                        <option value="0">Enero</option>
+                        <option value="1">Febrero</option>
+                        <option value="2">Marzo</option>
+                        <option value="3">Abril</option>
+                        <option value="4">Mayo</option>
+                        <option value="5">Junio</option>
+                        <option value="6">Julio</option>
+                        <option value="7">Agosto</option>
+                        <option value="8">Septiembre</option>
+                        <option value="9">Octubre</option>
+                        <option value="10">Noviembre</option>
+                        <option value="11">Diciembre</option>
+                    </select>
+                    <select v-model="year" @change="update" class="rounded border border-gray-500 pe-8 px-3 py-1">
+                        <option :value="2000 + n" v-for="n in 24">
+                            {{ 2000 + n }}
                         </option>
-                    </template>
-                </select>
+                    </select>
+                    <select v-model="tour_id" class="rounded border border-gray-500 px-3 pe-8 py-1">
+                        <option value="0">Todas las giras</option>
+                        <template v-for="item in tours">
+                            <option v-if="item.active == 1" :value="item.id">
+                                {{ item.tourname }}
+                            </option>
+                        </template>
+                    </select>
+                </div>
                 <!-- <div class="form-check items-center ms-1 flex">
                     <input required aria-label="Ver giras terminadas" @change="(e) => active = e.target.checked ? 1 : 0"
                         class="form-check-input me-0.5" type="checkbox" />

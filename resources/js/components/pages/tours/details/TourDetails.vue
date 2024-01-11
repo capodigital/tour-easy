@@ -194,7 +194,7 @@ export default {
                 <img :src="images.length > 0 ? images[0].url : 'src/image-placeholder.jpg'" />
                 <input type="radio" name="radio-set" checked="checked" />
                 <figcaption><span>
-                        <p>{{ tour.tourname }}</p>
+                        <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                         <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                         <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                     </span></figcaption>
@@ -203,7 +203,7 @@ export default {
                     <img :src="images.length > 1 ? images[1].url : 'src/image-placeholder.jpg'" />
                     <input type="radio" name="radio-set" />
                     <figcaption><span>
-                            <p>{{ tour.tourname }}</p>
+                            <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                             <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                             <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                         </span></figcaption>
@@ -212,7 +212,7 @@ export default {
                         <img :src="images.length > 2 ? images[2].url : 'src/image-placeholder.jpg'" />
                         <input type="radio" name="radio-set" />
                         <figcaption><span>
-                                <p>{{ tour.tourname }}</p>
+                                <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                 <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                 <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                             </span></figcaption>
@@ -221,7 +221,7 @@ export default {
                             <img :src="images.length > 3 ? images[3].url : 'src/image-placeholder.jpg'" />
                             <input type="radio" name="radio-set" />
                             <figcaption><span>
-                                    <p>{{ tour.tourname }}</p>
+                                    <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                     <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                     <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                                 </span></figcaption>
@@ -230,7 +230,7 @@ export default {
                                 <img :src="images.length > 4 ? images[4].url : 'src/image-placeholder.jpg'" />
                                 <input type="radio" name="radio-set" />
                                 <figcaption><span>
-                                        <p>{{ tour.tourname }}</p>
+                                        <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                         <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                         <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                                     </span></figcaption>
@@ -239,7 +239,7 @@ export default {
                                     <img :src="images.length > 5 ? images[5].url : 'src/image-placeholder.jpg'" />
                                     <input type="radio" name="radio-set" />
                                     <figcaption><span>
-                                            <p>{{ tour.tourname }}</p>
+                                            <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                             <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                             <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                                         </span></figcaption>
@@ -248,7 +248,7 @@ export default {
                                         <img :src="images.length > 6 ? images[6].url : 'src/image-placeholder.jpg'" />
                                         <input type="radio" name="radio-set" />
                                         <figcaption><span>
-                                                <p>{{ tour.tourname }}</p>
+                                                <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                                 <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                                 <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                                             </span></figcaption>
@@ -257,7 +257,7 @@ export default {
                                             <img :src="images.length > 7 ? images[7].url : 'src/image-placeholder.jpg'" />
                                             <input id="ia-selector-last" type="radio" name="radio-set" />
                                             <figcaption><span>
-                                                    <p>{{ tour.tourname }}</p>
+                                                    <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                                     <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                                     <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}</p>
                                                 </span></figcaption>
@@ -267,7 +267,7 @@ export default {
                                                     :src="images.length > 8 ? images[8].url : 'src/image-placeholder.jpg'" />
                                                 <input id="ia-selector-last" type="radio" name="radio-set" />
                                                 <figcaption><span>
-                                                        <p>{{ tour.tourname }}</p>
+                                                        <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                                         <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                                         <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate }}
                                                         </p>
@@ -278,7 +278,7 @@ export default {
                                                         :src="images.length > 9 ? images[9].url : 'src/image-placeholder.jpg'" />
                                                     <input id="ia-selector-last" type="radio" name="radio-set" />
                                                     <figcaption><span>
-                                                            <p>{{ tour.tourname }}</p>
+                                                            <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                                             <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                                             <p class="text-xs mt-2">{{ tour.startdate }} - {{ tour.enddate
                                                             }}</p>
@@ -289,7 +289,7 @@ export default {
                                                             :src="images.length > 10 ? images[10].url : 'src/image-placeholder.jpg'" />
                                                         <input id="ia-selector-last" type="radio" name="radio-set" />
                                                         <figcaption><span>
-                                                                <p>{{ tour.tourname }}</p>
+                                                                <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                                                 <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                                                 <p class="text-xs mt-2">{{ tour.startdate }} - {{
                                                                     tour.enddate }}</p>
@@ -300,7 +300,7 @@ export default {
                                                                 :src="images.length > 11 ? images[11].url : 'src/image-placeholder.jpg'" />
                                                             <input id="ia-selector-last" type="radio" name="radio-set" />
                                                             <figcaption><span>
-                                                                    <p>{{ tour.tourname }}</p>
+                                                                    <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                                                     <p class="text-xs mt-2">{{ tour.artist.stagename }}</p>
                                                                     <p class="text-xs mt-2">{{ tour.startdate }} - {{
                                                                         tour.enddate }}</p>
@@ -312,7 +312,7 @@ export default {
                                                                 <input id="ia-selector-last" type="radio"
                                                                     name="radio-set" />
                                                                 <figcaption><span>
-                                                                        <p>{{ tour.tourname }}</p>
+                                                                        <p class="text-xs md:text-md">{{ tour.tourname }}</p>
                                                                         <p class="text-xs mt-2">{{ tour.artist.stagename }}
                                                                         </p>
                                                                         <p class="text-xs mt-2">{{ tour.startdate }} - {{

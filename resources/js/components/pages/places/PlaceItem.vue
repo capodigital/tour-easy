@@ -9,7 +9,7 @@ export default {
 }
 </script>
 <template>
-    <div class="bg-white rounded-2xl shadow-md shadow-gray-500 transition-all hover:scale-105 cursor-pointer relative pb-[300px]">
+    <div class="bg-white max-w-[calc(100vw-2rem)] rounded-2xl shadow-md shadow-gray-500 transition-all hover:scale-105 cursor-pointer relative pb-[300px]">
         <div class="">
             <div class="flex float-right p-3">
                 <button title="Editar lugar" @click="$emit('edit', place)"

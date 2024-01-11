@@ -14,7 +14,7 @@ export default {
 }
 </script>
 <template>
-    <article class="shadow-md shadow-gray-500 rounded-md">
+    <article class="shadow-md max-w-[100vw-2rem] shadow-gray-500 rounded-md overflow-hidden">
         <div class="relative h-80 w-full bg-cover bg-center rounded-t-md"
             :style="{ 'background': `url(${artist.image.replace('http://localhost/', '')})` }">
             <div class="absolute top-0 left-0 w-full bg-gradient-to-b from-black to-transparent flex justify-end p-2">

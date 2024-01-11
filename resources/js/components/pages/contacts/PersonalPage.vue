@@ -181,9 +181,9 @@ export default {
 }
 </script>
 <template>
-    <div class="flex justify-center py-1">
+    <div class="flex justify-center py-1 w-screen">
         <div class="w-full md:w-2/3 px-2">
-            <div class="flex justify-center">
+            <div class="flex sm:justify-center">
                 <div>
                     <div class="flex mb-1">
                         <h1
@@ -198,7 +198,7 @@ export default {
                         <button @click="add"
                             class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
                     </div>
-                    <div class="container overflow-auto">
+                    <div class="container-ls overflow-auto">
                         <template v-for="item in contacts">
                             <PersonalItem @edit="edit" @destroy="destroy" :contact="item"
                                 v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typecontact.description'], item, filter)" />
@@ -209,7 +209,7 @@ export default {
         </div>
         <transition name="bounce" mode="out-in">
             <div v-if="show"
-                class="w-full bg-white bg-opacity-90 md:bg-transparent h-screen md:h-auto absolute md:relative top-0 md:block md:w-1/3 px-2 flex justify-center items-center">
+                class="w-full bg-white z-[500] bg-opacity-90 md:bg-transparent h-screen md:h-auto absolute md:relative top-0 md:block md:w-1/3 px-2 flex justify-center items-center">
                 <div>
                     <h1
                         class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
@@ -455,7 +455,7 @@ h1 {
 }
 
 form,
-.container {
+.container-ls {
     max-height: calc(100vh - 11.5rem);
 }
 </style>

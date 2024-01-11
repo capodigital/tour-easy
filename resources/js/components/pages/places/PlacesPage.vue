@@ -92,7 +92,7 @@ export default {
 }
 </script>
 <template>
-    <section class="p-4">
+    <section class="p-4 w-screen">
         <div class="relative">
             <div class="flex">
                 <h1

@@ -14,7 +14,7 @@ export default {
 }
 </script>
 <template>
-    <article class="w-full bg-gradient-to-tr rounded-lg from-slate-800 via-slate-900 to-slate-950 mb-2 max-w-3xl">
+    <article class="bg-gradient-to-tr max-w-[calc(100vw-1rem)] overflow-hidden rounded-lg from-slate-800 via-slate-900 to-slate-950 mb-2">
         <div class="flex items-center w-full">
             <div class="p-2 w-full">
                 <span class="float-right text-sm text-gray-400">{{ contact.typecontact.description }}</span>
