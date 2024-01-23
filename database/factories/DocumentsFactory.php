@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Agencies;
 use App\Models\Artists;
-use App\Models\Contacts;
+use App\Models\Persons;
 use App\Models\Places;
 use App\Models\Suppliers;
 use App\Models\Tours;
@@ -62,12 +62,12 @@ class DocumentsFactory extends Factory
         });
     }
 
-    public function contact()
+    public function person()
     {
         return $this->state(function (array $attributes) {
             return [
-                'documentable_id' => Contacts::inRandomOrder()->first()->id,
-                'documentable_type' => 'App\Models\Contacts',
+                'documentable_id' => Persons::inRandomOrder()->first()->id,
+                'documentable_type' => 'App\Models\Persons',
             ];
         });
     }

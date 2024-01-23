@@ -8,7 +8,7 @@ use App\Models\Typecontacts;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ContactsResource extends JsonResource
+class PersonsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -13,7 +13,7 @@ class Itineraries extends Model
     protected $fillable = [
         'name', 'startdate', 'enddate', 'notes', 'outoflour', 'carrier', 'carrier_id', 'showcheck',
         'showtime', 'notify', 'tour_id', 'typeitinerary_id', 'place_id', 'city_start_id',
-        'city_destination_id', 'contact_id', 'supplier_id'
+        'city_destination_id', 'person_id', 'supplier_id'
     ];
 
     public function cityStart(): BelongsTo
@@ -36,9 +36,9 @@ class Itineraries extends Model
     {
         return $this->belongsTo(Places::class, 'place_id');
     }
-    public function contact(): BelongsTo
+    public function person(): BelongsTo
     {
-        return $this->belongsTo(Contacts::class, 'contact_id');
+        return $this->belongsTo(Persons::class, 'person_id');
     }
     public function supplier(): BelongsTo
     {

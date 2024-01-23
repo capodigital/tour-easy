@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tourcontacts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tour_id')->nullable()->references('id')->on('tours')->onDelete('cascade');
-            $table->foreignId('contact_id')->nullable()->references('id')->on('contacts')->onDelete('cascade');
+            $table->foreignId('person_id')->nullable()->references('id')->on('persons')->onDelete('cascade');
             $table->timestamps();
         });
     }

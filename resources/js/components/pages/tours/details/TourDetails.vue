@@ -95,8 +95,8 @@ export default {
                     complete = 'Completado'
                 }
             }
-            if (activity.contact == null) {
-                activity.contact = {
+            if (activity.person == null) {
+                activity.person = {
                     id: 0,
                     name: 'Contacto eliminado'
                 }
@@ -126,7 +126,7 @@ export default {
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
                 case 4:
-                    name = activity.name, description = `<b>Conductor: </b>${activity.contact.name}`,
+                    name = activity.name, description = `<b>Conductor: </b>${activity.person.name}`,
                         date = `<br />${start}`;
                     break;
                 case 6:
@@ -138,7 +138,7 @@ export default {
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
                 case 8:
-                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Conductor: </b>${activity.contact.name}`,
+                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Conductor: </b>${activity.person.name}`,
                         date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
                     break;
             }

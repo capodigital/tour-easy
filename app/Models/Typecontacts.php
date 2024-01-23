@@ -13,8 +13,8 @@ class Typecontacts extends Model
         'description'
     ];
 
-    public function contacts(): HasMany
+    public function persons(): HasMany
     {
-        return $this->hasMany(Contacts::class,'typecontact_id');
+        return $this->hasMany(Persons::class,'typecontact_id');
     }
 }

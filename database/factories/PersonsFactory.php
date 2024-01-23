@@ -8,9 +8,9 @@ use App\Models\Typecontacts;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Contacts>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Persons>
  */
-class ContactsFactory extends Factory
+class PersonsFactory extends Factory
 {
     /**
      * Define the model's default state.

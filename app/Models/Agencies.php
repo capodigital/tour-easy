@@ -72,9 +72,9 @@ class Agencies extends Authenticatable
     {
         return $this->morphMany(Documents::class, 'documentsable', 'documentable_type', 'documentable_id');
     }
-    public function contacts(): HasMany
+    public function persons(): HasMany
     {
-        return $this->hasMany(Contacts::class, 'agency_id');
+        return $this->hasMany(Persons::class, 'agency_id');
     }
     public function suppliers(): HasMany
     {

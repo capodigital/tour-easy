@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Agencies;
-use App\Models\Contacts;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Persons;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +21,7 @@ class TourcontactsSeeder extends Seeder
                 DB::table('tourcontacts')->insert([
                     [
                         'tour_id' => $tour->id,
-                        'contact_id' => Contacts::where('agency_id',$agency->id)->get()->random()->id
+                        'person_id' => Persons::where('agency_id',$agency->id)->get()->random()->id
                     ]
                 ]);
             }

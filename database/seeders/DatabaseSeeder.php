@@ -9,16 +9,13 @@ use App\Models\Artists;
 use App\Models\Contacts;
 use App\Models\Documents;
 use App\Models\Itineraries;
+use App\Models\Persons;
 use App\Models\Places;
 use App\Models\Socialmedias;
 use App\Models\Suppliers;
 use App\Models\Tickets;
 use App\Models\Tours;
-use App\Models\Typeagencies;
-use App\Models\Typeitineraries;
-use App\Models\Typeplaces;
 use App\Models\User;
-use Database\Factories\ItinerariesFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -70,7 +67,7 @@ class DatabaseSeeder extends Seeder
         Socialmedias::factory(10)->tour()->create();
         Documents::factory(3)->tour()->create();
 
-        Contacts::factory(10)->create();
+        Persons::factory(10)->create();
         Socialmedias::factory(10)->contact()->create();
         Documents::factory(3)->contact()->create();
 

@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->foreignId('city_start_id')->nullable()->references('id')->on('cities')->onDelete('set null');
             $table->foreignId('city_destination_id')->nullable()->references('id')->on('cities')->onDelete('set null');
             $table->foreignId('typeitinerary_id')->nullable()->references('id')->on('typeitineraries')->onDelete('set null');
-            $table->foreignId('contact_id')->nullable()->references('id')->on('contacts')->onDelete('set null');
+            $table->foreignId('person_id')->nullable()->references('id')->on('persons')->onDelete('set null');
             $table->foreignId('supplier_id')->nullable()->references('id')->on('suppliers')->onDelete('set null');
             $table->string('name', 150)->nullable();
             $table->date('startdate')->nullable();

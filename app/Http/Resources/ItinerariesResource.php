@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Cities;
-use App\Models\Contacts;
+use App\Models\Persons;
 use App\Models\Places;
 use App\Models\Suppliers;
 use App\Models\Tours;
@@ -49,14 +49,14 @@ class ItinerariesResource extends JsonResource
         } else {
             $place = new PlacesResource($place);
         }
-        $contact = Contacts::find($this->contact_id);
-        if ($contact == null) {
-            $contact = [
+        $person = Persons::find($this->person_id);
+        if ($person == null) {
+            $person = [
                 'id' => 0,
                 'name' => 'Contacto eliminado',
             ];
         } else {
-            $contact = new ContactsResource($contact);
+            $person = new PersonsResource($person);
         }
         $supplier = Suppliers::find($this->supplier_id);
 
@@ -82,8 +82,8 @@ class ItinerariesResource extends JsonResource
             'city_destination_id' => $this->city_destination_id,
             'place' => $place,
             'place_id' => $this->place_id,
-            'contact' => $contact,
-            'contact_id' => $this->contact_id,
+            'person' => $person,
+            'person_id' => $this->person_id,
             'supplier' => new SuppliersResource($supplier),
             'supplier_id' => $this->supplier_id,
 
