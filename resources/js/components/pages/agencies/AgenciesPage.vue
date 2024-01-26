@@ -6,11 +6,13 @@ import PasswordModal from "../../common/PasswordModal.vue"
 import AgencyModal from './AgencyModal.vue'
 import ManagerModal from './ManagerModal.vue'
 import AgencyCard from './AgencyCard.vue'
+import AgencyDetails from './AgencyDetails.vue'
 export default {
     data() {
         return {
             filter: '',
             agencies: [],
+            details: null,
             agency: {},
             agency_password_id: null,
             user_password_id: null,
@@ -87,6 +89,7 @@ export default {
             this.show = true
         },
         edit(item) {
+            this.details = null
             this.country_id = item.city.country.code
             Object.assign(this.agency, item)
             this.show = true
@@ -178,7 +181,7 @@ export default {
             this.Utils.error(error.response);
         });
     },
-    components: { AgencyItem, PasswordModal, AgencyModal, ManagerModal, AgencyCard }
+    components: { AgencyItem, PasswordModal, AgencyModal, ManagerModal, AgencyCard, AgencyDetails }
 }
 </script>
 <template>
@@ -198,27 +201,19 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">
-                    <AgencyCard @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
-                        @agency_password="(id) => agency_password_id = id" @user_password="(id) => user_password_id = id"
-                        @edit="edit" @destroy="destroy" :agency="item"
+                    <AgencyCard @show="details = item" @manageradd="user.show = true"
+                        @agency_password="(id) => agency_password_id = id" @edit="edit" @destroy="destroy" :agency="item"
                         v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />
                 </template>
             </div>
         </div>
-        <transition name="bounce" mode="out-in">
-            <ManagerModal v-if="Utils.role() == 'agency' && user.show" @send="manager" @close="user = { show: false }"
-                :user="user" />
-        </transition>
-        <transition name="bounce" mode="out-in">
-            <AgencyModal v-if="Utils.role() != 'artist' && show" :agency="agency" @close="show = false" @send="send" />
-        </transition>
-        <transition name="bounce" mode="out-in">
-            <PasswordModal v-if="agency_password_id != null" @send="changeAgencyPassword"
-                @close="agency_password_id = null" />
-        </transition>
-        <transition name="bounce" mode="out-in">
-            <PasswordModal v-if="user_password_id != null" @send="changeUserPassword" @close="user_password_id = null" />
-        </transition>
+        <ManagerModal v-if="Utils.role() == 'agency' && user.show" @send="manager" @close="user = { show: false }"
+            :user="user" />
+        <AgencyModal v-if="Utils.role() != 'artist' && show" :agency="agency" @close="show = false" @send="send" />
+        <AgencyDetails v-if="details != null" :agency="details" @close="details = null" @edit="edit"
+            @user_password="(id) => user_password_id = id" @manageredit="editManager" @managerdestroy="destroyManager" />
+        <PasswordModal v-if="agency_password_id != null" @send="changeAgencyPassword" @close="agency_password_id = null" />
+        <PasswordModal v-if="user_password_id != null" @send="changeUserPassword" @close="user_password_id = null" />
     </section>
 </template>
 <style scoped>

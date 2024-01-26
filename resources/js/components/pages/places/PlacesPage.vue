@@ -4,13 +4,15 @@ import PlaceItem from './PlaceItem.vue';
 import Confirm from '../../modals/Confirm';
 import PlaceModal from './PlaceModal.vue';
 import PlaceCard from './PlaceCard.vue';
+import PlaceDetails from './PlaceDetails.vue';
 
 export default {
-    components: { PlaceItem, PlaceModal, PlaceCard },
+    components: { PlaceItem, PlaceModal, PlaceCard, PlaceDetails },
     data() {
         return {
             filter: '',
             places: [],
+            details: null,
             place: {},
             show: false
         };
@@ -21,6 +23,7 @@ export default {
             this.show = true
         },
         edit(item) {
+            this.details = null
             Object.assign(this.place, item)
             this.show = true
         },
@@ -110,14 +113,13 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in places">
-                    <PlaceCard @edit="edit" @destroy="destroy" :place="item"
+                    <PlaceCard @edit="edit" @destroy="destroy" @show="details = item" :place="item"
                         v-if="Utils.filter(['name', 'email', 'phone', 'extra_phone', 'address', 'manager', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typeplace.description'], item, filter)" />
                 </template>
             </div>
         </div>
-        <transition name="bounce" mode="out-in">
-            <PlaceModal v-if="show" :place="place" @send="send" @close="show = false" />
-        </transition>
+        <PlaceDetails v-if="details != null" @close="details = null" :place="details" @edit="edit" />
+        <PlaceModal v-if="show" :place="place" @send="send" @close="show = false" />
     </section>
 </template>
 <style scoped>

@@ -5,6 +5,7 @@ import Confirm from "../../modals/Confirm"
 import PasswordModal from '../../common/PasswordModal.vue';
 import ArtistModal from './ArtistModal.vue';
 import ArtistCard from './ArtistCard.vue';
+import ArtistDetails from './ArtistDetails.vue';
 
 export default {
     data() {
@@ -14,6 +15,7 @@ export default {
             artist: {
                 birthday: new Date().toLocaleDateString()
             },
+            details: null,
             agencies: [],
             password_id: null,
             show: false,
@@ -27,6 +29,7 @@ export default {
             this.show = true
         },
         edit(item) {
+            this.details = null
             Object.assign(this.artist, item)
             this.show = true
         },
@@ -109,7 +112,7 @@ export default {
             this.artists = response.data.data;
         });
     },
-    components: { ArtistsItem, PasswordModal, ArtistModal, ArtistCard }
+    components: { ArtistsItem, PasswordModal, ArtistModal, ArtistCard, ArtistDetails }
 }
 </script>
 <template>
@@ -129,16 +132,13 @@ export default {
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             <template v-for="item in artists">
-                <ArtistCard @edit="edit" @destroy="destroy" :artist="item"
+                <ArtistCard @edit="edit" @destroy="destroy" @show="(item) => details = item" :artist="item"
                     v-if="Utils.filter(['name', 'lastname', 'stagename', 'email', 'agency.tradename', 'agency.taxname'], item, filter)" />
             </template>
         </div>
-        <transition name="bounce" mode="out-in">
-            <ArtistModal v-if="show" @close="show = false" @send="send" :artist="artist" />
-        </transition>
-        <transition name="bounce" mode="out-in">
-            <PasswordModal v-if="password_id != null" @send="changePassword" @close="password_id = null" />
-        </transition>
+        <ArtistModal v-if="show" @close="show = false" @send="send" :artist="artist" />
+        <ArtistDetails v-if="details != null" @close="details = null" :artist="details" @edit="edit" />
+        <PasswordModal v-if="password_id != null" @send="changePassword" @close="password_id = null" />
     </section>
 </template>
 <style scoped>
