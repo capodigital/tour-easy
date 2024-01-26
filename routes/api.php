@@ -4,10 +4,10 @@ use App\Http\Controllers\AgenciesController;
 use App\Http\Controllers\ArtistsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
-use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\ItinerariesController;
+use App\Http\Controllers\PersonsController;
 use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\SuppliersController;
@@ -69,9 +69,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/photos', [ToursController::class, 'photos']);
     Route::post('/tour/noactive', [ToursController::class, 'noactive']);
 
-    Route::resource('contacts', ContactsController::class);
-    Route::post('/contacts/agency', [ContactsController::class, 'contactsByAgency']);
-    Route::post('/contacts/tour', [ContactsController::class, 'contactsByTour']);
+    Route::resource('persons', PersonsController::class);
+    Route::post('/persons/agency', [PersonsController::class, 'personsByAgency']);
+    Route::post('/persons/tour', [PersonsController::class, 'personsByTour']);
 
     Route::resource('places', PlacesController::class);
 

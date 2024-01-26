@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Cities;
-use App\Models\Contacts;
+use App\Models\Persons;
 use App\Models\Places;
 use App\Models\Suppliers;
 use App\Models\Tours;
@@ -49,8 +49,8 @@ class ItinerariesFactory extends Factory
             'city_destination_id' => function () {
                 return Cities::all()->random()->id;
             },
-            'contact_id' => function () {
-                return Contacts::all()->random()->id;
+            'person_id' => function () {
+                return Persons::all()->random()->id;
             },
             'supplier_id' => function () {
                 return Suppliers::all()->random()->id;

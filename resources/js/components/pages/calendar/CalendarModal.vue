@@ -20,7 +20,7 @@ export default {
                 { id: 8, description: "Transfer" }
             ],
             tours: [],
-            contacts: [],
+            persons: [],
             suppliers: [],
             countries: [],
             start_cities: [],
@@ -42,15 +42,15 @@ export default {
                 }
             });
         },
-        contact(contact) {
+        person(person) {
             switch (this.activity.typeitinerary_id) {
                 case 1:
-                    return contact.typecontact_id == 3 || contact.typecontact_id == 2
+                    return person.typecontact_id == 3 || person.typecontact_id == 2
                 case 4:
                 case 6:
                 case 7:
                 case 8:
-                    return contact.typecontact_id == 4
+                    return person.typecontact_id == 4
                 default:
                     return false
             }
@@ -80,12 +80,12 @@ export default {
         }).then((response) => {
             this.tours = response.data.data;
         });
-        axios.get('api/contacts', {
+        axios.get('api/persons', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
-            this.contacts = response.data.data;
+            this.persons = response.data.data;
         });
         axios.get('api/countries', {
             headers: {
@@ -260,10 +260,10 @@ export default {
                     <div v-if="[1, 4, 6, 7, 8].includes(Number(activity.typeitinerary_id))">
                         <label class="text-slate-200 text-xs font-semibold">Contacto</label>
                         <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select required v-model="activity.contact_id" name="contact_id"
+                            <select required v-model="activity.person_id" name="person_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <template v-for="item in contacts">
-                                    <option v-if="contact(item)" class="text-black" :value="item.id">{{
+                                <template v-for="item in persons">
+                                    <option v-if="person(item)" class="text-black" :value="item.id">{{
                                         item.name
                                     }}</option>
                                 </template>

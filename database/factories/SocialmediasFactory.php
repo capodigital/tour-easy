@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Agencies;
 use App\Models\Artists;
-use App\Models\Contacts;
+use App\Models\Persons;
 use App\Models\Places;
 use App\Models\Suppliers;
 use App\Models\Tours;
@@ -63,12 +63,12 @@ class SocialmediasFactory extends Factory
         });
     }
 
-    public function contact()
+    public function person()
     {
         return $this->state(function (array $attributes) {
             return [
-                'socialmediaable_id' => Contacts::inRandomOrder()->first()->id,
-                'socialmediaable_type' => 'App\Models\Contacts',
+                'socialmediaable_id' => Persons::inRandomOrder()->first()->id,
+                'socialmediaable_type' => 'App\Models\Persons',
             ];
         });
     }

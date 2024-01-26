@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Contacts extends Model
+class Persons extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -32,7 +32,7 @@ class Contacts extends Model
     }
     public function tours(): BelongsToMany
     {
-        return $this->belongsToMany(Tours::class, 'tourcontacts', 'contact_id', 'tour_id')->withTimestamps();
+        return $this->belongsToMany(Tours::class, 'tourcontacts', 'person_id', 'tour_id')->withTimestamps();
     }
 
     public function socialmedias(): MorphMany

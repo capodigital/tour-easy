@@ -35,9 +35,9 @@ class Tours extends Model
     {
         return $this->morphMany(Documents::class, 'documentsable','documentable_type','documentable_id');
     }
-    public function contacts(): BelongsToMany
+    public function persons(): BelongsToMany
     {
-        return $this->belongsToMany(Contacts::class, 'tourcontacts', 'tour_id', 'contact_id')->withTimestamps();
+        return $this->belongsToMany(Persons::class, 'tourcontacts', 'tour_id', 'person_id')->withTimestamps();
     }
     public function itineraries(): HasMany
     {

@@ -25,9 +25,9 @@ class Cities extends Model
     {
         return $this->hasMany(Places::class,'city_id');
     }
-    public function contacts(): HasMany
+    public function persons(): HasMany
     {
-        return $this->hasMany(Contacts::class,'city_id');
+        return $this->hasMany(Persons::class,'city_id');
     }
     public function suppliers(): HasMany
     {

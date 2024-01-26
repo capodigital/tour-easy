@@ -8,8 +8,8 @@ export default {
     data() {
         return {
             filter: '',
-            contacts: [],
-            contact: {},
+            persons: [],
+            person: {},
             agencies: [],
             countries: [],
             cities: [],
@@ -34,19 +34,19 @@ export default {
             const data = new FormData(e.target)
             this.Utils.lock(e.target)
             data.append('notify', 0);
-            data.append('_method', this.contact.id == undefined ? 'post' : 'put');
-            axios.post(this.contact.id == undefined ? 'api/contacts' : `api/contacts/${this.contact.id}`, data, {
+            data.append('_method', this.person.id == undefined ? 'post' : 'put');
+            axios.post(this.person.id == undefined ? 'api/persons' : `api/persons/${this.person.id}`, data, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then((response) => {
-                if (this.contact.id == undefined) {
-                    this.contacts.unshift(response.data.data)
+                if (this.person.id == undefined) {
+                    this.persons.unshift(response.data.data)
                     this.Utils.notify('Se ha creado correctamente el contacto')
                 } else {
-                    for (let i in this.contacts) {
-                        if (this.contacts[i].id == this.contact.id) {
-                            this.contacts[i] = response.data.data
+                    for (let i in this.persons) {
+                        if (this.persons[i].id == this.person.id) {
+                            this.persons[i] = response.data.data
                             this.Utils.notify('Se han actualizado correctamente los datos del contacto')
                             break
                         }
@@ -63,7 +63,7 @@ export default {
             })
         },
         add() {
-            this.contact = {}
+            this.person = {}
             this.socialmedias = [{}]
             this.files = [{ type: 'link' }]
             this.show = true
@@ -71,10 +71,10 @@ export default {
         edit(item) {
             this.country_id = item.city.country.code
             this.setCities(item.city.country.code)
-            Object.assign(this.contact, item)
-            this.socialmedias = this.contact.socialmedias
+            Object.assign(this.person, item)
+            this.socialmedias = this.person.socialmedias
             this.files = []
-            for (let document of this.contact.documents) {
+            for (let document of this.person.documents) {
                 document.type = document.url == null ? 'local' : 'link'
                 this.files.push(document)
             }
@@ -83,19 +83,19 @@ export default {
         destroy(item) {
             const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este contacto?')
             confirm.fire().then((result) => {
-                axios.post('api/contacts/' + item.id, { _method: 'delete' }, {
+                axios.post('api/persons/' + item.id, { _method: 'delete' }, {
                     headers: {
                         'Authorization': `Bearer ${this.Utils.token()}`
                     }
                 }).then((response) => {
-                    for (let i in this.contacts) {
-                        if (this.contacts[i].id == item.id) {
-                            this.contacts.splice(i, 1)
+                    for (let i in this.persons) {
+                        if (this.persons[i].id == item.id) {
+                            this.persons.splice(i, 1)
                             this.Utils.notify('Se ha eliminado correctamente el contacto')
                             break
                         }
                     }
-                    if(item.id == this.contact.id) {
+                    if(item.id == this.person.id) {
                         this.show = false
                     }
                 }).catch((error) => {
@@ -122,12 +122,12 @@ export default {
         }
     },
     created() {
-        axios.get('api/contacts', {
+        axios.get('api/persons', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
-            this.contacts = response.data.data;
+            this.persons = response.data.data;
         }).catch((error) => {
             this.Utils.error(error.response)
         });
@@ -214,7 +214,7 @@ export default {
                 <div>
                     <h1
                         class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                        <template v-if="contact.id == undefined">
+                        <template v-if="person.id == undefined">
                             AÑADIR
                         </template>
                         <template v-else>
@@ -223,10 +223,10 @@ export default {
                     </h1>
                     <form @submit.prevent="send"
                         class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto">
-                        <div v-if="Utils.role() != 'agency' && contact.id == undefined">
+                        <div v-if="Utils.role() != 'agency' && person.id == undefined">
                             <label class="text-slate-200 text-xs font-semibold">Agencia</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <select required v-model="contact.agency_id" name="agency_id"
+                                <select required v-model="person.agency_id" name="agency_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="item in agencies" :value="item.id">{{
                                         item.taxname
@@ -239,7 +239,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input required v-model="contact.name" name="name" type="text" placeholder="Nombre(s)"
+                                    <input required v-model="person.name" name="name" type="text" placeholder="Nombre(s)"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
                             </div>
@@ -247,7 +247,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person text-gray-100"></i>
-                                    <input required v-model="contact.lastname" name="lastname" type="text"
+                                    <input required v-model="person.lastname" name="lastname" type="text"
                                         placeholder="Apellidos"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -258,7 +258,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-envelope text-gray-100"></i>
-                                    <input required v-model="contact.email" name="email" type="email"
+                                    <input required v-model="person.email" name="email" type="email"
                                         placeholder="Correo electrónico"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -267,7 +267,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Fecha de nacimiento</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-calendar-day text-gray-100"></i>
-                                    <input required v-model="contact.birthday" name="birthday" type="date"
+                                    <input required v-model="person.birthday" name="birthday" type="date"
                                         placeholder="Fecha de nacimiento"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                                 </div>
@@ -278,7 +278,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Teléfono principal</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input required v-model="contact.phone" name="phone" type="tel"
+                                    <input required v-model="person.phone" name="phone" type="tel"
                                         placeholder="Teléfono principal"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -287,7 +287,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Teléfono secundario</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-telephone text-gray-100"></i>
-                                    <input v-model="contact.extra_phone" name="extra_phone" type="tel"
+                                    <input v-model="person.extra_phone" name="extra_phone" type="tel"
                                         placeholder="Teléfono secundario"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 </div>
@@ -298,7 +298,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Profesión</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-person-vcard text-gray-100"></i>
-                                    <select required v-model="contact.typecontact_id" name="typecontact_id"
+                                    <select required v-model="person.typecontact_id" name="typecontact_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="type in types" :value="type.id">{{
                                             type.description }}
@@ -310,7 +310,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Idioma</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-translate text-gray-100"></i>
-                                    <select required v-model="contact.lang" name="lang"
+                                    <select required v-model="person.lang" name="lang"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="language in languages" :value="language.name">{{
                                             language.name }}
@@ -335,7 +335,7 @@ export default {
                                 <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
                                 <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                     <i class="bi bi-globe-americas text-gray-100"></i>
-                                    <select required v-model="contact.city_id" name="city_id"
+                                    <select required v-model="person.city_id" name="city_id"
                                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                         <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
                                         </option>
@@ -346,14 +346,14 @@ export default {
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea v-model="contact.notes" name="notes" placeholder="Datos adicionales"
+                                <textarea v-model="person.notes" name="notes" placeholder="Datos adicionales"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
                         <div>
                             <label class="text-slate-200 text-xs font-semibold">Posición</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                                <textarea name="position" v-model="contact.position" placeholder="Posición"
+                                <textarea name="position" v-model="person.position" placeholder="Posición"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                             </div>
                         </div>
@@ -436,7 +436,7 @@ export default {
                             </button>
                             <button type="submit"
                                 class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
-                                <template v-if="contact.id == undefined">
+                                <template v-if="person.id == undefined">
                                     Agregar
                                 </template>
                                 <template v-else>

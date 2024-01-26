@@ -2,34 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ContactsResource;
+use App\Http\Resources\PersonsResource;
 use App\Models\Agencies;
-use App\Models\Contacts;
 use App\Models\Documents;
+use App\Models\Persons;
 use App\Models\Socialmedias;
 use App\Models\Tours;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
-class ContactsController extends Controller
+class PersonsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $contacts = Contacts::all();
-        return ContactsResource::collection($contacts);
+        $persons = Persons::all();
+        return PersonsResource::collection($persons);
     }
     public function all()
     {
-        $contacts = Contacts::withTrashed()->get();
-        return ContactsResource::collection($contacts);
+        $persons = Persons::withTrashed()->get();
+        return PersonsResource::collection($persons);
     }
     public function deleted()
     {
-        $contacts = Contacts::onlyTrashed()->get();
-        return ContactsResource::collection($contacts);
+        $persons = Persons::onlyTrashed()->get();
+        return PersonsResource::collection($persons);
     }
 
     /**
@@ -46,7 +45,7 @@ class ContactsController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:contacts',
+            'email' => 'required|email|unique:persons',
             'birthday' => 'required|before:today'
         ]);
 
@@ -63,18 +62,18 @@ class ContactsController extends Controller
             }
         }
         //Almacenar los datos en la base de datos
-        $contact = Contacts::create($data);
+        $person = Persons::create($data);
 
         if ($request->has('socialmedias')) {
-            Socialmedias::where('socialmediaable_id',$contact->id)->delete();
+            Socialmedias::where('socialmediaable_id',$person->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
                     Socialmedias::create([
                         'url' => $socialmedia['url'],
                         'description' => $socialmedia['description'],
                         'typeredes_id' => $socialmedia['typeredes_id'],
-                        'socialmediaable_id' => $contact->id,
-                        'socialmediaable_type' => 'App\Models\Contacts'
+                        'socialmediaable_id' => $person->id,
+                        'socialmediaable_type' => 'App\Models\Persons'
                     ]);
                 }
             }
@@ -93,8 +92,8 @@ class ContactsController extends Controller
                     'document_path' => $path,
                     'size' => $sizeInMB,
                     'ext' => $extension,
-                    'documentable_id' => $contact->id,
-                    'documentable_type' => 'App\Models\Contacts'
+                    'documentable_id' => $person->id,
+                    'documentable_type' => 'App\Models\Persons'
                 ]);
             }
         }
@@ -108,21 +107,21 @@ class ContactsController extends Controller
                         'document_path' => null,
                         'size' => null,
                         'ext' => null,
-                        'documentable_id' => $contact->id,
-                        'documentable_type' => 'App\Models\Contacts'
+                        'documentable_id' => $person->id,
+                        'documentable_type' => 'App\Models\Persons'
                     ]);
                 }
             }
         }
 
-        $contact->refresh();
-        return new ContactsResource($contact);
+        $person->refresh();
+        return new PersonsResource($person);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Contacts $contacts)
+    public function show(Persons $person)
     {
         //
     }
@@ -130,7 +129,7 @@ class ContactsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contacts $contacts)
+    public function edit(Persons $person)
     {
         //
     }
@@ -138,7 +137,7 @@ class ContactsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contacts $contact)
+    public function update(Request $request, Persons $person)
     {
         $request->validate([
             'name' => 'required',
@@ -151,9 +150,9 @@ class ContactsController extends Controller
         ]);
 
         //Almacenar los datos en la base de datos
-        $contact->update($data);
+        $person->update($data);
 
-        Socialmedias::where('socialmediaable_id', $contact->id)->delete();
+        Socialmedias::where('socialmediaable_id', $person->id)->delete();
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typeredes_id'])) {
@@ -161,8 +160,8 @@ class ContactsController extends Controller
                         'url' => $socialmedia['url'],
                         'description' => $socialmedia['description'],
                         'typeredes_id' => $socialmedia['typeredes_id'],
-                        'socialmediaable_id' => $contact->id,
-                        'socialmediaable_type' => 'App\Models\Contacts'
+                        'socialmediaable_id' => $person->id,
+                        'socialmediaable_type' => 'App\Models\Persons'
                     ]);
                 }
             }
@@ -181,8 +180,8 @@ class ContactsController extends Controller
                     'document_path' => $path,
                     'size' => $sizeInMB,
                     'ext' => $extension,
-                    'documentable_id' => $contact->id,
-                    'documentable_type' => 'App\Models\Contacts'
+                    'documentable_id' => $person->id,
+                    'documentable_type' => 'App\Models\Persons'
                 ]);
             }
         }
@@ -195,46 +194,46 @@ class ContactsController extends Controller
                         'document_path' => null,
                         'size' => null,
                         'ext' => null,
-                        'documentable_id' => $contact->id,
-                        'documentable_type' => 'App\Models\Contacts'
+                        'documentable_id' => $person->id,
+                        'documentable_type' => 'App\Models\Persons'
                     ]);
                 }
             }
         }
-        $contact->refresh();
-        return new ContactsResource($contact);
+        $person->refresh();
+        return new PersonsResource($person);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contacts $contact)
+    public function destroy(Persons $person)
     {
-        $contact->delete();
-        Socialmedias::where('socialmediaable_id', $contact->id)->delete();
-        Documents::where('documentable_id', $contact->id)->delete();
+        $person->delete();
+        Socialmedias::where('socialmediaable_id', $person->id)->delete();
+        Documents::where('documentable_id', $person->id)->delete();
 
-        return response()->json($contact);
+        return response()->json($person);
     }
-    public function restore(Contacts $contact)
+    public function restore(Persons $person)
     {
-        $contact->restore();
+        $person->restore();
 
-        return response()->json($contact);
+        return response()->json($person);
     }
 
-    public function contactsByAgency(Request $request)
+    public function personsByAgency(Request $request)
     {
         $agency = Agencies::find($request->id);
-        $contacts = $agency->contacts()->get();
+        $persons = $agency->persons()->get();
 
-        return ContactsResource::collection($contacts);
+        return PersonsResource::collection($persons);
     }
-    public function contactsByTour(Request $request)
+    public function personsByTour(Request $request)
     {
         $tour = Tours::find($request->id);
-        $contacts = $tour->contacts()->get();
+        $persons = $tour->persons()->get();
 
-        return ContactsResource::collection($contacts);
+        return PersonsResource::collection($persons);
     }
 }
