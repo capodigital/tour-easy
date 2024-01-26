@@ -191,12 +191,12 @@ select.select-dark {
     opacity: var(--bs-btn-close-focus-opacity);
 }
 
-.bounce-enter-active {
+/* .bounce-enter-active {
     animation: backInDown 0.3s;
 }
 .bounce-leave-active {
     animation: backOutDown 0.3s;
-}
+} */
 
 @keyframes backOutDown {
     0% {
@@ -232,9 +232,9 @@ select.select-dark {
     }
 }
 
-.carousel-enter-active {
+/* .carousel-enter-active {
     animation: bounceInRight 0.3s;
-}
+} */
 /* .carousel-leave-active {
     animation: bounceInLeft 0.5s;
 } */
@@ -450,4 +450,7 @@ input[type="date"]::-webkit-inner-spin-button,
 }
 .close:disabled {
     opacity: 0.5;
+}
+.custom-modal > form {
+    border-radius: .5rem !important;
 }

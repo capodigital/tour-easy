@@ -45,7 +45,7 @@ export default {
 </script>
 <template>
     <footer
-        class="flex fixed bottom-0 z-[30] justify-center w-full h-16 items-end overflow-hidden transition-all rounded-t-2xl bg-white">
+        class="flex md:hidden fixed bottom-0 z-[30] justify-center w-full h-16 items-end overflow-hidden transition-all rounded-t-2xl bg-white">
         <div class="flex pb-3">
             <a v-if="Utils.role() != 'artist'" class="transition-all px-3" @click="active = -2" href="#places"
                 :class="{ 'text-gray-500': active != -2, 'text-black': active == -3 }">

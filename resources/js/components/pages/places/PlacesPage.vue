@@ -3,9 +3,10 @@ import axios from 'axios';
 import PlaceItem from './PlaceItem.vue';
 import Confirm from '../../modals/Confirm';
 import PlaceModal from './PlaceModal.vue';
+import PlaceCard from './PlaceCard.vue';
 
 export default {
-    components: { PlaceItem, PlaceModal },
+    components: { PlaceItem, PlaceModal, PlaceCard },
     data() {
         return {
             filter: '',
@@ -92,7 +93,7 @@ export default {
 }
 </script>
 <template>
-    <section class="p-4 w-screen">
+    <section class="p-4">
         <div class="relative">
             <div class="flex">
                 <h1
@@ -109,7 +110,7 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in places">
-                    <PlaceItem @edit="edit" @destroy="destroy" :place="item"
+                    <PlaceCard @edit="edit" @destroy="destroy" :place="item"
                         v-if="Utils.filter(['name', 'email', 'phone', 'extra_phone', 'address', 'manager', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typeplace.description'], item, filter)" />
                 </template>
             </div>

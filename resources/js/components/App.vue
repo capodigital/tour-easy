@@ -6,9 +6,10 @@ import TourDetails from "./pages/tours/details/TourDetails.vue";
 import NotFound from "./NotFound.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import axios from 'axios'
+import AppSidebar from "./AppSidebar.vue";
 
 export default {
-    components: { AppNavbar, AppMenu, HomePage, TourDetails, NotFound, LoginPage },
+    components: { AppNavbar, AppMenu, HomePage, TourDetails, NotFound, LoginPage, AppSidebar },
     data() {
         const separator = location.hash.lastIndexOf('/')
         const hash = separator > 0 ? location.hash.substring(0, separator) : location.hash
@@ -87,11 +88,14 @@ export default {
     </template>
     <template v-else-if="active != 'login'">
         <AppNavbar />
-        <main class="overflow-auto pb-12">
-            <transition name="carousel" mode="out-in">
-                <component :is="active"> </component>
-            </transition>
-        </main>
+        <div class="flex">
+            <AppSidebar />
+            <main class="overflow-auto pb-12 w-full md:w-10/12">
+                <transition name="carousel" mode="out-in">
+                    <component :is="active"> </component>
+                </transition>
+            </main>
+        </div>
         <AppMenu />
     </template>
     <template v-else>
@@ -103,5 +107,10 @@ export default {
 <style scoped>
 main {
     height: calc(100vh - 8rem);
+}
+@media (min-width: 768px) {
+    main {
+        height: calc(100vh - 4rem);
+    }
 }
 </style>

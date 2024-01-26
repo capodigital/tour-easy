@@ -2,6 +2,7 @@
 import axios from 'axios'
 import PersonalItem from './PersonalItem.vue'
 import Confirm from '../../modals/Confirm';
+import ContactCard from './ContactCard.vue';
 
 export default {
     data() {
@@ -177,12 +178,12 @@ export default {
             this.Utils.error(error.response)
         });
     },
-    components: { PersonalItem }
+    components: { PersonalItem, ContactCard }
 }
 </script>
 <template>
-    <div class="flex justify-center py-1 w-screen">
-        <div class="w-full md:w-2/3 px-2">
+    <div class="flex justify-center py-1">
+        <div class="w-full px-2">
             <div class="flex sm:justify-center">
                 <div>
                     <div class="flex mb-1">
@@ -198,16 +199,16 @@ export default {
                         <button @click="add"
                             class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
                     </div>
-                    <div class="container-ls overflow-auto">
+                    <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 overflow-auto">
                         <template v-for="item in contacts">
-                            <PersonalItem @edit="edit" @destroy="destroy" :contact="item"
+                            <ContactCard @edit="edit" @destroy="destroy" :contact="item"
                                 v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typecontact.description'], item, filter)" />
                         </template>
                     </div>
                 </div>
             </div>
         </div>
-        <transition name="bounce" mode="out-in">
+        <!-- <transition name="bounce" mode="out-in">
             <div v-if="show"
                 class="w-full bg-white z-[500] bg-opacity-90 md:bg-transparent h-screen md:h-auto absolute md:relative top-0 md:block md:w-1/3 px-2 flex justify-center items-center">
                 <div>
@@ -446,7 +447,7 @@ export default {
                     </form>
                 </div>
             </div>
-        </transition>
+        </transition> -->
     </div>
 </template>
 <style scoped>

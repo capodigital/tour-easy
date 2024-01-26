@@ -4,6 +4,7 @@ import ArtistsItem from './ArtistsItem.vue'
 import Confirm from "../../modals/Confirm"
 import PasswordModal from '../../common/PasswordModal.vue';
 import ArtistModal from './ArtistModal.vue';
+import ArtistCard from './ArtistCard.vue';
 
 export default {
     data() {
@@ -108,11 +109,11 @@ export default {
             this.artists = response.data.data;
         });
     },
-    components: { ArtistsItem, PasswordModal, ArtistModal }
+    components: { ArtistsItem, PasswordModal, ArtistModal, ArtistCard }
 }
 </script>
 <template>
-    <section class="w-screen">
+    <section class="">
         <div class="flex mb-1 p-2">
             <h1
                 class="font-bold w-full bg-gradient-to-tr from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
@@ -128,7 +129,7 @@ export default {
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             <template v-for="item in artists">
-                <ArtistsItem @edit="edit" @destroy="destroy" @password="(id) => password_id = id" :artist="item"
+                <ArtistCard @edit="edit" @destroy="destroy" :artist="item"
                     v-if="Utils.filter(['name', 'lastname', 'stagename', 'email', 'agency.tradename', 'agency.taxname'], item, filter)" />
             </template>
         </div>

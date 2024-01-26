@@ -5,6 +5,7 @@ import Confirm from "../../modals/Confirm"
 import PasswordModal from "../../common/PasswordModal.vue"
 import AgencyModal from './AgencyModal.vue'
 import ManagerModal from './ManagerModal.vue'
+import AgencyCard from './AgencyCard.vue'
 export default {
     data() {
         return {
@@ -177,7 +178,7 @@ export default {
             this.Utils.error(error.response);
         });
     },
-    components: { AgencyItem, PasswordModal, AgencyModal, ManagerModal }
+    components: { AgencyItem, PasswordModal, AgencyModal, ManagerModal, AgencyCard }
 }
 </script>
 <template>
@@ -197,7 +198,7 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">
-                    <AgencyItem @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
+                    <AgencyCard @manageradd="user.show = true" @managerdestroy="destroyManager" @manageredit="editManager"
                         @agency_password="(id) => agency_password_id = id" @user_password="(id) => user_password_id = id"
                         @edit="edit" @destroy="destroy" :agency="item"
                         v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />

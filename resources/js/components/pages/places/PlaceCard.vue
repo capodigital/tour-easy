@@ -1,0 +1,71 @@
+<script>
+export default {
+    props: {
+        place: Object
+    }
+}
+</script>
+<template>
+    <div
+        class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer relative pb-12">
+        <div class="">
+            <iframe class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" width="40" height="40" frameborder="0" scrolling="no" marginheight="0"
+                marginwidth="0"
+                :src="`https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=es&amp;q=${place.gis}+(Ejemplo)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`"><a
+                    href="https://www.gps.ie/car-satnav-gps/">Sat Navs</a>
+            </iframe>
+            <!-- <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400"
+                :src="artist.image.replace('http://localhost/', '')" /> -->
+            <div class="min-h-[3.5rem]">
+                <h3 class="font-bold text-lg text-gray-900">{{ place.name }}</h3>
+                <p class="text-gray-500 text-sm leading-4 pe-10">{{ place.typeplace.description }}</p>
+            </div>
+            <p class="text-sm">{{ place.notes }}</p>
+        </div>
+        <div class="flex mt-4 absolute bottom-2 w-[calc(100%-1.5rem)]">
+            <div class="flex w-full">
+                <button title="Editar artista" @click="$emit('edit', place)"
+                    class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-clipboard-edit">
+                        <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                        <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z" />
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5.5" />
+                        <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
+                    </svg>
+                </button>
+                <button title="Eliminar artista" @click="$emit('destroy', place)"
+                    class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-trash-2">
+                        <path d="M3 6h18" />
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                        <line x1="10" x2="10" y1="11" y2="17" />
+                        <line x1="14" x2="14" y1="11" y2="17" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex">
+                <button @click="$emit('show', place)"
+                    class="bg-gradient-to-br overlay-button from-slate-800 to-black text-white px-3 h-7 rounded-lg flex text-sm items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-eye me-1">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    Detalles
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+<style scoped>
+h3,
+p {
+    font-family: 'Roboto', sans-serif;
+}
+</style>
