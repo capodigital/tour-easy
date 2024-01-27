@@ -7,7 +7,7 @@ export default {
 </script>
 <template>
     <article
-        class="rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer relative pb-12">
+        class="rounded-lg overlay-button shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
         <div class="">
             <iframe class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" width="40" height="40" frameborder="0" scrolling="no" marginheight="0"
                 marginwidth="0"
@@ -25,7 +25,7 @@ export default {
         <div class="flex mt-4 absolute bottom-2 w-[calc(100%-1.5rem)]">
             <div class="flex w-full">
                 <button title="Editar artista" @click="$emit('edit', place)"
-                    class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
+                    class="rounded-md border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(202, 138, 4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clipboard-edit">
@@ -36,7 +36,7 @@ export default {
                     </svg>
                 </button>
                 <button title="Eliminar artista" @click="$emit('destroy', place)"
-                    class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
+                    class="rounded-md border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(220, 38, 38)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-2">
@@ -50,7 +50,7 @@ export default {
             </div>
             <div class="flex">
                 <button @click="$emit('show', place)"
-                    class="bg-gradient-to-br overlay-button from-app-primary-500 to-app-primary-800 text-white px-3 h-7 rounded-lg flex text-sm items-center">
+                    class="bg-gradient-to-br overlay-button from-app-primary-500 to-app-primary-800 text-white px-3 h-7 rounded flex text-sm items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-eye me-1">

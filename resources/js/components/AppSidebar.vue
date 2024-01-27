@@ -52,7 +52,7 @@ export default {
             </div>
         </div> -->
         <div class="ps-3">
-            <a class="transition-all py-3 flex items-center" @click="active = 0" href="#home"
+            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 0" href="#home"
                 :class="{ 'text-gray-400': active != 0, 'text-white': active == 0 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 0 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -62,7 +62,7 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5">Inicio</p>
             </a>
-            <a class="transition-all py-3 flex items-center" @click="active = 1" href="#calendar"
+            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 1" href="#calendar"
                 :class="{ 'text-gray-400': active != 1, 'text-white': active == 1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -2 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -75,7 +75,7 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5">Calendario</p>
             </a>
-            <a class="transition-all py-3 flex items-center" @click="active = 2" href="#artists"
+            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 2" href="#artists"
                 :class="{ 'text-gray-400': active != 2, 'text-white': active == 2 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -1 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -86,7 +86,7 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5">Artistas</p>
             </a>
-            <a class="transition-all py-3 flex items-center" @click="active = 3" href="#agencies"
+            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 3" href="#agencies"
                 :class="{ 'text-gray-400': active != 3, 'text-white': active == 3 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 2 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -105,7 +105,7 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5">Agencias</p>
             </a>
-            <a class="transition-all py-3 flex items-center" @click="active = 4" href="#tickets"
+            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 4" href="#tickets"
                 :class="{ 'text-gray-400': active != 4, 'text-white': active == 4 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 1 ? '#fff' : 'rgb(209, 213, 219)'" stroke-linecap="round" stroke-linejoin="round"
@@ -118,7 +118,7 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5">Tickets</p>
             </a>
-            <a v-if="Utils.role() != 'artist'" class="transition-all py-3 flex items-center" @click="active = 5"
+            <a v-if="Utils.role() != 'artist'" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 5"
                 href="#places" :class="{ 'text-gray-400': active != 5, 'text-white': active == 5 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -3 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -130,7 +130,7 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5">Lugares</p>
             </a>
-            <a v-if="Utils.role() != 'artist'" class="transition-all py-3 flex items-center" @click="active = 6"
+            <a v-if="Utils.role() != 'artist'" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 6"
                 href="#personal" :class="{ 'text-gray-400': active != 6, 'text-white': active == 6 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 3 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"

@@ -6,16 +6,15 @@ import axios from 'axios';
 export default {
     components: { CustomModal },
     props: {
-        place: Object,
+        person: Object,
     },
     data() {
         return {
             agencies: [],
-            types: [],
-            socialtypes: [],
             countries: [],
-            country_id: 'AF',
             cities: [],
+            country_id: 'AF',
+            languages: [],
             socialmedias: [{}],
             files: [{ type: 'link' }],
         }
@@ -49,10 +48,10 @@ export default {
         }
     },
     created() {
-        if (this.place.id != undefined) {
-            this.socialmedias = this.place.socialmedias
+        if (this.person.id != undefined) {
+            this.socialmedias = this.person.socialmedias
             this.files = []
-            for (let document of this.place.documents) {
+            for (let document of this.person.documents) {
                 document.type = document.url == null ? 'local' : 'link'
                 this.files.push(document)
             }
@@ -60,49 +59,52 @@ export default {
             this.socialmedias = [{}]
             this.files = [{ type: 'link' }]
         }
+        axios.get('api/agencies', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.agencies = response.data.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        });
         axios.get('api/countries', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
             this.countries = response.data.data;
-            if (this.place.id != undefined) {
-                this.country_id = this.place.city.country_id
-                this.setCities(this.country_id)
-            } else {
-                this.setCities(this.countries[0].code)
-            }
+            this.setCities(this.countries[0].code)
         }).catch((error) => {
-            console.log(error)
             this.Utils.error(error.response)
-        })
-        axios.get('api/agencies', {
+        });
+        axios.get('api/typecontacts', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
-            this.agencies = response.data.data
+            this.types = response.data.data;
         }).catch((error) => {
             this.Utils.error(error.response)
-        })
-        axios.get('api/typeplaces', {
-            headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }
-        }).then((response) => {
-            this.types = response.data.data
-        }).catch((error) => {
-            this.Utils.error(error.response)
-        })
+        });
         axios.get('api/typeredes', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
-            this.socialtypes = response.data.data
+            this.socialtypes = response.data.data;
         }).catch((error) => {
             this.Utils.error(error.response)
-        })
+        });
+        axios.get('src/languages.json', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.languages = response.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        });
     },
 }
 </script>
@@ -113,18 +115,18 @@ export default {
             <input type="hidden" :value="Utils.user().id" name="agency_id" />
             <h1
                 class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-                <template v-if="place.id == undefined">
-                    AÑADIR LUGAR
+                <template v-if="person.id == undefined">
+                    AÑADIR PERSONA
                 </template>
                 <template v-else>
-                    EDITAR LUGAR
+                    EDITAR PERSONA
                 </template>
             </h1>
             <div class="overflow-auto modal-content">
-                <div v-if="Utils.role() != 'agency' && place.id == undefined">
+                <div v-if="Utils.role() != 'agency' && person.id == undefined">
                     <label class="text-slate-200 text-xs font-semibold">Agencia</label>
                     <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                        <select required v-model="place.agency_id" name="agency_id"
+                        <select required v-model="person.agency_id" name="agency_id"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             <option class="text-black" v-for="item in agencies" :value="item.id">{{
                                 item.taxname
@@ -134,37 +136,18 @@ export default {
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Nombre del lugar</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-globe text-gray-100"></i>
-                            <input required v-model="place.name" name="name" type="text" placeholder="Nombre del lugar"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Manager</label>
+                        <label class="text-slate-200 text-xs font-semibold">Nombre(s)</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-person text-gray-100"></i>
-                            <input required v-model="place.manager" name="manager" type="text" placeholder="Manager"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Teléfono principal</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-telephone text-gray-100"></i>
-                            <input required v-model="place.phone" name="phone" type="tel" placeholder="Teléfono principal"
+                            <input required v-model="person.name" name="name" type="text" placeholder="Nombre(s)"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         </div>
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Teléfono secundario</label>
+                        <label class="text-slate-200 text-xs font-semibold">Apellidos</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-telephone text-gray-100"></i>
-                            <input v-model="place.extra_phone" name="extra_phone" type="tel"
-                                placeholder="Teléfono secundario"
+                            <i class="bi bi-person text-gray-100"></i>
+                            <input required v-model="person.lastname" name="lastname" type="text" placeholder="Apellidos"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         </div>
                     </div>
@@ -174,37 +157,63 @@ export default {
                         <label class="text-slate-200 text-xs font-semibold">Correo electrónico</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-envelope text-gray-100"></i>
-                            <input required v-model="place.email" name="email" type="email" placeholder="Correo electrónico"
+                            <input required v-model="person.email" name="email" type="email"
+                                placeholder="Correo electrónico"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         </div>
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Tipo de lugar</label>
-                        <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select required v-model="place.typeplace_id" name="typeplace_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="type in types" :value="type.id">{{
-                                    type.description
-                                }}</option>
-                            </select>
+                        <label class="text-slate-200 text-xs font-semibold">Fecha de nacimiento</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-calendar-day text-gray-100"></i>
+                            <input required v-model="person.birthday" name="birthday" type="date"
+                                placeholder="Fecha de nacimiento"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                         </div>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Link de Google Maps</label>
+                        <label class="text-slate-200 text-xs font-semibold">Teléfono principal</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-telephone text-gray-100"></i>
-                            <input v-model="place.google_id" name="google_id" type="text" placeholder="Link de Google Maps"
+                            <input required v-model="person.phone" name="phone" type="tel" placeholder="Teléfono principal"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         </div>
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Coordenadas</label>
+                        <label class="text-slate-200 text-xs font-semibold">Teléfono secundario</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-telephone text-gray-100"></i>
-                            <input v-model="place.gis" name="gis" type="text" placeholder="Coordenadas"
+                            <input v-model="person.extra_phone" name="extra_phone" type="tel"
+                                placeholder="Teléfono secundario"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-x-2">
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Profesión</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-person-vcard text-gray-100"></i>
+                            <select required v-model="person.typecontact_id" name="typecontact_id"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                <option class="text-black" v-for="type in types" :value="type.id">{{
+                                    type.description }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Idioma</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-translate text-gray-100"></i>
+                            <select required v-model="person.lang" name="lang"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                <option class="text-black" v-for="language in languages" :value="language.name">{{
+                                    language.name }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -224,7 +233,7 @@ export default {
                         <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-globe-americas text-gray-100"></i>
-                            <select required v-model="place.city_id" name="city_id"
+                            <select required v-model="person.city_id" name="city_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
                                 </option>
@@ -233,16 +242,16 @@ export default {
                     </div>
                 </div>
                 <div>
-                    <label class="text-slate-200 text-xs font-semibold">Dirección</label>
+                    <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                     <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                        <textarea rows="3" v-model="place.address" name="address" placeholder="Dirección"
+                        <textarea v-model="person.notes" name="notes" placeholder="Datos adicionales"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                     </div>
                 </div>
                 <div>
-                    <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
+                    <label class="text-slate-200 text-xs font-semibold">Posición</label>
                     <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                        <textarea rows="3" v-model="place.notes" name="notes" placeholder="Datos adicionales"
+                        <textarea name="position" v-model="person.position" placeholder="Posición"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                     </div>
                 </div>
@@ -322,7 +331,7 @@ export default {
                 </button>
                 <button type="submit"
                     class="mt-8 overlay-button bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
-                    <template v-if="place.id == undefined">
+                    <template v-if="person.id == undefined">
                         Agregar
                     </template>
                     <template v-else>

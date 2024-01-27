@@ -20,8 +20,12 @@ export default {
 </script>
 <template>
     <nav class="w-screen h-16 flex justify-between items-center shadow-lg shadow-gray-300 bg-white">
-        <div @click="home" class="px-2 cursor-pointer">
+        <div @click="home" class="px-2 cursor-pointer flex items-center">
             <img src="src/logo.svg" class="h-12 w-12" />
+            <div class="hidden sm:block">
+                <h1 class="text-gray-50">MAD MUSIC</h1>
+                <p class=" text-sm text-gray-400">Tour planner</p>
+            </div>
         </div>
         <div class="relative p-2 text-center">
             <h1 v-if="Utils.role() != 'user'" class="text-lg text-slate-700 font-bold">{{ Utils.username() }}</h1>

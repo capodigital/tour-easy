@@ -29,23 +29,23 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TyperedesSeeder::class,
-           
+
         ]);
         $this->call([
             TypecontactsSeeder::class,
-           
+
         ]);
         $this->call([
             TypeitinerariesSeeder::class,
-           
+
         ]);
         $this->call([
             TypeplacesSeeder::class,
-           
+
         ]);
         $this->call([
             TypeagenciesSeeder::class,
-           
+
         ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
         $path2 = base_path() . '\database\seeders\Ciudades.sql_';
@@ -62,14 +62,14 @@ class DatabaseSeeder extends Seeder
         Socialmedias::factory(10)->artist()->create();
         Documents::factory(3)->artist()->create();
 
-            
+
         Tours::factory(4)->create();
         Socialmedias::factory(10)->tour()->create();
         Documents::factory(3)->tour()->create();
 
         Persons::factory(10)->create();
-        Socialmedias::factory(10)->contact()->create();
-        Documents::factory(3)->contact()->create();
+        Socialmedias::factory(10)->person()->create();
+        Documents::factory(3)->person()->create();
 
         Suppliers::factory(10)->create();
         Socialmedias::factory(10)->supplier()->create();
@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             TourcontactsSeeder::class,
-           
+
         ]);
 
         Places::factory(10)->create();
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PhotosSeeder::class,
-           
+
         ]);
 
         User::factory(1)->create();

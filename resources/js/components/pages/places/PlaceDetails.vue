@@ -12,7 +12,7 @@ export default {
 <template>
     <CustomModal @close="$emit('close')">
         <article @submit.prevent="(e) => $emit('send', e)"
-            class="bg-gradient-to-tr from-slate-700 max-w-3xl to-slate-950 rounded-2xl shadow-md shadow-gray-500 p-4 overflow-auto transition-all cursor-pointer">
+            class="max-w-3xl rounded-2xl shadow-md shadow-gray-800 p-4 overflow-auto transition-all cursor-pointer">
             <h1
                 class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 DETALLES DEL LUGAR
@@ -90,14 +90,19 @@ export default {
             </div>
             <div class="flex justify-center">
                 <button type="button" @click="$emit('close')"
-                    class="mt-8 me-2 close overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                    class="mt-8 me-2 close overlay-button bg-gradient-to-tr from-slate-600 to-slate-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                     Cerrar
                 </button>
                 <button type="button" @click="$emit('edit', place)"
-                    class="mt-8 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                    class="mt-8 overlay-button bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                     Actualizar
                 </button>
             </div>
         </article>
     </CustomModal>
 </template>
+<style>
+article {
+    background: linear-gradient(138.52deg, rgb(81, 44, 44) -1.32%, rgb(37, 44, 78) 85.77%);
+}
+</style>
