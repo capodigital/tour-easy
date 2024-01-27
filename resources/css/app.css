@@ -414,13 +414,13 @@ input[type="date"]::-webkit-inner-spin-button,
     filter: brightness(90%);
 }
 .form-check-input:focus {
-    border-color: #000000;
+    border-color: #2c46ac;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(104, 104, 104, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(65, 91, 197, 0.25);
 }
 .form-check-input:checked {
-    background-color: rgb(24, 24, 24);
-    border-color: rgb(24, 24, 24);
+    background-color: #415bc5;
+    border-color: #415bc5;
 }
 .form-check-input:checked[type="checkbox"] {
     --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
@@ -429,8 +429,8 @@ input[type="date"]::-webkit-inner-spin-button,
     --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
 }
 .form-check-input[type="checkbox"]:indeterminate {
-    background-color: rgb(24, 24, 24);
-    border-color: rgb(24, 24, 24);
+    background-color: #415bc5;
+    border-color: #415bc5;
     --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 .form-check-input:disabled {

@@ -107,6 +107,7 @@ export default {
 <style scoped>
 main {
     height: calc(100vh - 8rem);
+    background: linear-gradient(138.52deg, rgba(38, 75, 80, 0.568) 0.44%, rgba(41, 36, 72, 0.452) 85.15%);
 }
 @media (min-width: 768px) {
     main {

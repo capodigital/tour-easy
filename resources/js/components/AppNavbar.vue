@@ -29,7 +29,7 @@ export default {
         <div class="flex items-center justify-end px-1">
             <button @click="logout" class="me-2 rounded hover:bg-slate-400 p-2 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-log-out">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                     <polyline points="16 17 21 12 16 7" />
@@ -57,5 +57,8 @@ export default {
 <style scoped>
 h1 {
     font-family: 'Roboto', sans-serif;
+}
+nav {
+    background: linear-gradient(138.52deg, rgb(38, 75, 80) 0.44%, rgb(41, 36, 72) 85.15%);
 }
 </style>

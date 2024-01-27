@@ -189,15 +189,15 @@ export default {
         <div class="relative">
             <div class="flex">
                 <h1
-                    class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
+                    class="font-bold bg-gradient-to-tr w-full from-app-secondary-300 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     AGENCIAS</h1>
-                <div v-if="Utils.role() == 'user'" class="flex items-center rounded border border-gray-400 px-2 me-2">
-                    <i class="bi bi-funnel-fill text-gray-400"></i>
+                <div v-if="Utils.role() == 'user'" class="flex items-center rounded border border-gray-200 px-2 me-2">
+                    <i class="bi bi-funnel-fill text-gray-200"></i>
                     <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                        class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2">
                 </div>
                 <button v-if="Utils.role() == 'user'" @click="add"
-                    class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
+                    class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 rounded whitespace-nowrap"><i class="bi bi-plus"></i> Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">

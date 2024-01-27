@@ -6,23 +6,23 @@ export default {
 }
 </script>
 <template>
-    <div
-        class="bg-white rounded-2xl shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer relative pb-12">
+    <article
+        class="bg-white overlay-button rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-105 cursor-pointer relative pb-12">
         <div class="">
             <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400"
                 :src="agency.image.replace('http://localhost/', '')" />
             <div class="min-h-[3.5rem]">
-                <h3 class="font-bold text-lg text-gray-900">{{ agency.taxname }}</h3>
-                <p class="text-gray-500 text-sm leading-4 pe-10">{{ agency.tradename }}</p>
+                <h3 class="font-bold text-lg text-gray-200">{{ agency.taxname }}</h3>
+                <p class="text-sm text-gray-300 leading-4 pe-10">{{ agency.tradename }}</p>
             </div>
-            <p class="text-sm">{{ agency.notes }}</p>
+            <p class="text-xs text-gray-400">{{ agency.notes }}</p>
         </div>
         <div class="flex mt-4 absolute bottom-2 w-[calc(100%-1.5rem)]">
             <div class="flex w-full">
                 <button title="Editar agencia" @click="$emit('edit', agency)"
-                    class="rounded-lg border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="rounded-md border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="rgb(202, 138, 4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clipboard-edit">
                         <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
                         <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z" />
@@ -31,9 +31,9 @@ export default {
                     </svg>
                 </button>
                 <button title="Eliminar agencia" @click="$emit('destroy', agency)"
-                    class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="rounded-md border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="rgb(220, 38, 38)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-2">
                         <path d="M3 6h18" />
                         <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
@@ -42,12 +42,12 @@ export default {
                         <line x1="14" x2="14" y1="11" y2="17" />
                     </svg>
                 </button>
-                <button title="Eliminar agencia"
+                <button title="Cambiar contraseña de la agencia"
                     v-if="Utils.role() == 'agency' && (Utils.manager() == null || Utils.manager() == 'null')"
                     @click="$emit('agency_password', agency.id)"
-                    class="rounded-lg border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
+                    class="rounded-md border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        stroke="#415bc5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-key-round">
                         <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z" />
                         <circle cx="16.5" cy="7.5" r=".5" />
@@ -56,7 +56,7 @@ export default {
             </div>
             <div class="flex">
                 <button @click="$emit('show', agency)"
-                    class="bg-gradient-to-br overlay-button from-slate-800 to-black text-white px-3 h-7 rounded-lg flex text-sm items-center">
+                    class="bg-gradient-to-br overlay-button from-app-primary-500 to-app-primary-800 text-white px-3 h-7 rounded flex text-sm items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-eye me-1">
@@ -67,11 +67,14 @@ export default {
                 </button>
             </div>
         </div>
-    </div>
+    </article>
 </template>
 <style scoped>
 h3,
 p {
     font-family: 'Roboto', sans-serif;
+}
+article {
+    background: linear-gradient(138.52deg, rgb(81, 44, 44) -1.32%, rgb(37, 44, 78) 85.77%);
 }
 </style>

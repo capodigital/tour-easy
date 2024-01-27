@@ -119,16 +119,16 @@ export default {
     <section class="">
         <div class="flex mb-1 p-2">
             <h1
-                class="font-bold w-full bg-gradient-to-tr from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                class="font-bold w-full bg-gradient-to-tr from-app-secondary-300 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 ARTISTAS
             </h1>
-            <div class="flex items-center rounded border border-gray-400 px-2 me-2">
-                <i class="bi bi-funnel-fill text-gray-400"></i>
+            <div class="flex items-center rounded border border-gray-200 px-2 me-2">
+                <i class="bi bi-funnel-fill text-gray-200"></i>
                 <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                    class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2">
             </div>
             <button v-if="Utils.role() != 'artist'" @click="add"
-                class="bg-gradient-to-tr from-slate-800 to-slate-950 text-white px-2 py-1 rounded">Añadir</button>
+                class="bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-2 py-1 rounded whitespace-nowrap"><i class="bi bi-plus"></i> Añadir</button>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
             <template v-for="item in artists">
