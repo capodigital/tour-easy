@@ -28,7 +28,7 @@ export default {
             </div>
         </div>
         <div class="relative p-2 text-center">
-            <h1 v-if="Utils.role() != 'user'" class="text-lg text-slate-700 font-bold">{{ Utils.username() }}</h1>
+            <h1 v-if="Utils.role() != 'user'" class="text-lg text-gray-200 font-bold">{{ Utils.username() }}</h1>
         </div>
         <div class="flex items-center justify-end px-1">
             <button @click="logout" class="me-2 rounded hover:bg-slate-400 p-2 transition-all">

@@ -17,6 +17,7 @@ export default {
         return {
             pages: ["#home", "#details", "#artists", "#login", "#personal", "#tour", "#artist", "#calendar", "#day", "#agencies", "#places", "#tickets"],
             active: active,
+            collapsed: false,
         }
     },
     methods: {
@@ -89,8 +90,8 @@ export default {
     <template v-else-if="active != 'login'">
         <AppNavbar />
         <div class="flex">
-            <AppSidebar />
-            <main class="overflow-auto pb-12 w-full md:w-10/12">
+            <AppSidebar @collapse="(value) => collapsed = value" />
+            <main :class="{ 'md:w-full': collapsed, 'md:w-10/12': !collapsed }" class="overflow-auto pb-12 w-full">
                 <transition name="carousel" mode="out-in">
                     <component :is="active"> </component>
                 </transition>
@@ -109,6 +110,7 @@ main {
     height: calc(100vh - 8rem);
     background: linear-gradient(138.52deg, rgba(38, 75, 80, 0.568) 0.44%, rgba(41, 36, 72, 0.452) 85.15%);
 }
+
 @media (min-width: 768px) {
     main {
         height: calc(100vh - 4rem);

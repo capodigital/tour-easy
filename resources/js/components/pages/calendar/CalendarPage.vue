@@ -2,6 +2,7 @@
 import axios from 'axios'
 import ActivityDetails from '../../common/ActivityDetails.vue';
 import CalendarModal from './CalendarModal.vue';
+import CalendarItem from './CalendarItem.vue';
 export default {
     data() {
         const today = new Date();
@@ -92,7 +93,7 @@ export default {
                     const date = new Date(item.startdate + ' 00:00:00');
                     this.forms[date.getDate() - 1 + initial].activities.push(this.getActivityData(item));
                 }
-                for (let i = 1; i < 8 - today.getDay(); i++) {
+                for (let i = 1; i < 8 - (today.getDay() + 1); i++) {
                     this.forms.push({
                         day: '',
                         out: true,
@@ -185,7 +186,7 @@ export default {
             this.tours = response.data.data;
         });
     },
-    components: { ActivityDetails, CalendarModal }
+    components: { ActivityDetails, CalendarModal, CalendarItem }
 };
 </script>
 <template>
@@ -233,81 +234,11 @@ export default {
             </div>
         </div>
         <div class="overflow-x-auto scroll">
-            <div class="min-w-[50rem]">
-                <div class="grid grid-cols-7 rounded-t">
-                    <div
-                        class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                        D</div>
-                    <div
-                        class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white rounded-tl">
-                        L
-                    </div>
-                    <div
-                        class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                        M</div>
-                    <div
-                        class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                        M</div>
-                    <div
-                        class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                        J</div>
-                    <div
-                        class="text-center font-bold text-lg p-2 border border-r-gray-300 bg-gradient-to-tr from-slate-800 to-slate-950 text-white">
-                        V</div>
-                    <div
-                        class="text-center font-bold text-lg p-2 border bg-gradient-to-tr from-slate-800 to-slate-950 text-white rounded-tr">
-                        S</div>
-                </div>
-                <div class="grid grid-cols-7 border border-black border-t-0 rounded-b">
-                    <div class="border p-2 flex relative"
-                        :class="{ 'border-r-black': index % 7 != 6, 'border-b-black': index < forms.length - 7, 'bg-gray-300': day.out != undefined }"
-                        v-for="(day, index) in forms">
-                        <template v-if="!day.out">
-                            <a :href="'#day/' + timestamp(day.day)"
-                                class="absolute right-0 top-1 rounded text-white text-sm bg-gradient-to-tr from-slate-800 to-slate-950 w-5 h-5 text-center me-1">
-                                {{
-                                    day.day }}</a>
-                            <div class="w-full">
-                                <div class="rounded">
-                                    <!-- <p class="text-gray-400 text-center text-xs">Mañana</p> -->
-                                    <template v-if="day.activities.length == 0">
-                                        <div class="rounded bg-gray-600 text-white text-center text-xs py-1 px-2">No hay
-                                            actividades</div>
-                                    </template>
-                                    <template v-else>
-                                        <template v-for="item in day.activities">
-                                            <button
-                                                v-if="(tour_id == 0 || item.tour_id == tour_id) && (active == 1 || item.tour.active == 1)"
-                                                @click="details = item"
-                                                class="block rounded text-white w-full bg-green-500 py-1 px-2 mb-0.5 text-xs truncate">
-                                                {{ types[Number(item.typeitinerary_id) - 1].description }}
-                                            </button>
-                                        </template>
-
-                                    </template>
-                                    <button title="Agregar actividad" v-if="Utils.role() != 'artist'" @click="add(day.day)"
-                                        class="w-full py-0.5 text-center border mt-0.5 border-gray-400 text-gray-400 rounded flex justify-center items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                            fill="none" stroke="rgb(156, 163, 175)" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" class="lucide lucide-plus">
-                                            <path d="M5 12h14" />
-                                            <path d="M12 5v14" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </div>
+            <CalendarItem :today="date" :itineraries="forms" @update="update" @year="(value) => year = value"
+                @show="(item) => details = item" @month="(value) => month = value" />
         </div>
-        <transition name="bounce" mode="out-in">
-            <CalendarModal v-if="show" @send="send" @close="show = false" :activity="activity" />
-        </transition>
-        <transition name="bounce" mode="out-in">
-            <ActivityDetails @close="details = {}" v-if="details.id != undefined" :activity="details" />
-        </transition>
+        <CalendarModal v-if="show" @send="send" @close="show = false" :activity="activity" />
+        <ActivityDetails @close="details = {}" v-if="details.id != undefined" :activity="details" />
     </div>
 </template>
 <style scoped>

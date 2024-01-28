@@ -89,7 +89,7 @@ h1 {
     left: 50%;
     width: 0px;
     height: 0px;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 .overlay-button:hover:before {
     width: 100%;
@@ -97,7 +97,7 @@ h1 {
     background: #ffffff13 radial-gradient(circle, transparent 1%, #ffffff0e 1%)
         center/15000%;
     background-size: 100%;
-    transition: all .21s ease-in-out;
+    transition: all 0.21s ease-in-out;
     /* border-radius: 0.5rem; */
     top: 0;
     left: 0;
@@ -459,4 +459,19 @@ input[type="date"]::-webkit-inner-spin-button,
 }
 .custom-modal > form {
     border-radius: 0.5rem !important;
+}
+
+.gradient-1 {
+    background: linear-gradient(
+        138.52deg,
+        rgb(38, 75, 80) 0.44%,
+        rgb(41, 36, 72) 85.15%
+    );
+}
+.gradient-2 {
+    background: linear-gradient(
+        138.52deg,
+        rgb(81, 44, 44) -1.32%,
+        rgb(37, 44, 78) 85.77%
+    );
 }

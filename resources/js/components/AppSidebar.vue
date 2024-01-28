@@ -3,6 +3,7 @@ export default {
     data() {
         return {
             active: 0,
+            collapsed: false,
         }
     },
     methods: {
@@ -32,6 +33,10 @@ export default {
                     this.active = 5;
                     break;
             }
+        },
+        collapse() {
+            this.collapsed = !this.collapsed
+            this.$emit('collapse', this.collapsed)
         }
     },
     created() {
@@ -43,27 +48,24 @@ export default {
 }
 </script>
 <template>
-    <aside class="hidden md:block w-2/12 h-[calc(100vh-4rem)] shadow-lg shadow-gray-600 bg-white relative">
-        <!-- <div @click="home" class="px-2 cursor-pointer flex items-center">
-            <img src="src/logo.svg" class="h-12 w-12 me-2" />
-            <div>
-                <p class="m-0 leading-3 font-semibold">MAD MUSIC</p>
-                <small class="m-0 leading-3">Tour Planner</small>
-            </div>
-        </div> -->
-        <div class="ps-3">
-            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 0" href="#home"
-                :class="{ 'text-gray-400': active != 0, 'text-white': active == 0 }">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+    <aside :class="{ 'w-[3.5rem]': collapsed, 'w-2/12': !collapsed }"
+        class="hidden md:block h-[calc(100vh-4rem)] transition-all shadow-lg shadow-gray-600 bg-white relative">
+        <button @click="collapse()" :class="{ 'rotate-180': collapsed }"
+            class="absolute z-50 transition-all top-2 right-2 text-gray-300 me-2 mt-2"><i
+                class="bi bi-arrow-bar-left"></i></button>
+        <div class="ps-3 relative transition-all" :class="{ 'pt-10': collapsed }">
+            <a title="Inicio" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+                @click="active = 0" href="#home" :class="{ 'text-gray-400': active != 0, 'text-white': active == 0 }">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 0 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-home">
                     <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                     <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
-                <p class="ms-2 mt-0.5">Inicio</p>
+                <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Inicio</p>
             </a>
-            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 1" href="#calendar"
-                :class="{ 'text-gray-400': active != 1, 'text-white': active == 1 }">
+            <a title="Calendario" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+                @click="active = 1" href="#calendar" :class="{ 'text-gray-400': active != 1, 'text-white': active == 1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -2 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-calendar-check">
@@ -73,10 +75,10 @@ export default {
                     <line x1="3" x2="21" y1="10" y2="10" />
                     <path d="m9 16 2 2 4-4" />
                 </svg>
-                <p class="ms-2 mt-0.5">Calendario</p>
+                <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Calendario</p>
             </a>
-            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 2" href="#artists"
-                :class="{ 'text-gray-400': active != 2, 'text-white': active == 2 }">
+            <a title="Artistas" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+                @click="active = 2" href="#artists" :class="{ 'text-gray-400': active != 2, 'text-white': active == 2 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -1 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-mic">
@@ -84,10 +86,10 @@ export default {
                     <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
                     <line x1="12" x2="12" y1="19" y2="22" />
                 </svg>
-                <p class="ms-2 mt-0.5">Artistas</p>
+                <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Artistas</p>
             </a>
-            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 3" href="#agencies"
-                :class="{ 'text-gray-400': active != 3, 'text-white': active == 3 }">
+            <a title="Agencias" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+                @click="active = 3" href="#agencies" :class="{ 'text-gray-400': active != 3, 'text-white': active == 3 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 2 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-building">
@@ -103,10 +105,10 @@ export default {
                     <path d="M8 10h.01" />
                     <path d="M8 14h.01" />
                 </svg>
-                <p class="ms-2 mt-0.5">Agencias</p>
+                <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Agencias</p>
             </a>
-            <a class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 4" href="#tickets"
-                :class="{ 'text-gray-400': active != 4, 'text-white': active == 4 }">
+            <a title="Tickets" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+                @click="active = 4" href="#tickets" :class="{ 'text-gray-400': active != 4, 'text-white': active == 4 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 1 ? '#fff' : 'rgb(209, 213, 219)'" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-ticket">
@@ -116,10 +118,11 @@ export default {
                     <path d="M13 17v2" />
                     <path d="M13 11v2" />
                 </svg>
-                <p class="ms-2 mt-0.5">Tickets</p>
+                <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Tickets</p>
             </a>
-            <a v-if="Utils.role() != 'artist'" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 5"
-                href="#places" :class="{ 'text-gray-400': active != 5, 'text-white': active == 5 }">
+            <a title="Lugares" v-if="Utils.role() != 'artist'"
+                class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+                @click="active = 5" href="#places" :class="{ 'text-gray-400': active != 5, 'text-white': active == 5 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -3 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-land-plot">
@@ -128,10 +131,11 @@ export default {
                     <path d="m6.49 12.85 11.02 6.3" />
                     <path d="M17.51 12.85 6.5 19.15" />
                 </svg>
-                <p class="ms-2 mt-0.5">Lugares</p>
+                <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Lugares</p>
             </a>
-            <a v-if="Utils.role() != 'artist'" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent" @click="active = 6"
-                href="#personal" :class="{ 'text-gray-400': active != 6, 'text-white': active == 6 }">
+            <a title="Personal" v-if="Utils.role() != 'artist'"
+                class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+                @click="active = 6" href="#personal" :class="{ 'text-gray-400': active != 6, 'text-white': active == 6 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 3 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-users">
@@ -140,11 +144,11 @@ export default {
                     <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
-                <p class="ms-2 mt-0.5">Personal</p>
+                <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Personal</p>
             </a>
         </div>
         <div class="active-box w-10 h-full transition-all"
-            :style="{ 'top': 'calc(' + active * 3.15 + 'rem)' }">
+            :style="{ 'top': 'calc(' + (active * 3.15 + (collapsed ? 2.35 : 0)) + 'rem)' }">
         </div>
     </aside>
 </template>
