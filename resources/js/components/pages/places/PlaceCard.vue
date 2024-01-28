@@ -7,7 +7,7 @@ export default {
 </script>
 <template>
     <article
-        class="rounded-lg overlay-button shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
+        class="rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
         <div class="">
             <iframe class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400" width="40" height="40" frameborder="0" scrolling="no" marginheight="0"
                 marginwidth="0"
