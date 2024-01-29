@@ -101,7 +101,7 @@ export default {
         </article>
     </CustomModal>
 </template>
-<style>
+<style scoped>
 article {
     background: linear-gradient(138.52deg, rgb(81, 44, 44) -1.32%, rgb(37, 44, 78) 85.77%);
 }

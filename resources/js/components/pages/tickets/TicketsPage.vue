@@ -3,9 +3,11 @@ import axios from 'axios';
 import TicketItem from './TicketItem.vue';
 import Confirm from '../../modals/Confirm';
 import TicketModal from './TicketModal.vue';
+import TicketCard from './TicketCard.vue';
+import TicketDetails from './TicketDetails.vue';
 
 export default {
-    components: { TicketItem, TicketModal },
+    components: { TicketItem, TicketModal, TicketCard, TicketDetails },
     data() {
         return {
             filter: '',
@@ -13,6 +15,7 @@ export default {
             tours: [],
             tour_filter: 0,
             ticket: {},
+            details: null,
             show: false
         };
     },
@@ -22,6 +25,7 @@ export default {
             this.show = true
         },
         edit(item) {
+            this.details = null
             Object.assign(this.ticket, item)
             this.show = true
         },
@@ -101,39 +105,40 @@ export default {
         <div class="relative">
             <div class="flex">
                 <h1
-                    class="font-bold bg-gradient-to-tr w-full from-slate-500 to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
+                    class="font-bold bg-gradient-to-tr w-full from-app-secondary-500 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     TICKETS</h1>
                 <div>
                     <div class="flex items-center rounded border border-gray-400 px-2 me-2">
                         <i class="bi bi-funnel-fill text-gray-400"></i>
                         <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                            class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2">
+                            class="bg-transparent w-full text-gray-700 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-300">
                     </div>
 
                 </div>
                 <div>
                     <button v-if="Utils.role() != 'artist'" @click="add"
-                        class="px-2 py-1 text-white bg-gradient-to-tr from-slate-800 to-slate-950 rounded">Añadir</button>
+                        class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 rounded whitespace-nowrap"><i
+                            class="bi bi-plus"></i> Añadir</button>
                 </div>
             </div>
             <div class="flex justify-end mt-1">
-                <select v-model="tour_filter" class="rounded border border-gray-500 px-3 pe-8 py-1 mt-1 max-w-[calc(100vw-2rem)]">
-                    <option value="0">Todas las giras</option>
-                    <option v-for="item in tours" :value="item.id">
+                <select v-model="tour_filter"
+                    class="rounded border border-gray-300 text-gray-300 px-3 pe-8 py-1 mt-1 max-w-[calc(100vw-2rem)]">
+                    <option class="text-black" value="0">Todas las giras</option>
+                    <option class="text-black" v-for="item in tours" :value="item.id">
                         {{ item.tourname }}
                     </option>
                 </select>
             </div>
-            <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
+            <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
                 <template v-for="item in tickets">
-                    <TicketItem @edit="edit" @destroy="destroy" :ticket="item"
+                    <TicketCard @edit="edit" @destroy="destroy" @show="details = item" :ticket="item"
                         v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes', 'itinerary.name'], item, filter) && (tour_filter == 0 || tour_filter == item.itinerary.tour_id)" />
                 </template>
             </div>
         </div>
-        <transition name="bounce" mode="out-in">
-            <TicketModal v-if="show" @close="show = false" @send="send" :ticket="ticket" />
-        </transition>
+        <TicketModal v-if="show" @close="show = false" @send="send" :ticket="ticket" />
+        <TicketDetails v-if="details != null" @close="details = null" :ticket="details" @edit="edit" />
     </section>
 </template>
 <style scoped>

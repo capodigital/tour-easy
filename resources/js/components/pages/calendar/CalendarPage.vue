@@ -191,12 +191,15 @@ export default {
 </script>
 <template>
     <div class="w-full px-4 py-4 overflow-auto scroll" style="font-family: Roboto">
-        <h1 class="font-bold text-gray-800 text-2xl">CALENDARIO DE ACTIVIDADES</h1>
+        <h1
+            class="font-bold w-full bg-gradient-to-tr from-app-secondary-300 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+            CALENDARIO DE ACTIVIDADES
+        </h1>
         <div class="my-2">
             <div class="text-center sm:flex items-center">
                 <label class="me-2">Filtrar: </label>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
-                    <select v-model="month" @change="update" class="rounded border border-gray-500 px-3 pe-8 py-1">
+                    <select v-model="month" @change="update" class="rounded border border-gray-300 px-3 pe-8 py-1">
                         <option value="0">Enero</option>
                         <option value="1">Febrero</option>
                         <option value="2">Marzo</option>
@@ -210,12 +213,12 @@ export default {
                         <option value="10">Noviembre</option>
                         <option value="11">Diciembre</option>
                     </select>
-                    <select v-model="year" @change="update" class="rounded border border-gray-500 pe-8 px-3 py-1">
+                    <select v-model="year" @change="update" class="rounded border border-gray-300 pe-8 px-3 py-1">
                         <option :value="2000 + n" v-for="n in 24">
                             {{ 2000 + n }}
                         </option>
                     </select>
-                    <select v-model="tour_id" class="rounded border border-gray-500 px-3 pe-8 py-1">
+                    <select v-model="tour_id" class="rounded border border-gray-300 px-3 pe-8 py-1">
                         <option value="0">Todas las giras</option>
                         <template v-for="item in tours">
                             <option v-if="item.active == 1" :value="item.id">

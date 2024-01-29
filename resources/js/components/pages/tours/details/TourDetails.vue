@@ -312,7 +312,8 @@ export default {
                                                                 <input id="ia-selector-last" type="radio"
                                                                     name="radio-set" />
                                                                 <figcaption><span>
-                                                                        <p class="text-xs md:text-md">{{ tour.tourname }}</p>
+                                                                        <p class="text-xs md:text-md">{{ tour.tourname }}
+                                                                        </p>
                                                                         <p class="text-xs mt-2">{{ tour.artist.stagename }}
                                                                         </p>
                                                                         <p class="text-xs mt-2">{{ tour.startdate }} - {{
@@ -391,8 +392,9 @@ export default {
                 class="font-bold bg-gradient-to-tr w-full from-app-secondary-500 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                 ACTIVIDADES</h1>
             <button @click="show_images = true"
-                class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-sm rounded whitespace-nowrap">Ver más
-                imágenes</button>
+                class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-sm rounded whitespace-nowrap">
+                Ver más imágenes
+            </button>
         </div>
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
             <TourActivity v-for="item in sort(activities)" @show="(item) => details = item" @edit="edit" @destroy="destroy"
@@ -402,15 +404,9 @@ export default {
                 <i class="bi bi-plus text-6xl text-gray-500"></i>
             </article>
         </div>
-        <transition name="bounce" mode="out-in">
-            <ImageModal :tour="tour" v-if="show_images" @update="(items) => images = items" @close="show_images = false" />
-        </transition>
-        <transition name="bounce" mode="out-in">
-            <ActivityModal @close="show = false" @send="send" :activity="activity" :tour="tour" v-if="show" />
-        </transition>
-        <transition name="bounce" mode="out-in">
-            <ActivityDetails @close="details = null" v-if="details != null" :activity="details" />
-        </transition>
+        <ImageModal :tour="tour" v-if="show_images" @update="(items) => images = items" @close="show_images = false" />
+        <ActivityModal @close="show = false" @send="send" :activity="activity" :tour="tour" v-if="show" />
+        <ActivityDetails @close="details = null" v-if="details != null" :activity="details" />
     </section>
 </template>
 <style scoped>

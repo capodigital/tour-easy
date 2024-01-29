@@ -125,7 +125,7 @@ export default {
             <div class="flex items-center rounded border border-gray-200 px-2 me-2">
                 <i class="bi bi-funnel-fill text-gray-200"></i>
                 <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2">
+                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2  placeholder:text-gray-300">
             </div>
             <button v-if="Utils.role() != 'artist'" @click="add"
                 class="bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-2 py-1 rounded whitespace-nowrap"><i class="bi bi-plus"></i> Añadir</button>
