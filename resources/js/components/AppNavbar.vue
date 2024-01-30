@@ -5,6 +5,7 @@ export default {
     data() {
         return {
             collapsed: false,
+            profile: false,
         }
     },
     methods: {
@@ -19,17 +20,25 @@ export default {
         },
         home() {
             location.href = '#home'
+        },
+        collapse() {
+            this.collapsed = !this.collapsed
+            this.$emit('collapse', this.collapsed)
         }
     }
 }
 </script>
 <template>
     <nav class="w-screen h-16 flex justify-between items-center shadow-lg shadow-gray-300 bg-white">
-        <div @click="home" class="px-2 cursor-pointer flex items-center">
-            <img src="src/logo.svg" class="h-12 w-12" />
-            <div class="hidden sm:block">
-                <h1 class="text-gray-50">MAD MUSIC</h1>
-                <p class=" text-sm text-gray-400">Tour planner</p>
+        <div class="flex px-2">
+            <button @click="collapse()" :class="{ 'rotate-180': collapsed }"
+                class="z-50 transition-all text-gray-300 me-2 mt-2"><i class="bi bi-arrow-bar-left"></i></button>
+            <div @click="home" class="px-2 cursor-pointer flex items-center">
+                <img src="src/logo.svg" class="h-12 w-12" />
+                <div class="hidden sm:block">
+                    <h1 class="text-gray-50">MAD MUSIC</h1>
+                    <p class=" text-sm text-gray-400">Tour planner</p>
+                </div>
             </div>
         </div>
         <div class="relative p-2 text-center">
@@ -38,27 +47,18 @@ export default {
         <div class="flex items-center justify-end px-1">
 
             <div class="relative p-2 flex rounded">
-                <!-- <div class="w-0 group-hover:w-52 transition-all overflow-hidden px-0 group-hover:px-2">
-                    <h5 class="whitespace-nowrap font-bold text-slate-900 leading-5 text-end group-hover:text-white mt-1">
-                        {{ Utils.user().name }}
-                    </h5>
-                    <p class="whitespace-nowrap text-slate-700 leading-4 text-sm text-end group-hover:text-gray-200 ">
-                        {{ Utils.user().email }}
-                    </p>
-                </div> -->
-                <img @click="collapsed = !collapsed"
-                    :src="Utils.role() == '' ? Utils.user().image : 'src/user_placeholder.png'"
+                <img @click="profile = !profile" :src="Utils.role() == '' ? Utils.user().image : 'src/user_placeholder.png'"
                     class="rounded-full h-10 w-10 cursor-pointer me-2" />
                 <span
                     class="w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white absolute text-center text-xs font-semibold"
                     style="top: .2rem; right: .2rem">4</span>
             </div>
-            <div :class="{ 'h-0': !collapsed, 'p-2': collapsed, 'p-0': !collapsed, 'h-auto': collapsed }"
+            <div :class="{ 'h-0': !profile, 'p-2': profile, 'p-0': !profile, 'h-auto': profile }"
                 class="absolute transition-all overflow-hidden top-16 right-2 rounded shadow-lg shadow-gray-900 gradient-1 z-50">
                 <p class="text-gray-300 text-sm text-center leading-3 mb-2 mt-1">{{ Utils.role() == 'agency' ? 'Agencia' :
                     'Administrador' }}</p>
                 <p class="text-gray-400 text-xs text-center leading-3 mb-2 mt-1">{{ Utils.user().email }}</p>
-                <button @click="logout"
+                <button
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -69,7 +69,7 @@ export default {
                     </svg>
                     <p class="ms-2 text-gray-100 text-sm">Perfil</p>
                 </button>
-                <button @click="logout"
+                <button
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -102,4 +102,5 @@ h1 {
 
 nav {
     background: linear-gradient(138.52deg, rgb(38, 75, 80) 0.44%, rgb(41, 36, 72) 85.15%);
-}</style>
+}
+</style>

@@ -88,9 +88,9 @@ export default {
         </transition>
     </template>
     <template v-else-if="active != 'login'">
-        <AppNavbar />
+        <AppNavbar @collapse="(value) => collapsed = value" />
         <div class="flex">
-            <AppSidebar @collapse="(value) => collapsed = value" />
+            <AppSidebar :collapsed="collapsed" />
             <main :class="{ 'md:w-[calc(100vw-3.5rem)]': collapsed, 'md:w-10/12': !collapsed }" class="overflow-auto pb-12 w-full">
                 <transition name="carousel" mode="out-in">
                     <component :is="active"> </component>

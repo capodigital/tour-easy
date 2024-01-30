@@ -1,9 +1,11 @@
 <script>
 export default {
+    props: {
+        collapsed: Boolean,
+    },
     data() {
         return {
             active: 0,
-            collapsed: false,
         }
     },
     methods: {
@@ -34,10 +36,6 @@ export default {
                     break;
             }
         },
-        collapse() {
-            this.collapsed = !this.collapsed
-            this.$emit('collapse', this.collapsed)
-        }
     },
     created() {
         window.onhashchange = () => {
@@ -50,13 +48,12 @@ export default {
 <template>
     <aside :class="{ 'w-[3.5rem]': collapsed, 'w-2/12': !collapsed }"
         class="hidden md:block h-[calc(100vh-4rem)] transition-all shadow-lg shadow-gray-600 bg-white relative">
-        <button @click="collapse()" :class="{ 'rotate-180': collapsed }"
-            class="absolute z-50 transition-all top-2 right-2 text-gray-300 me-2 mt-2"><i
-                class="bi bi-arrow-bar-left"></i></button>
-        <div class="ps-3 relative transition-all" :class="{ 'pt-10': collapsed }">
-            <a title="Inicio" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+
+        <div class="ps-3 relative transition-all">
+            <a title="Inicio"
+                class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
                 @click="active = 0" href="#home" :class="{ 'text-gray-400': active != 0, 'text-white': active == 0 }">
-                <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 0 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-home">
                     <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -64,7 +61,8 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Inicio</p>
             </a>
-            <a title="Calendario" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+            <a title="Calendario"
+                class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
                 @click="active = 1" href="#calendar" :class="{ 'text-gray-400': active != 1, 'text-white': active == 1 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -2 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -77,7 +75,8 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Calendario</p>
             </a>
-            <a title="Artistas" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+            <a title="Artistas"
+                class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
                 @click="active = 2" href="#artists" :class="{ 'text-gray-400': active != 2, 'text-white': active == 2 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == -1 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -88,7 +87,8 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Artistas</p>
             </a>
-            <a title="Agencias" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+            <a title="Agencias"
+                class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
                 @click="active = 3" href="#agencies" :class="{ 'text-gray-400': active != 3, 'text-white': active == 3 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 2 ? '#fff' : 'rgb(209, 213, 219)'" stroke-width="2" stroke-linecap="round"
@@ -107,7 +107,8 @@ export default {
                 </svg>
                 <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Agencias</p>
             </a>
-            <a title="Tickets" class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
+            <a title="Tickets"
+                class="transition-all py-3 flex items-center hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent"
                 @click="active = 4" href="#tickets" :class="{ 'text-gray-400': active != 4, 'text-white': active == 4 }">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     :stroke="active == 1 ? '#fff' : 'rgb(209, 213, 219)'" stroke-linecap="round" stroke-linejoin="round"
@@ -147,8 +148,7 @@ export default {
                 <p class="ms-2 mt-0.5 transition-all overflow-hidden" :class="{ 'w-0': collapsed }">Personal</p>
             </a>
         </div>
-        <div class="active-box w-10 h-full transition-all"
-            :style="{ 'top': 'calc(' + (active * 3.15 + (collapsed ? 2.35 : 0)) + 'rem)' }">
+        <div class="active-box w-10 h-full transition-all" :style="{ 'top': 'calc(' + (active * 3.17) + 'rem)' }">
         </div>
     </aside>
 </template>
@@ -172,5 +172,4 @@ export default {
 
 aside {
     background: linear-gradient(138.52deg, rgb(38, 75, 80) 0.44%, rgb(41, 36, 72) 85.15%);
-}
-</style>
+}</style>
