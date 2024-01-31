@@ -35,8 +35,7 @@ export default {
             </div>
         </div>
         <div class="w-full transition-all overflow-hidden" :class="{ 'h-0 p-0': collapse, 'h-auto p-2': !collapse }">
-            <p class="text-gray-300 text-sm mb-2"><i class="bi bi-geo-alt"></i> Ciudad: {{ person.city.name }} ({{
-                person.city.country.name }})</p>
+            <p class="text-gray-300 text-sm mb-2"><i class="bi bi-geo-alt"></i> Nacionalidad: {{ person.country.name }}</p>
             <p class="text-gray-300 text-sm mb-2"><i class="bi bi-calendar-day"></i> Fecha de nacimiento: {{
                 person.birthday }}</p>
             <p class="text-gray-300 text-sm mb-2"><i class="bi bi-envelope"></i> Correo electrónico:
