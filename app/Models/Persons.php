@@ -16,15 +16,15 @@ class Persons extends Model
     use SoftDeletes;
     protected $fillable = [
         'name', 'lastname', 'birthday', 'notes', 'extra_phone', 'agency_id', 'phone',
-        'email', 'lang', 'position', 'notify', 'typecontact_id', 'city_id'
+        'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id'
     ];
     public function agency(): BelongsTo
     {
         return $this->belongsTo(Agencies::class, 'agency_id');
     }
-    public function city(): BelongsTo
+    public function country(): BelongsTo
     {
-        return $this->belongsTo(Cities::class, 'city_id');
+        return $this->belongsTo(Cities::class, 'country_id');
     }
     public function typecontact(): BelongsTo
     {
@@ -45,7 +45,7 @@ class Persons extends Model
     }
     public function itineraries(): HasMany
     {
-        return $this->hasMany(Itineraries::class,'contact_id');
+        return $this->hasMany(Itineraries::class,'person_id');
     }
 
     public function toArray() {
