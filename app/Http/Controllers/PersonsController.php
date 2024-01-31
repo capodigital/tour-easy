@@ -51,7 +51,8 @@ class PersonsController extends Controller
 
         $data = $request->only([
             'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
-            'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id', 'agency_id'
+            'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id', 'agency_id',
+            'passport', 'passport_expiry', 'notify_type', 'group'
         ]);
 
         if (!$request->has('agency_id')) {
@@ -147,6 +148,7 @@ class PersonsController extends Controller
         $data = $request->only([
             'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
             'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id',
+            'passport', 'passport_expiry', 'notify_type', 'group'
         ]);
 
         //Almacenar los datos en la base de datos

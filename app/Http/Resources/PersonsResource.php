@@ -57,6 +57,10 @@ class PersonsResource extends JsonResource
             'typecontact_id' => $this->typecontact_id,
             'country' => $country,
             'country_id' => $this->country_id,
+            'passport' => $this->passport,
+            'passport_expiry' => $this->passport_expiry,
+            'notify_type' => $this->notify_type,
+            'group' => $this->group,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
             'documents' => DocumentsResource::collection($this->documents()->get()),
 

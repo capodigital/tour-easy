@@ -16,7 +16,8 @@ class Persons extends Model
     use SoftDeletes;
     protected $fillable = [
         'name', 'lastname', 'birthday', 'notes', 'extra_phone', 'agency_id', 'phone',
-        'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id'
+        'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id', 'passport', 
+        'passport_expiry', 'notify_type', 'group'
     ];
     public function agency(): BelongsTo
     {

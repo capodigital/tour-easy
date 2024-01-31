@@ -219,7 +219,7 @@ export default {
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">País</label>
+                        <label class="text-slate-200 text-xs font-semibold">Nacionalidad</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-globe text-gray-100"></i>
                             <select required v-model="country_id" 

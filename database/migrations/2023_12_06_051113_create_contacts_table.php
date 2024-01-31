@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('position', 150)->nullable();
             $table->boolean('notify')->default(false);
             $table->text('notes')->nullable();
+            $table->string('passport', 50)->nullable();
+            $table->date('passport_expiry')->nullable();
+            $table->enum('notify_type', ['WhatsApp','Telegram', 'Correo'])->nullable();
+            $table->enum('group', ['PartyA','PartyB', 'PartyC', 'VIP'])->nullable();
             $table->foreignId('typecontact_id')->nullable()->references('id')->on('typecontacts')->onDelete('set null');
             $table->foreignId('country_id')->nullable()->references('id')->on('countries')->onDelete('set null');
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Agencies;
 use App\Models\Cities;
+use App\Models\Countries;
 use App\Models\Typecontacts;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,13 +29,17 @@ class PersonsFactory extends Factory
             'extra_phone' => fake()->phoneNumber(),
             'lang' => fake()->randomElement(['Inglés','Español', 'Francés']),
             'notes' => fake()->paragraph(),
-            'position' => fake()->sentence(),
             'notify' => false,
+            'position' => fake()->sentence(),
+            'passport' => fake()->swiftBicNumber(),
+            'passport_expiry' => fake()->dateTimeBetween('+1 years', '4 years'),
+            'notify_type' => fake()->randomElement(['WhatsApp','Telegram', 'Correo']),
+            'group' => fake()->randomElement(['PartyA','PartyB', 'PartyC', 'VIP']),
             'agency_id' => function () {
                 return Agencies::all()->random()->id;
             },
-            'city_id' => function () {
-                return Cities::all()->random()->id;
+            'country_id' => function () {
+                return Countries::all()->random()->id;
             },
             'typecontact_id' => function () {
                 return Typecontacts::all()->random()->id;
