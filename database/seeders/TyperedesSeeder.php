@@ -13,7 +13,7 @@ class TyperedesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('typeredes')->insert([
+        DB::table('typesocialmedias')->insert([
             [
                 'name' => 'Facebook',
                 'logo' => asset('src/Facebook.png'),

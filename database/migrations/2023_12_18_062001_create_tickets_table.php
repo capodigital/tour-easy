@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('wallet', 100)->nullable();
             $table->string('chain', 100)->nullable();
             $table->text('notes')->nullable();
+            $table->text('trans')->nullable();
             $table->foreignId('itinerary_id')->nullable()->references('id')->on('itineraries')->onDelete('set null');
             $table->timestamps();
         });

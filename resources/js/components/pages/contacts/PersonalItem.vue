@@ -49,7 +49,7 @@ export default {
             <div class="mt-3 grid grid-cols-6">
                 <a v-for="socialmedia in person.socialmedias" :href="socialmedia.url" target="_blank"
                     class="px-2 rounded-md flex justify-center text-whiteitems-center me-1">
-                    <img :src="socialmedia.typered.logo.replace('http://localhost/', '')" class="" />
+                    <img :src="socialmedia.typesocialmedia.logo.replace('http://localhost/', '')" class="" />
                 </a>
             </div>
             <DocumentsItem :documents="person.documents" />

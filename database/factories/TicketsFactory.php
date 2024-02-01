@@ -25,6 +25,7 @@ class TicketsFactory extends Factory
             'wallet' => fake()->word(),
             'chain' => fake()->word(),
             'notes' => fake()->paragraph(),
+            'trans' => fake()->paragraph(),
             'itinerary_id' => function () {
                 return Itineraries::all()->random()->id;
             },

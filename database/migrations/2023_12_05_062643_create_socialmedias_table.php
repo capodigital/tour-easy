@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('description')->nullable();
             $table->string('url')->nullable();
-            $table->foreignId('typeredes_id')->nullable()->references('id')->on('typeredes');
+            $table->foreignId('typesocialmedia_id')->nullable()->references('id')->on('typesocialmedias');
             $table->unsignedBigInteger('socialmediaable_id')->nullable();
             $table->string('socialmediaable_type')->nullable();
             $table->timestamps();

@@ -17,10 +17,8 @@ use App\Http\Controllers\TypeagenciesController;
 use App\Http\Controllers\TypecontactsController;
 use App\Http\Controllers\TypeitinerariesController;
 use App\Http\Controllers\TypeplacesController;
-use App\Http\Controllers\TyperedesController;
+use App\Http\Controllers\TypesocialmediasController;
 use App\Http\Controllers\UserController;
-use App\Models\Typeitineraries;
-use App\Models\Typeplaces;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -95,7 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('typeagencies', TypeagenciesController::class);
     Route::resource('typeitineraries', TypeitinerariesController::class);
     Route::resource('typeplaces', TypeplacesController::class);
-    Route::resource('typeredes', TyperedesController::class);
+    Route::resource('typesocialmedias', TypesocialmediasController::class);
 
     Route::resource('documents', DocumentsController::class);
 

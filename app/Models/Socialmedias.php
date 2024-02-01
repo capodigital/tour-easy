@@ -11,7 +11,7 @@ class Socialmedias extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'description', 'typeredes_id', 'socialmediaable_id', 'socialmediaable_type','url'
+        'description', 'typesocialmedia_id', 'socialmediaable_id', 'socialmediaable_type','url'
     ];
 
     public function socialmediasable(): MorphTo
@@ -19,9 +19,9 @@ class Socialmedias extends Model
         return $this->morphTo();
     }
 
-    public function typered(): BelongsTo
+    public function typesocialmedia(): BelongsTo
     {
-        return $this->belongsTo(Typeredes::class, 'typeredes_id');
+        return $this->belongsTo(Typesocialmedias::class, 'typesocialmedia_id');
     }
 
     public function toArray() {

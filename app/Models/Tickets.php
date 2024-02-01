@@ -11,7 +11,7 @@ class Tickets extends Model
     use HasFactory;
     protected $fillable = [
         'name', 'lastname', 'amount', 'wallet', 'notes', 'chain', 'itinerary_id',
-        'email'
+        'email', 'trans'
     ];
     public function itinerary(): BelongsTo
     {

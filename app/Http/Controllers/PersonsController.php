@@ -68,11 +68,11 @@ class PersonsController extends Controller
         if ($request->has('socialmedias')) {
             Socialmedias::where('socialmediaable_id',$person->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
-                if (isset($socialmedia['typeredes_id'])) {
+                if (isset($socialmedia['typesocialmedia_id'])) {
                     Socialmedias::create([
                         'url' => $socialmedia['url'],
                         'description' => $socialmedia['description'],
-                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'typesocialmedia_id' => $socialmedia['typesocialmedia_id'],
                         'socialmediaable_id' => $person->id,
                         'socialmediaable_type' => 'App\Models\Persons'
                     ]);
@@ -157,11 +157,11 @@ class PersonsController extends Controller
         Socialmedias::where('socialmediaable_id', $person->id)->delete();
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                if (isset($socialmedia['typeredes_id'])) {
+                if (isset($socialmedia['typesocialmedia_id'])) {
                     Socialmedias::create([
                         'url' => $socialmedia['url'],
                         'description' => $socialmedia['description'],
-                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'typesocialmedia_id' => $socialmedia['typesocialmedia_id'],
                         'socialmediaable_id' => $person->id,
                         'socialmediaable_type' => 'App\Models\Persons'
                     ]);

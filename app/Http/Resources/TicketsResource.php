@@ -33,6 +33,7 @@ class TicketsResource extends JsonResource
             'wallet' => $this->wallet,
             'chain' => $this->chain,
             'notes' => $this->notes,
+            'trans' => $this->trans,
             'itinerary_id' => $this->itinerary_id,
             'itinerary' => $itinerary,
 

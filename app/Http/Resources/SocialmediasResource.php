@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Typeredes;
+use App\Models\Typesocialmedias;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,13 +15,13 @@ class SocialmediasResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $typered = Typeredes::find($this->typeredes_id);
+        $typesocialmedia = Typesocialmedias::find($this->typesocialmedia_id);
         return [
             'id' => $this->id,
             'url'=>$this->url,
             'description' => $this->description,
-            'typered' => new TyperedesResource($typered),
-            'typeredes_id' => $this->typeredes_id,
+            'typesocialmedia' => new TypesocialmediasResource($typesocialmedia),
+            'typesocialmedia_id' => $this->typesocialmedia_id,
                            
         ];
     }

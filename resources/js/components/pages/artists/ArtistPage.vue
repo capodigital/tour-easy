@@ -115,7 +115,7 @@ export default {
                         <div class="mt-3 grid grid-cols-6">
                             <a v-for="socialmedia in artist.socialmedias" :href="socialmedia.url" target="_blank"
                                 class="px-3 rounded-md flex justify-center text-whiteitems-center me-1">
-                                <img :src="socialmedia.typered.logo.replace('http://localhost/', '')" class="" />
+                                <img :src="socialmedia.typesocialmedia.logo.replace('http://localhost/', '')" class="" />
                             </a>
                         </div>
                     </div>

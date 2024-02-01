@@ -19,15 +19,19 @@ class SuppliersFactory extends Factory
     public function definition(): array
     {
         return [
-            'company_name' => fake()->company(),
+            'tradename' => fake()->company(),
             'supplier_name' => fake()->name(),
-            'tax_code' => fake()->swiftBicNumber(),
+            'taxcode' => fake()->swiftBicNumber(),
             'email' => fake()->email(),
+            'manager' => fake()->name(),
+            'manager_phone' => fake()->phoneNumber(),
+            'manager_email' => fake()->email(),
             'address' => fake()->address(),
             'phone' => fake()->phoneNumber(),
             'extra_phone' => fake()->phoneNumber(),
-            'contact_manager' => fake()->name(),
+            'contact' => fake()->name(),
             'notes' => fake()->paragraph(),
+            'paydata' => fake()->paragraph(),
             'contact_phone' => fake()->phoneNumber(),
             'contact_email' => fake()->email(),
             'agency_id' => function () {

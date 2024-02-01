@@ -99,11 +99,11 @@ class AgenciesController extends Controller
         if ($request->has('socialmedias')) {
             Socialmedias::where('socialmediaable_id', $agency->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
-                if (isset($socialmedia['typeredes_id'])) {
+                if (isset($socialmedia['typesocialmedia_id'])) {
                     Socialmedias::create([
                         'url' => $socialmedia['url'],
                         'description' => $socialmedia['description'],
-                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'typesocialmedia_id' => $socialmedia['typesocialmedia_id'],
                         'socialmediaable_id' => $agency->id,
                         'socialmediaable_type' => 'App\Models\Agencies'
                     ]);
@@ -221,11 +221,11 @@ class AgenciesController extends Controller
 
         if ($request->has('socialmedias')) {
             foreach ($request->socialmedias as $socialmedia) {
-                if (isset($socialmedia['typeredes_id'])) {
+                if (isset($socialmedia['typesocialmedia_id'])) {
                     Socialmedias::create([
                         'url' => $socialmedia['url'],
                         'description' => $socialmedia['description'],
-                        'typeredes_id' => $socialmedia['typeredes_id'],
+                        'typesocialmedia_id' => $socialmedia['typesocialmedia_id'],
                         'socialmediaable_id' => $agency->id,
                         'socialmediaable_type' => 'App\Models\Agencies'
                     ]);

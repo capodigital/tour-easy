@@ -53,7 +53,7 @@ class SuppliersController extends Controller
                 Socialmedias::create([
                     'url' => $socialmedia->url,
                     'description' => $socialmedia->description,
-                    'typeredes_id' => $socialmedia->typeredes_id,
+                    'typesocialmedia_id' => $socialmedia->typesocialmedia_id,
                     'socialmediaable_id' => $supplier->id,
                     'socialmediaable_type' => 'App\Models\Suppliers'
                 ]);
@@ -133,7 +133,7 @@ class SuppliersController extends Controller
             Socialmedias::create([
                 'url' => $socialmedia->url,
                 'description' => $socialmedia->description,
-                'typeredes_id' => $socialmedia->typeredes_id,
+                'typesocialmedia_id' => $socialmedia->typesocialmedia_id,
                 'socialmediaable_id' => $supplier->id,
                 'socialmediaable_type' => 'App\Models\Suppliers'
             ]);
