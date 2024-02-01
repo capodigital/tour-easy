@@ -188,7 +188,7 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div v-if="artist.id == undefined" class="grid grid-cols-2 gap-x-2">
+                <!-- <div v-if="artist.id == undefined" class="grid grid-cols-2 gap-x-2">
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Contraseña</label>
                         <div class="flex items-center mb-1 rounded border border-gray-300 px-2">
@@ -209,7 +209,7 @@ export default {
                     </div>
                     <small v-if="!same_password" class="text-center text-gray-300 col-start-1 col-end-3 mt-1">Las
                         contraseñas no coinciden</small>
-                </div>
+                </div> -->
                 <div>
                     <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
                     <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
