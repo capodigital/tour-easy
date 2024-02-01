@@ -113,7 +113,7 @@ export default {
                 {{ tour.tourname }}
             </h1>
             <div class="overflow-auto modal-content">
-                <img class="w-full rounded max-w-[30rem]" :src="tour.tourcartel.replace('http://localhost/', '')" />
+                <img class="w-full rounded" :src="tour.tourcartel.replace('http://localhost/', '')" />
                 <div class="mt-1">
                     <h3 class="font-bold text-lg text-gray-200 text-center">{{ tour.artist.name }}</h3>
                 </div>

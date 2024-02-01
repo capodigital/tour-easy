@@ -241,7 +241,7 @@ export default {
                 @show="(item) => details = item" @month="(value) => month = value" />
         </div>
         <CalendarModal v-if="show" @send="send" @close="show = false" :activity="activity" />
-        <ActivityDetails @close="details = {}" v-if="details.id != undefined" :activity="details" />
+        <!-- <ActivityDetails @close="details = {}" v-if="details.id != undefined" :activity="details" /> -->
     </div>
 </template>
 <style scoped>
