@@ -65,7 +65,7 @@ class ItinerariesResource extends JsonResource
             'name' => $this->name,
             'startdate' => $this->startdate,
             'enddate' => $this->enddate,
-            'outoflour' => $this->outoflour,
+            'outoftour' => $this->outoftour,
             'carrier' => $this->carrier,
             'carrier_id' => $this->carrier_id,
             'showcheck' => $this->showcheck,

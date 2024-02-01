@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->date('startdate')->nullable();
             $table->date('enddate')->nullable();
             $table->text('notes')->nullable();
-            $table->boolean('outoflour')->default(false);
+            $table->boolean('outoftour')->default(false);
             $table->string('carrier', 150)->nullable();
             $table->string('carrier_id', 150)->nullable();
             $table->time('showcheck')->nullable();

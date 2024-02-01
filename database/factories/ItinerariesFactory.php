@@ -25,7 +25,7 @@ class ItinerariesFactory extends Factory
         return [
             'name' => fake()->name(),
             'notes' => fake()->paragraph(),
-            'outoflour' => fake()->boolean(),
+            'outoftour' => fake()->boolean(),
             'startdate' => fake()->dateTimeBetween('4 days', '8 days'),
             'enddate' => fake()->dateTimeBetween('8 days', '12 days'),
             'carrier' => fake()->name(),
