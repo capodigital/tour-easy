@@ -70,18 +70,18 @@ class ToursController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $rules = [
             'tourname' => 'required',
             'tourcartel' => ['required', 'image'],
             'startdate' => 'date|after_or_equal:today'
 
         ];
-        
+
         $customMessages = [
             'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
         ];
-        
+
         $request->validate($rules, $customMessages);
 
         $data = $request->only([
@@ -193,11 +193,11 @@ class ToursController extends Controller
             'startdate' => 'date|after_or_equal:today'
 
         ];
-        
+
         $customMessages = [
             'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
         ];
-        
+
         $request->validate($rules, $customMessages);
 
 
@@ -339,7 +339,16 @@ class ToursController extends Controller
             $photo1->url = "src/$image";
             $photo1->agency_id = $agency_id;
             $photo1->save();
-
         }
+    }
+    public function contacts(Request $request)
+    {
+
+        $tour = Tours::find($request->tour_id);
+
+        $tour->persons()->sync($request->contacts);
+
+        $tour->refresh();
+        return new ToursResource($tour);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Documents;
 use App\Models\Itineraries;
+use App\Models\Persons;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,6 +21,7 @@ class ToursResource extends JsonResource
     {
         $agency = Agencies::find($this->agency_id);
         $artist = Artists::find($this->artist_id);
+        $persons = $this->persons()->get();
         if ($artist == null) {
             $artist = [
                 'id' => 0,
@@ -56,6 +58,7 @@ class ToursResource extends JsonResource
             'documents' => DocumentsResource::collection($this->documents()->get()),
             'active' => $this->active,
             'itineraries_count' => count($this->itineraries),
+            'persons' => PersonsResource::collection($persons),
             'deleted_at' => $this->deleted_at,
 
         ];
