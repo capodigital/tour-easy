@@ -5,7 +5,7 @@ export default {
     props: {
         activity: Object,
     },
-    components: { ActivityIcon }
+    components: { ActivityIcon },
 }
 </script>
 <template>
@@ -126,7 +126,7 @@ export default {
                             <p v-else class="text-white">
                                 Encargado de transporte
                             </p>
-                            <p class="text-gray-400 text-sm">{{ activity.contact.name }}</p>
+                            <p class="text-gray-400 text-sm">{{ activity.person.name }}</p>
                         </div>
                     </div>
                     <hr class="my-2 border-gray-500" />

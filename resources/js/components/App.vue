@@ -93,7 +93,7 @@ export default {
             <AppSidebar :collapsed="collapsed" />
             <main :class="{ 'md:w-[calc(100vw-3.5rem)]': collapsed, 'md:w-10/12': !collapsed }" class="overflow-auto pb-12 w-full">
                 <transition name="carousel" mode="out-in">
-                    <component :is="active"> </component>
+                    <component :is="active" :collapsed="collapsed"> </component>
                 </transition>
             </main>
         </div>
@@ -108,7 +108,8 @@ export default {
 <style scoped>
 main {
     height: calc(100vh - 8rem);
-    background: linear-gradient(138.52deg, rgba(38, 75, 80, 0.568) 0.44%, rgba(41, 36, 72, 0.452) 85.15%);
+    /*background: linear-gradient(138.52deg, rgba(38, 75, 80, 0.568) 0.44%, rgba(41, 36, 72, 0.452) 85.15%);*/
+    background-color: white;
 }
 
 @media (min-width: 768px) {

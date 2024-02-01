@@ -3,14 +3,16 @@ import axios from 'axios';
 import TourCard from './TourCard.vue';
 import Confirm from '../../modals/Confirm';
 import TourModal from './TourModal.vue';
+import TourPrint from './TourPrint.vue';
 
 export default {
-    components: { TourCard, TourModal },
+    components: { TourCard, TourModal, TourPrint },
     data() {
         return {
             filter: '',
             tours: [],
             tour: {},
+            details: null,
             show: false,
             active: 0,
             deleted: 0,
@@ -25,6 +27,7 @@ export default {
             this.show = true
         },
         edit(item) {
+            this.details = null
             Object.assign(this.tour, item)
             this.show = true
         },
@@ -118,12 +121,17 @@ export default {
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-app-secondary-300 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     GIRAS</h1>
-
+                <div class="flex items-center rounded border border-gray-200 px-2 me-2 min-w-[8rem]">
+                    <i class="bi bi-funnel-fill text-gray-200"></i>
+                    <input v-model="filter" type="text" placeholder="Escribe para filtrar"
+                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-300">
+                </div>
                 <button @click="add"
-                    class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 rounded whitespace-nowrap"><i class="bi bi-plus"></i> Añadir</button>
+                    class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 rounded whitespace-nowrap"><i
+                        class="bi bi-plus"></i> Añadir</button>
             </div>
             <div class="flex w-full justify-end mt-1">
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                <div class="grid grid-cols-2 gap-2">
                     <div class="form-check items-center" v-if="Utils.role() == 'user'">
                         <input required aria-label="Ver giras terminadas"
                             @change="(e) => deleted = e.target.checked ? 1 : 0" class="form-check-input me-0.5"
@@ -139,24 +147,17 @@ export default {
                             Ver giras terminadas
                         </label>
                     </div>
-                    <div class="block sm:hidden"></div>
-                    <div class="flex items-center rounded border border-gray-200 px-2 me-2">
-                        <i class="bi bi-funnel-fill text-gray-200"></i>
-                        <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-300">
-                    </div>
                 </div>
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in tours">
-                    <TourCard @edit="edit" @destroy="destroy" @complete="complete" :tour="item"
+                    <TourCard @edit="edit" @destroy="destroy" @complete="complete" @show="details = item" :tour="item"
                         v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && (item.active == 1 || active == 1) && (item.deleted_at == null || deleted == 1)" />
                 </template>
             </div>
         </div>
-        <transition name="bounce" mode="out-in">
-            <TourModal v-if="show" @close="show = false" @send="send" :tour="tour" />
-        </transition>
+        <TourModal v-if="show" @close="show = false" @send="send" :tour="tour" />
+        <TourPrint v-if="details != null" @close="details = null" :tour="details" @edit="edit" />
     </section>
 </template>
 <style scoped>

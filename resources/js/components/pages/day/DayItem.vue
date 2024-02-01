@@ -4,17 +4,22 @@ import ActivityIcon from '../../common/ActivityIcon.vue';
 export default {
     props: {
         activity: Object,
+        collapsed: {
+            type: Boolean,
+            default: true,
+        }
     },
     data() {
         return {
-            collapse: true
+            collapse: this.collapsed
         };
     },
     components: { ActivityIcon }
 }
 </script>
 <template>
-    <article class="rounded-lg gradient-1 mb-1 border border-gray-700 w-full">
+    <article :class="{ 'gradient-1': !collapsed, 'gradient-2': collapsed }"
+        class="rounded-lg mb-1 border border-gray-700 w-full">
         <div class="flex items-center w-full">
             <div class="p-2 w-11/12 flex items-center">
                 <div class="me-2">
@@ -28,7 +33,7 @@ export default {
                     <p class="text-gray-400 text-xs" v-html="activity.description"></p>
                 </div>
             </div>
-            <div class="text-end w-1/12">
+            <div v-if="collapsed" class="text-end w-1/12">
                 <button @click="collapse = !collapse" :class="{ 'rotate-180': !collapse }"
                     class="text-white me-2 transition-transform"><i class="bi bi-chevron-down"></i></button>
             </div>
@@ -160,7 +165,8 @@ export default {
                     </svg>
                     <div>
                         <p class="text-white text-sm">Ciudad de partida</p>
-                        <p class="text-gray-400 text-xs">{{ activity.citystart.name }} ({{ activity.citystart.country.name }})</p>
+                        <p class="text-gray-400 text-xs">{{ activity.citystart.name }} ({{ activity.citystart.country.name
+                        }})</p>
                     </div>
                 </div>
                 <template v-if="Number(activity.typeitinerary_id) == 6 || Number(activity.typeitinerary_id) == 7">
@@ -174,7 +180,8 @@ export default {
                         </svg>
                         <div>
                             <p class="text-white text-sm">Ciudad de llegada</p>
-                            <p class="text-gray-400 text-xs">{{ activity.cityend.name }} ({{ activity.citystart.country.name }})</p>
+                            <p class="text-gray-400 text-xs">{{ activity.cityend.name }} ({{ activity.citystart.country.name
+                            }})</p>
                         </div>
                     </div>
                 </template>

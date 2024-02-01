@@ -32,7 +32,7 @@ export default {
     <nav class="w-screen h-16 flex justify-between items-center shadow-lg shadow-gray-300 bg-white">
         <div class="flex px-2">
             <button @click="collapse()" :class="{ 'rotate-180': collapsed }"
-                class="z-50 transition-all text-gray-300 me-2 mt-2"><i class="bi bi-arrow-bar-left"></i></button>
+                class="z-50 transition-all text-gray-300 me-2 mt-2 hidden sm:block"><i class="bi bi-arrow-bar-left"></i></button>
             <div @click="home" class="px-2 cursor-pointer flex items-center">
                 <img src="src/logo.svg" class="h-12 w-12" />
                 <div class="hidden sm:block">

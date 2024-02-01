@@ -8,6 +8,9 @@ import ArtistCard from './ArtistCard.vue';
 import ArtistDetails from './ArtistDetails.vue';
 
 export default {
+    props: {
+        collapsed: Boolean
+    },
     data() {
         return {
             filter: '',
@@ -128,9 +131,10 @@ export default {
                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2  placeholder:text-gray-300">
             </div>
             <button v-if="Utils.role() != 'artist'" @click="add"
-                class="bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-2 py-1 rounded whitespace-nowrap"><i class="bi bi-plus"></i> Añadir</button>
+                class="bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-2 py-1 rounded whitespace-nowrap"><i
+                    class="bi bi-plus"></i> Añadir</button>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-3">
+        <div class="grid md:grid-cols-2 gap-4 p-3" :class="{ 'lg:grid-cols-4': collapsed, 'lg:grid-cols-3': !collapsed }">
             <template v-for="item in artists">
                 <ArtistCard @edit="edit" @destroy="destroy" @show="(item) => details = item" :artist="item"
                     v-if="Utils.filter(['name', 'lastname', 'stagename', 'email', 'agency.tradename', 'agency.taxname'], item, filter)" />

@@ -130,7 +130,7 @@ export default {
                     </option>
                 </select>
             </div>
-            <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+            <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in tickets">
                     <TicketCard @edit="edit" @destroy="destroy" @show="details = item" :ticket="item"
                         v-if="Utils.filter(['name', 'lastname', 'email', 'wallet', 'chain', 'notes', 'itinerary.name'], item, filter) && (tour_filter == 0 || tour_filter == item.itinerary.tour_id)" />
