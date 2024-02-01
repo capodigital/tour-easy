@@ -72,9 +72,9 @@ class ArtistsController extends Controller
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:artists',
-            'password' => ['required', 'string'],
+            //'password' => ['required', 'string'],
             'image' => ['required', 'image'],
-            'confirm_password' => 'required|same:password',
+            //'confirm_password' => 'required|same:password',
             'birthday' => 'required|before:today'
 
         ];
@@ -92,7 +92,7 @@ class ArtistsController extends Controller
                 $data['agency_id'] = $request->user()->id;
             }
         }
-        $data['password'] = bcrypt($request->password);
+        //$data['password'] = bcrypt($request->password);
 
         $image = $request->file('image')->store('artists', 'src');
         $data['image'] = "src/$image";
@@ -212,7 +212,7 @@ class ArtistsController extends Controller
             $data['image'] = "src/$image";
         }
 
-        $data['password'] = bcrypt($request->password);
+        //$data['password'] = bcrypt($request->password);
 
         //Almacenar los datos en la base de datos
         $artist->update($data);

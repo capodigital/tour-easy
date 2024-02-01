@@ -31,9 +31,8 @@ export default {
                     <div class="flex items-center my-1">
                         <i class="bi bi-geo-alt text-lg me-2 text-gray-200"></i>
                         <div>
-                            <h3 class="text-gray-300">Ciudad</h3>
-                            <p class="text-sm text-gray-400">{{ person.city.name }} ({{
-                                person.city.country.name }})</p>
+                            <h3 class="text-gray-300">Nacionalidad</h3>
+                            <p class="text-sm text-gray-400">{{ person.country.name }} </p>
                         </div>
                     </div>
                     <hr class="bg-gray-500 text-gray-500" />

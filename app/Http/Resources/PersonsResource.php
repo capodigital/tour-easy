@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Agencies;
 use App\Models\Cities;
+use App\Models\Countries;
 use App\Models\Typecontacts;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -27,14 +28,14 @@ class PersonsResource extends JsonResource
         } else {
             $agency = new AgenciesResource($agency);
         }
-        $city = Cities::find($this->city_id);
-        if ($city == null) {
-            $city = [
+        $country = Countries::find($this->country_id);
+        if ($country == null) {
+            $country = [
                 'id' => 0,
                 'name' => 'Ciudad eliminada',
             ];
         } else {
-            $city = new CitiesResource($city);
+            $country = new CountriesResource($country);
         }
         $typecontact = Typecontacts::find($this->typecontact_id);
 
@@ -54,8 +55,12 @@ class PersonsResource extends JsonResource
             'agency_id' => $this->agency_id,
             'typecontact' => new TypecontactsResource($typecontact),
             'typecontact_id' => $this->typecontact_id,
-            'city' => $city,
-            'city_id' => $this->city_id,
+            'country' => $country,
+            'country_id' => $this->country_id,
+            'passport' => $this->passport,
+            'passport_expiry' => $this->passport_expiry,
+            'notify_type' => $this->notify_type,
+            'group' => $this->group,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
             'documents' => DocumentsResource::collection($this->documents()->get()),
 

@@ -116,7 +116,7 @@ export default {
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in persons">
                     <PersonalCard @edit="edit" @destroy="destroy" @show="details = item" :contact="item"
-                        v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'city.name', 'typecontact.description'], item, filter)" />
+                        v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'country.name', 'typecontact.description'], item, filter)" />
                 </template>
             </div>
         </div>

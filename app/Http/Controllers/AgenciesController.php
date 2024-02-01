@@ -293,6 +293,6 @@ class AgenciesController extends Controller
         $user = User::find($request->id);
         $agency = $user->agency()->get();
 
-        return new AgenciesResource($agency);
+        return new AgenciesResource($agency) ;
     }
 }

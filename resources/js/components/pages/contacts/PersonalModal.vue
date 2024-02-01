@@ -12,7 +12,7 @@ export default {
         return {
             agencies: [],
             countries: [],
-            cities: [],
+            //cities: [],
             country_id: 'AF',
             languages: [],
             socialmedias: [{}],
@@ -20,7 +20,7 @@ export default {
         }
     },
     methods: {
-        setCities(country) {
+        /*setCities(country) {
             axios.post('api/cities', { code: country }, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
@@ -28,7 +28,7 @@ export default {
             }).then((response) => {
                 this.cities = response.data;
             });
-        },
+        },*/
         removeDocument(index) {
             const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este documento?')
             confirm.fire().then((result) => {
@@ -74,7 +74,7 @@ export default {
             }
         }).then((response) => {
             this.countries = response.data.data;
-            this.setCities(this.countries[0].code)
+           // this.setCities(this.countries[0].code)
         }).catch((error) => {
             this.Utils.error(error.response)
         });
@@ -219,27 +219,17 @@ export default {
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">País</label>
+                        <label class="text-slate-200 text-xs font-semibold">Nacionalidad</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-globe text-gray-100"></i>
-                            <select required v-model="country_id" @change="(e) => setCities(e.target.value)"
+                            <select required v-model="country_id" 
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="country in countries" :value="country.code">{{
+                                <option class="text-black" v-for="country in countries" :value="country.id">{{
                                     country.name }}</option>
                             </select>
                         </div>
                     </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Ciudad</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-globe-americas text-gray-100"></i>
-                            <select required v-model="person.city_id" name="city_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div>
                     <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
