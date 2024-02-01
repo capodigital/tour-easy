@@ -63,8 +63,8 @@ p {
 }
 
 article {
-    -webkit-mask-image: url(src/ticket.svg);
-    mask-image: url(src/ticket.svg);
+    -webkit-mask-image: url(/src/ticket.svg);
+    mask-image: url(/src/ticket.svg);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     mask-position: center;
