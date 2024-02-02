@@ -1,18 +1,17 @@
 <script>
 import ActivityIcon from './ActivityIcon.vue';
+import CustomModal from './CustomModal.vue';
 
 export default {
     props: {
         activity: Object,
     },
-    components: { ActivityIcon },
+    components: { ActivityIcon, CustomModal },
 }
 </script>
 <template>
-    <div style=""
-        class="bg-white z-50 bg-opacity-90 h-screen w-screen absolute top-0 left-0 px-2 py-2 flex justify-center items-center">
-        <article
-            class="bg-gradient-to-tr rounded-lg max-w-xl from-slate-800 via-slate-900 to-slate-950 mb-2 scroll overflow-auto p-2">
+    <CustomModal @close="$emit('close')">
+        <article class="rounded-lg max-w-xl gradient-2 mb-2 scroll overflow-auto p-2">
             <div class="flex items-center w-full">
                 <div class="p-2 w-full flex items-center">
                     <div class="me-2">
@@ -175,19 +174,29 @@ export default {
                         </div>
                     </div>
                 </template>
+                <template v-if="Number(activity.outoftour) == 1">
+                    <hr class="my-2 border-gray-500" />
+                    <div class="flex items-center mt-2">
+                        <i class="bi bi-calendar-date me-3 text-gray-50"></i>
+                        <div>
+                            <p class="text-white">Fuera de la gira</p>
+                            <p class="text-gray-400 text-sm">Esta actividad se encuentra fuera de la gira</p>
+                        </div>
+                    </div>
+                </template>
             </div>
             <div class="flex justify-center p-2">
                 <button type="button" @click="$emit('close')"
-                    class="mt-1 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                    class="mt-1 me-2 overlay-button bg-gradient-to-tr from-gray-600 to-gray-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                     Cerrar
                 </button>
                 <button type="button" @click="$emit('destroy')"
-                    class="mt-1 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                    class="mt-1 overlay-button bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                     Eliminar
                 </button>
             </div>
         </article>
-    </div>
+    </CustomModal>
 </template>
 <style scoped>
 article {

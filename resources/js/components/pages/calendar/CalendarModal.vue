@@ -26,6 +26,7 @@ export default {
             start_cities: [],
             end_cities: [],
             places: [],
+            outoftour: false,
         }
     },
     methods: {
@@ -282,6 +283,14 @@ export default {
                                 </template>
                             </select>
                         </div>
+                    </div>
+                    <div class="form-check items-center text-gray-200 pt-2">
+                        <input type="hidden" :value="outoftour ? 1 : 0" name="outoftour" />
+                        <input aria-label="Fuera de gira" class="form-check-input me-2" type="checkbox"
+                            v-model="outoftour" />
+                        <label class="form-check-label leading-4 text-sm text-center mt-1">
+                            Fuera de gira
+                        </label>
                     </div>
                 </div>
             </div>

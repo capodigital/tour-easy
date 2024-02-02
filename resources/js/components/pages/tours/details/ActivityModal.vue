@@ -20,6 +20,7 @@ export default {
             places: [],
             country_start: 'AF',
             country_end: 'AF',
+            outoftour: false,
         }
     },
     methods: {
@@ -97,6 +98,7 @@ export default {
         }).then((response) => {
             this.countries = response.data.data;
             if (this.activity.citystart != null) {
+                this.outoftour = this.activity.outoftour == 1;
                 this.setCities(this.activity.citystart.country.code, 'start')
             } else {
                 this.setCities(this.countries[0].code, 'start')
@@ -128,8 +130,7 @@ export default {
 </script>
 <template>
     <CustomModal @close="$emit('close')">
-        <form @submit.prevent="(e) => $emit('send', e)"
-            class="gradient-2 rounded-3xl rounded-tr p-5">
+        <form @submit.prevent="(e) => $emit('send', e)" class="gradient-2 rounded-3xl rounded-tr p-5">
             <h1
                 class="font-bold bg-gradient-to-tr from-app-primary-500 text-center to-app-primary-700 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 <template v-if="activity.id == undefined">
@@ -297,6 +298,14 @@ export default {
                                 </template>
                             </select>
                         </div>
+                    </div>
+                    <div class="form-check items-center text-gray-200 pt-2">
+                        <input type="hidden" :value="outoftour ? 1 : 0" name="outoftour" />
+                        <input aria-label="Fuera de gira" class="form-check-input me-2" type="checkbox"
+                            v-model="outoftour" />
+                        <label class="form-check-label leading-4 text-sm text-center mt-1">
+                            Fuera de gira
+                        </label>
                     </div>
                 </div>
             </div>

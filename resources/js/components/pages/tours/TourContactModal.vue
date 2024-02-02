@@ -49,6 +49,7 @@ export default {
         return {
             contacts: [],
             ids: ids,
+            filter: '',
         }
     },
     created() {
@@ -76,8 +77,16 @@ export default {
                 <div class="max-w-[400px]">
                     <input type="hidden" :value="tour.id" name="tour_id" />
                     <input v-for="(id, index) in ids" type="hidden" :value="id" :name="`contacts[${index}]`" />
-                    <ContactItem v-for="contact in contacts" :key="contact.id" :person="contact"
-                        :selected="selected(contact)" @update="(e) => update(contact.id, e)" />
+                    <div class="flex items-center rounded border border-gray-200 px-2 me-2 mb-3">
+                        <i class="bi bi-funnel-fill text-gray-200"></i>
+                        <input v-model="filter" type="text" placeholder="Escribe para filtrar"
+                            class="bg-transparent w-full text-gray-200 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-300">
+                    </div>
+                    <template v-for="contact in contacts" :key="contact.id">
+                        <ContactItem
+                            v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'country.name', 'typecontact.description'], contact, filter)"
+                            :person="contact" :selected="selected(contact)" @update="(e) => update(contact.id, e)" />
+                    </template>
                 </div>
             </div>
             <div class="flex justify-center">

@@ -396,7 +396,7 @@ export default {
                 Ver más imágenes
             </button>
         </div>
-        <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 z-50 p-4">
+        <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 z-50 p-4">
             <TourActivity v-for="item in sort(activities)" @show="(item) => details = item" @edit="edit" @destroy="destroy"
                 :activity="item" />
             <article @click="add" v-if="Utils.role() != 'artist'"

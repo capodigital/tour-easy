@@ -15,7 +15,7 @@ class CitiesController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -68,8 +68,7 @@ class CitiesController extends Controller
 
     public function citiesByCountry(Request $request)
     {
-        $country = Countries::where('code',$request->code)->first();
-        $cities = $country->cities()->get()->sortBy('name');
+        $cities = Cities::where('country_id', $request->code)->orderBy('name')->get();
 
         return response()->json($cities);
     }

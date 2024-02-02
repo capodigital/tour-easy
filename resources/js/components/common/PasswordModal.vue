@@ -1,35 +1,38 @@
 <script>
+import CustomModal from './CustomModal.vue'
+
 export default {
     data() {
         return {
             password: '',
             confirm_password: '',
             same_password: true,
-        }
+        };
     },
     methods: {
         comparePasswords() {
             if (this.confirm_password != '' && this.confirm_password != undefined) {
                 if (this.password != this.confirm_password) {
-                    this.same_password = false
-                    console.log('n o son iguales')
-                    return
+                    this.same_password = false;
+                    console.log('n o son iguales');
+                    return;
                 }
             }
-            this.same_password = true
+            this.same_password = true;
         }
-    }
+    },
+    components: { CustomModal }
 }
 </script>
 <template>
-    <div class="w-full bg-white bg-opacity-90 h-screen absolute top-0 px-2 py-2 flex justify-center items-center">
-        <div>
+    <CustomModal @close="$emit('close')">
+        <form @submit.prevent="(e) => $emit('send', e.target)"
+            class="gradient-2 rounded-2xl shadow-md shadow-gray-800 p-4 overflow-auto transition-all cursor-pointer">
             <h1
-                class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                class="font-bold bg-gradient-to-tr from-app-primary-500 text-center to-app-primary-700 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 CAMBIAR CONTRASEÑA
             </h1>
-            <form @submit.prevent="(e) => $emit('send', e.target)"
-                class="bg-gradient-to-tr from-slate-700 via-black to-slate-950 rounded-3xl rounded-tr p-10 overflow-auto scroll">
+            <div class="overflow-auto modal-content">
                 <div class="grid grid-cols-1 gap-x-2">
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Escriba su contraseña</label>
@@ -66,17 +69,17 @@ export default {
 
                 <div class="justify-center">
                     <button type="button" @click="$emit('close')"
-                        class="mt-4 me-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                        class="mt-4 me-2 close overlay-button bg-gradient-to-tr from-gray-600 to-gray-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                         Cerrar
                     </button>
                     <button type="submit"
-                        class="mt-2 overlay-button bg-gradient-to-tr from-slate-100 to-slate-300 text-black px-3 py-3 w-full rounded-xl rounded-tr">
+                        class="mt-2 overlay-button bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                         Cambiar contraseña
                     </button>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+        </form>
+    </CustomModal>
 </template>
 <style scoped>
 form {
