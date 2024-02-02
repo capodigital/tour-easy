@@ -346,16 +346,16 @@ class ToursController extends Controller
     {
 
         $tour = Tours::find($request->tour_id);
-        // $tour->persons()->detach();
-        TourContact::where('tour_id', $tour->id)->delete();
-        foreach ($request->contacts as $contact) {
+        //$tour->persons()->detach();
+        //TourContact::where('tour_id', $tour->id)->delete();
+        /*foreach ($request->contacts as $contact) {
             TourContact::create([
                 'tour_id' => $tour->id,
                 'person_id' => $contact
             ]);
             // $tour->persons()->attach($contact);
-        }
-        // $tour->persons()->sync($request->contacts);
+        }*/
+        $tour->persons()->sync($request->contacts);
         $tour->refresh();
         return new ToursResource($tour);
     }
