@@ -32,7 +32,7 @@ class PersonsResource extends JsonResource
         if ($country == null) {
             $country = [
                 'id' => 0,
-                'name' => 'Ciudad eliminada',
+                'name' => 'País eliminado',
             ];
         } else {
             $country = new CountriesResource($country);
