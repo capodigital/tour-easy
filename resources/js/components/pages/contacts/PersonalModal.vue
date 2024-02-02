@@ -196,16 +196,16 @@ export default {
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Número de pasaporte</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-telephone text-gray-100"></i>
+                            <i class="bi bi-passport text-gray-100"></i>
                             <input required v-model="person.passport" name="passport" type="num"
                                 placeholder="Número de pasaporte"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         </div>
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha de expiración</label>
+                        <label class="text-slate-200 text-xs font-semibold">Fecha de expiración del pasaporte</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-telephone text-gray-100"></i>
+                            <i class="bi bi-calendar-date text-gray-100"></i>
                             <input v-model="person.passport_expiry" name="passport_expiry" type="date"
                                 placeholder="Fecha de expiración"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -242,7 +242,7 @@ export default {
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Método de notificación</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-person-vcard text-gray-100"></i>
+                            <i class="bi bi-bell text-gray-100"></i>
                             <select required v-model="person.notify_type" name="notify_type"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" value="WhatsApp">WhatsApp</option>
@@ -254,7 +254,7 @@ export default {
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Grupo</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-translate text-gray-100"></i>
+                            <i class="bi bi-collection text-gray-100"></i>
                             <select required v-model="person.group" name="group"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" value="PartyA">Party A</option>
@@ -271,7 +271,7 @@ export default {
                         <label class="text-slate-200 text-xs font-semibold">Nacionalidad</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-globe text-gray-100"></i>
-                            <select required v-model="country_id"
+                            <select name="country_id" required v-model="country_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" v-for="country in countries" :value="country.id">{{
                                     country.name }}</option>
