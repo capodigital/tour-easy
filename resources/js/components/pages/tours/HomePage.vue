@@ -103,12 +103,12 @@ export default {
         },
         update(tour) {
             for (let i in this.tours) {
-                if (tour.id == this.tours[i]) {
+                if (tour.id == this.tours[i].id) {
                     this.tours[i] = tour;
-                    this.contacts = null;
-                    return;
+                    break;
                 }
             }
+            this.contacts = null;
         }
     },
     created() {

@@ -28,13 +28,13 @@ export default {
         },
         save(e) {
             const data = new FormData(e.target);
-            data.append('contacts', this.ids);
+            // data.append('contacts', this.ids);
             axios.post('api/tours/contacts', data, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then((response) => {
-                this.$emit('update', response.data)
+                this.$emit('update', response.data.data)
             }).catch((error) => {
                 this.Utils.error(error.response)
             })
@@ -74,7 +74,7 @@ export default {
             <div class="overflow-auto modal-content">
                 <div class="max-w-[400px]">
                     <input type="hidden" :value="tour.id" name="tour_id" />
-                    <!-- <input type="hidden" :value="ids" name="contacts" /> -->
+                    <input v-for="(id, index) in ids" type="hidden" :value="id" :name="`contacts[${index}]`" />
                     <ContactItem v-for="contact in contacts" :person="contact" :selected="selected(contact)"
                         @change="(checked) => update(contact.id, checked)" />
                 </div>
