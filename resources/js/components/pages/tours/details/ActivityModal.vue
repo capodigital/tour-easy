@@ -277,7 +277,7 @@ export default {
                         <div class="flex items-center rounded border border-gray-300 px-2">
                             <select required v-model="activity.person_id" name="person_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <template v-for="item in persons">
+                                <template v-for="item in tour.persons">
                                     <option v-if="person(item)" class="text-black" :value="item.id">{{
                                         item.name
                                     }}</option>

@@ -125,10 +125,10 @@ export default {
                 class="font-bold w-full bg-gradient-to-tr from-app-secondary-300 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 ARTISTAS
             </h1>
-            <div class="flex items-center rounded border border-gray-200 px-2 me-2">
-                <i class="bi bi-funnel-fill text-gray-200"></i>
+            <div class="flex items-center rounded border border-gray-400 px-2 me-2">
+                <i class="bi bi-funnel-fill text-gray-400"></i>
                 <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2  placeholder:text-gray-300">
+                    class="bg-transparent w-full text-gray-400 text-sm border-none focus:outline-none px-3 py-2  placeholder:text-gray-400">
             </div>
             <button v-if="Utils.role() != 'artist'" @click="add"
                 class="bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-2 py-1 rounded whitespace-nowrap"><i

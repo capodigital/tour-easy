@@ -131,10 +131,10 @@ export default {
                 <h1
                     class="font-bold bg-gradient-to-tr w-full from-app-secondary-300 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                     GIRAS</h1>
-                <div class="flex items-center rounded border border-gray-200 px-2 me-2 min-w-[8rem]">
-                    <i class="bi bi-funnel-fill text-gray-200"></i>
+                <div class="flex items-center rounded border border-gray-400 px-2 me-2 min-w-[8rem]">
+                    <i class="bi bi-funnel-fill text-gray-400"></i>
                     <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                        class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-300">
+                        class="bg-transparent w-full text-gray-400 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-400">
                 </div>
                 <button @click="add"
                     class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 rounded whitespace-nowrap"><i

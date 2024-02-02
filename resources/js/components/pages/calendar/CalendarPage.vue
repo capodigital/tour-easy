@@ -237,7 +237,7 @@ export default {
             </div>
         </div>
         <div class="overflow-x-auto scroll">
-            <CalendarItem :today="date" :itineraries="forms" @update="update" @year="(value) => year = value"
+            <CalendarItem :today="date" :itineraries="forms" @update="update" @add="add" @year="(value) => year = value"
                 @show="(item) => details = item" @month="(value) => month = value" />
         </div>
         <CalendarModal v-if="show" @send="send" @close="show = false" :activity="activity" />

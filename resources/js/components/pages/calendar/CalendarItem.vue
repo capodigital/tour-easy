@@ -106,7 +106,7 @@ export default {
                 <div class="mt-0.5 grid grid-cols-7 gap-1 text-sm text-gray-400">
                     <div @click="selected(index)" v-for="(day, index) in days"
                         class="border border-gray-600 relative cursor-pointer" :class="{ select: day.day == select }">
-                        <button v-if="!day.out" class="text-gray-300 text-base px-1">
+                        <button v-if="!day.out" @click="$emit('add', day.day)" class="text-gray-300 text-base px-1">
                             <i class="bi bi-plus"></i>
                         </button>
                         <div class="font-bold absolute top-0 right-0.5 text-xs">
