@@ -4,15 +4,17 @@ import TourCard from './TourCard.vue';
 import Confirm from '../../modals/Confirm';
 import TourModal from './TourModal.vue';
 import TourPrint from './TourPrint.vue';
+import TourContactModal from './TourContactModal.vue';
 
 export default {
-    components: { TourCard, TourModal, TourPrint },
+    components: { TourCard, TourModal, TourPrint, TourContactModal },
     data() {
         return {
             filter: '',
             tours: [],
             tour: {},
             details: null,
+            contacts: null,
             show: false,
             active: 0,
             deleted: 0,
@@ -99,7 +101,15 @@ export default {
                 this.Utils.error(error.response)
             })
         },
-
+        update(tour) {
+            for (let i in this.tours) {
+                if (tour.id == this.tours[i]) {
+                    this.tours[i] = tour;
+                    this.contacts = null;
+                    return;
+                }
+            }
+        }
     },
     created() {
         axios.get('api/tours', {
@@ -151,13 +161,15 @@ export default {
             </div>
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in tours">
-                    <TourCard @edit="edit" @destroy="destroy" @complete="complete" @show="details = item" :tour="item"
+                    <TourCard @edit="edit" @destroy="destroy" @complete="complete" @show="details = item"
+                        @contact="contacts = item" :tour="item"
                         v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && (item.active == 1 || active == 1) && (item.deleted_at == null || deleted == 1)" />
                 </template>
             </div>
         </div>
         <TourModal v-if="show" @close="show = false" @send="send" :tour="tour" />
         <TourPrint v-if="details != null" @close="details = null" :tour="details" @edit="edit" />
+        <TourContactModal v-if="contacts != null" @close="contacts = null" :tour="contacts" @update="update" />
     </section>
 </template>
 <style scoped>

@@ -5,9 +5,10 @@ import ActivityDetails from '../../common/ActivityDetails.vue';
 import DayItem from '../day/DayItem.vue';
 import ActivityIcon from '../../common/ActivityIcon.vue';
 import CustomModal from '../../common/CustomModal.vue';
+import ContactItem from '../contacts/ContactItem.vue';
 
 export default {
-    components: { CustomModal, ActivityIcon, ActivityDetails, DayItem, DocumentsItem },
+    components: { CustomModal, ActivityIcon, ActivityDetails, DayItem, DocumentsItem, ContactItem },
     props: {
         tour: Object,
     },
@@ -149,11 +150,15 @@ export default {
                     <DayItem v-for="itinerary in itineraries" :activity="itinerary" :collapsed="false" />
                 </div>
                 <div class="p-2">
+                    <p class="text-sm text-white">Contactos</p>
+                    <ContactItem v-for="item in tour.persons" :person="item" :select="false" />
+                </div>
+                <div class="p-2">
                     <p class="text-sm text-white">Redes sociales</p>
-                    <div class="mt-3 grid grid-cols-6">
+                    <div class="mt-3 grid grid-cols-2">
                         <a v-for="socialmedia in tour.socialmedias" :href="socialmedia.url" target="_blank"
                             class="px-3 rounded-md flex justify-center text-whiteitems-center me-1">
-                            <img :src="socialmedia.typered.logo.replace('http://localhost/', '')" class="max-w-[3rem]" />
+                            {{ socialmedia.url }}
                         </a>
                     </div>
                 </div>

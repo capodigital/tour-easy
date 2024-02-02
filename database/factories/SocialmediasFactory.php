@@ -6,9 +6,11 @@ use App\Models\Agencies;
 use App\Models\Artists;
 use App\Models\Persons;
 use App\Models\Places;
+use App\Models\Socialmedias;
 use App\Models\Suppliers;
 use App\Models\Tours;
 use App\Models\Typeredes;
+use App\Models\Typesocialmedias;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,8 +28,8 @@ class SocialmediasFactory extends Factory
         return [
             'description' => fake()->paragraph(),
             'url' => fake()->url(),
-            'typeredes_id' => function () {
-                return Typeredes::all()->random()->id;
+            'typesocialmedia_id' => function () {
+                return Typesocialmedias::all()->random()->id;
             },
             'socialmediaable_id' => null,
             'socialmediaable_type' => null,
