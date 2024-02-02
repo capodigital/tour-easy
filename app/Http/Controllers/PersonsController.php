@@ -43,11 +43,19 @@ class PersonsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:persons',
-            'birthday' => 'required|before:today'
-        ]);
+            'birthday' => 'required|before:today',
+            'passport_expiry' => 'required|after:today'
+        ];
+
+        $customMessages = [
+            'birthday.before' => 'El campo fecha de nacimiento debe ser una fecha anterior a hoy',
+            'passport_expiry.after' => 'El campo fecha de expiración del pasaporte debe ser una fecha mayor a hoy',
+        ];
+        
+        $request->validate($rules, $customMessages);
 
         $data = $request->only([
             'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
