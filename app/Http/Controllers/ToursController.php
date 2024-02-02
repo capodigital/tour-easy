@@ -8,6 +8,7 @@ use App\Models\Artists;
 use App\Models\Documents;
 use App\Models\Photos;
 use App\Models\Socialmedias;
+use App\Models\TourContact;
 use App\Models\Tours;
 use App\Models\User;
 use Carbon\Carbon;
@@ -345,12 +346,16 @@ class ToursController extends Controller
     {
 
         $tour = Tours::find($request->tour_id);
-        $tour->persons()->detach(); 
-        /*foreach ($request->contacts as $contact) {
-           
-            $tour->persons()->attach($contact);
-        }    */   
-        $tour->persons()->sync($request->contacts);
+        $tour->persons()->detach();
+        TourContact::where('tour_id', $tour->id)->delete();
+        foreach ($request->contacts as $contact) {
+            TourContact::create([
+                'tour_id' => $tour->id,
+                'person_id' => $contact
+            ]);
+            // $tour->persons()->attach($contact);
+        }
+        // $tour->persons()->sync($request->contacts);
         $tour->refresh();
         return new ToursResource($tour);
     }
