@@ -346,7 +346,7 @@ class ToursController extends Controller
     {
 
         $tour = Tours::find($request->tour_id);
-        $tour->persons()->detach();
+        // $tour->persons()->detach();
         TourContact::where('tour_id', $tour->id)->delete();
         foreach ($request->contacts as $contact) {
             TourContact::create([

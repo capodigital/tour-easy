@@ -17,8 +17,9 @@ export default {
             }
             return false;
         },
-        update(id, checked) {
-            if (checked) {
+        update(id, e) {
+            console.log(e)
+            if (e.target.checked) {
                 if (!this.ids.includes(id)) {
                     this.ids.push(id);
                 }
@@ -75,8 +76,8 @@ export default {
                 <div class="max-w-[400px]">
                     <input type="hidden" :value="tour.id" name="tour_id" />
                     <input v-for="(id, index) in ids" type="hidden" :value="id" :name="`contacts[${index}]`" />
-                    <ContactItem v-for="contact in contacts" :person="contact" :selected="selected(contact)"
-                        @change="(checked) => update(contact.id, checked)" />
+                    <ContactItem v-for="contact in contacts" :key="contact.id" :person="contact"
+                        :selected="selected(contact)" @update="(e) => update(contact.id, e)" />
                 </div>
             </div>
             <div class="flex justify-center">

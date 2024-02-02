@@ -2,6 +2,7 @@
 import ContactIcon from '../../common/ContactIcon.vue';
 
 export default {
+    emits: ['update'],
     props: {
         person: Object,
         select: {
@@ -26,9 +27,8 @@ export default {
         <div class="flex items-center w-full">
             <div class="p-2 w-11/12 flex items-center">
                 <div class="me-2 flex">
-                    <input v-if="select" aria-label="Seleccionar contacto"
-                        @change="(e) => $emit('change', e.target.checked)" class="form-check-input me-2" type="checkbox"
-                        :checked="selected" />
+                    <input v-if="select" aria-label="Seleccionar contacto" @change="(e) => $emit('update', e)"
+                        class="form-check-input me-2" type="checkbox" :checked="selected" />
                     <ContactIcon :contact="person" stroke="#fff" />
                 </div>
                 <div class="w-full">
