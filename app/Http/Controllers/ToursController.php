@@ -345,12 +345,12 @@ class ToursController extends Controller
     {
 
         $tour = Tours::find($request->tour_id);
-        $tour->persons()->detach(); 
+        /*$tour->persons()->detach(); 
         foreach ($request->contacts as $contact) {
            
             $tour->persons()->attach($contact);
-        }       
-       // $tour->persons()->sync($request->contacts);
+        }    */   
+        $tour->persons()->sync($request->contacts);
         $tour->refresh();
         return new ToursResource($tour);
     }
