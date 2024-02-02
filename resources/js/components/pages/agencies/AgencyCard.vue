@@ -53,6 +53,17 @@ export default {
                         <circle cx="16.5" cy="7.5" r=".5" />
                     </svg>
                 </button>
+                <button title="Ver managers de la agencia" @click="$emit('managers', agency)"
+                    class="rounded-md border border-gray-400 w-7 h-7 flex justify-center items-center me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="rgb(22, 163, 74)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-users">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                </button>
             </div>
             <div class="flex">
                 <button @click="$emit('show', agency)"
@@ -74,6 +85,7 @@ h3,
 p {
     font-family: 'Roboto', sans-serif;
 }
+
 article {
     background: linear-gradient(138.52deg, rgb(81, 44, 44) -1.32%, rgb(37, 44, 78) 85.77%);
 }

@@ -7,12 +7,14 @@ import AgencyModal from './AgencyModal.vue'
 import ManagerModal from './ManagerModal.vue'
 import AgencyCard from './AgencyCard.vue'
 import AgencyDetails from './AgencyDetails.vue'
+import ManagersModal from './ManagersModal.vue'
 export default {
     data() {
         return {
             filter: '',
             agencies: [],
             details: null,
+            managers: null,
             agency: {},
             agency_password_id: null,
             user_password_id: null,
@@ -88,6 +90,10 @@ export default {
             this.files = [{ type: 'link' }]
             this.show = true
         },
+        addManager() {
+            this.managers = null;
+            this.user.show = true
+        },
         edit(item) {
             this.details = null
             this.country_id = item.city.country.code
@@ -95,6 +101,7 @@ export default {
             this.show = true
         },
         editManager(user) {
+            this.managers = null;
             Object.assign(this.user, user)
             this.user.show = true
         },
@@ -130,6 +137,7 @@ export default {
                     for (let i in this.agencies) {
                         if (this.agencies[i].id == user.agency_id) {
                             this.agencies[i] = response.data.data
+                            this.managers = response.data.data
                             this.Utils.notify('Se ha eliminado correctamente el administrador')
                             break
                         }
@@ -181,7 +189,7 @@ export default {
             this.Utils.error(error.response);
         });
     },
-    components: { AgencyItem, PasswordModal, AgencyModal, ManagerModal, AgencyCard, AgencyDetails }
+    components: { AgencyItem, PasswordModal, AgencyModal, ManagerModal, AgencyCard, AgencyDetails, ManagersModal }
 }
 </script>
 <template>
@@ -197,11 +205,12 @@ export default {
                         class="bg-transparent w-full text-gray-400 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-400">
                 </div>
                 <button v-if="Utils.role() == 'user'" @click="add"
-                    class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 rounded whitespace-nowrap"><i class="bi bi-plus"></i> Añadir</button>
+                    class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 rounded whitespace-nowrap"><i
+                        class="bi bi-plus"></i> Añadir</button>
             </div>
             <div class="mt-4 grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 <template v-for="item in agencies">
-                    <AgencyCard @show="details = item" @manageradd="user.show = true"
+                    <AgencyCard @show="details = item" @managers="managers = item"
                         @agency_password="(id) => agency_password_id = id" @edit="edit" @destroy="destroy" :agency="item"
                         v-if="Utils.filter(['tradename', 'taxname', 'taxcode', 'phone', 'address', 'email', 'owner', 'notes', 'city.name'], item, filter)" />
                 </template>
@@ -210,7 +219,8 @@ export default {
         <ManagerModal v-if="Utils.role() == 'agency' && user.show" @send="manager" @close="user = { show: false }"
             :user="user" />
         <AgencyModal v-if="Utils.role() != 'artist' && show" :agency="agency" @close="show = false" @send="send" />
-        <AgencyDetails v-if="details != null" :agency="details" @close="details = null" @edit="edit"
+        <AgencyDetails v-if="details != null" :agency="details" @close="details = null" @edit="edit" />
+        <ManagersModal v-if="managers != null" :agency="managers" @close="managers = null" @manageradd="addManager"
             @user_password="(id) => user_password_id = id" @manageredit="editManager" @managerdestroy="destroyManager" />
         <PasswordModal v-if="agency_password_id != null" @send="changeAgencyPassword" @close="agency_password_id = null" />
         <PasswordModal v-if="user_password_id != null" @send="changeUserPassword" @close="user_password_id = null" />
