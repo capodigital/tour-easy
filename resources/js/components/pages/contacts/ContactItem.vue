@@ -40,7 +40,7 @@ export default {
                 </div>
             </div>
             <div class="text-end w-1/12">
-                <button @click="collapse = !collapse" :class="{ 'rotate-180': !collapse }"
+                <button type="button" @click="collapse = !collapse" :class="{ 'rotate-180': !collapse }"
                     class="text-white me-2 transition-transform"><i class="bi bi-chevron-down"></i></button>
             </div>
         </div>
@@ -83,7 +83,7 @@ export default {
                     <i class="bi bi-telephone text-lg me-2 text-gray-200"></i>
                     <div>
                         <h3 class="text-gray-300">Pasaporte</h3>
-                        <p class="text-sm text-gray-400">{{ person.passport }} (Expira: {{ person.passport - expiry }})</p>
+                        <p class="text-sm text-gray-400">{{ person.passport }} (Expira: {{ person.passport_expiry }})</p>
                     </div>
                 </div>
                 <hr class="bg-gray-500 text-gray-500" />

@@ -49,6 +49,7 @@ export default {
     },
     created() {
         if (this.person.id != undefined) {
+            this.country_id = this.person.country_id
             this.socialmedias = this.person.socialmedias
             this.files = []
             for (let document of this.person.documents) {
@@ -74,7 +75,7 @@ export default {
             }
         }).then((response) => {
             this.countries = response.data.data;
-           // this.setCities(this.countries[0].code)
+            // this.setCities(this.countries[0].code)
         }).catch((error) => {
             this.Utils.error(error.response)
         });
@@ -196,7 +197,8 @@ export default {
                         <label class="text-slate-200 text-xs font-semibold">Número de pasaporte</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-telephone text-gray-100"></i>
-                            <input required v-model="person.passport" name="passport" type="num" placeholder="Número de pasaporte"
+                            <input required v-model="person.passport" name="passport" type="num"
+                                placeholder="Número de pasaporte"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         </div>
                     </div>
@@ -300,7 +302,8 @@ export default {
                     <div class="mt-1 grid grid-cols-3 gap-2">
                         <template v-for="(socialmedia, index) in socialmedias">
                             <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="socialmedia.typesocialmedia_id" :name="`socialmedias[${index}][typesocialmedia_id]`"
+                                <select v-model="socialmedia.typesocialmedia_id"
+                                    :name="`socialmedias[${index}][typesocialmedia_id]`"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
                                         type.name

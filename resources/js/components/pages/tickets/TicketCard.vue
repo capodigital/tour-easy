@@ -1,5 +1,4 @@
 <script>
-import JSBarcode from 'jsbarcode';
 import QRious from "qrious"
 export default {
     props: {

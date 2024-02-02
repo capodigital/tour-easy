@@ -64,7 +64,7 @@ export default {
                         <i class="bi bi-passport text-lg me-2 text-gray-200"></i>
                         <div>
                             <h3 class="text-gray-300">Pasaporte</h3>
-                            <p class="text-sm text-gray-400">{{ person.passport }} (Expira: {{ person.passport-expiry }})</p>
+                            <p class="text-sm text-gray-400">{{ person.passport }} (Expira: {{ person.passport_expiry }})</p>
                         </div>
                     </div>
                     <hr class="bg-gray-500 text-gray-500" />
