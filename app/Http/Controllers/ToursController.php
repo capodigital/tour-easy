@@ -346,7 +346,7 @@ class ToursController extends Controller
 
         $tour = Tours::find($request->tour_id);
 
-        $tour->persons()->sync($request->contacts);
+        $tour->persons()->sync([$request->contacts]);
 
         $tour->refresh();
         return new ToursResource($tour);
