@@ -55,7 +55,7 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         })
-        axios.get('api/typeredes', {
+        axios.get('api/typesocialmedias', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
