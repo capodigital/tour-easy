@@ -161,6 +161,13 @@ export default {
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
                     </div>
                 </div>
+                <div>
+                    <label class="text-slate-200 text-xs font-semibold">Transacción</label>
+                    <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
+                        <textarea rows="3" v-model="ticket.trans" name="trans" placeholder="Transacción"
+                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
+                    </div>
+                </div>
             </div>
             <div class="flex justify-center">
                 <button type="button" @click="$emit('close')"

@@ -100,7 +100,7 @@ export default {
                     </svg>
                 </button>
                 <button title="Imprimir detalles de la gira" @click="$emit('show', tour)"
-                    class="rounded-md border border-gray-700 w-7 h-7 flex justify-center items-center">
+                    class="rounded-md border border-gray-700 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-printer">
@@ -108,6 +108,17 @@ export default {
                         <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
                         <rect width="12" height="8" x="6" y="14" />
                     </svg>
+                </button>
+                <button title="Seleccionar contactos de la gira" @click="$emit('contact', tour)"
+                    class="rounded-md border border-gray-700 w-7 h-7 flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                    stroke="rgb(22, 163, 74)" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-users m-auto">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
                 </button>
             </div>
             <div class="flex">

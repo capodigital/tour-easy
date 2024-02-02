@@ -61,6 +61,32 @@ export default {
                     </div>
                     <hr class="bg-gray-500 text-gray-500" />
                     <div class="flex items-center my-1">
+                        <i class="bi bi-passport text-lg me-2 text-gray-200"></i>
+                        <div>
+                            <h3 class="text-gray-300">Pasaporte</h3>
+                            <p class="text-sm text-gray-400">{{ person.passport }} (Expira: {{ person.passport-expiry }})</p>
+                        </div>
+                    </div>
+                    <hr class="bg-gray-500 text-gray-500" />
+                    <div class="flex items-center my-1">
+                        <i v-if="person.notify_type == 'WhatsApp'" class="bi bi-whatsapp text-lg me-2 text-gray-200"></i>
+                        <i v-if="person.notify_type == 'Telegram'" class="bi bi-telegram text-lg me-2 text-gray-200"></i>
+                        <i v-else class="bi bi-envelope text-lg me-2 text-gray-200"></i>
+                        <div>
+                            <h3 class="text-gray-300">Método de notificación</h3>
+                            <p class="text-sm text-gray-400">{{ person.notify_type }}</p>
+                        </div>
+                    </div>
+                    <hr class="bg-gray-500 text-gray-500" />
+                    <div class="flex items-center my-1">
+                        <i class="bi bi-telephone text-lg me-2 text-gray-200"></i>
+                        <div>
+                            <h3 class="text-gray-300">Grupo</h3>
+                            <p class="text-sm text-gray-400">{{ person.group }}</p>
+                        </div>
+                    </div>
+                    <hr class="bg-gray-500 text-gray-500" />
+                    <div class="flex items-center my-1">
                         <i class="bi bi-translate text-lg me-2 text-gray-200"></i>
                         <div>
                             <h3 class="text-gray-300">Idioma</h3>

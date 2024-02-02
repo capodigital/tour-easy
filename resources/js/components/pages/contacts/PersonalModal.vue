@@ -87,7 +87,7 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         });
-        axios.get('api/typeredes', {
+        axios.get('api/typesocialmedias', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
@@ -193,6 +193,25 @@ export default {
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
+                        <label class="text-slate-200 text-xs font-semibold">Número de pasaporte</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-telephone text-gray-100"></i>
+                            <input required v-model="person.passport" name="passport" type="num" placeholder="Número de pasaporte"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Fecha de expiración</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-telephone text-gray-100"></i>
+                            <input v-model="person.passport_expiry" name="passport_expiry" type="date"
+                                placeholder="Fecha de expiración"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-x-2">
+                    <div>
                         <label class="text-slate-200 text-xs font-semibold">Profesión</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-person-vcard text-gray-100"></i>
@@ -219,17 +238,45 @@ export default {
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
+                        <label class="text-slate-200 text-xs font-semibold">Método de notificación</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-person-vcard text-gray-100"></i>
+                            <select required v-model="person.notify_type" name="notify_type"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                <option class="text-black" value="WhatsApp">WhatsApp</option>
+                                <option class="text-black" value="Telegram">Telegram</option>
+                                <option class="text-black" value="Correo">Correo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-slate-200 text-xs font-semibold">Grupo</label>
+                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
+                            <i class="bi bi-translate text-gray-100"></i>
+                            <select required v-model="person.group" name="group"
+                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                                <option class="text-black" value="PartyA">Party A</option>
+                                <option class="text-black" value="PartyB">Party B</option>
+                                <option class="text-black" value="PartyC">Party C</option>
+                                <option class="text-black" value="VIP">VIP</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-x-2">
+                    <div>
                         <label class="text-slate-200 text-xs font-semibold">Nacionalidad</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-globe text-gray-100"></i>
-                            <select required v-model="country_id" 
+                            <select required v-model="country_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" v-for="country in countries" :value="country.id">{{
                                     country.name }}</option>
                             </select>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div>
                     <label class="text-slate-200 text-xs font-semibold">Datos adicionales</label>
@@ -256,7 +303,7 @@ export default {
                                 <select v-model="socialmedia.typesocialmedia_id" :name="`socialmedias[${index}][typesocialmedia_id]`"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
-                                        type.names
+                                        type.name
                                     }}</option>
                                 </select>
                             </div>
