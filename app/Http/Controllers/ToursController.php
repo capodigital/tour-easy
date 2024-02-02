@@ -345,8 +345,8 @@ class ToursController extends Controller
     {
 
         $tour = Tours::find($request->tour_id);
-        /*$tour->persons()->detach(); 
-        foreach ($request->contacts as $contact) {
+        $tour->persons()->detach(); 
+        /*foreach ($request->contacts as $contact) {
            
             $tour->persons()->attach($contact);
         }    */   
