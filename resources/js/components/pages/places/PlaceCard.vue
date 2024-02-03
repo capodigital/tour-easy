@@ -70,6 +70,6 @@ p {
 }
 
 article {
-    background: rgb(81, 44, 44);
+    background: rgb(37, 44, 78);
 }
 </style>

@@ -19,7 +19,7 @@ export default {
 </script>
 <template>
     <article
-        class="rounded-lg gradient-2 shadow-md shadow-gray-500 p-0.5 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
+        class="rounded-lg shadow-md shadow-gray-500 p-0.5 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
         <!-- <div class="">
             <div class="min-h-[3.5rem]">
                 <h3 class="font-bold text-gray-200 truncate">{{ ticket.name }} {{ ticket.lastname }} - {{ ticket.id }}</h3>
@@ -110,9 +110,6 @@ h1 {
 }
 
 article {
-    /*-webkit-mask-image: url(/src/ticket.svg);
-    mask-image: url(/src/ticket.svg);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    mask-position: center;*/
-}</style>
+    background: rgb(37, 44, 78);
+}
+</style>

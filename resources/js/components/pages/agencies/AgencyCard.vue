@@ -7,7 +7,7 @@ export default {
 </script>
 <template>
     <article
-        class="bg-white rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
+        class="rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
         <div class="">
             <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400"
                 :src="agency.image.replace('http://localhost/', '')" />
@@ -87,6 +87,6 @@ p {
 }
 
 article {
-    background: linear-gradient(138.52deg, rgb(81, 44, 44) -1.32%, rgb(37, 44, 78) 85.77%);
+    background: rgb(37, 44, 78);
 }
 </style>

@@ -32,12 +32,13 @@ export default {
     <nav class="w-screen h-16 flex justify-between items-center shadow-lg shadow-gray-300 bg-white">
         <div class="flex px-2">
             <button @click="collapse()" :class="{ 'rotate-180': collapsed }"
-                class="z-50 transition-all text-gray-300 me-2 mt-2 hidden sm:block"><i class="bi bi-arrow-bar-left"></i></button>
+                class="z-50 transition-all text-gray-300 me-2 mt-2 hidden sm:block"><i
+                    class="bi bi-arrow-bar-left"></i></button>
             <div @click="home" class="px-2 cursor-pointer flex items-center">
                 <img src="src/logo.svg" class="h-12 w-12" />
                 <div class="hidden sm:block">
                     <h1 class="text-gray-50">MAD MUSIC</h1>
-                    <p class=" text-sm text-gray-400">Tour planner</p>
+                    <p class=" text-sm text-gray-400">Easy Tour</p>
                 </div>
             </div>
         </div>
@@ -45,9 +46,9 @@ export default {
             <h1 v-if="Utils.role() != 'user'" class="text-lg text-gray-200 font-bold">{{ Utils.username() }}</h1>
         </div>
         <div class="flex items-center justify-end px-1">
-
             <div class="relative p-2 flex rounded">
-                <img @click="profile = !profile" :src="Utils.role() == '' ? Utils.user().image : 'src/user_placeholder.png'"
+                <img @click="profile = !profile"
+                    :src="Utils.role() == 'agency' ? (Utils.user().agency_id != undefined ? Utils.user().agency.image : Utils.user().image) : 'src/user_placeholder.png'"
                     class="rounded-full h-10 w-10 cursor-pointer me-2" />
                 <span
                     class="w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white absolute text-center text-xs font-semibold"

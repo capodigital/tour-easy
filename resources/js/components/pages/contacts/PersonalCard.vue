@@ -10,7 +10,7 @@ export default {
 </script>
 <template>
     <article
-        class="bg-white rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
+        class="rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
         <div class="">
             <ContactIcon classes="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400 flex justify-center items-center" :contact="contact" stroke="#fff" />
             <div class="min-h-[3.5rem]">
@@ -66,6 +66,6 @@ p {
     font-family: 'Roboto', sans-serif;
 }
 article {
-    background: rgb(81, 44, 44);
+    background: rgb(37, 44, 78);
 }
 </style>

@@ -7,17 +7,17 @@ export default {
 </script>
 <template>
     <article
-        class="bg-white rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
+        class="rounded-lg shadow-md shadow-gray-500 p-3 transition-all hover:scale-[1.03] cursor-pointer relative pb-12">
         <div class="">
             <img class="rounded-full h-10 w-10 float-right shadow-md shadow-gray-400"
                 :src="tour.tourcartel.replace('http://localhost/', '')" />
             <div class="min-h-[3.5rem]">
-                <h3 class="font-bold text-lg text-gray-900">{{ tour.artist.name }}</h3>
-                <p class="text-gray-800 text-sm leading-4 pe-10">{{ tour.tourname }}</p>
+                <h3 class="font-bold text-lg text-gray-200">{{ tour.artist.name }}</h3>
+                <p class="text-gray-300 text-sm leading-4 pe-10">{{ tour.tourname }}</p>
             </div>
-            <p class="text-xs text-gray-700">{{ tour.notes }}</p>
+            <p class="text-xs text-gray-400">{{ tour.notes }}</p>
             <div class="flex justify-around text-xs mt-2">
-                <div class="flex rounded bg-app-primary-600 py-1 px-2">
+                <div class="flex rounded bg-app-primary-600 bg-opacity-30 py-1 px-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(204, 212, 249)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-calendar-plus">
@@ -30,7 +30,7 @@ export default {
                     </svg>
                     <p class="ms-1 text-app-primary-100">Desde: {{ tour.startdate }}</p>
                 </div>
-                <div class="flex rounded bg-app-primary-600 py-1 px-2">
+                <div class="flex rounded bg-app-primary-600 bg-opacity-30 py-1 px-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(204, 212, 249)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-calendar-check-2">
@@ -47,7 +47,7 @@ export default {
         <div class="flex mt-4 absolute bottom-2 w-[calc(100%-1.5rem)]">
             <div class="flex w-full">
                 <a :href="'#tour/' + tour.id"
-                    class="rounded-md border border-gray-700 w-7 h-7 me-1 flex justify-center items-center">
+                    class="rounded-md border border-gray-300 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-qr-code">
@@ -66,7 +66,7 @@ export default {
                     </svg>
                 </a>
                 <button title="Editar gira" v-if="Utils.role() != 'artist'" @click="$emit('edit', tour)"
-                    class="rounded-md border border-gray-700 w-7 h-7 me-1 flex justify-center items-center">
+                    class="rounded-md border border-gray-300 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(202, 138, 4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-clipboard-edit">
@@ -78,7 +78,7 @@ export default {
                 </button>
                 <button title="Eliminar gira" v-if="Utils.role() != 'artist' && tour.itineraries_count == 0"
                     @click="$emit('destroy', tour)"
-                    class="rounded-md border border-gray-700 w-7 h-7 flex justify-center items-center me-1">
+                    class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(220, 38, 38)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-trash-2">
@@ -91,7 +91,7 @@ export default {
                 </button>
                 <button title="Completar gira" v-if="Utils.role() != 'artist' && tour.active"
                     @click="$emit('complete', tour)"
-                    class="rounded-md border border-gray-700 w-7 h-7 flex justify-center items-center me-1">
+                    class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(22, 163, 74)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-check-square">
@@ -100,7 +100,7 @@ export default {
                     </svg>
                 </button>
                 <button title="Imprimir detalles de la gira" @click="$emit('show', tour)"
-                    class="rounded-md border border-gray-700 w-7 h-7 flex justify-center items-center me-1">
+                    class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-printer">
@@ -110,7 +110,7 @@ export default {
                     </svg>
                 </button>
                 <button title="Seleccionar contactos de la gira" @click="$emit('contact', tour)"
-                    class="rounded-md border border-gray-700 w-7 h-7 flex justify-center items-center">
+                    class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                     stroke="rgb(22, 163, 74)" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" class="lucide lucide-users m-auto">
@@ -143,6 +143,6 @@ p {
 }
 
 article {
-    background: linear-gradient(138.52deg, rgba(38, 75, 80, 0.568) 0.44%, rgba(41, 36, 72, 0.452) 85.15%);
+    background: rgb(37, 44, 78);
 }
 </style>
