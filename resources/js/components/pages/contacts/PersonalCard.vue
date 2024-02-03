@@ -66,6 +66,6 @@ p {
     font-family: 'Roboto', sans-serif;
 }
 article {
-    background: linear-gradient(138.52deg, rgb(81, 44, 44) -1.32%, rgb(37, 44, 78) 85.77%);
+    background: rgb(81, 44, 44);
 }
 </style>
