@@ -18,5 +18,5 @@ Route::get('/admin', function () {
 });
 
 Route::get('/', function () {
-    return view('landing');
+    return view('example');
 });
