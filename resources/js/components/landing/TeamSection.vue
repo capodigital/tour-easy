@@ -52,7 +52,7 @@ export default {
 }
 </script>
 <template>
-    <section class="px-6 sm:px-12 md:px-24 lg:px-40 py-40">
+    <section id="team" class="px-6 sm:px-12 md:px-24 lg:px-40 py-40">
         <div class="px-6 sm:px-10 md:px-20 lg:px-44">
             <h3 class="text-gray-700 text-center font-bold text-2xl">Our <span class="text-red-500">Team</span></h3>
             <p class="text-gray-500 text-center">In an ideal world this website wouldn’t exist, a client would acknowledge

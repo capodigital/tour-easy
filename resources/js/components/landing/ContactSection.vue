@@ -5,7 +5,7 @@ export default {
 }
 </script>
 <template>
-    <section class="bg-white pt-14">
+    <section id="contact" class="bg-white pt-14">
         <div class="px-6 sm:px-24 md:px-40 lg:px-64">
             <h3 class="text-gray-700 font-bold text-2xl text-center">Get In Touch</h3>
             <p class="text-gray-500 text-center mt-3">We thrive when coming up with innovative ideas but also understand

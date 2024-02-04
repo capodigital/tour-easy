@@ -58,7 +58,7 @@ export default {
 }
 </script>
 <template>
-    <section class="mt-24 px-6 sm:px-10 md:px-20 lg:px-44 py-20">
+    <section id="plans" class="mt-24 px-6 sm:px-10 md:px-20 lg:px-44 py-20">
         <h3 class="text-gray-600 font-bold text-2xl text-center">Choose the plan that's right for you</h3>
         <p class="text-gray-500 text-center mt-3">Simple pricing. No hidden fees. Advanced features for you business.</p>
         <div class="flex items-end justify-center mt-4">

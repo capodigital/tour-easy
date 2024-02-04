@@ -1,5 +1,5 @@
 <template>
-    <header class="w-full overflow-hidden flex justify-center lg:px-24 pt-44 pb-20">
+    <header id="home" class="w-full overflow-hidden flex justify-center lg:px-24 pt-44 pb-20">
         <div class="px-6 lg:px-48">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-600 text-center leading-[3rem] lg:leading-[4rem]">The better way to manage your
                 tours

@@ -1,4 +1,18 @@
 {
+  "Utils.css": {
+    "file": "assets/Utils-a5ba327e.css",
+    "src": "Utils.css"
+  },
+  "_Utils-68c52c3a.js": {
+    "assets": [
+      "assets/bootstrap-icons-5b2dd4d4.woff2",
+      "assets/bootstrap-icons-d0346eea.woff"
+    ],
+    "css": [
+      "assets/Utils-a5ba327e.css"
+    ],
+    "file": "assets/Utils-68c52c3a.js"
+  },
   "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
     "file": "assets/bootstrap-icons-d0346eea.woff",
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
@@ -8,19 +22,33 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/js/app.css": {
-    "file": "assets/app-11a65e01.css",
+    "file": "assets/app-6f638f56.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
-    "assets": [
-      "assets/bootstrap-icons-5b2dd4d4.woff2",
-      "assets/bootstrap-icons-d0346eea.woff"
-    ],
     "css": [
-      "assets/app-11a65e01.css"
+      "assets/app-6f638f56.css"
     ],
-    "file": "assets/app-5f7f5aa0.js",
+    "file": "assets/app-093dd26d.js",
+    "imports": [
+      "_Utils-68c52c3a.js"
+    ],
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/landing.css": {
+    "file": "assets/landing-26927424.css",
+    "src": "resources/js/landing.css"
+  },
+  "resources/js/landing.js": {
+    "css": [
+      "assets/landing-26927424.css"
+    ],
+    "file": "assets/landing-a8759281.js",
+    "imports": [
+      "_Utils-68c52c3a.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/landing.js"
   }
 }

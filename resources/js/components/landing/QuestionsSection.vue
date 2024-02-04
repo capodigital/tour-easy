@@ -46,7 +46,7 @@ export default {
 </script>
 
 <template>
-    <section class="bg-white py-20">
+    <section id="questions" class="bg-white py-20">
         <div class="lg:px-56">
             <h3 class="text-center text-2xl text-gray-600 font-bold">Frequently Asked Questions</h3>
             <p class="text-gray-400 mt-4 px-20 text-center">If you can not find answer to your question in our FAQ, you can

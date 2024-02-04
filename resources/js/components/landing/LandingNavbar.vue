@@ -1,8 +1,15 @@
 <script>
+import { Scroll } from "scroll-utility"
 export default {
     data() {
         return {
             collapse: true
+        }
+    },
+    methods: {
+        scrollTo(el) {
+            const scrollManager = new Scroll({ duration: 500 })
+            scrollManager.scrollTo.element(el)
         }
     }
 }
@@ -19,15 +26,22 @@ export default {
                 </div>
             </div>
             <div class="hidden md:flex">
-                <a class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Home">Home</a>
-                <a class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600"
+                <a @click.prevent="scrollTo('#home')"
+                    class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Home">Home</a>
+                <a @click.prevent="scrollTo('#services')"
+                    class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600"
                     href="#Services">Services</a>
-                <a class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600"
+                <a @click.prevent="scrollTo('#features')"
+                    class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600"
                     href="#Features">Features</a>
-                <a class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Plans">Plans</a>
-                <a class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Reviews">Reviews</a>
-                <a class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Team">Team</a>
-                <a class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Contact">Contact</a>
+                <a @click.prevent="scrollTo('#plans')"
+                    class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Plans">Plans</a>
+                <a @click.prevent="scrollTo('#reviews')"
+                    class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Reviews">Reviews</a>
+                <a @click.prevent="scrollTo('#team')"
+                    class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Team">Team</a>
+                <a @click.prevent="scrollTo('#contact')"
+                    class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Contact">Contact</a>
             </div>
             <div class="hidden md:block">
                 <button
@@ -41,16 +55,23 @@ export default {
         </nav>
         <div class="bg-white rounded-b transition-all duration-500 md:hidden overflow-hidden right-0 left-0 w-full fixed z-30"
             :class="{ 'top-16': !collapse, 'p-4': !collapse, 'top-[-30rem]': collapse, 'p-0': collapse }">
-            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Home">Home</a></p>
-            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Services">Services</a>
+            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Home">Home</a>
             </p>
-            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Features">Features</a>
+            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600"
+                    href="#Services">Services</a>
             </p>
-            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Plans">Plans</a></p>
-            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Reviews">Reviews</a>
+            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600"
+                    href="#Features">Features</a>
             </p>
-            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Team">Team</a></p>
-            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Contact">Contact</a>
+            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600"
+                    href="#Plans">Plans</a></p>
+            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600"
+                    href="#Reviews">Reviews</a>
+            </p>
+            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Team">Team</a>
+            </p>
+            <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600"
+                    href="#Contact">Contact</a>
             </p>
             <button
                 class="px-5 py-2 text-white bg-blue-600 hover:bg-blue-700 transition-all rounded border-none focus:outline-none">Iniciar

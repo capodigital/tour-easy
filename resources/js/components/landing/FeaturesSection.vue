@@ -5,7 +5,7 @@ export default {
 }
 </script>
 <template>
-    <section>
+    <section id="features">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 px-6 md:px-14 lg:px-36 mt-24 py-10">
             <div>
                 <img src="src/landing/image_2.png" />

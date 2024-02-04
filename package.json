@@ -21,10 +21,13 @@
         "postcss": "^8.4.28",
         "qrious": "^4.0.2",
         "sass": "^1.66.1",
+        "scroll-to": "^0.0.2",
+        "scroll-utility": "^4.0.2",
         "swiper": "^11.0.5",
         "tailwindcss": "^3.3.3",
         "v-viewer": "^3.0.11",
         "viewerjs": "^1.11.6",
-        "vue": "^3.3.11"
+        "vue": "^3.3.11",
+        "vue-scrollto": "^2.20.0"
     }
 }

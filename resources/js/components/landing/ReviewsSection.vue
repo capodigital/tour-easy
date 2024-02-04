@@ -34,7 +34,7 @@ export default {
 }
 </script>
 <template>
-    <section>
+    <section id="reviews">
         <div class="py-24 bg-blue-600 relative px-6 sm:px-10 md:px-20 lg:px-32">
             <div class="bg-overlay bg-overlay-pattern opacity-50"></div>
             <div>
