@@ -14,9 +14,9 @@
                     management apps, Admin Panels, etc using Velzon.</p>
             </div>
             <div class="w-full md:w-2/3">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4 md:mt-0">
                     <div>
-                        <h6 class="text-xl text-gray-100 font-bold ps-14">Company</h6>
+                        <h6 class="text-xl text-gray-100 font-bold md:ps-14">Company</h6>
                         <div class="lg:px-14">
                             <p class="mt-4"><a class="text-sm font-semibold" href="#">About Us</a></p>
                             <p class="mt-3"><a class="text-sm font-semibold" href="#">Gallery</a></p>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div>
-                        <h6 class="text-xl text-gray-100 font-bold ps-14">Apps Pages</h6>
+                        <h6 class="text-xl text-gray-100 font-bold md:ps-14">Apps Pages</h6>
                         <div class="lg:px-14">
                             <p class="mt-4"><a class="text-sm font-semibold" href="#">Calendar</a></p>
                             <p class="mt-3"><a class="text-sm font-semibold" href="#">Mailbox</a></p>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div>
-                        <h6 class="text-xl text-gray-100 font-bold ps-14">Support</h6>
+                        <h6 class="text-xl text-gray-100 font-bold md:ps-14">Support</h6>
                         <div class="lg:px-14">
                             <p class="mt-4"><a class="text-sm font-semibold" href="#">FAQ</a></p>
                             <p class="mt-3"><a class="text-sm font-semibold" href="#">Contact</a></p>

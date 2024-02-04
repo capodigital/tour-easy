@@ -39,8 +39,8 @@ export default {
             </button>
 
         </nav>
-        <div class="bg-white rounded-b transition-all md:hidden overflow-hidden top-16 right-0 left-0 w-full absolute z-50"
-            :class="{ 'h-auto': !collapse, 'p-4': !collapse, 'h-0': collapse, 'p-0': collapse }">
+        <div class="bg-white rounded-b transition-all duration-500 md:hidden overflow-hidden right-0 left-0 w-full fixed z-30"
+            :class="{ 'top-16': !collapse, 'p-4': !collapse, 'top-[-30rem]': collapse, 'p-0': collapse }">
             <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Home">Home</a></p>
             <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600" href="#Services">Services</a>
             </p>
