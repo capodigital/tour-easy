@@ -1,7 +1,7 @@
 <template>
     <header class="w-full overflow-hidden flex justify-center lg:px-24 pt-44 pb-20">
-        <div class="lg:px-48">
-            <h1 class="text-5xl font-bold text-gray-600 text-center leading-[4rem]">The better way to manage your
+        <div class="px-6 lg:px-48">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-600 text-center leading-[3rem] lg:leading-[4rem]">The better way to manage your
                 tours
                 with <strong class="text-green-600">Tour Easy</strong></h1>
             <h2 class="text-gray-500 text-center text-lg mt-4">Veniam aliquip qui quis ea consectetur id tempor do aliquip occaecat, est officia laboris cillum ut laborum ipsum est eu aute ad Lorem qui ea sit.</h2>

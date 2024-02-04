@@ -1,7 +1,7 @@
 <template>
-    <footer class="py-12 lg:px-28 bg-gray-600 text-gray-400">
-        <div class="flex">
-            <div class="w-1/3">
+    <footer class="py-12 px-6 sm:px-10 md:px-20 lg:px-28 bg-gray-600 text-gray-400">
+        <div class="md:flex">
+            <div class="w-full md:w-1/3">
                 <div class="flex items-center">
                     <img src="src/logo.svg" class="h-10 w-10 me-2" />
                     <div class="ps-1">
@@ -13,8 +13,8 @@
                 <p class="text-sm mt-3">You can build any type of web application like eCommerce, CRM, CMS, Project
                     management apps, Admin Panels, etc using Velzon.</p>
             </div>
-            <div class="w-2/3">
-                <div class="grid grid-cols-3 gap-6">
+            <div class="w-full md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <h6 class="text-xl text-gray-100 font-bold ps-14">Company</h6>
                         <div class="lg:px-14">

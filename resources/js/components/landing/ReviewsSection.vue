@@ -31,16 +31,11 @@ export default {
             modules: [Navigation, Pagination, A11y],
         };
     },
-    // data() {
-    //     return {
-
-    //     }
-    // }
 }
 </script>
 <template>
     <section>
-        <div class="py-24 bg-blue-600 relative px-32">
+        <div class="py-24 bg-blue-600 relative px-6 sm:px-10 md:px-20 lg:px-32">
             <div class="bg-overlay bg-overlay-pattern opacity-50"></div>
             <div>
                 <div class="flex justify-center items-center mb-12">
@@ -56,7 +51,7 @@ export default {
                 </swiper>
             </div>
         </div>
-        <div class="grid grid-cols-4 gap-6 mt-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
             <div class="text-center">
                 <p class="text-2xl text-gray-700 font-bold">100+</p>
                 <small class="text-gray-500">Projects Completed</small>
@@ -74,11 +69,11 @@ export default {
                 <small class="text-gray-500">Employees</small>
             </div>
         </div>
-        <div class="mt-16 lg:px-56">
+        <div class="mt-16 px-8 sm:px-24 md:px-32 lg:px-56">
             <h3 class="text-gray-700 text-center font-bold text-2xl">Our Work Process</h3>
             <p class="text-gray-500 text-center">In an ideal world this website wouldn’t exist, a client would acknowledge the importance of having web copy before the Proin vitae ipsum vel ex finibus semper design starts.</p>
         </div>
-        <div class="mt-16 lg:px-36 grid grid-cols-3">
+        <div class="mt-16 px-6 sm:px-10 md:px-20 lg:px-36 grid grid-cols-1 md:grid-cols-3">
             <div>
                 <div class="flex justify-center mb-2">
                     <i class="bi bi-tree text-4xl text-green-600"></i>

@@ -1,12 +1,18 @@
+<script>
+import CallToAction from './CallToAction.vue';
+export default {
+    components: { CallToAction }
+}
+</script>
 <template>
     <section class="bg-white pt-14">
-        <div class="lg:px-64">
+        <div class="px-6 sm:px-24 md:px-40 lg:px-64">
             <h3 class="text-gray-700 font-bold text-2xl text-center">Get In Touch</h3>
             <p class="text-gray-500 text-center mt-3">We thrive when coming up with innovative ideas but also understand
                 that a
                 smart concept should be supported with faucibus sapien odio measurable results.</p>
         </div>
-        <div class="grid grid-cols-3 gap-6 mt-6 lg:px-44">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 px-2 sm:px-16 md:px-32 lg:px-44">
             <div class="lg:pe-32">
                 <p class="text-gray-400 text-sm">OFFICE ADDRESS 1:</p>
                 <p class="text-gray-800 mt-1 font-semibold">4461 Cedar Street Moro, AR 72368</p>
@@ -44,22 +50,13 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-end w-full mt-2 lg:px-44">
+        <div class="flex justify-end w-full mt-2 px-2 sm:px-16 md:px-32 lg:px-44 mb-4">
             <button
                 class="px-5 py-2 text-white bg-blue-600 hover:bg-blue-700 transition-all rounded border-none focus:outline-none">Send
                 Message</button>
         </div>
-        <div class="py-12 bg-blue-600 relative px-32 mt-20">
-            <div class="bg-overlay bg-overlay-pattern opacity-50"></div>
-            <div class="flex justify-between items-center">
-                <div class="z-50">
-                    <h4 class="text-white text-xl font-bold">Build your web App/SaaS with Velzon dashboard</h4>
-                </div>
-                <div class="z-50">
-                    <a href="#" class="px-4 py-2 text-white bg-red-500 rounded"><i class="bi bi-cart3"></i> Buy Now</a>
-                </div>
-            </div>
-        </div>
+
+        <CallToAction />
     </section>
 </template>
 <style scoped>
@@ -69,27 +66,5 @@ label,
 h4,
 a {
     font-family: 'Nunito', sans-serif;
-}
-
-.bg-overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    top: 0;
-    opacity: .7;
-    background-color: #000;
-    z-index: 1;
-}
-
-.bg-overlay-pattern {
-    background-image: url(src/landing/bg-pattern.png);
-    background-color: transparent;
-    background-position: center;
-    background-size: cover;
-    opacity: .2;
-
 }
 </style>

@@ -7,12 +7,12 @@ export default {
 
 <template>
     <section class="lg:px-16 mt-24">
-        <h3 class="text-gray-700 text-4xl text-center font-bold px-56">A Digital web design studio creating modern &
+        <h3 class="text-gray-700 text-4xl text-center font-bold px-6 sm:px-20 md:px-40 lg:px-56">A Digital web design studio creating modern &
             engaging online</h3>
-        <p class="text-gray-500 text-center mt-4 px-56 font-semibold">To achieve this, it would be necessary to have uniform
+        <p class="text-gray-500 text-center mt-4 px-6 sm:px-20 md:px-40 lg:px-56 font-semibold">To achieve this, it would be necessary to have uniform
             grammar, pronunciation and more
             common words. If several languages coalesce the grammar</p>
-        <div class="grid grid-cols-3 lg:gap-10 lg:px-16 mt-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-10 px-6 lg:px-16 mt-8">
             <ServiceItem icon="bi bi-pencil-square" title="Creative Design"
                 description="The creative design includes designs that are unique, effective and memorable." />
             <ServiceItem icon="bi bi-palette" title="Unlimited Colors"

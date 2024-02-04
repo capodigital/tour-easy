@@ -61,7 +61,7 @@ export default {
                             class="bi bi-twitter"></i></span> Send Us Tweet</a>
             </div>
         </div>
-        <div class="mt-6 grid grid-cols-2 gap-12 lg:px-32">
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-12 px-6 sm:px-10 md:px-20 lg:px-32">
             <div>
                 <h5 class="flex text-xl text-green-600 font-semibold"><i class="bi bi-question-circle me-3"></i> General
                     Questions</h5>

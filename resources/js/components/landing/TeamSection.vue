@@ -52,13 +52,13 @@ export default {
 }
 </script>
 <template>
-    <section class="lg:px-40 py-40">
-        <div class="px-40 lg:px-44">
+    <section class="px-6 sm:px-12 md:px-24 lg:px-40 py-40">
+        <div class="px-6 sm:px-10 md:px-20 lg:px-44">
             <h3 class="text-gray-700 text-center font-bold text-2xl">Our <span class="text-red-500">Team</span></h3>
             <p class="text-gray-500 text-center">In an ideal world this website wouldn’t exist, a client would acknowledge
                 the importance of having web copy before the Proin vitae ipsum vel ex finibus semper design starts.</p>
         </div>
-        <div class="grid grid-cols-4 gap-6 mt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
             <TeamItem v-for="member in members" :avatar="member.avatar" :name="member.name" :role="member.role" />
         </div>
         <div class="flex justify-center mt-8">
