@@ -90,6 +90,7 @@ export default {
                 <div class="flex items-center my-1">
                     <i v-if="person.notify_type == 'WhatsApp'" class="bi bi-whatsapp text-lg me-2 text-gray-200"></i>
                     <i v-else-if="person.notify_type == 'Telegram'" class="bi bi-telegram text-lg me-2 text-gray-200"></i>
+                    <i  v-else-if="person.notify_type == 'SMS'" class="bi bi-message text-lg me-2 text-gray-200"></i>
                     <i v-else class="bi bi-envelope text-lg me-2 text-gray-200"></i>
                     <div>
                         <h3 class="text-gray-300">Método de notificación</h3>

@@ -248,6 +248,7 @@ export default {
                                 <option class="text-black" value="WhatsApp">WhatsApp</option>
                                 <option class="text-black" value="Telegram">Telegram</option>
                                 <option class="text-black" value="Correo">Correo</option>
+                                <option class="text-black" value="SMS">Mensaje</option>
                             </select>
                         </div>
                     </div>
