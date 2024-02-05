@@ -14,5 +14,5 @@ class TourContact extends Model
         'person_id'
     ];
 
-    public $table = 'tourcontacts';
+    public $table = 'personcontacts';
 }
