@@ -20,7 +20,7 @@ class SuppliersFactory extends Factory
     {
         return [
             'tradename' => fake()->company(),
-            'supplier_name' => fake()->name(),
+            'taxname' => fake()->name(),
             'taxcode' => fake()->swiftBicNumber(),
             'email' => fake()->email(),
             'manager' => fake()->name(),
