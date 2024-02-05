@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Agencies;
 use App\Models\Cities;
 use App\Models\Countries;
+use App\Models\Groups;
 use App\Models\Typecontacts;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -38,6 +39,7 @@ class PersonsResource extends JsonResource
             $country = new CountriesResource($country);
         }
         $typecontact = Typecontacts::find($this->typecontact_id);
+        $group = Groups::find($this->group_id);
 
         return [
             'id' => $this->id,
@@ -60,7 +62,8 @@ class PersonsResource extends JsonResource
             'passport' => $this->passport,
             'passport_expiry' => $this->passport_expiry,
             'notify_type' => $this->notify_type,
-            'group' => $this->group,
+            'group' => new GroupsResource($group),
+            'group_id' => $this->group_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
             'documents' => DocumentsResource::collection($this->documents()->get()),
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitiesController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\ItinerariesController;
 use App\Http\Controllers\PersonsController;
 use App\Http\Controllers\PhotosController;
@@ -73,6 +74,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/persons/tour', [PersonsController::class, 'personsByTour']);
 
     Route::resource('places', PlacesController::class);
+
+    Route::resource('groups', GroupsController::class);
 
     Route::resource('suppliers', SuppliersController::class);
     Route::post('/suppliers/agency', [SuppliersController::class, 'suppliersByAgency']);

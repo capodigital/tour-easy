@@ -17,11 +17,15 @@ class Persons extends Model
     protected $fillable = [
         'name', 'lastname', 'birthday', 'notes', 'extra_phone', 'agency_id', 'phone',
         'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id', 'passport', 
-        'passport_expiry', 'notify_type', 'group'
+        'passport_expiry', 'notify_type', 'group_id'
     ];
     public function agency(): BelongsTo
     {
         return $this->belongsTo(Agencies::class, 'agency_id');
+    }
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Groups::class, 'group_id');
     }
     public function country(): BelongsTo
     {
