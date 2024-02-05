@@ -10,7 +10,7 @@ class Typesocialmedias extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'logo'
+        'name', 'logo', 'url'
     ];
 
     public function socialmedias(): HasMany
