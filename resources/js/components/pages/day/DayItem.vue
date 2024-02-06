@@ -61,7 +61,7 @@ export default {
                     </svg>
                     <div>
                         <p class="text-white text-sm">Fecha y hora de inicio</p>
-                        <p class="text-gray-400 text-xs">{{ Utils.date(activity.startdate, Utils.FULL_DATE_TIME) }}</p>
+                        <p class="text-gray-400 text-xs">{{ Utils.datetime(activity.startdate, Utils.FULL_DATE_TIME) }}</p>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@ export default {
                     </svg>
                     <div>
                         <p class="text-white text-sm">Fecha y hora de fin</p>
-                        <p class="text-gray-400 text-xs">{{ Utils.date(activity.enddate, Utils.FULL_DATE_TIME) }}</p>
+                        <p class="text-gray-400 text-xs">{{ Utils.datetime(activity.enddate, Utils.FULL_DATE_TIME) }}</p>
                     </div>
                 </div>
             </div>

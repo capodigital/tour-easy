@@ -21,6 +21,10 @@ export default {
             country_start: 'AF',
             country_end: 'AF',
             outoftour: false,
+            _startdate: '',
+            _enddate: '',
+            _starttime: '',
+            _endtime: '',
         }
     },
     methods: {
@@ -70,6 +74,18 @@ export default {
         },
     },
     created() {
+        if (this.activity.startdate != null) {
+            const date = new Date(this.activity.startdate)
+            this._startdate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+            this._starttime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+        }
+        if (this.activity.enddate != null) {
+            const date = new Date(this.activity.enddate)
+            this._enddate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+            this._endtime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+        }
+        console.log(this._startdate, this._starttime)
+        console.log(this._enddate, this._endtime)
         axios.get('api/tours', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -103,10 +119,9 @@ export default {
             } else {
                 this.setCities(this.countries[0].code, 'start')
             }
-            if (this.activity.cityend != null) {
+            if (this.activity.cityend != null && this.activity.cityend.country != undefined) {
                 this.setCities(this.activity.cityend.country.code, 'end')
             } else {
-
                 this.setCities(this.countries[0].code, 'end')
             }
 
@@ -200,21 +215,36 @@ export default {
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input required v-model="activity.startdate" name="startdate" type="date"
-                                placeholder="Fecha de inicio"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de inicio</label>
+                        <div class="flex">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_startdate" type="date" placeholder="Fecha de inicio"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                            </div>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_starttime" type="time" placeholder="Hora de inicio"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                            </div>
                         </div>
+                        <input type="hidden" name="startdate" :value="_startdate + ' ' + _starttime" />
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input required v-model="activity.enddate" name="enddate" type="date" placeholder="Fecha de fin"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de fin</label>
+                        <div class="flex">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_enddate" type="date" placeholder="Fecha de fin"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_endtime" type="time" placeholder="Hora de fin"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
                         </div>
+                        <input type="hidden" name="enddate" :value="_enddate + ' ' + _endtime" />
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">

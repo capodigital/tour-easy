@@ -151,13 +151,6 @@ export default {
             item.complete = complete
             return item
         },
-        sort(activities) {
-            const sort = activities.sort((a, b) => {
-                return new Date(a.startdate).valueOf() - new Date(b.startdate).valueOf()
-                // return -1;
-            })
-            return sort
-        }
     },
     created() {
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
@@ -397,7 +390,7 @@ export default {
             </button>
         </div>
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 z-50 p-4">
-            <TourActivity v-for="item in sort(activities)" @show="(item) => details = item" @edit="edit" @destroy="destroy"
+            <TourActivity v-for="item in Utils.sort(activities)" @show="(item) => details = item" @edit="edit" @destroy="destroy"
                 :activity="item" />
             <article @click="add" v-if="Utils.role() != 'artist'"
                 class="border-2 border-gray-500 rounded-2xl cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">

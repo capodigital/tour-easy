@@ -27,6 +27,10 @@ export default {
             end_cities: [],
             places: [],
             outoftour: false,
+            _startdate: '',
+            _starttime: '',
+            _enddate: '',
+            _endtime: '',
         }
     },
     methods: {
@@ -187,21 +191,36 @@ export default {
                 </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha de inicio</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input readonly v-model="activity.startdate" name="startdate" type="date"
-                                placeholder="Fecha de inicio"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de inicio</label>
+                        <div class="flex">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_startdate" type="date" placeholder="Fecha de inicio"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                            </div>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_starttime" type="time" placeholder="Hora de inicio"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
+                            </div>
                         </div>
+                        <input type="hidden" name="startdate" :value="_startdate + ' ' + _starttime" />
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha de fin</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input required v-model="activity.enddate" name="enddate" type="date" placeholder="Fecha de fin"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de fin</label>
+                        <div class="flex">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_enddate" type="date" placeholder="Fecha de fin"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                                <i class="bi bi-calendar-day text-gray-100"></i>
+                                <input required v-model="_endtime" type="time" placeholder="Hora de fin"
+                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
+                            </div>
                         </div>
+                        <input type="hidden" name="enddate" :value="_enddate + ' ' + _endtime" />
                     </div>
                 </div>
                 <label class="text-slate-200 text-xs font-semibold">Ciudad <template

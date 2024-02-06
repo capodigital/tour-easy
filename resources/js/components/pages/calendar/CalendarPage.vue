@@ -90,7 +90,7 @@ export default {
                     });
                 }
                 for (let item of response.data.data) {
-                    const date = new Date(item.startdate + ' 00:00:00');
+                    const date = new Date(item.startdate);
                     this.forms[date.getDate() - 1 + initial].activities.push(this.getActivityData(item));
                 }
                 for (let i = 1; i < 8 - (today.getDay() + 1); i++) {

@@ -13,6 +13,7 @@ export default {
             agencies: [],
             countries: [],
             //cities: [],
+            groups: [],
             country_id: 'AF',
             languages: [],
             socialmedias: [{}],
@@ -103,6 +104,15 @@ export default {
             }
         }).then((response) => {
             this.languages = response.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        });
+        axios.get('api/groups', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.groups = response.data.data;
         }).catch((error) => {
             this.Utils.error(error.response)
         });
@@ -256,13 +266,9 @@ export default {
                         <label class="text-slate-200 text-xs font-semibold">Grupo</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-collection text-gray-100"></i>
-                            <select required v-model="person.group" name="group"
+                            <select required v-model="person.group_id" name="group_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" value="PartyA">Party A</option>
-                                <option class="text-black" value="PartyB">Party B</option>
-                                <option class="text-black" value="PartyC">Party C</option>
-                                <option class="text-black" value="VIP">VIP</option>
-
+                                <option v-for="group in groups" class="text-black" :value="group.id">{{ group.name }}</option>
                             </select>
                         </div>
                     </div>

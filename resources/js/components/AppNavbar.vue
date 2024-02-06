@@ -1,12 +1,16 @@
 <script>
 import axios from 'axios';
+import ConfigurationModal from './ConfigurationModal.vue';
+import { ref } from 'vue'
 
 export default {
     data() {
         return {
             collapsed: false,
             profile: false,
-        }
+            configuration: false,
+            cart: ref(null),
+        };
     },
     methods: {
         logout() {
@@ -15,17 +19,23 @@ export default {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then(() => {
-                location.href = "#login"
-            })
+                location.href = "#login";
+            });
         },
         home() {
-            location.href = '#home'
+            location.href = '#home';
         },
         collapse() {
-            this.collapsed = !this.collapsed
-            this.$emit('collapse', this.collapsed)
+            this.collapsed = !this.collapsed;
+            this.$emit('collapse', this.collapsed);
         }
-    }
+    },
+    mounted() {
+        document.addEventListener("click", (e) => {
+            console.log(this.cart)
+        });
+    },
+    components: { ConfigurationModal }
 }
 </script>
 <template>
@@ -45,7 +55,7 @@ export default {
         <div class="relative p-2 text-center">
             <h1 v-if="Utils.role() != 'user'" class="text-lg text-gray-200 font-bold">{{ Utils.username() }}</h1>
         </div>
-        <div class="flex items-center justify-end px-1">
+        <div ref="cart" class="flex items-center justify-end px-1">
             <div class="relative p-2 flex rounded">
                 <img @click="profile = !profile"
                     :src="Utils.role() == 'agency' ? (Utils.user().agency_id != undefined ? Utils.user().agency.image : Utils.user().image) : 'src/user_placeholder.png'"
@@ -70,7 +80,7 @@ export default {
                     </svg>
                     <p class="ms-2 text-gray-100 text-sm">Perfil</p>
                 </button>
-                <button
+                <button @click="configuration = true"
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -94,6 +104,7 @@ export default {
                 </button>
             </div>
         </div>
+        <ConfigurationModal @close="configuration = false" v-if="configuration" />
     </nav>
 </template>
 <style scoped>

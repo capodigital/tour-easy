@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -26,8 +25,8 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->string('passport', 50)->nullable();
             $table->date('passport_expiry')->nullable();
-            $table->enum('notify_type', ['WhatsApp','Telegram', 'Correo'])->nullable();
-           
+            $table->enum('notify_type', ['WhatsApp', 'Telegram', 'Correo', 'SMS'])->nullable();
+
             $table->foreignId('group_id')->nullable()->references('id')->on('groups')->onDelete('set null');
             $table->foreignId('typecontact_id')->nullable()->references('id')->on('typecontacts')->onDelete('set null');
             $table->foreignId('country_id')->nullable()->references('id')->on('countries')->onDelete('set null');
