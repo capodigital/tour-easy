@@ -65,6 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/tours/{id}/restore', [ToursController::class, 'restore']);
     Route::post('/tours/agency', [ToursController::class, 'toursByAgency']);
     Route::post('/tours/contacts', [ToursController::class, 'contacts']);
+    Route::post('/tours/countries', [ToursController::class, 'countries']);
     Route::post('/tour', [ToursController::class, 'tour']);
     Route::post('/photos', [ToursController::class, 'photos']);
     Route::post('/tour/noactive', [ToursController::class, 'noactive']);
