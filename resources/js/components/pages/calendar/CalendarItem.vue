@@ -114,7 +114,7 @@ export default {
                         </div>
                         <div class="min-h-[2rem] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-1 px-0.5 py-0.5">
                             <span @click="$emit('show', activity)" :title="activity.name"
-                                v-for="activity in day.activities">
+                                v-for="activity in Utils.sort(day.activities)">
                                 <ActivityIcon :activity="activity" size="15" />
                             </span>
                         </div>
@@ -127,7 +127,7 @@ export default {
                 <!-- <CalendarHours v-for="(hour, index) in hours" :hour="hour" :index="index" :hours="hours" /> -->
                 <div class="flex justify-center">
                     <div class="w-full" v-if="activities.length > 0">
-                        <DayItem v-for="activity in activities" :activity="activity" />
+                        <DayItem v-for="activity in Utils.sort(activities)" :activity="activity" />
                     </div>
                     <div v-else class="min-h-[20rem] flex justify-center items-center">
                         <div class="text-center">

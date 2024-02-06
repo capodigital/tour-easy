@@ -18,7 +18,7 @@ class TourcontactsSeeder extends Seeder
         foreach ($agencies as $agency) {
             $tours = $agency->tours()->get();
             foreach ($tours as $tour) {
-                DB::table('tourcontacts')->insert([
+                DB::table('personcontacts')->insert([
                     [
                         'tour_id' => $tour->id,
                         'person_id' => Persons::where('agency_id',$agency->id)->get()->random()->id

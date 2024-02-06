@@ -220,4 +220,15 @@ export default class Utils {
         }
         return false;
     }
+
+    static sort(activities) {
+        if (activities == undefined) return activities;
+        const sort = activities.sort((a, b) => {
+            return (
+                new Date(a.startdate).valueOf() -
+                new Date(b.startdate).valueOf()
+            );
+        });
+        return sort;
+    }
 }
