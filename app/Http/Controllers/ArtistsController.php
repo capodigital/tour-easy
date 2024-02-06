@@ -81,6 +81,7 @@ class ArtistsController extends Controller
         
         $customMessages = [
             'birthday.before' => 'El campo fecha debe ser una fecha anterior a hoy',
+            'email.unique' => 'El email ya existe'
         ];
         
         $request->validate($rules, $customMessages);
@@ -191,13 +192,14 @@ class ArtistsController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'email' => 'required|email|unique:artists',
+            'email' => 'required|email|unique:artists,' . $artist->id,
             'birthday' => 'required|before:today'
 
         ];
         
         $customMessages = [
             'birthday.before' => 'El campo fecha debe ser una fecha anterior a hoy',
+            'email.unique' => 'El email ya existe'
         ];
         
         $request->validate($rules, $customMessages);
