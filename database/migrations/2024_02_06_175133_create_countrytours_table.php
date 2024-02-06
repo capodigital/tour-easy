@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('persontours', function (Blueprint $table) {
+        Schema::create('countrytours', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tour_id')->nullable()->references('id')->on('tours')->onDelete('cascade');
-            $table->foreignId('person_id')->nullable()->references('id')->on('persons')->onDelete('cascade');
+            $table->foreignId('country_id')->nullable()->references('id')->on('countries')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('persontours');
+        Schema::dropIfExists('countrytours');
     }
 };

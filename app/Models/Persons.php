@@ -37,7 +37,7 @@ class Persons extends Model
     }
     public function tours(): BelongsToMany
     {
-        return $this->belongsToMany(Tours::class, 'tourcontacts', 'person_id', 'tour_id')->withTimestamps();
+        return $this->belongsToMany(Tours::class, 'persontours', 'person_id', 'tour_id')->withTimestamps();
     }
 
     public function socialmedias(): MorphMany

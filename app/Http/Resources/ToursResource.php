@@ -22,6 +22,7 @@ class ToursResource extends JsonResource
         $agency = Agencies::find($this->agency_id);
         $artist = Artists::find($this->artist_id);
         $persons = $this->persons()->get();
+        $countries = $this->coutries()->get();
         if ($artist == null) {
             $artist = [
                 'id' => 0,
@@ -59,6 +60,7 @@ class ToursResource extends JsonResource
             'active' => $this->active,
             'itineraries_count' => count($this->itineraries),
             'persons' => PersonsResource::collection($persons),
+            'countries' => CountriesResource::collection($countries),
             'deleted_at' => $this->deleted_at,
 
         ];

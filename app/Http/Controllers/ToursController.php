@@ -359,4 +359,13 @@ class ToursController extends Controller
         $tour->refresh();
         return new ToursResource($tour);
     }
+    public function countries(Request $request)
+    {
+
+        $tour = Tours::find($request->tour_id);
+       
+        $tour->countries()->sync($request->countries);
+        $tour->refresh();
+        return new ToursResource($tour);
+    }
 }

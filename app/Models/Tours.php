@@ -37,7 +37,11 @@ class Tours extends Model
     }
     public function persons(): BelongsToMany
     {
-        return $this->belongsToMany(Persons::class, 'personcontacts', 'tour_id', 'person_id')->withTimestamps();
+        return $this->belongsToMany(Persons::class, 'persontours', 'tour_id', 'person_id')->withTimestamps();
+    }
+    public function countries(): BelongsToMany
+    {
+        return $this->belongsToMany(Countries::class, 'countrytours', 'tour_id', 'country_id')->withTimestamps();
     }
     public function itineraries(): HasMany
     {
