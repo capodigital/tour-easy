@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->string('passport', 50)->nullable();
             $table->date('passport_expiry')->nullable();
-            $table->enum('notify_type', ['WhatsApp','Telegram', 'Correo'])->nullable();
+            $table->enum('notify_type', ['WhatsApp','Telegram', 'Correo', 'SMS'])->nullable();
            
             $table->foreignId('group_id')->nullable()->references('id')->on('groups')->onDelete('set null');
             $table->foreignId('typecontact_id')->nullable()->references('id')->on('typecontacts')->onDelete('set null');

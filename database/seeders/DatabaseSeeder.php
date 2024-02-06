@@ -52,11 +52,15 @@ class DatabaseSeeder extends Seeder
 
         ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
-        $path2 = base_path() . '\database\seeders\Ciudades.sql_';
+       // $path2 = base_path() . '\database\seeders\Ciudades.sql_';
         $sql1 = file_get_contents($path1);
-        $sql2 = file_get_contents($path2);
+       // $sql2 = file_get_contents($path2);
         DB::unprepared($sql1);
-        DB::unprepared($sql2);
+        //DB::unprepared($sql2);
+
+        $this->call([
+            CitiesSeeder::class,
+        ]);
 
         Agencies::factory(2)->create();
         Socialmedias::factory(3)->agency()->create();
