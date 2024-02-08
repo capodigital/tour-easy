@@ -12,6 +12,7 @@ export default {
             cart: ref(null),
             user: this.Utils.user(),
             role: this.Utils.role(),
+            current: [],
         };
     },
     methods: {
@@ -36,6 +37,15 @@ export default {
         this.emitter.on('current_agency_update', (data) => {
             localStorage.setItem('user', JSON.stringify(data))
             this.user = this.Utils.user()
+        })
+    },
+    created() {
+        axios.get('api/currentitineraries', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.current = response.data.data
         })
     },
     components: { ConfigurationModal }
@@ -66,10 +76,9 @@ export default {
                     :class="{ 'w-auto': this.role == 'agency', 'rounded-md': this.role == 'agency', 'w-10': this.role != 'agency', 'rounded-full': this.role != 'agency' }" />
                 <span @click="location.href = '#calendar'"
                     class="w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white absolute text-center text-xs font-semibold"
-                    style="top: .2rem; right: .2rem">4</span>
+                    style="top: .2rem; right: .2rem">{{ current.length }}</span>
             </div>
-            <div
-                :class="{ 'h-0': !profile, 'p-2': profile, 'p-0': !profile, 'h-auto': profile }"
+            <div :class="{ 'h-0': !profile, 'p-2': profile, 'p-0': !profile, 'h-auto': profile }"
                 class="absolute transition-all overflow-hidden top-16 right-2 rounded shadow-lg shadow-gray-900 gradient-1 z-50">
                 <p class="text-gray-300 text-sm text-center leading-3 mb-2 mt-1">{{ Utils.role() == 'agency' ? 'Agencia' :
                     'Administrador' }}</p>

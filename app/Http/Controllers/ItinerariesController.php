@@ -25,18 +25,34 @@ class ItinerariesController extends Controller
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 $agency = Agencies::find($user->agency_id);
-                $itineraries = $agency->tours()->where('active',true)->with('itineraries')->get();
+                $itineraries = $agency->tours()->where('active', true)->with('itineraries')->get();
             } else
-                $itineraries = Itineraries::where('active',true)->get();
+                $itineraries = Itineraries::where('active', true)->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
-            $itineraries = $agency->tours()->where('active',true)->with('itineraries')->get();
+            $itineraries = $agency->tours()->where('active', true)->with('itineraries')->get();
         } else {
             $artist = Artists::find($request->user()->id);
-            $itineraries = $artist->tours()->where('active',true)->with('itineraries')->get();
+            $itineraries = $artist->tours()->where('active', true)->with('itineraries')->get();
         }
 
+        return ItinerariesResource::collection($itineraries);
+    }
+
+    public function getCurrent(Request $request)
+    {
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                //Script milagroso para filtrar solo las actividades de la agencia logueada por la fecha
+                $itineraries = Itineraries::whereDate('startdate', Carbon::today())->get();
+            } else {
+                $itineraries = Itineraries::whereDate('startdate', Carbon::today())->get();
+            }
+        } else {
+            $itineraries = Itineraries::whereDate('startdate', Carbon::today())->get();
+        }
         return ItinerariesResource::collection($itineraries);
     }
 
@@ -53,19 +69,19 @@ class ItinerariesController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $rules = [
             'name' => 'required',
             'startdate' => 'date|after_or_equal:today'
         ];
-        
+
         $customMessages = [
             'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
         ];
-        
+
         $request->validate($rules, $customMessages);
 
-        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+        if (Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
             ]);
@@ -73,7 +89,7 @@ class ItinerariesController extends Controller
 
         $tour = Tours::find($request->tour_id);
         $end = Carbon::parse($tour->enddate . " 00:00:00")->addDay();
-        if(Carbon::parse($request->enddate) >= $end) {
+        if (Carbon::parse($request->enddate) >= $end) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de este evento esta fuera de las fechas de la gira.'],
             ]);
@@ -110,20 +126,20 @@ class ItinerariesController extends Controller
             'name' => 'required',
             'startdate' => 'date|after_or_equal:today'
         ];
-        
+
         $customMessages = [
             'startdate.after_or_equal' => 'El campo fecha debe ser una fecha posterior a hoy',
         ];
-        
+
         $request->validate($rules, $customMessages);
-        if(Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
+        if (Carbon::parse($request->startdate) > Carbon::parse($request->enddate)) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de fin no puede ser menor que la fecha de inicio.'],
             ]);
         }
 
         $end = Carbon::parse($itinerary->tour->enddate . " 00:00:00")->addDay();
-        if(Carbon::parse($request->enddate) >= $end) {
+        if (Carbon::parse($request->enddate) >= $end) {
             throw ValidationException::withMessages([
                 'enddate' => ['La fecha de este evento esta fuera de las fechas de la gira.'],
             ]);
@@ -158,27 +174,35 @@ class ItinerariesController extends Controller
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 $agency = Agencies::find($user->agency_id);
-                $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
-                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
-                }])->get()
-                ->pluck('itineraries')->collapse();
+                $itineraries = $agency->tours()->where('active', true)->with([
+                    'itineraries' => function ($query) use ($month, $year) {
+                        $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
+                    }
+                ])->get()
+                    ->pluck('itineraries')->collapse();
             } else
-                $itineraries = Tours::where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
-                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
-                }])->get()->pluck('itineraries')->collapse();
+                $itineraries = Tours::where('active', true)->with([
+                    'itineraries' => function ($query) use ($month, $year) {
+                        $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
+                    }
+                ])->get()->pluck('itineraries')->collapse();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
-            $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
-                $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
-            }])
+            $itineraries = $agency->tours()->where('active', true)->with([
+                'itineraries' => function ($query) use ($month, $year) {
+                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
+                }
+            ])
                 ->get()
                 ->pluck('itineraries')->collapse();
         } else {
             $artist = Artists::find($request->user()->id);
-            $itineraries = $artist->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year) {
-                $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
-            }])->get()
+            $itineraries = $artist->tours()->where('active', true)->with([
+                'itineraries' => function ($query) use ($month, $year) {
+                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year);
+                }
+            ])->get()
                 ->pluck('itineraries')->collapse();
         }
         return ItinerariesResource::collection($itineraries);
@@ -190,24 +214,32 @@ class ItinerariesController extends Controller
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 $agency = Agencies::find($user->agency_id);
-                $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
-                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
-                }])->get()->pluck('itineraries')->collapse();
+                $itineraries = $agency->tours()->where('active', true)->with([
+                    'itineraries' => function ($query) use ($month, $year, $day) {
+                        $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
+                    }
+                ])->get()->pluck('itineraries')->collapse();
             } else
-                $itineraries = Tours::where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
-                    $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
-                }])->get()->pluck('itineraries')->collapse();
+                $itineraries = Tours::where('active', true)->with([
+                    'itineraries' => function ($query) use ($month, $year, $day) {
+                        $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
+                    }
+                ])->get()->pluck('itineraries')->collapse();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
 
             $agency = Agencies::find($request->user()->id);
-            $itineraries = $agency->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
+            $itineraries = $agency->tours()->where('active', true)->with([
+                'itineraries' => function ($query) use ($month, $year, $day) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
-                }])->get()->pluck('itineraries')->collapse();
+                }
+            ])->get()->pluck('itineraries')->collapse();
         } else {
             $artist = Artists::find($request->user()->id);
-            $itineraries = $artist->tours()->where('active',true)->with(['itineraries' => function ($query) use ($month, $year, $day) {
+            $itineraries = $artist->tours()->where('active', true)->with([
+                'itineraries' => function ($query) use ($month, $year, $day) {
                     $query->whereMonth('startdate', $month)->whereYear('startdate', $year)->whereDay('startdate', $day);
-                }])->get()->pluck('itineraries')->collapse();
+                }
+            ])->get()->pluck('itineraries')->collapse();
         }
         return ItinerariesResource::collection($itineraries);
     }

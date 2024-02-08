@@ -104,6 +104,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::resource('users', UserController::class);
     Route::post('/users/password/{user}', [UserController::class, 'updatePassword']);
+    Route::get('/currentitineraries', [ItinerariesController::class, 'getCurrent']);
 
 });
 

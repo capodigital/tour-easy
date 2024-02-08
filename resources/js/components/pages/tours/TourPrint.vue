@@ -129,7 +129,7 @@ export default {
                 class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 {{ tour.tourname }}
             </h1>
-            <div class="overflow-auto modal-content print">
+            <div class="overflow-auto modal-content">
                 <!-- <img class="w-full rounded" :src="tour.tourcartel.replace('http://localhost/', '')" /> -->
                 <div class="mt-1">
                     <h3 class="font-bold text-lg text-gray-200 text-center">{{ tour.artist.name }}</h3>
@@ -163,7 +163,7 @@ export default {
                     </div>
                 </div>
                 <div class="my-3">
-                    <DayItem v-for="itinerary in itineraries" :activity="itinerary" :print="true" :collapsed="false" />
+                    <DayItem v-for="itinerary in itineraries" :activity="itinerary" :collapsed="false" />
                 </div>
                 <div class="p-2">
                     <p class="text-sm text-white">Contactos</p>
@@ -178,17 +178,16 @@ export default {
                         </a>
                     </div>
                 </div>
-                <DocumentsItem :documents="tour.documents" />
             </div>
             <div class="flex justify-center">
                 <button type="button" @click="$emit('close')"
                     class="mt-8 me-2 close overlay-button bg-gradient-to-tr from-slate-600 to-slate-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                     Cerrar
                 </button>
-                <button type="button" @click="print"
-                    class="mt-8 overlay-button bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
+                <a target="_blank" :href="'/print/' + tour.id"
+                    class="mt-8 overlay-button bg-gradient-to-tr text-center from-app-primary-500 to-app-primary-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                     Imprimir
-                </button>
+                </a>
             </div>
         </section>
     </CustomModal>

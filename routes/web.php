@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Tours;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,11 @@ Route::get('/admin', function () {
 
 Route::get('/', function () {
     return view('example');
+});
+
+Route::get('/print/{tour}', function (Tours $tour) {
+    // return view("print", ['tour' => $tour, "itineraries" => $tour->itineraries]);
+    $dompdf = App::make("dompdf.wrapper");
+    $dompdf->loadView("print", ['tour' => $tour, "itineraries" => $tour->itineraries]);
+    return $dompdf->stream();
 });
