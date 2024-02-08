@@ -19,6 +19,7 @@ export default {
                 { id: 7, description: "Tren" },
                 { id: 8, description: "Transfer" }
             ],
+            tour_id: null,
             tours: [],
             persons: [],
             suppliers: [],
@@ -76,8 +77,27 @@ export default {
                     return false
             }
         },
+        updateCountries() {
+            for (const tour of this.tours) {
+                if (tour.id == this.tour_id) {
+                    this.countries = tour.countries;
+                    if (this.countries.length > 0) {
+                        this.setCities(this.countries[0].code, 'start')
+                        this.setCities(this.countries[0].code, 'end')
+                    } else {
+                        this.start_cities = [];
+                        this.end_cities = [];
+                    }
+                }
+            }
+        }
     },
     created() {
+        if (this.activity.startdate != null) {
+            const date = new Date(this.activity.startdate)
+            this._startdate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
+            this._starttime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+        }
         axios.get('api/tours', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -91,15 +111,6 @@ export default {
             }
         }).then((response) => {
             this.persons = response.data.data;
-        });
-        axios.get('api/countries', {
-            headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }
-        }).then((response) => {
-            this.countries = response.data.data;
-            this.setCities(this.countries[0].code, 'start')
-            this.setCities(this.countries[0].code, 'end')
         });
         axios.get('api/places', {
             headers: {
@@ -136,7 +147,7 @@ export default {
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Gira</label>
                         <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select required name="tour_id"
+                            <select @change="updateCountries" v-model="tour_id" required name="tour_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" v-for="item in tours" :value="item.id">{{
                                     item.tourname
@@ -193,12 +204,12 @@ export default {
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Fecha y hora de inicio</label>
                         <div class="flex">
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
                                 <input required v-model="_startdate" type="date" placeholder="Fecha de inicio"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                             </div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 w-1/2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
                                 <input required v-model="_starttime" type="time" placeholder="Hora de inicio"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
@@ -209,12 +220,12 @@ export default {
                     <div>
                         <label class="text-slate-200 text-xs font-semibold">Fecha y hora de fin</label>
                         <div class="flex">
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
                                 <input required v-model="_enddate" type="date" placeholder="Fecha de fin"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1">
+                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 w-1/2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
                                 <input required v-model="_endtime" type="time" placeholder="Hora de fin"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -223,11 +234,13 @@ export default {
                         <input type="hidden" name="enddate" :value="_enddate + ' ' + _endtime" />
                     </div>
                 </div>
-                <label class="text-slate-200 text-xs font-semibold">Ciudad <template
-                        v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de
-                        salida</template></label>
+
                 <div class="grid grid-cols-2 gap-x-2">
                     <div>
+                        <label class="text-slate-200 text-xs font-semibold">País <template
+                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de
+                                salida</template>
+                        </label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-globe text-gray-100"></i>
                             <select required @change="(e) => setCities(e.target.value, 'start')"
@@ -238,21 +251,26 @@ export default {
                         </div>
                     </div>
                     <div>
+                        <label class="text-slate-200 text-xs font-semibold">Ciudad <template
+                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de
+                                salida</template>
+                        </label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-globe-americas text-gray-100"></i>
                             <select required v-model="activity.city_start_id" name="city_start_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" v-for="city in start_cities" :value="city.id">{{
-                                    city.name }}
+                                    city.name }} ({{ city.code }})
                                 </option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <template v-if="[6, 7, 8].includes(Number(activity.typeitinerary_id))">
-                    <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
+
                     <div class="grid grid-cols-2 gap-x-2">
                         <div>
+                            <label class="text-slate-200 text-xs font-semibold">País de destino</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-globe text-gray-100"></i>
                                 <select required @change="(e) => setCities(e.target.value, 'end')"
@@ -263,13 +281,14 @@ export default {
                             </div>
                         </div>
                         <div>
+                            <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                                 <i class="bi bi-globe-americas text-gray-100"></i>
                                 <select required v-model="activity.city_destination_id" name="city_destination_id"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="city in end_cities" :value="city.id">{{
                                         city.name
-                                    }}
+                                    }} ({{ city.code }})
                                     </option>
                                 </select>
                             </div>

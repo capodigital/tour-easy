@@ -10,6 +10,8 @@ export default {
             profile: false,
             configuration: false,
             cart: ref(null),
+            user: this.Utils.user(),
+            role: this.Utils.role(),
         };
     },
     methods: {
@@ -34,6 +36,10 @@ export default {
         document.addEventListener("click", (e) => {
             console.log(this.cart)
         });
+        this.emitter.on('current_agency_update', (data) => {
+            localStorage.setItem('user', JSON.stringify(data))
+            this.user = this.Utils.user()
+        })
     },
     components: { ConfigurationModal }
 }
@@ -58,8 +64,9 @@ export default {
         <div ref="cart" class="flex items-center justify-end px-1">
             <div class="relative p-2 flex rounded">
                 <img @click="profile = !profile"
-                    :src="Utils.role() == 'agency' ? (Utils.user().agency_id != undefined ? Utils.user().agency.image : Utils.user().image) : 'src/user_placeholder.png'"
-                    class="rounded-full h-10 w-10 cursor-pointer me-2" />
+                    :src="this.role == 'agency' ? (this.user.agency_id != undefined ? this.user.agency.image : this.user.image) : 'src/user_placeholder.png'"
+                    class="h-10 cursor-pointer me-2"
+                    :class="{ 'w-auto': this.role == 'agency', 'rounded-md': this.role == 'agency', 'w-10': this.role != 'agency', 'rounded-full': this.role != 'agency' }" />
                 <span
                     class="w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white absolute text-center text-xs font-semibold"
                     style="top: .2rem; right: .2rem">4</span>

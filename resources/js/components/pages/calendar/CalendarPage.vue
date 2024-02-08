@@ -38,8 +38,9 @@ export default {
             this.init();
         },
         add(day) {
+            const now = new Date()
             this.activity = {
-                startdate: `${this.year}-${(Number(this.month) + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`,
+                startdate: `${this.year}-${(Number(this.month) + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
                 typeitinerary_id: 1,
             };
             this.show = true;
@@ -53,7 +54,7 @@ export default {
                 }
             }).then((response) => {
                 const date = new Date(response.data.data.startdate);
-                this.forms[date.getDate() + this.initial].activities.push(this.getActivityData(response.data.data));
+                this.forms[date.getDate() + Number(this.initial) - 1].activities.push(this.getActivityData(response.data.data));
                 this.Utils.notify('Se ha creado correctamente la actividad')
                 this.show = false;
                 this.Utils.unlock(e.target)

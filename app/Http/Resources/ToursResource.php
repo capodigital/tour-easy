@@ -22,7 +22,7 @@ class ToursResource extends JsonResource
         $agency = Agencies::find($this->agency_id);
         $artist = Artists::find($this->artist_id);
         $persons = $this->persons()->get();
-        $countries = $this->coutries()->get();
+        $countries = $this->countries()->get();
         if ($artist == null) {
             $artist = [
                 'id' => 0,

@@ -84,8 +84,6 @@ export default {
             this._enddate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
             this._endtime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
         }
-        console.log(this._startdate, this._starttime)
-        console.log(this._enddate, this._endtime)
         axios.get('api/tours', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -107,25 +105,22 @@ export default {
         }).then((response) => {
             this.persons = response.data.data;
         })
-        axios.get('api/countries', {
-            headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }
-        }).then((response) => {
-            this.countries = response.data.data;
-            if (this.activity.citystart != null) {
-                this.outoftour = this.activity.outoftour == 1;
-                this.setCities(this.activity.citystart.country.code, 'start')
-            } else {
+        this.countries = this.tour.countries;
+        if (this.activity.citystart != null) {
+            this.outoftour = this.activity.outoftour == 1;
+            this.setCities(this.activity.citystart.country.code, 'start')
+        } else {
+            if (this.countries.length > 0) {
                 this.setCities(this.countries[0].code, 'start')
             }
-            if (this.activity.cityend != null && this.activity.cityend.country != undefined) {
-                this.setCities(this.activity.cityend.country.code, 'end')
-            } else {
+        }
+        if (this.activity.cityend != null && this.activity.cityend.country != undefined) {
+            this.setCities(this.activity.cityend.country.code, 'end')
+        } else {
+            if (this.countries.length > 0) {
                 this.setCities(this.countries[0].code, 'end')
             }
-
-        })
+        }
         axios.get('api/places', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -268,7 +263,7 @@ export default {
                             <select required v-model="activity.city_start_id" name="city_start_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <option class="text-black" v-for="city in start_cities" :value="city.id">{{
-                                    city.name }}
+                                    city.name }} ({{ city.code }})
                                 </option>
                             </select>
                         </div>
@@ -295,7 +290,7 @@ export default {
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="city in end_cities" :value="city.id">{{
                                         city.name
-                                    }}
+                                    }} ({{ city.code }})
                                     </option>
                                 </select>
                             </div>

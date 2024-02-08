@@ -156,7 +156,7 @@ export default {
                     </svg>
                     <div>
                         <p class="text-white">Ciudad de partida</p>
-                        <p class="text-gray-400 text-sm">{{ activity.citystart.name }}</p>
+                        <p class="text-gray-400 text-sm">{{ activity.citystart.name }} ({{ activity.citystart.code }})</p>
                     </div>
                 </div>
                 <template v-if="Number(activity.typeitinerary_id) == 6 || Number(activity.typeitinerary_id) == 7">
@@ -170,7 +170,7 @@ export default {
                         </svg>
                         <div>
                             <p class="text-white">Ciudad de llegada</p>
-                            <p class="text-gray-400 text-sm">{{ activity.cityend.name }}</p>
+                            <p class="text-gray-400 text-sm">{{ activity.cityend.name }} ({{ activity.cityend.code }})</p>
                         </div>
                     </div>
                 </template>

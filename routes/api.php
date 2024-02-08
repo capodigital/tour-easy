@@ -98,7 +98,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('typeagencies', TypeagenciesController::class);
     Route::resource('typeitineraries', TypeitinerariesController::class);
     Route::resource('typeplaces', TypeplacesController::class);
-    Route::resource('typesocialmedias', TypesocialmediasController::class);
+    Route::resource('typesocialmedia', TypesocialmediasController::class);
 
     Route::resource('documents', DocumentsController::class);
 

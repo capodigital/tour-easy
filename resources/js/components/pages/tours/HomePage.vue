@@ -5,9 +5,10 @@ import Confirm from '../../modals/Confirm';
 import TourModal from './TourModal.vue';
 import TourPrint from './TourPrint.vue';
 import TourContactModal from './TourContactModal.vue';
+import TourCountriesModal from './TourCountriesModal.vue';
 
 export default {
-    components: { TourCard, TourModal, TourPrint, TourContactModal },
+    components: { TourCard, TourModal, TourPrint, TourContactModal, TourCountriesModal },
     data() {
         return {
             filter: '',
@@ -15,6 +16,7 @@ export default {
             tour: {},
             details: null,
             contacts: null,
+            countries: null,
             show: false,
             active: 0,
             deleted: 0,
@@ -109,6 +111,7 @@ export default {
                 }
             }
             this.contacts = null;
+            this.countries = null;
         }
     },
     created() {
@@ -162,7 +165,7 @@ export default {
             <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3">
                 <template v-for="item in tours">
                     <TourCard @edit="edit" @destroy="destroy" @complete="complete" @show="details = item"
-                        @contact="contacts = item" :tour="item"
+                        @contact="contacts = item" @countries="countries = item" :tour="item"
                         v-if="Utils.filter(['tourname', 'startdate', 'enddate', 'notes', 'agency.tradename', 'agency.taxname', 'artist.name', 'artist.lastname', 'artist.stagename'], item, filter) && (item.active == 1 || active == 1) && (item.deleted_at == null || deleted == 1)" />
                 </template>
             </div>
@@ -170,6 +173,7 @@ export default {
         <TourModal v-if="show" @close="show = false" @send="send" :tour="tour" />
         <TourPrint v-if="details != null" @close="details = null" :tour="details" @edit="edit" />
         <TourContactModal v-if="contacts != null" @close="contacts = null" :tour="contacts" @update="update" />
+        <TourCountriesModal v-if="countries != null" @close="countries = null" :tour="countries" @update="update" />
     </section>
 </template>
 <style scoped>

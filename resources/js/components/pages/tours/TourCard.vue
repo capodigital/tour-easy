@@ -110,15 +110,25 @@ export default {
                     </svg>
                 </button>
                 <button title="Seleccionar contactos de la gira" @click="$emit('contact', tour)"
+                    class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-users m-auto">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                </button>
+                <button title="Seleccionar contactos de la gira" @click="$emit('countries', tour)"
                     class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
-                    stroke="rgb(22, 163, 74)" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-users m-auto">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
+                        stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-globe">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                        <path d="M2 12h20" />
+                    </svg>
                 </button>
             </div>
             <div class="flex">
@@ -144,5 +154,4 @@ p {
 
 article {
     background: rgb(37, 44, 78);
-}
-</style>
+}</style>

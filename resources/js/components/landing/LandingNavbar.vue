@@ -1,17 +1,20 @@
 <script>
 import { Scroll } from "scroll-utility"
+import LoginModal from "./LoginModal.vue"
 export default {
     data() {
         return {
-            collapse: true
-        }
+            collapse: true,
+            isLoginOpen: false,
+        };
     },
     methods: {
         scrollTo(el) {
-            const scrollManager = new Scroll({ duration: 500 })
-            scrollManager.scrollTo.element(el)
+            const scrollManager = new Scroll({ duration: 500 });
+            scrollManager.scrollTo.element(el);
         }
-    }
+    },
+    components: { LoginModal }
 }
 </script>
 <template>
@@ -44,7 +47,7 @@ export default {
                     class="mx-2 transition-all font-semibold text-gray-700 hover:text-green-600" href="#Contact">Contact</a>
             </div>
             <div class="hidden md:block">
-                <button
+                <button @click="isLoginOpen = true"
                     class="px-5 py-2 text-white bg-blue-600 hover:bg-blue-700 transition-all rounded border-none focus:outline-none">Iniciar
                     sesión</button>
             </div>
@@ -73,10 +76,11 @@ export default {
             <p class="my-3"><a class="transition-all font-semibold text-gray-700 hover:text-green-600"
                     href="#Contact">Contact</a>
             </p>
-            <button
+            <button @click="isLoginOpen = true"
                 class="px-5 py-2 text-white bg-blue-600 hover:bg-blue-700 transition-all rounded border-none focus:outline-none">Iniciar
                 sesión</button>
         </div>
+        <LoginModal v-if="isLoginOpen" @close="isLoginOpen = false" />
     </div>
 </template>
 <style scoped>

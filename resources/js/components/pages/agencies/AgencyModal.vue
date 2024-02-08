@@ -92,8 +92,7 @@ export default {
 </script>
 <template>
     <CustomModal @close="$emit('close')">
-        <form @submit.prevent="(e) => $emit('send', e)"
-            class="rounded-3xl rounded-tr p-10 overflow-auto scroll">
+        <form @submit.prevent="(e) => $emit('send', e)" class="rounded-3xl rounded-tr p-10 overflow-auto scroll">
             <h1
                 class="font-bold bg-gradient-to-tr from-slate-500 text-center to-black text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 <template v-if="agency.id == undefined">
@@ -221,7 +220,8 @@ export default {
                             <i class="bi bi-globe-americas text-gray-100"></i>
                             <select required v-model="agency.city_id" @change="setCities" name="city_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
+                                <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }} ({{
+                                    city.code }})
                                 </option>
                             </select>
                         </div>
@@ -235,7 +235,8 @@ export default {
                     <div class="mt-1 grid grid-cols-3 gap-2">
                         <template v-for="(socialmedia, index) in socialmedias">
                             <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="socialmedia.typesocialmedia_id" :name="`socialmedias[${index}][typesocialmedia_id]`"
+                                <select v-model="socialmedia.typesocialmedia_id"
+                                    :name="`socialmedias[${index}][typesocialmedia_id]`"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
                                         type.name

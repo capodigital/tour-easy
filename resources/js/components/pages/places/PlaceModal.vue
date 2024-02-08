@@ -226,7 +226,8 @@ export default {
                             <i class="bi bi-globe-americas text-gray-100"></i>
                             <select required v-model="place.city_id" name="city_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }}
+                                <option class="text-black" v-for="city in cities" :value="city.id">{{ city.name }} ({{
+                                    city.code }})
                                 </option>
                             </select>
                         </div>
@@ -254,7 +255,8 @@ export default {
                     <div class="mt-1 grid grid-cols-3 gap-2">
                         <template v-for="(socialmedia, index) in socialmedias">
                             <div class="flex items-center rounded border border-gray-300 px-2">
-                                <select v-model="socialmedia.typesocialmedia_id" :name="`socialmedias[${index}][typesocialmedia_id]`"
+                                <select v-model="socialmedia.typesocialmedia_id"
+                                    :name="`socialmedias[${index}][typesocialmedia_id]`"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                     <option class="text-black" v-for="type in socialtypes" :value="type.id">{{
                                         type.name

@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             groups: [],
+            socialmedias: [],
             editItem: {},
         }
     },
@@ -64,6 +65,15 @@ export default {
             }
         }).then((response) => {
             this.groups = response.data.data;
+        }).catch((error) => {
+            this.Utils.error(error.response)
+        });
+        axios.get('api/typesocialmedia', {
+            headers: {
+                'Authorization': `Bearer ${this.Utils.token()}`
+            }
+        }).then((response) => {
+            this.socialmedias = response.data.data;
         }).catch((error) => {
             this.Utils.error(error.response)
         });
@@ -158,6 +168,14 @@ export default {
                                 </button>
                             </div>
                         </div>
+                    </article>
+                </div>
+                <h5 class="text-center text-gray-200 text-lg">Redes sociales</h5>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3 z-50 p-4">
+                    <article v-for="(type, index) in socialmedias"
+                        class="border-2 border-gray-500 rounded-lg cursor-pointer p-2 relative">
+                        <img class="rounded w-full" :src="type.logo.replace('http://localhost', '')" />
+                        <a class="absolute bottom-2 text-center text-gray-300 w-[calc(100%-1rem)]" :href="'https://' + type.url">{{ type.name }}</a>
                     </article>
                 </div>
             </div>

@@ -41,6 +41,9 @@ export default {
                     for (let i in this.agencies) {
                         if (this.agencies[i].id == this.agency.id) {
                             this.agencies[i] = response.data.data
+                            if (this.Utils.role() == 'agency' && this.Utils.user().id == this.agency.id) {
+                                this.emitter.emit('current_agency_update', response.data.data)
+                            }
                             this.Utils.notify('Se han actualizado correctamente los datos de la agencia')
                             break
                         }

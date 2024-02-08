@@ -117,7 +117,7 @@ export default {
                         </svg>
                         <div>
                             <p class="text-white">Ciudad</p>
-                            <p class="text-gray-400 text-sm">{{ agency.city.name }}</p>
+                            <p class="text-gray-400 text-sm">{{ agency.city.name }} ({{ agency.city.name }})</p>
                         </div>
                     </div>
                 </div>
