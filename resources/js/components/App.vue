@@ -72,7 +72,7 @@ export default {
             // this.init()
         }).catch(() => {
             if (this.active != "tour" && this.active != "artist")
-                location.href = '#login'
+                location.href = '/'
         })
 
     },
@@ -91,7 +91,8 @@ export default {
         <AppNavbar @collapse="(value) => collapsed = value" />
         <div class="flex">
             <AppSidebar :collapsed="collapsed" />
-            <main :class="{ 'md:w-[calc(100vw-3.5rem)]': collapsed, 'md:w-10/12': !collapsed }" class="overflow-auto pb-12 w-full">
+            <main :class="{ 'md:w-[calc(100vw-3.5rem)]': collapsed, 'md:w-10/12': !collapsed }"
+                class="overflow-auto pb-12 w-full">
                 <transition name="carousel" mode="out-in">
                     <component :is="active" :collapsed="collapsed"> </component>
                 </transition>

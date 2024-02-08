@@ -7,6 +7,9 @@ import ActivityIcon from '../../common/ActivityIcon.vue';
 import CustomModal from '../../common/CustomModal.vue';
 import ContactItem from '../contacts/ContactItem.vue';
 
+import html2pdf from "html2pdf.js";
+import __WEBPACK_EXTERNAL_MODULE_jspdf__ from "html2pdf.js";
+
 export default {
     components: { CustomModal, ActivityIcon, ActivityDetails, DayItem, DocumentsItem, ContactItem },
     props: {
@@ -90,6 +93,19 @@ export default {
                 return new Date(a.startdate).valueOf() - new Date(b.startdate).valueOf()
             })
             return sort
+        },
+        print() {
+            const element = this.$el.querySelector(".modal-content")
+            var w = element.offsetWidth;
+            var h = element.offsetHeight;
+            console.log(h)
+            const jsPDF = new __WEBPACK_EXTERNAL_MODULE_jspdf__('L', 'px', [w, 2000])
+
+            html2pdf(element, {
+                margin: 1,
+                filename: "tour.pdf",
+                jsPDF: jsPDF,
+            });
         }
     },
     created() {
@@ -107,14 +123,14 @@ export default {
 </script>
 <template>
     <CustomModal @close="$emit('close')">
-        <article @submit.prevent="(e) => $emit('send', e)"
+        <section @submit.prevent="(e) => $emit('send', e)"
             class="max-w-3xl rounded-2xl shadow-md shadow-gray-800 p-4 overflow-auto transition-all cursor-pointer">
             <h1
                 class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 {{ tour.tourname }}
             </h1>
-            <div class="overflow-auto modal-content">
-                <img class="w-full rounded" :src="tour.tourcartel.replace('http://localhost/', '')" />
+            <div class="overflow-auto modal-content print">
+                <!-- <img class="w-full rounded" :src="tour.tourcartel.replace('http://localhost/', '')" /> -->
                 <div class="mt-1">
                     <h3 class="font-bold text-lg text-gray-200 text-center">{{ tour.artist.name }}</h3>
                 </div>
@@ -147,7 +163,7 @@ export default {
                     </div>
                 </div>
                 <div class="my-3">
-                    <DayItem v-for="itinerary in itineraries" :activity="itinerary" :collapsed="false" />
+                    <DayItem v-for="itinerary in itineraries" :activity="itinerary" :print="true" :collapsed="false" />
                 </div>
                 <div class="p-2">
                     <p class="text-sm text-white">Contactos</p>
@@ -169,16 +185,20 @@ export default {
                     class="mt-8 me-2 close overlay-button bg-gradient-to-tr from-slate-600 to-slate-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
                     Cerrar
                 </button>
-                <button type="button" @click="$emit('edit', tour)"
+                <button type="button" @click="print"
                     class="mt-8 overlay-button bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-white px-3 py-3 w-full rounded-xl rounded-tr">
-                    Actualizar
+                    Imprimir
                 </button>
             </div>
-        </article>
+        </section>
     </CustomModal>
 </template>
 <style scoped>
-article {
+section {
     background: linear-gradient(138.52deg, rgb(81, 44, 44) -1.32%, rgb(37, 44, 78) 85.77%);
+}
+
+.print {
+    background-color: white;
 }
 </style>

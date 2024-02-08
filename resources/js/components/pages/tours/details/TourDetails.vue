@@ -384,14 +384,20 @@ export default {
             <h1
                 class="font-bold bg-gradient-to-tr w-full from-app-secondary-500 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
                 ACTIVIDADES</h1>
-            <button @click="show_images = true"
-                class="px-2 py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-sm rounded whitespace-nowrap">
-                Ver más imágenes
-            </button>
+            <div class="text-end">
+                <button @click="show_images = true"
+                    class="px-2 py-1 mb-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-sm rounded whitespace-nowrap">
+                    <i class="bi bi-file-image"></i> Ver imágenes
+                </button>
+                <a :href="'#calendar/' + tour.id"
+                    class="px-[1.09rem] py-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-sm rounded whitespace-nowrap">
+                    <i class="bi bi-calendar-date"></i> Calendario
+                </a>
+            </div>
         </div>
         <div class="mt-4 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 z-50 p-4">
-            <TourActivity v-for="item in Utils.sort(activities)" @show="(item) => details = item" @edit="edit" @destroy="destroy"
-                :activity="item" />
+            <TourActivity v-for="item in Utils.sort(activities)" @show="(item) => details = item" @edit="edit"
+                @destroy="destroy" :activity="item" />
             <article @click="add" v-if="Utils.role() != 'artist'"
                 class="border-2 border-gray-500 rounded-2xl cursor-pointer border-dashed min-h-[10rem] flex justify-center items-center">
                 <i class="bi bi-plus text-6xl text-gray-500"></i>

@@ -186,6 +186,8 @@ export default {
         }).then((response) => {
             this.tours = response.data.data;
         });
+        const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
+        this.tour_id = id
     },
     components: { ActivityDetails, CalendarModal, CalendarItem }
 };
@@ -238,8 +240,8 @@ export default {
             </div>
         </div>
         <div class="overflow-x-auto scroll">
-            <CalendarItem :today="date" :itineraries="forms" @update="update" @add="add" @year="(value) => year = value"
-                @show="(item) => details = item" @month="(value) => month = value" />
+            <CalendarItem :today="date" :itineraries="forms" :tour="tour_id" @update="update" @add="add"
+                @year="(value) => year = value" @show="(item) => details = item" @month="(value) => month = value" />
         </div>
         <CalendarModal v-if="show" @send="send" @close="show = false" :activity="activity" />
         <!-- <ActivityDetails @close="details = {}" v-if="details.id != undefined" :activity="details" /> -->

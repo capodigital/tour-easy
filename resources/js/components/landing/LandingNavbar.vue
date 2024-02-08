@@ -24,8 +24,8 @@ export default {
             <div class="flex items-center">
                 <img src="src/logo.svg" class="h-10 w-10 me-2" />
                 <div>
-                    <h1 class="font-bold leading-4 mb-1">MAD MUSIC</h1>
-                    <p class="text-sm text-gray-600 leading-3">Easy Tour</p>
+                    <h1 class="font-bold leading-4 mb-1">TOUR EASY</h1>
+                    <p class="text-sm text-gray-600 leading-3">Tour planner</p>
                 </div>
             </div>
             <div class="hidden md:flex">

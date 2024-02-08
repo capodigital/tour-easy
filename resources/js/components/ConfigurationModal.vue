@@ -175,7 +175,7 @@ export default {
                     <article v-for="(type, index) in socialmedias"
                         class="border-2 border-gray-500 rounded-lg cursor-pointer p-2 relative">
                         <img class="rounded w-full" :src="type.logo.replace('http://localhost', '')" />
-                        <a class="absolute bottom-2 text-center text-gray-300 w-[calc(100%-1rem)]" :href="'https://' + type.url">{{ type.name }}</a>
+                        <a target="_blank" class="absolute bottom-2 text-center text-gray-300 w-[calc(100%-1rem)]" :href="'https://' + type.url">{{ type.name }}</a>
                     </article>
                 </div>
             </div>

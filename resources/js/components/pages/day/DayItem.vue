@@ -7,7 +7,8 @@ export default {
         collapsed: {
             type: Boolean,
             default: true,
-        }
+        },
+        print: { type: Boolean, default: false },
     },
     data() {
         return {
@@ -18,7 +19,7 @@ export default {
 }
 </script>
 <template>
-    <article :class="{ 'gradient-1': !collapsed, 'gradient-2': collapsed }"
+    <article :class="{ 'bg-white': print, 'gradient-1': !collapsed && !print, 'gradient-2': collapsed && !print }"
         class="rounded-lg mb-1 border border-gray-700 w-full">
         <div class="flex items-center w-full">
             <div class="p-2 w-11/12 flex items-center">

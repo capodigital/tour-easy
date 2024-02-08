@@ -9,6 +9,7 @@ export default {
     props: {
         itineraries: Array,
         today: Date,
+        tour: Number,
     },
     watch: {
         itineraries() {
@@ -113,10 +114,12 @@ export default {
                             {{ day.day }}
                         </div>
                         <div class="min-h-[2rem] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-1 px-0.5 py-0.5">
-                            <span @click="$emit('show', activity)" :title="activity.name"
-                                v-for="activity in Utils.sort(day.activities)">
-                                <ActivityIcon :activity="activity" size="15" />
-                            </span>
+                            <template v-for="activity in Utils.sort(day.activities)">
+                                <span v-if="tour == 0 || activity.tour_id == tour" @click="$emit('show', activity)"
+                                    :title="activity.name">
+                                    <ActivityIcon :activity="activity" size="15" />
+                                </span>
+                            </template>
                         </div>
 
                     </div>

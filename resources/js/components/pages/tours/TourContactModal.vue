@@ -9,16 +9,18 @@ export default {
         tour: Object,
     },
     methods: {
-        selected(contact) {
-            for (const item of this.tour.persons) {
-                if (item.id == contact.id) {
-                    return true;
+        selectAll(e) {
+            if (e.target.checked) {
+                for (let contact of this.contacts) {
+                    if (!this.ids.includes(contact.id)) {
+                        this.ids.push(contact.id);
+                    }
                 }
+            } else {
+                this.ids = [];
             }
-            return false;
         },
         update(id, e) {
-            console.log(e)
             if (e.target.checked) {
                 if (!this.ids.includes(id)) {
                     this.ids.push(id);
@@ -77,15 +79,27 @@ export default {
                 <div class="max-w-[400px]">
                     <input type="hidden" :value="tour.id" name="tour_id" />
                     <input v-for="(id, index) in ids" type="hidden" :value="id" :name="`contacts[${index}]`" />
-                    <div class="flex items-center rounded border border-gray-200 px-2 me-2 mb-3">
-                        <i class="bi bi-funnel-fill text-gray-200"></i>
-                        <input v-model="filter" type="text" placeholder="Escribe para filtrar"
-                            class="bg-transparent w-full text-gray-200 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-300">
+                    <div class="flex mb-3 items-center">
+                        <div class="flex items-center rounded border border-gray-200 px-2 me-2 w-7/12">
+                            <i class="bi bi-funnel-fill text-gray-200"></i>
+                            <input v-model="filter" type="text" placeholder="Escribe para filtrar"
+                                class="bg-transparent w-full text-gray-200 text-sm border-none focus:outline-none px-3 py-2 placeholder:text-gray-300">
+                        </div>
+                        <div class="w-5/12 px-2">
+                            <div class="form-check items-center">
+                                <input required aria-label="Seleccionar todos" @change="selectAll"
+                                    class="form-check-input me-1" type="checkbox" />
+                                <label class="form-check-label leading-4 text-sm mt-1">
+                                    Seleccionar todos
+                                </label>
+                            </div>
+                        </div>
                     </div>
+
                     <template v-for="contact in contacts" :key="contact.id">
                         <ContactItem
                             v-if="Utils.filter(['name', 'lastname', 'lang', 'email', 'extra_phone', 'phone', 'position', 'notes', 'agency.tradename', 'agency.taxname', 'country.name', 'typecontact.description'], contact, filter)"
-                            :person="contact" :selected="selected(contact)" @update="(e) => update(contact.id, e)" />
+                            :person="contact" :selected="ids.includes(contact.id)" @update="(e) => update(contact.id, e)" />
                     </template>
                 </div>
             </div>

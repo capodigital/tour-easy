@@ -21,7 +21,7 @@ export default {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then(() => {
-                location.href = "#login";
+                location.href = "/";
             });
         },
         home() {
@@ -58,22 +58,23 @@ export default {
         <div class="relative p-2 text-center">
             <h1 v-if="Utils.role() != 'user'" class="text-lg text-gray-200 font-bold">{{ Utils.username() }}</h1>
         </div>
-        <div ref="cart" class="flex items-center justify-end px-1">
+        <div v-click-outside="() => profile = false" class="flex items-center justify-end px-1">
             <div class="relative p-2 flex rounded">
                 <img @click="profile = !profile"
                     :src="this.role == 'agency' ? (this.user.agency_id != undefined ? this.user.agency.image : this.user.image) : 'src/user_placeholder.png'"
                     class="h-10 cursor-pointer me-2"
                     :class="{ 'w-auto': this.role == 'agency', 'rounded-md': this.role == 'agency', 'w-10': this.role != 'agency', 'rounded-full': this.role != 'agency' }" />
-                <span
+                <span @click="location.href = '#calendar'"
                     class="w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white absolute text-center text-xs font-semibold"
                     style="top: .2rem; right: .2rem">4</span>
             </div>
-            <div :class="{ 'h-0': !profile, 'p-2': profile, 'p-0': !profile, 'h-auto': profile }"
+            <div
+                :class="{ 'h-0': !profile, 'p-2': profile, 'p-0': !profile, 'h-auto': profile }"
                 class="absolute transition-all overflow-hidden top-16 right-2 rounded shadow-lg shadow-gray-900 gradient-1 z-50">
                 <p class="text-gray-300 text-sm text-center leading-3 mb-2 mt-1">{{ Utils.role() == 'agency' ? 'Agencia' :
                     'Administrador' }}</p>
                 <p class="text-gray-400 text-xs text-center leading-3 mb-2 mt-1">{{ Utils.user().email }}</p>
-                <button
+                <!-- <button
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -83,7 +84,7 @@ export default {
                         <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
                     </svg>
                     <p class="ms-2 text-gray-100 text-sm">Perfil</p>
-                </button>
+                </button> -->
                 <button @click="configuration = true"
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"

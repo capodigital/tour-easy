@@ -40,14 +40,18 @@ export default {
                 <p class="text-center border-t border-b border-gray-800 py-1 truncate">
                     {{ ticket.itinerary.tour.tourname }}, {{ ticket.itinerary.citystart.name }}
                 </p>
-                <p class="leading-4 mt-2">Nombre: {{ ticket.name }} {{ ticket.lastname }}</p>
+                <p class="leading-4 mt-2 truncate">Nombre: {{ ticket.name }} {{ ticket.lastname }}</p>
                 <div class="flex mt-1 items-center">
                     <div class="w-1/2">
-                        <p class="leading-4 mt-2">Fecha: {{ ticket.itinerary.startdate }}</p>
+                        <div class="flex items-center">
+                            <p class="leading-4 mt-2 me-2">Fecha:</p>
+                            <p class="leading-4 mt-2 text-center">{{ ticket.itinerary.startdate }}</p>
+                        </div>
                         <canvas class="w-16 h-16 mt-2 mx-auto" id="qr"></canvas>
                     </div>
                     <div class="w-1/2">
-                        <p class="leading-4 text-xs text-center max-h-[4rem] overflow-hidden text-ellipsis">{{ ticket.notes }}</p>
+                        <p class="leading-4 text-xs text-center max-h-[4rem] overflow-hidden text-ellipsis">{{ ticket.notes
+                        }}</p>
                         <p class="leading-4 mt-1 text-center">Hora del show: {{ ticket.itinerary.showtime }}</p>
                     </div>
                 </div>

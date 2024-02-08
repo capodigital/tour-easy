@@ -232,7 +232,9 @@ export default {
                         <div class="flex">
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_startdate" type="date" placeholder="Fecha de inicio"
+                                <input required :min="Utils.getDateInput(tour.startdate)"
+                                    :max="Utils.getDateInput(tour.enddate)" v-model="_startdate" type="date"
+                                    placeholder="Fecha de inicio"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                             </div>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
@@ -248,7 +250,8 @@ export default {
                         <div class="flex">
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
                                 <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_enddate" type="date" placeholder="Fecha de fin"
+                                <input :min="Utils.getDateInput(tour.startdate)" :max="Utils.getDateInput(tour.enddate)"
+                                    required v-model="_enddate" type="date" placeholder="Fecha de fin"
                                     class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             </div>
                             <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">

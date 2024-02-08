@@ -65,7 +65,7 @@ export default {
                         <path d="M12 21v-1" />
                     </svg>
                 </a>
-                <button title="Editar gira" v-if="Utils.role() != 'artist'" @click="$emit('edit', tour)"
+                <button title="Editar gira" v-if="Utils.role() != 'artist' && tour.active" @click="$emit('edit', tour)"
                     class="rounded-md border border-gray-300 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(202, 138, 4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -76,7 +76,7 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button title="Eliminar gira" v-if="Utils.role() != 'artist' && tour.itineraries_count == 0"
+                <button title="Eliminar gira" v-if="Utils.role() != 'artist' && tour.itineraries_count == 0 && tour.active"
                     @click="$emit('destroy', tour)"
                     class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
@@ -109,7 +109,7 @@ export default {
                         <rect width="12" height="8" x="6" y="14" />
                     </svg>
                 </button>
-                <button title="Seleccionar contactos de la gira" @click="$emit('contact', tour)"
+                <button v-if="tour.active" title="Seleccionar contactos de la gira" @click="$emit('contact', tour)"
                     class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -120,7 +120,7 @@ export default {
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
                 </button>
-                <button title="Seleccionar contactos de la gira" @click="$emit('countries', tour)"
+                <button v-if="tour.active" title="Seleccionar contactos de la gira" @click="$emit('countries', tour)"
                     class="rounded-md border border-gray-300 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -154,4 +154,5 @@ p {
 
 article {
     background: rgb(37, 44, 78);
-}</style>
+}
+</style>

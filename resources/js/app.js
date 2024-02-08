@@ -9,6 +9,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "viewerjs/dist/viewer.css";
 import "../css/app.css";
 import "../scss/app.scss";
+import vClickOutside from "click-outside-vue3";
 
 import VueViewer from "v-viewer";
 import { createApp } from "vue";
@@ -29,7 +30,7 @@ import PlacesPage from "./components/pages/places/PlacesPage.vue";
 import TicketsPage from "./components/pages/tickets/TicketsPage.vue";
 import ArtistPage from "./components/pages/artists/ArtistPage.vue";
 
-const app = createApp(App);
+const app = createApp(App).use(vClickOutside);
 app.component("home", HomePage);
 app.component("details", TourDetails);
 app.component("artists", ArtistsPage);
