@@ -51,13 +51,19 @@ class ItinerariesController extends Controller
                 $itineraries = Itineraries::whereHas('tour.agency', function ($query) use ($agencyId) {
                     $query->where('id', $agencyId);
                 })->whereDate('startdate', $today)->get();
+                return ItinerariesResource::collection($itineraries);
             } else {
+                //Es un admin
                 $itineraries = Itineraries::whereDate('startdate', $today)->get();
+                return ItinerariesResource::collection($itineraries);
             }
         } else {
-            $itineraries = Itineraries::whereDate('startdate', $today)->get();
+            $agencyId = $request->user()->id;
+            $itineraries = Itineraries::whereHas('tour.agency', function ($query) use ($agencyId) {
+                $query->where('id', $agencyId);
+            })->whereDate('startdate', $today)->get();
+            return ItinerariesResource::collection($itineraries);
         }
-        return ItinerariesResource::collection($itineraries);
     }
 
     /**
