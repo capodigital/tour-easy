@@ -42,16 +42,20 @@ class ItinerariesController extends Controller
 
     public function getCurrent(Request $request)
     {
+        $today = Carbon::today();
         if ($request->user()->getMorphClass() == 'App\\Models\\User') {
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 //Script milagroso para filtrar solo las actividades de la agencia logueada por la fecha
-                $itineraries = Itineraries::whereDate('startdate', Carbon::today())->get();
+                $agencyId = $user->agency_id;
+                $itineraries = Itineraries::whereHas('tour.agency', function ($query) use ($agencyId) {
+                    $query->where('id', $agencyId);
+                })->whereDate('startdate', $today)->get();
             } else {
-                $itineraries = Itineraries::whereDate('startdate', Carbon::today())->get();
+                $itineraries = Itineraries::whereDate('startdate', $today)->get();
             }
         } else {
-            $itineraries = Itineraries::whereDate('startdate', Carbon::today())->get();
+            $itineraries = Itineraries::whereDate('startdate', $today)->get();
         }
         return ItinerariesResource::collection($itineraries);
     }
