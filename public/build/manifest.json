@@ -22,14 +22,14 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/js/app.css": {
-    "file": "assets/app-caabebcc.css",
+    "file": "assets/app-159324ed.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-caabebcc.css"
+      "assets/app-159324ed.css"
     ],
-    "file": "assets/app-797d1b1d.js",
+    "file": "assets/app-d8143e0d.js",
     "imports": [
       "_CustomModal-1621300e.js"
     ],

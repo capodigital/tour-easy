@@ -112,6 +112,15 @@ export default {
         } else {
             if (this.countries.length > 0) {
                 this.setCities(this.countries[0].code, 'start')
+            } else {
+                axios.get('api/countries', {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
+                    }
+                }).then((response) => {
+                    this.countries = response.data.data;
+                    this.setCities(this.countries[0].code, 'start')
+                })
             }
         }
         if (this.activity.cityend != null && this.activity.cityend.country != undefined) {
@@ -119,6 +128,15 @@ export default {
         } else {
             if (this.countries.length > 0) {
                 this.setCities(this.countries[0].code, 'end')
+            } else {
+                axios.get('api/countries', {
+                    headers: {
+                        'Authorization': `Bearer ${this.Utils.token()}`
+                    }
+                }).then((response) => {
+                    this.countries = response.data.data;
+                    this.setCities(this.countries[0].code, 'end')
+                })
             }
         }
         axios.get('api/places', {

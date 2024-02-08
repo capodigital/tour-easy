@@ -33,9 +33,6 @@ export default {
         }
     },
     mounted() {
-        document.addEventListener("click", (e) => {
-            console.log(this.cart)
-        });
         this.emitter.on('current_agency_update', (data) => {
             localStorage.setItem('user', JSON.stringify(data))
             this.user = this.Utils.user()
@@ -53,8 +50,8 @@ export default {
             <div @click="home" class="px-2 cursor-pointer flex items-center">
                 <img src="src/logo.svg" class="h-12 w-12" />
                 <div class="hidden sm:block">
-                    <h1 class="text-gray-50">MAD MUSIC</h1>
-                    <p class=" text-sm text-gray-400">Easy Tour</p>
+                    <h1 class="text-gray-50">EASY TOUR</h1>
+                    <p class=" text-sm text-gray-400">Tour planner</p>
                 </div>
             </div>
         </div>

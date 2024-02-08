@@ -85,8 +85,15 @@ export default {
                         this.setCities(this.countries[0].code, 'start')
                         this.setCities(this.countries[0].code, 'end')
                     } else {
-                        this.start_cities = [];
-                        this.end_cities = [];
+                        axios.get('api/countries', {
+                            headers: {
+                                'Authorization': `Bearer ${this.Utils.token()}`
+                            }
+                        }).then((response) => {
+                            this.countries = response.data.data;
+                            this.setCities(this.countries[0].code, 'start')
+                            this.setCities(this.countries[0].code, 'end')
+                        })
                     }
                 }
             }
