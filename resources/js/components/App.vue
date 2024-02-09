@@ -70,6 +70,9 @@ export default {
             }
         }).then(() => {
             // this.init()
+            if (this.active == "login") {
+                this.active = "home"
+            }
         }).catch(() => {
             if (this.active != "tour" && this.active != "artist")
                 location.href = '/'

@@ -187,7 +187,10 @@ export default {
             this.tours = response.data.data;
         });
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-        this.tour_id = id
+        console.log(id)
+        if (id != '#calendar') {
+            this.tour_id = id
+        }
     },
     components: { ActivityDetails, CalendarModal, CalendarItem }
 };

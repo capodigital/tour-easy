@@ -156,9 +156,11 @@ export default {
                         <div class="flex items-center rounded border border-gray-300 px-2">
                             <select @change="updateCountries" v-model="tour_id" required name="tour_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="item in tours" :value="item.id">{{
-                                    item.tourname
-                                }}</option>
+                                <template v-for="item in tours">
+                                    <option class="text-black" v-if="item.active == 1" :value="item.id">{{
+                                        item.tourname
+                                    }}</option>
+                                </template>
                             </select>
                         </div>
                     </div>

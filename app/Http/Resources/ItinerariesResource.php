@@ -86,8 +86,6 @@ class ItinerariesResource extends JsonResource
             'persons' => PersonsResource::collection($persons),
             'supplier' => new SuppliersResource($supplier),
             'supplier_id' => $this->supplier_id,
-
-
         ];
     }
 }

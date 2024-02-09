@@ -87,7 +87,7 @@ export default {
                         </div>
                         <div class="w-5/12 px-2">
                             <div class="form-check items-center">
-                                <input required aria-label="Seleccionar todos" @change="selectAll"
+                                <input aria-label="Seleccionar todos" @change="selectAll"
                                     class="form-check-input me-1" type="checkbox" />
                                 <label class="form-check-label leading-4 text-sm mt-1">
                                     Seleccionar todos

@@ -1,9 +1,10 @@
 <script>
 import CustomModal from '../../../common/CustomModal.vue';
 import axios from 'axios';
+import MultiSelect from '../../../common/MultiSelect.vue';
 
 export default {
-    components: { CustomModal },
+    components: { CustomModal, MultiSelect },
     props: {
         activity: Object,
         tour: Object,
@@ -98,13 +99,13 @@ export default {
         }).then((response) => {
             this.types = response.data.data;
         })
-        axios.get('api/persons', {
-            headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }
-        }).then((response) => {
-            this.persons = response.data.data;
-        })
+        // axios.get('api/persons', {
+        //     headers: {
+        //         'Authorization': `Bearer ${this.Utils.token()}`
+        //     }
+        // }).then((response) => {
+        //     this.persons = response.data.data;
+        // })
         this.countries = this.tour.countries;
         if (this.activity.citystart != null) {
             this.outoftour = this.activity.outoftour == 1;
@@ -321,7 +322,16 @@ export default {
                 <div class="grid grid-cols-2 gap-x-2">
                     <div v-if="[1, 4, 6, 7, 8].includes(Number(activity.typeitinerary_id))">
                         <label class="text-slate-200 text-xs font-semibold">Contacto</label>
-                        <div class="flex items-center rounded border border-gray-300 px-2">
+                        <MultiSelect :ids="persons" label="Seleccionar contactos" :options="tour.persons" :initial="tour.persons">
+                            <template v-slot="{ item }">
+                                <div>
+                                    <p class="text-gray-200">{{ item.name }}</p>
+                                    <p class="text-gray-500 text-sm">{{ item.email }}</p>
+                                </div>
+                            </template>
+                        </MultiSelect>
+                        <input type="hidden" :name="`persons[${index}]`" :value="id" v-for="(id, index) in persons" />
+                        <!-- <div class="flex items-center rounded border border-gray-300 px-2">
                             <select required v-model="activity.person_id" name="person_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                                 <template v-for="item in tour.persons">
@@ -330,7 +340,20 @@ export default {
                                     }}</option>
                                 </template>
                             </select>
-                        </div>
+                        </div> -->
+                        <!-- <MultiSelect :options="tour.persons" placeholder="Seleccionar contactos"
+                            class="w-full">
+                            <template #optiongroup="slotProps">
+                                <div class="flex align-items-center">
+                                    <img :alt="slotProps.option.name"
+                                        src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+                                        :class="`flag flag-${slotProps.option.code.toLowerCase()} mr-2`"
+                                        style="width: 18px" />
+                                    <div>{{ slotProps.option.name }}</div>
+                                </div>
+                            </template>
+
+                        </MultiSelect> -->
                     </div>
                     <div v-if="[1, 2, 3, 5, 6, 7].includes(Number(activity.typeitinerary_id))">
                         <label class="text-slate-200 text-xs font-semibold">Lugar</label>
@@ -371,5 +394,4 @@ export default {
                 </button>
             </div>
         </form>
-    </CustomModal>
-</template>
+    </CustomModal></template>

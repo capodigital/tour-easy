@@ -21,6 +21,7 @@
         "jsbarcode": "^3.11.6",
         "mitt": "^3.0.1",
         "postcss": "^8.4.28",
+        "primevue": "^3.48.1",
         "qrious": "^4.0.2",
         "sass": "^1.66.1",
         "scroll-utility": "^4.0.2",

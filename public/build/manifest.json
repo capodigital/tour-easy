@@ -13,8 +13,8 @@
     ],
     "file": "assets/CustomModal-8ceab22d.js"
   },
-  "_html2canvas-b523f67e.js": {
-    "file": "assets/html2canvas-b523f67e.js",
+  "_html2canvas-729c9d09.js": {
+    "file": "assets/html2canvas-729c9d09.js",
     "imports": [
       "resources/js/app.js"
     ],
@@ -29,7 +29,7 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "node_modules/canvg/lib/index.es.js": {
-    "file": "assets/index.es-80603ab6.js",
+    "file": "assets/index.es-ac9cf485.js",
     "imports": [
       "resources/js/app.js",
       "_CustomModal-8ceab22d.js"
@@ -43,19 +43,19 @@
     "src": "node_modules/dompurify/dist/purify.es.js"
   },
   "resources/js/app.css": {
-    "file": "assets/app-5c499339.css",
+    "file": "assets/app-250b319e.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-5c499339.css"
+      "assets/app-250b319e.css"
     ],
     "dynamicImports": [
-      "_html2canvas-b523f67e.js",
+      "_html2canvas-729c9d09.js",
       "node_modules/dompurify/dist/purify.es.js",
       "node_modules/canvg/lib/index.es.js"
     ],
-    "file": "assets/app-cfa7d674.js",
+    "file": "assets/app-ff4939f9.js",
     "imports": [
       "_CustomModal-8ceab22d.js"
     ],
@@ -63,14 +63,14 @@
     "src": "resources/js/app.js"
   },
   "resources/js/landing.css": {
-    "file": "assets/landing-24a2254d.css",
+    "file": "assets/landing-a897f458.css",
     "src": "resources/js/landing.css"
   },
   "resources/js/landing.js": {
     "css": [
-      "assets/landing-24a2254d.css"
+      "assets/landing-a897f458.css"
     ],
-    "file": "assets/landing-54889d8f.js",
+    "file": "assets/landing-4b55cf89.js",
     "imports": [
       "_CustomModal-8ceab22d.js"
     ],
