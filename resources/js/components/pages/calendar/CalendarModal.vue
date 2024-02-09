@@ -143,10 +143,10 @@ export default {
             <h1
                 class="font-bold bg-gradient-to-tr from-slate-200 text-center to-slate-500 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 <template v-if="activity.id == undefined">
-                    AÑADIR ACTIVIDAD
+                    AÑADIR ITINERARIO
                 </template>
                 <template v-else>
-                    EDITAR ACTIVIDAD
+                    EDITAR ITINERARIO
                 </template>
             </h1>
             <div class="overflow-auto modal-content">
@@ -163,7 +163,7 @@ export default {
                         </div>
                     </div>
                     <div>
-                        <label class="text-slate-200 text-xs font-semibold">Tipo de actividad</label>
+                        <label class="text-slate-200 text-xs font-semibold">Tipo de itinerario</label>
                         <div class="flex items-center rounded border border-gray-300 px-2">
                             <select required v-model="activity.typeitinerary_id" name="typeitinerary_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
@@ -178,7 +178,7 @@ export default {
                     <label class="text-slate-200 text-xs font-semibold">Nombre</label>
                     <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                         <i class="bi bi-envelope text-gray-100"></i>
-                        <input required v-model="activity.name" name="name" type="text" placeholder="Nombre de la actividad"
+                        <input required v-model="activity.name" name="name" type="text" placeholder="Nombre del itinerario"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                     </div>
                 </div>

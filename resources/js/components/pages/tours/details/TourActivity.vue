@@ -12,7 +12,7 @@ export default {
     <article class="gradient-2 relative pb-16 rounded-lg shadow-md shadow-gray-800 p-3 transition-all hover:scale-[1.03] cursor-pointer">
         <div class="float-right">
             <div class="flex">
-                <button title="Ver detalles de la actividad" @click="$emit('show', activity)"
+                <button title="Ver detalles del itinerario" @click="$emit('show', activity)"
                     class="rounded-md border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(65, 91, 197)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -21,7 +21,7 @@ export default {
                         <circle cx="12" cy="12" r="3" />
                     </svg>
                 </button>
-                <button title="Editar actividad" v-if="Utils.role() != 'artist'" @click="$emit('edit', activity)"
+                <button title="Editar itinerario" v-if="Utils.role() != 'artist'" @click="$emit('edit', activity)"
                     class="rounded-md border border-gray-400 w-7 h-7 me-1 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(202, 138, 4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +32,7 @@ export default {
                         <path d="M4 13.5V6a2 2 0 0 1 2-2h2" />
                     </svg>
                 </button>
-                <button title="Eliminar actividad" v-if="Utils.role() != 'artist'" @click="$emit('destroy', activity)"
+                <button title="Eliminar itinerario" v-if="Utils.role() != 'artist'" @click="$emit('destroy', activity)"
                     class="rounded-md border border-gray-400 w-7 h-7 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="rgb(220, 38, 38)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

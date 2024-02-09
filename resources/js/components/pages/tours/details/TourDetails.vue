@@ -30,7 +30,7 @@ export default {
             this.show = true
         },
         destroy(item) {
-            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar esta actividad?')
+            const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este itinerario?')
             confirm.fire().then(() => {
                 axios.post('api/itineraries/' + item.id, { _method: 'delete' }, {
                     headers: {
@@ -39,7 +39,7 @@ export default {
                 }).then(() => {
                     for (let i in this.activities) {
                         if (this.activities[i].id == item.id) {
-                            this.Utils.notify('Se eliminó la actividad correctamente');
+                            this.Utils.notify('Se eliminó el itinerario correctamente');
                             this.activities.splice(i, 1)
                             break
                         }
@@ -65,13 +65,13 @@ export default {
                     }
                 }
                 if (this.activity.id == undefined) {
-                    this.Utils.notify('Se ha creado la actividad correctamente');
+                    this.Utils.notify('Se ha creado el itinerario correctamente');
                     this.activities.push(this.getActivityData(response.data.data))
                 } else {
                     for (let i in this.activities) {
                         if (this.activities[i].id == this.activity.id) {
                             this.activities[i] = this.getActivityData(response.data.data)
-                            this.Utils.notify('Se ha actualizado la actividad correctamente')
+                            this.Utils.notify('Se ha actualizado el itinerario correctamente')
                             break
                         }
                     }
@@ -383,7 +383,7 @@ export default {
         <div class="flex px-2">
             <h1
                 class="font-bold bg-gradient-to-tr w-full from-app-secondary-500 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black">
-                ACTIVIDADES</h1>
+                ITINERARIOS</h1>
             <div class="text-end">
                 <button @click="show_images = true"
                     class="px-2 py-1 mb-1 text-white bg-gradient-to-tr from-app-primary-500 to-app-primary-700 text-sm rounded whitespace-nowrap">

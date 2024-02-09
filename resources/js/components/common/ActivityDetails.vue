@@ -31,7 +31,7 @@ export default {
                 <div class="flex items-center mt-2">
                     <ActivityIcon :activity="activity" :size="20" />
                     <div class="ps-2">
-                        <p class="text-white">Tipo de actividad</p>
+                        <p class="text-white">Tipo de itinerario</p>
                         <p class="text-gray-400 text-sm">{{ activity.typeitinerary.description }}</p>
                     </div>
                 </div>
@@ -180,7 +180,7 @@ export default {
                         <i class="bi bi-calendar-date me-3 text-gray-50"></i>
                         <div>
                             <p class="text-white">Fuera de la gira</p>
-                            <p class="text-gray-400 text-sm">Esta actividad se encuentra fuera de la gira</p>
+                            <p class="text-gray-400 text-sm">Este itinerario se encuentra fuera de la gira</p>
                         </div>
                     </div>
                 </template>

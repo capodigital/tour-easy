@@ -86,7 +86,7 @@ export default {
     <div class="main mt-2">
         <div class="resume mb-2">
             <!-- <p class="font-bold text-gray-800 leading-3"><i class="bi bi-calendar-event-fill"></i> Calendario</p> -->
-            <h6 class="text-gray-700 leading-4 text-center">5 actividades hoy</h6>
+            <h6 class="text-gray-700 leading-4 text-center">5 itinerarios hoy</h6>
         </div>
         <div class="gradient-2 rounded-lg p-3 shadow-lg shadow-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div>
@@ -126,7 +126,7 @@ export default {
                 </div>
             </div>
             <div class="mt-3 sm:mt-0">
-                <p class="text-gray-300 text-center"><i class="bi bi-calendar2-week-fill"></i> Actividades</p>
+                <p class="text-gray-300 text-center"><i class="bi bi-calendar2-week-fill"></i> Itinerarios</p>
                 <!-- <CalendarHours v-for="(hour, index) in hours" :hour="hour" :index="index" :hours="hours" /> -->
                 <div class="flex justify-center">
                     <div class="w-full" v-if="activities.length > 0">
