@@ -55,7 +55,7 @@ export default {
             }).then((response) => {
                 const date = new Date(response.data.data.startdate);
                 this.forms[date.getDate() + Number(this.initial) - 1].activities.push(this.getActivityData(response.data.data));
-                this.Utils.notify('Se ha creado correctamente la actividad')
+                this.Utils.notify('Se ha creado correctamente el itinerario')
                 this.show = false;
                 this.Utils.unlock(e.target)
             }).catch((error) => {
@@ -196,7 +196,7 @@ export default {
     <div class="w-full px-4 py-4 overflow-auto scroll" style="font-family: Roboto">
         <h1
             class="font-bold w-full bg-gradient-to-tr from-app-secondary-300 to-app-secondary-800 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
-            CALENDARIO DE ACTIVIDADES
+            CALENDARIO DE ITINERARIOS
         </h1>
         <div class="my-2">
             <div class="text-center sm:flex items-center">

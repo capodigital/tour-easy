@@ -43,7 +43,7 @@ export default {
             <div class="flex items-center mt-1">
                 <ActivityIcon :activity="activity" :size="20" />
                 <div class="ps-2">
-                    <p class="text-white text-sm">Tipo de actividad</p>
+                    <p class="text-white text-sm">Tipo de itinerario</p>
                     <p class="text-gray-400 text-xs">{{ activity.typeitinerary.description }}</p>
                 </div>
             </div>

@@ -48,9 +48,9 @@ class Persons extends Model
     {
         return $this->morphMany(Documents::class, 'documentsable','documentable_type','documentable_id');
     }
-    public function itineraries(): HasMany
+    public function itineraries(): BelongsToMany
     {
-        return $this->hasMany(Itineraries::class,'person_id');
+        return $this->belongsToMany(Itineraries::class,'personitineraries', 'person_id', 'itinerary_id');
     }
 
     public function toArray() {
