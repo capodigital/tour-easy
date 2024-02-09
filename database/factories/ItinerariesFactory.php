@@ -49,9 +49,7 @@ class ItinerariesFactory extends Factory
             'city_destination_id' => function () {
                 return Cities::all()->random()->id;
             },
-            // 'person_id' => function () {
-            //     return Persons::all()->random()->id;
-            // },
+
             'supplier_id' => function () {
                 return Suppliers::all()->random()->id;
             },

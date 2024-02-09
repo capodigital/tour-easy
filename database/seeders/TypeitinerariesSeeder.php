@@ -15,30 +15,37 @@ class TypeitinerariesSeeder extends Seeder
     {
         DB::table('typeitineraries')->insert([
             [
-                'description' => 'Show',
-                
+                'description' => 'Vuelo Comercial',
             ],
             [
-                'description' => 'Actividad',
+                'description' => 'Vuelo Privado',
             ],
             [
-                'description' => 'Servicio',
+                'description' => 'Transfer',
             ],
             [
                 'description' => 'Transporte terrestre',
             ],
             [
-                'description' => 'Hotel',
-            ],
-            [
-                'description' => 'Avión',
-            ],
-            [
                 'description' => 'Tren',
             ],
             [
-                'description' => 'Transfer',
+                'description' => 'Alojamiento',
             ],
+            [
+                'description' => 'Show',
+                
+            ],
+            [
+                'description' => 'Actividad Prensa',
+            ],
+            [
+                'description' => 'Actividad Fans',
+            ],
+            
+            
+            
+            
            
         ]);
     }
