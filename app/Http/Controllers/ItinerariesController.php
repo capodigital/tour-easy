@@ -48,8 +48,11 @@ class ItinerariesController extends Controller
             if ($user->agency_id != null) {
                 //Script milagroso para filtrar solo las actividades de la agencia logueada por la fecha
                 $agencyId = $user->agency_id;
-                $itineraries = Itineraries::whereHas('tour.agency', function ($query) use ($agencyId) {
-                    $query->where('id', $agencyId);
+                $itineraries = Itineraries::whereHas('tour', function ($query) use ($agencyId) {
+                    $query->where('active', true)
+                          ->whereHas('agency', function ($query) use ($agencyId) {
+                              $query->where('id', $agencyId);
+                          });
                 })->whereDate('startdate', $today)->get();
                 return ItinerariesResource::collection($itineraries);
             } else {
@@ -59,8 +62,11 @@ class ItinerariesController extends Controller
             }
         } else {
             $agencyId = $request->user()->id;
-            $itineraries = Itineraries::whereHas('tour.agency', function ($query) use ($agencyId) {
-                $query->where('id', $agencyId);
+            $itineraries = Itineraries::whereHas('tour', function ($query) use ($agencyId) {
+                $query->where('active', true)
+                      ->whereHas('agency', function ($query) use ($agencyId) {
+                          $query->where('id', $agencyId);
+                      });
             })->whereDate('startdate', $today)->get();
             return ItinerariesResource::collection($itineraries);
         }
