@@ -14,7 +14,7 @@ class Itineraries extends Model
     protected $fillable = [
         'name', 'startdate', 'enddate', 'notes', 'outoftour', 'carrier', 'carrier_id', 'showcheck',
         'showtime', 'notify', 'tour_id', 'typeitinerary_id', 'place_id', 'city_start_id',
-        'city_destination_id', 'person_id', 'supplier_id'
+        'city_destination_id', 'supplier_id'
     ];
 
     public function cityStart(): BelongsTo
