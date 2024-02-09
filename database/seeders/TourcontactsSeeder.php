@@ -24,6 +24,16 @@ class TourcontactsSeeder extends Seeder
                         'person_id' => Persons::where('agency_id',$agency->id)->get()->random()->id
                     ]
                 ]);
+                $itineararies = $tour->itineraries()->get();
+                foreach ($itineararies as $itinerary) {
+                    DB::table('personitineraries')->insert([
+                        [
+                            'itinerary_id' => $itinerary->id,
+                            'person_id' => Persons::where('agency_id',$agency->id)->get()->random()->id,
+                            'type' => 1
+                        ]
+                    ]);
+                }
             }
         }
     }
