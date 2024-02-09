@@ -49,7 +49,7 @@ class ItinerariesResource extends JsonResource
         } else {
             $place = new PlacesResource($place);
         }
-        $person = Persons::find($this->person_id);
+        /*$person = Persons::find($this->person_id);
         if ($person == null) {
             $person = [
                 'id' => 0,
@@ -57,7 +57,8 @@ class ItinerariesResource extends JsonResource
             ];
         } else {
             $person = new PersonsResource($person);
-        }
+        }*/
+        $persons = $this->persons()->get();
         $supplier = Suppliers::find($this->supplier_id);
 
         return [
@@ -82,8 +83,7 @@ class ItinerariesResource extends JsonResource
             'city_destination_id' => $this->city_destination_id,
             'place' => $place,
             'place_id' => $this->place_id,
-            'person' => $person,
-            'person_id' => $this->person_id,
+            'persons' => PersonsResource::collection($persons),
             'supplier' => new SuppliersResource($supplier),
             'supplier_id' => $this->supplier_id,
 

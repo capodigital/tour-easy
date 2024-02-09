@@ -113,6 +113,7 @@ class ItinerariesController extends Controller
 
         $itinerary = new Itineraries($request->input());
         $itinerary->save();
+        $itinerary->persons()->syncWithPivotValues($request->persons, ['type' => 1]);
         $itinerary->refresh();
         return new ItinerariesResource($itinerary);
     }
@@ -161,6 +162,7 @@ class ItinerariesController extends Controller
             ]);
         }
         $itinerary->update($request->all());
+        $itinerary->persons()->syncWithPivotValues($request->persons, ['type' => 1]);
 
         return new ItinerariesResource($itinerary);
     }
