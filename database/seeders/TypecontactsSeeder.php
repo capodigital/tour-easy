@@ -19,20 +19,40 @@ class TypecontactsSeeder extends Seeder
                 
             ],
             [
+                'description' => 'Agente',
+                
+            ],
+            [
                 'description' => 'Manager',
+            ],
+            [
+                'description' => 'Tour Manager',
             ],
             [
                 'description' => 'Promotor',
             ],
             [
+                'description' => 'Booking',
+            ],
+            [
+                'description' => 'Técnico',
+            ],
+            [
                 'description' => 'Chofer',
             ],
             [
-                'description' => 'Crew',
+                'description' => 'Proveedor',
             ],
             [
-                'description' => 'Tech',
+                'description' => 'Equipo Artista',
             ],
+            [
+                'description' => 'Personal Artista',
+            ],
+            [
+                'description' => 'Seguridad',
+            ],
+            
            
         ]);
     }
