@@ -117,7 +117,7 @@ class ItinerariesController extends Controller
          * sobreescriben a los del tipo 1 que se habían guardado y al final solo quedan los de tipo 2
          */
         $itinerary->persons()->syncWithPivotValues($request->persons_1, ['type' => 1]);
-        $itinerary->persons()->syncWithPivotValues($request->persons_2, ['type' => 2]);
+        $itinerary->persons()->syncWithoutDetaching($request->persons_2, ['type' => 2]);
         $itinerary->refresh();
         return new ItinerariesResource($itinerary);
     }
@@ -170,7 +170,7 @@ class ItinerariesController extends Controller
          * sobreescriben a los del tipo 1 que se habían guardado y al final solo quedan los de tipo 2
          */
         $itinerary->persons()->syncWithPivotValues($request->persons_1, ['type' => 1]);
-        $itinerary->persons()->syncWithPivotValues($request->persons_2, ['type' => 2]);
+        $itinerary->persons()->syncWithoutDetaching($request->persons_2, ['type' => 2]);
 
         return new ItinerariesResource($itinerary);
     }
