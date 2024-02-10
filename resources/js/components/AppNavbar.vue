@@ -83,17 +83,18 @@ export default {
                 <p class="text-gray-300 text-sm text-center leading-3 mb-2 mt-1">{{ Utils.role() == 'agency' ? 'Agencia' :
                     'Administrador' }}</p>
                 <p class="text-gray-400 text-xs text-center leading-3 mb-2 mt-1">{{ Utils.user().email }}</p>
-                <!-- <button
+                <a href="/dj/home/"
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-circle-user">
-                        <circle cx="12" cy="12" r="10" />
-                        <circle cx="12" cy="10" r="3" />
-                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
+                        class="lucide lucide-file-music">
+                        <circle cx="14" cy="16" r="2" />
+                        <circle cx="6" cy="18" r="2" />
+                        <path d="M4 12.4V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-7.5" />
+                        <path d="M8 18v-7.7L16 9v7" />
                     </svg>
-                    <p class="ms-2 text-gray-100 text-sm">Perfil</p>
-                </button> -->
+                    <p class="ms-2 text-gray-100 text-sm">Reportes</p>
+                </a>
                 <button @click="configuration = true"
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"

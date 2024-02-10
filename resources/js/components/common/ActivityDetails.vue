@@ -7,12 +7,13 @@ import TrainItineraryDetails from '../itinerary/details/TrainItineraryDetails.vu
 import ShowItineraryDetails from '../itinerary/details/ShowItineraryDetails.vue';
 import ActivityIcon from './ActivityIcon.vue';
 import CustomModal from './CustomModal.vue';
+import HotelItineraryDetails from '../itinerary/details/HotelItineraryDetails.vue';
 
 export default {
     props: {
         activity: Object,
     },
-    components: { ActivityIcon, CustomModal, ActivityItineraryDetails, FlyItineraryDetails, TransferItineraryDetails, BusItineraryDetails, TrainItineraryDetails, ShowItineraryDetails, },
+    components: { ActivityIcon, CustomModal, ActivityItineraryDetails, FlyItineraryDetails, TransferItineraryDetails, BusItineraryDetails, TrainItineraryDetails, ShowItineraryDetails, HotelItineraryDetails },
 }
 </script>
 <template>
@@ -48,6 +49,7 @@ export default {
                     <TransferItineraryDetails v-if="Number(activity.typeitinerary_id) == 3" :activity="activity" />
                     <BusItineraryDetails v-else-if="Number(activity.typeitinerary_id) == 4" :activity="activity" />
                     <TrainItineraryDetails v-else-if="Number(activity.typeitinerary_id) == 5" :activity="activity" />
+                    <HotelItineraryDetails v-else-if="Number(activity.typeitinerary_id) == 6" :activity="activity" />
                     <ShowItineraryDetails v-else-if="Number(activity.typeitinerary_id) == 7" :activity="activity" />
                     <ActivityItineraryDetails
                         v-else-if="Number(activity.typeitinerary_id) == 8 || Number(activity.typeitinerary_id) == 9"

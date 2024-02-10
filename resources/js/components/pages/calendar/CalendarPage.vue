@@ -54,7 +54,7 @@ export default {
                 }
             }).then((response) => {
                 const date = new Date(response.data.data.startdate);
-                this.forms[date.getDate() + Number(this.initial) - 1].activities.push(this.getActivityData(response.data.data));
+                this.forms[date.getDate() + Number(this.initial) - 1].activities.push(response.data.data);
                 this.Utils.notify('Se ha creado correctamente el itinerario')
                 this.show = false;
                 this.Utils.unlock(e.target)
@@ -92,7 +92,7 @@ export default {
                 }
                 for (let item of response.data.data) {
                     const date = new Date(item.startdate);
-                    this.forms[date.getDate() - 1 + initial].activities.push(this.getActivityData(item));
+                    this.forms[date.getDate() - 1 + initial].activities.push(item);
                 }
                 for (let i = 1; i < 8 - (today.getDay() + 1); i++) {
                     this.forms.push({
@@ -104,73 +104,6 @@ export default {
                 console.log(error)
                 this.Utils.error(error.response)
             });
-        },
-        getActivityData(activity) {
-            let name = '', description = '', type = activity.typeitinerary_id, start = activity.startdate, end = activity.enddate, complete = ''
-            if (new Date(start) > new Date()) {
-                complete = 'No completado'
-            } else {
-                if (new Date() < new Date(end)) {
-                    complete = 'En progreso'
-                } else {
-                    complete = 'Completado'
-                }
-            }
-            let date = '';
-            if (activity.person == null) {
-                activity.person = {
-                    id: 0,
-                    name: 'Contacto eliminado'
-                }
-            }
-            if (activity.place == null) {
-                activity.place = {
-                    id: 0,
-                    name: 'Lugar eliminado'
-                }
-            }
-            switch (Number(activity.typeitinerary_id)) {
-                case 1:
-                    name = activity.name, description = `<b>Prueba de sonidos: </b>${activity.showcheck}.<br /><b>Puertas abiertas: </b>${activity.showtime}.<br /><b>Lugar: </b>${activity.place.name}`,
-                        date = `<br />${start}`;
-                    break;
-                case 2:
-                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
-                        date = `<br />${start}`;
-                    break;
-                case 3:
-                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
-                        date = `<br />${start}`;
-                    break;
-                case 5:
-                    name = activity.name, description = `<b>Lugar: </b>${activity.place.name}`,
-                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
-                    break;
-                case 4:
-                    name = activity.name, description = `<b>Conductor: </b>${activity.person.name}`,
-                        date = `<br />${start}`;
-                    break;
-                case 6:
-                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Aerolinea: </b>${activity.place.name}`,
-                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
-                    break;
-                case 7:
-                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Ferroviaria: </b>${activity.place.name}`,
-                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
-                    break;
-                case 8:
-                    name = `${activity.citystart.name} → ${activity.cityend.name}`, description = `<b>Conductor: </b>${activity.person.name}`,
-                        date = `<br /><div class="flex flex-col items-center"><div>${start}</div><div>${activity.enddate}</div></div>`;
-                    break;
-            }
-            const item = activity
-            item.name = name
-            item.type = type
-            item.description = description
-            item.date = date
-            item.start = start
-            item.complete = complete
-            return item
         },
         timestamp(day) {
             const date = new Date(this.year, this.month, day);
@@ -187,7 +120,6 @@ export default {
             this.tours = response.data.data;
         });
         const id = location.hash.substring(location.hash.lastIndexOf('/') + 1)
-        console.log(id)
         if (id != '#calendar') {
             this.tour_id = id
         }

@@ -7,9 +7,10 @@ import BusItineraryForm from '../../../itinerary/forms/BusItineraryForm.vue';
 import TrainItineraryForm from '../../../itinerary/forms/TrainItineraryForm.vue';
 import ShowItineraryForm from '../../../itinerary/forms/ShowItineraryForm.vue';
 import ActivityItineraryForm from '../../../itinerary/forms/ActivityItineraryForm.vue';
+import HotelItineraryForm from '../../../itinerary/forms/HotelItineraryForm.vue';
 
 export default {
-    components: { CustomModal, FlyItineraryForm, TransferItineraryForm, BusItineraryForm, TrainItineraryForm, ShowItineraryForm, ActivityItineraryForm },
+    components: { CustomModal, FlyItineraryForm, TransferItineraryForm, BusItineraryForm, TrainItineraryForm, ShowItineraryForm, ActivityItineraryForm, HotelItineraryForm },
     props: {
         activity: Object,
         tour: Object,
@@ -178,6 +179,10 @@ export default {
                     :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
                     :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
                     :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 5" />
+                <HotelItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                    :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                    :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                    :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 6" />
                 <ShowItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :places="places"
                     :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
                     :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
