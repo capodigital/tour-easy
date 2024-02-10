@@ -58,7 +58,8 @@ class ItinerariesResource extends JsonResource
         } else {
             $person = new PersonsResource($person);
         }*/
-        $persons = $this->persons()->get();
+        $persons_1 = $this->persons()->wherePivot('type', 1)->get();
+        $persons_2 = $this->persons()->wherePivot('type', 2)->get();
         $supplier = Suppliers::find($this->supplier_id);
 
         return [
@@ -83,7 +84,8 @@ class ItinerariesResource extends JsonResource
             'city_destination_id' => $this->city_destination_id,
             'place' => $place,
             'place_id' => $this->place_id,
-            'persons' => PersonsResource::collection($persons),
+            'persons_1' => PersonsResource::collection($persons_1),
+            'persons_2' => PersonsResource::collection($persons_2),
             'supplier' => new SuppliersResource($supplier),
             'supplier_id' => $this->supplier_id,
         ];

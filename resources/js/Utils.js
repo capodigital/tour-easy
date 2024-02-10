@@ -238,4 +238,53 @@ export default class Utils {
             .toString()
             .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
     }
+
+    static place(place, type) {
+        switch (type) {
+            case 1:
+            case 2:
+                return place.typeplace_id == 3;
+            case 5:
+                return place.typeplace_id == 4;
+            case 6:
+                return place.typeplace_id == 2;
+            case 7:
+                return place.typeplace_id == 1;
+            default:
+                return true;
+        }
+    }
+
+    static contact(contact, type) {
+        switch (type) {
+            case 1:
+            case 2:
+            case 5:
+            case 6:
+                return [9, 5, 6, 4].includes(Number(contact.typecontact_id));
+            case 3:
+            case 4:
+                return [9, 8, 6, 4].includes(Number(contact.typecontact_id));
+            case 7:
+            case 8:
+            case 9:
+                return [4, 5, 6, 3, 2].includes(Number(contact.typecontact_id));
+            default:
+                return false;
+        }
+    }
+
+    static complete(activity) {
+        const current = new Date();
+
+        if (new Date(activity.startdate) > current) {
+            return "No completado";
+        } else {
+            if (current < new Date(activity.enddate)) {
+                return "En progreso";
+            } else {
+                return "Completado";
+            }
+        }
+    }
 }

@@ -50,9 +50,9 @@ class ItinerariesController extends Controller
                 $agencyId = $user->agency_id;
                 $itineraries = Itineraries::whereHas('tour', function ($query) use ($agencyId) {
                     $query->where('active', true)
-                          ->whereHas('agency', function ($query) use ($agencyId) {
-                              $query->where('id', $agencyId);
-                          });
+                        ->whereHas('agency', function ($query) use ($agencyId) {
+                            $query->where('id', $agencyId);
+                        });
                 })->whereDate('startdate', $today)->get();
                 return ItinerariesResource::collection($itineraries);
             } else {
@@ -64,9 +64,9 @@ class ItinerariesController extends Controller
             $agencyId = $request->user()->id;
             $itineraries = Itineraries::whereHas('tour', function ($query) use ($agencyId) {
                 $query->where('active', true)
-                      ->whereHas('agency', function ($query) use ($agencyId) {
-                          $query->where('id', $agencyId);
-                      });
+                    ->whereHas('agency', function ($query) use ($agencyId) {
+                        $query->where('id', $agencyId);
+                    });
             })->whereDate('startdate', $today)->get();
             return ItinerariesResource::collection($itineraries);
         }
@@ -113,8 +113,11 @@ class ItinerariesController extends Controller
 
         $itinerary = new Itineraries($request->input());
         $itinerary->save();
-        $itinerary->persons()->syncWithPivotValues($request->persons, ['type' => 1]);
-        $itinerary->persons()->syncWithPivotValues($request->persons2, ['type' => 2]);
+        /**Aquí da problemas, se guardan los del tipo 1 pero los del tipo 2 cuando se guardan
+         * sobreescriben a los del tipo 1 que se habían guardado y al final solo quedan los de tipo 2
+         */
+        $itinerary->persons()->syncWithPivotValues($request->persons_1, ['type' => 1]);
+        $itinerary->persons()->syncWithPivotValues($request->persons_2, ['type' => 2]);
         $itinerary->refresh();
         return new ItinerariesResource($itinerary);
     }
@@ -163,8 +166,11 @@ class ItinerariesController extends Controller
             ]);
         }
         $itinerary->update($request->all());
-        $itinerary->persons()->syncWithPivotValues($request->persons, ['type' => 1]);
-        $itinerary->persons()->syncWithPivotValues($request->persons2, ['type' => 2]);
+        /**Aquí da problemas, se guardan los del tipo 1 pero los del tipo 2 cuando se guardan
+         * sobreescriben a los del tipo 1 que se habían guardado y al final solo quedan los de tipo 2
+         */
+        $itinerary->persons()->syncWithPivotValues($request->persons_1, ['type' => 1]);
+        $itinerary->persons()->syncWithPivotValues($request->persons_2, ['type' => 2]);
 
         return new ItinerariesResource($itinerary);
     }

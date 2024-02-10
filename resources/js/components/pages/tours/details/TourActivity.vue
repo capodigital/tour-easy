@@ -1,4 +1,5 @@
 <script>
+import Utils from '../../../../Utils';
 import ActivityIcon from '../../../common/ActivityIcon.vue';
 
 export default {
@@ -9,7 +10,8 @@ export default {
 }
 </script>
 <template>
-    <article class="gradient-2 relative pb-16 rounded-lg shadow-md shadow-gray-800 p-3 transition-all hover:scale-[1.03] cursor-pointer">
+    <article
+        class="gradient-2 relative pb-16 rounded-lg shadow-md shadow-gray-800 p-3 transition-all hover:scale-[1.03] cursor-pointer">
         <div class="float-right">
             <div class="flex">
                 <button title="Ver detalles del itinerario" @click="$emit('show', activity)"
@@ -49,23 +51,25 @@ export default {
                 <ActivityIcon :activity="activity" />
             </div>
         </div>
-        <h3 class="font-bold text-lg text-gray-300 leading-4 pe-2">{{ activity.name }}</h3>
-        <p class="text-gray-400 text-sm leading-4 pe-10 mt-4 overflow-hidden text-ellipsis"
-            v-html="activity.description"></p>
+        <h3 class="font-bold text-lg text-gray-300 leading-4 pe-2">
+            <template v-if="activity.typeitinerary_id == 3">Transfer to </template>
+            {{ activity.name }}
+        </h3>
+        <p class="text-gray-400 text-xs leading-4 mt-4 overflow-hidden text-ellipsis" v-html="activity.notes"></p>
         <div class="flex absolute mt-4 w-[calc(100%-1rem)] bottom-2 left-2">
             <div class="flex w-full justify-between items-end text-sm">
                 <button
-                    :class="{ 'from-blue-500': activity.complete == 'En progreso', 'to-blue-600': activity.complete == 'En progreso', 'from-gray-400': activity.complete == 'No completado', 'to-gray-800': activity.complete == 'No completado', 'from-green-500': activity.complete == 'Completado', 'to-green-700': activity.complete == 'Completado' }"
+                    :class="{ 'from-blue-500': Utils.complete(activity) == 'En progreso', 'to-blue-600': Utils.complete(activity) == 'En progreso', 'from-gray-400': Utils.complete(activity) == 'No completado', 'to-gray-800': Utils.complete(activity) == 'No completado', 'from-green-500': Utils.complete(activity) == 'Completado', 'to-green-700': Utils.complete(activity) == 'Completado' }"
                     class="rounded-md border px-3 h-9 overlay-button me-1 flex justify-center items-center bg-gradient-to-br text-white">
-                    <svg v-if="activity.complete == 'Completado'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                    <svg v-if="Utils.complete(activity) == 'Completado'" xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="lucide lucide-check-square me-2">
                         <path d="m9 11 3 3L22 4" />
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                     </svg>
-                    <svg v-else-if="activity.complete == 'No completado'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-calendar-clock me-2">
+                    <svg v-else-if="Utils.complete(activity) == 'No completado'" xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock me-2">
                         <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
                         <path d="M16 2v4" />
                         <path d="M8 2v4" />
@@ -80,12 +84,16 @@ export default {
                         <path d="m15 9-6 6" />
                         <path d="m9 9 6 6" />
                     </svg>
-                    {{ activity.complete }}
+                    {{ Utils.complete(activity) }}
                 </button>
 
                 <div class="flex">
                     <div>
-                        <small class="text-end text-gray-500 leading-4" v-html="activity.date"></small>
+                        <small class="text-end text-gray-500 leading-3 text-xs">
+                            Inicio: {{ Utils.datetime(activity.startdate, Utils.FULL_DATE_TIME) }}
+                            <br />
+                            Fin: {{ Utils.datetime(activity.enddate, Utils.FULL_DATE_TIME) }}
+                        </small>
                     </div>
                 </div>
             </div>

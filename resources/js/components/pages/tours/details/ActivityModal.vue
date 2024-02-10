@@ -1,10 +1,15 @@
 <script>
 import CustomModal from '../../../common/CustomModal.vue';
 import axios from 'axios';
-import MultiSelect from '../../../common/MultiSelect.vue';
+import FlyItineraryForm from '../../../itinerary/forms/FlyItineraryForm.vue';
+import TransferItineraryForm from '../../../itinerary/forms/TransferItineraryForm.vue';
+import BusItineraryForm from '../../../itinerary/forms/BusItineraryForm.vue';
+import TrainItineraryForm from '../../../itinerary/forms/TrainItineraryForm.vue';
+import ShowItineraryForm from '../../../itinerary/forms/ShowItineraryForm.vue';
+import ActivityItineraryForm from '../../../itinerary/forms/ActivityItineraryForm.vue';
 
 export default {
-    components: { CustomModal, MultiSelect },
+    components: { CustomModal, FlyItineraryForm, TransferItineraryForm, BusItineraryForm, TrainItineraryForm, ShowItineraryForm, ActivityItineraryForm },
     props: {
         activity: Object,
         tour: Object,
@@ -12,15 +17,14 @@ export default {
     data() {
         return {
             tours: [],
-            persons: [],
+            persons_1: [],
+            persons_2: [],
             suppliers: [],
             types: [],
             countries: [],
             start_cities: [],
             end_cities: [],
             places: [],
-            country_start: 'AF',
-            country_end: 'AF',
             outoftour: false,
             _startdate: '',
             _enddate: '',
@@ -29,52 +33,24 @@ export default {
         }
     },
     methods: {
-        setCities(country, type) {
-            axios.post('api/cities', { code: country }, {
+        setCities({ code, type }) {
+            axios.post('api/cities', { code: code }, {
                 headers: {
                     'Authorization': `Bearer ${this.Utils.token()}`
                 }
             }).then((response) => {
                 if (type == 'start') {
-                    this.country_start = country
-                    this.start_cities = response.data;
+                    this.activity._country_start = code
+                    this.start_cities = response.data
                 } else {
-                    this.country_end = country
-                    this.end_cities = response.data;
+                    this.activity._country_end = code
+                    this.end_cities = response.data
                 }
             });
         },
-        person(person) {
-            switch (this.activity.typeitinerary_id) {
-                case 1:
-                    return person.typecontact_id == 3 || person.typecontact_id == 2
-                case 4:
-                case 6:
-                case 7:
-                case 8:
-                    return person.typecontact_id == 4
-                default:
-                    return false
-            }
-        },
-        place(place) {
-            switch (this.activity.typeitinerary_id) {
-                case 1:
-                case 2:
-                case 3:
-                    return place.typeplace_id == 1
-                case 5:
-                    return place.typeplace_id == 2
-                case 6:
-                    return place.typeplace_id == 3
-                case 7:
-                    return place.typeplace_id == 4
-                default:
-                    return false
-            }
-        },
     },
     created() {
+        this.activity.typeitinerary_id = 1
         if (this.activity.startdate != null) {
             const date = new Date(this.activity.startdate)
             this._startdate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
@@ -99,47 +75,39 @@ export default {
         }).then((response) => {
             this.types = response.data.data;
         })
-        // axios.get('api/persons', {
-        //     headers: {
-        //         'Authorization': `Bearer ${this.Utils.token()}`
-        //     }
-        // }).then((response) => {
-        //     this.persons = response.data.data;
-        // })
         this.countries = this.tour.countries;
         if (this.activity.citystart != null) {
-            this.outoftour = this.activity.outoftour == 1;
-            this.setCities(this.activity.citystart.country.code, 'start')
-        } else {
-            if (this.countries.length > 0) {
-                this.setCities(this.countries[0].code, 'start')
-            } else {
-                axios.get('api/countries', {
-                    headers: {
-                        'Authorization': `Bearer ${this.Utils.token()}`
-                    }
-                }).then((response) => {
-                    this.countries = response.data.data;
-                    this.setCities(this.countries[0].code, 'start')
-                })
-            }
+            this.activity._outoftour = this.activity.outoftour == 1;
+            this.activity._country_start = this.activity.citystart.country_id
+            this.setCities({ code: this.activity.citystart.country.code, type: 'start' })
         }
-        if (this.activity.cityend != null && this.activity.cityend.country != undefined) {
-            this.setCities(this.activity.cityend.country.code, 'end')
-        } else {
-            if (this.countries.length > 0) {
-                this.setCities(this.countries[0].code, 'end')
-            } else {
-                axios.get('api/countries', {
-                    headers: {
-                        'Authorization': `Bearer ${this.Utils.token()}`
-                    }
-                }).then((response) => {
-                    this.countries = response.data.data;
-                    this.setCities(this.countries[0].code, 'end')
-                })
-            }
+        if (this.activity.cityend != null) {
+            this.activity._country_end = this.activity.cityend.country_id
+            this.setCities({ code: this.activity.cityend.country_id, type: 'end' })
         }
+        if (this.countries.length > 0) {
+            if (this.activity.citystart == null) {
+                this.setCities({ code: this.countries[0].code, type: 'start' })
+            }
+            if (this.activity.cityend == null) {
+                this.setCities({ code: this.countries[0].code, type: 'end' })
+            }
+        } else {
+            axios.get('api/countries', {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.countries = response.data.data;
+                if (this.activity.citystart == null) {
+                    this.setCities({ code: this.countries[0].code, type: 'start' })
+                }
+                if (this.activity.cityend == null) {
+                    this.setCities({ code: this.countries[0].code, type: 'end' })
+                }
+            })
+        }
+
         axios.get('api/places', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -194,189 +162,30 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <label class="text-slate-200 text-xs font-semibold">Nombre</label>
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                        <i class="bi bi-envelope text-gray-100"></i>
-                        <input required v-model="activity.name" name="name" type="text" placeholder="Nombre del itinerario"
-                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                    </div>
-                </div>
-                <div>
-                    <label class="text-slate-200 text-xs font-semibold">Descripción</label>
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                        <textarea required rows="3" v-model="activity.notes" name="notes" placeholder="Datos adicionales"
-                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-x-2 my-3" v-if="activity.typeitinerary_id == 1">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Prueba de sonido</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input required v-model="activity.showcheck" name="showcheck" type="time"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Inicio del show</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input required v-model="activity.showtime" name="showtime" type="time"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de inicio</label>
-                        <div class="flex">
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required :min="Utils.getDateInput(tour.startdate)"
-                                    :max="Utils.getDateInput(tour.enddate)" v-model="_startdate" type="date"
-                                    placeholder="Fecha de inicio"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_starttime" type="time" placeholder="Hora de inicio"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
-                        </div>
-                        <input type="hidden" name="startdate" :value="_startdate + ' ' + _starttime" />
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de fin</label>
-                        <div class="flex">
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input :min="Utils.getDateInput(tour.startdate)" :max="Utils.getDateInput(tour.enddate)"
-                                    required v-model="_enddate" type="date" placeholder="Fecha de fin"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_endtime" type="time" placeholder="Hora de fin"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <input type="hidden" name="enddate" :value="_enddate + ' ' + _endtime" />
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">País</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-globe text-gray-100"></i>
-                            <select required v-model="country_start" @change="(e) => setCities(e.target.value, 'start')"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="country in countries" :value="country.code">{{
-                                    country.name }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Ciudad <template
-                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de
-                                salida</template></label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-globe-americas text-gray-100"></i>
-                            <select required v-model="activity.city_start_id" name="city_start_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="city in start_cities" :value="city.id">{{
-                                    city.name }} ({{ city.code }})
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <template v-if="[6, 7, 8].includes(Number(activity.typeitinerary_id))">
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">País</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe text-gray-100"></i>
-                                <select required v-model="country_end" @change="(e) => setCities(e.target.value, 'end')"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="country in countries" :value="country.code">{{
-                                        country.name }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe-americas text-gray-100"></i>
-                                <select required v-model="activity.city_destination_id" name="city_destination_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="city in end_cities" :value="city.id">{{
-                                        city.name
-                                    }} ({{ city.code }})
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div v-if="[1, 4, 6, 7, 8].includes(Number(activity.typeitinerary_id))">
-                        <label class="text-slate-200 text-xs font-semibold">Contacto</label>
-                        <MultiSelect :ids="persons" label="Seleccionar contactos" :options="tour.persons" :initial="tour.persons">
-                            <template v-slot="{ item }">
-                                <div>
-                                    <p class="text-gray-200">{{ item.name }}</p>
-                                    <p class="text-gray-500 text-sm">{{ item.email }}</p>
-                                </div>
-                            </template>
-                        </MultiSelect>
-                        <input type="hidden" :name="`persons[${index}]`" :value="id" v-for="(id, index) in persons" />
-                        <!-- <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select required v-model="activity.person_id" name="person_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <template v-for="item in tour.persons">
-                                    <option v-if="person(item)" class="text-black" :value="item.id">{{
-                                        item.name
-                                    }}</option>
-                                </template>
-                            </select>
-                        </div> -->
-                        <!-- <MultiSelect :options="tour.persons" placeholder="Seleccionar contactos"
-                            class="w-full">
-                            <template #optiongroup="slotProps">
-                                <div class="flex align-items-center">
-                                    <img :alt="slotProps.option.name"
-                                        src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-                                        :class="`flag flag-${slotProps.option.code.toLowerCase()} mr-2`"
-                                        style="width: 18px" />
-                                    <div>{{ slotProps.option.name }}</div>
-                                </div>
-                            </template>
-
-                        </MultiSelect> -->
-                    </div>
-                    <div v-if="[1, 2, 3, 5, 6, 7].includes(Number(activity.typeitinerary_id))">
-                        <label class="text-slate-200 text-xs font-semibold">Lugar</label>
-                        <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select required v-model="activity.place_id" name="place_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <template v-for="item in places">
-                                    <option v-if="place(item)" class="text-black" :value="item.id">{{
-                                        item.name
-                                    }}</option>
-                                </template>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-check items-center text-gray-200 pt-2">
-                        <input type="hidden" :value="outoftour ? 1 : 0" name="outoftour" />
-                        <input aria-label="Fuera de gira" class="form-check-input me-2" type="checkbox"
-                            v-model="outoftour" />
-                        <label class="form-check-label leading-4 text-sm text-center mt-1">
-                            Fuera de gira
-                        </label>
-                    </div>
-                </div>
+                <FlyItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                    :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                    :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                    :persons_2="persons_2" v-if="activity.typeitinerary_id == 1 || activity.typeitinerary_id == 2" />
+                <TransferItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                    :places="places" :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                    :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                    :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 3" />
+                <BusItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                    :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                    :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                    :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 4" />
+                <TrainItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                    :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                    :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                    :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 5" />
+                <ShowItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :places="places"
+                    :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                    :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                    :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 7" />
+                <ActivityItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                    :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                    :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                    :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 8 || activity.typeitinerary_id == 9" />
             </div>
             <div class="flex justify-center">
                 <button type="button" @click="$emit('close')"
@@ -394,4 +203,5 @@ export default {
                 </button>
             </div>
         </form>
-    </CustomModal></template>
+    </CustomModal>
+</template>

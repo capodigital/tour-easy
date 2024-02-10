@@ -1,4 +1,10 @@
 <script>
+import ActivityItineraryDetails from '../itinerary/details/ActivityItineraryDetails.vue';
+import FlyItineraryDetails from '../itinerary/details/FlyItineraryDetails.vue';
+import TransferItineraryDetails from '../itinerary/details/TransferItineraryDetails.vue';
+import BusItineraryDetails from '../itinerary/details/TransferItineraryDetails.vue';
+import TrainItineraryDetails from '../itinerary/details/TrainItineraryDetails.vue';
+import ShowItineraryDetails from '../itinerary/details/ShowItineraryDetails.vue';
 import ActivityIcon from './ActivityIcon.vue';
 import CustomModal from './CustomModal.vue';
 
@@ -6,29 +12,47 @@ export default {
     props: {
         activity: Object,
     },
-    components: { ActivityIcon, CustomModal },
+    components: { ActivityIcon, CustomModal, ActivityItineraryDetails, FlyItineraryDetails, TransferItineraryDetails, BusItineraryDetails, TrainItineraryDetails, ShowItineraryDetails, },
 }
 </script>
 <template>
     <CustomModal @close="$emit('close')">
         <article class="rounded-lg max-w-xl gradient-2 mb-2 scroll overflow-auto p-2">
-            <div class="flex items-center w-full">
-                <div class="p-2 w-full flex items-center">
-                    <div class="me-2">
-                        <ActivityIcon :activity="activity" />
-                    </div>
-                    <div class="w-full">
-                        <small class="float-right text-xs text-gray-400">
-                            {{ activity.tour.tourname }}
-                        </small>
-                        <h3 class="text-gray-200 font-semibold">{{ activity.name }}</h3>
-                        <p class="text-white text-sm" v-html="activity.notes"></p>
+            <h1
+                class="font-bold bg-gradient-to-tr from-app-primary-500 text-center to-app-primary-700 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
+                DETALLES DE ITINERARIO
+            </h1>
+            <div class="overflow-auto modal-content">
+                <div class="flex items-center w-full">
+                    <div class="p-2 w-full flex items-center">
+                        <div class="me-2">
+                            <ActivityIcon :activity="activity" />
+                        </div>
+                        <div class="w-full">
+                            <small class="float-right text-xs text-gray-400">
+                                {{ activity.tour.tourname }}
+                            </small>
+                            <h3 class="text-gray-200 font-semibold">
+                                <template v-if="activity.typeitinerary_id == 3">Transfer to </template>
+                                {{ activity.name }}
+                            </h3>
+                            <p class="text-white text-sm" v-html="activity.notes"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="w-full transition-all overflow-hidden px-4"
-                :class="{ 'h-0 p-0': collapse, 'h-auto p-2': !collapse }">
-                <div class="flex items-center mt-2">
+                <div class="w-full transition-all px-4"
+                    :class="{ 'h-0 p-0 overflow-hidden': collapse, 'h-auto p-2': !collapse }">
+                    <FlyItineraryDetails
+                        v-if="Number(activity.typeitinerary_id) == 1 || Number(activity.typeitinerary_id) == 2"
+                        :activity="activity" />
+                    <TransferItineraryDetails v-if="Number(activity.typeitinerary_id) == 3" :activity="activity" />
+                    <BusItineraryDetails v-else-if="Number(activity.typeitinerary_id) == 4" :activity="activity" />
+                    <TrainItineraryDetails v-else-if="Number(activity.typeitinerary_id) == 5" :activity="activity" />
+                    <ShowItineraryDetails v-else-if="Number(activity.typeitinerary_id) == 7" :activity="activity" />
+                    <ActivityItineraryDetails
+                        v-else-if="Number(activity.typeitinerary_id) == 8 || Number(activity.typeitinerary_id) == 9"
+                        :activity="activity" />
+                    <!-- <div class="flex items-center mt-2">
                     <ActivityIcon :activity="activity" :size="20" />
                     <div class="ps-2">
                         <p class="text-white">Tipo de itinerario</p>
@@ -183,7 +207,8 @@ export default {
                             <p class="text-gray-400 text-sm">Este itinerario se encuentra fuera de la gira</p>
                         </div>
                     </div>
-                </template>
+                </template> -->
+                </div>
             </div>
             <div class="flex justify-center p-2">
                 <button type="button" @click="$emit('close')"
@@ -198,8 +223,4 @@ export default {
         </article>
     </CustomModal>
 </template>
-<style scoped>
-article {
-    max-height: calc(100vh - 7.5rem);
-}
-</style>
+<style scoped></style>

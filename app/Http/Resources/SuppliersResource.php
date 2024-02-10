@@ -39,6 +39,7 @@ class SuppliersResource extends JsonResource
         return [
             'id' => $this->id,
             'company_name' => $this->company_name,
+            'tradename' => $this->tradename,
             'taxname' => $this->taxname,
             'tax_code' => $this->tax_code,
             'phone' => $this->phone,

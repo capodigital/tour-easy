@@ -102,7 +102,7 @@ export default {
                     <i class="bi bi-telephone text-lg me-2 text-gray-200"></i>
                     <div>
                         <h3 class="text-gray-300">Grupo</h3>
-                        <p class="text-sm text-gray-400">{{ person.group }}</p>
+                        <p class="text-sm text-gray-400">{{ person.group.name }}</p>
                     </div>
                 </div>
                 <hr class="bg-gray-500 text-gray-500" />
