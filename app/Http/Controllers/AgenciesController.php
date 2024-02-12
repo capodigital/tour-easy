@@ -211,7 +211,7 @@ class AgenciesController extends Controller
                 Storage::disk('src')->delete($agency->image);
             }
             //Almacenar la nueva foto de perfil
-            $image = $request->file('image')->store('src');
+            $image = $request->file('image')->store('agencies', 'src');
             $data['image'] = "src/$image";
         }
 
@@ -293,6 +293,6 @@ class AgenciesController extends Controller
         $user = User::find($request->id);
         $agency = $user->agency()->get();
 
-        return new AgenciesResource($agency) ;
+        return new AgenciesResource($agency);
     }
 }
