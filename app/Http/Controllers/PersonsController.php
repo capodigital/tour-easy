@@ -8,6 +8,7 @@ use App\Models\Documents;
 use App\Models\Persons;
 use App\Models\Socialmedias;
 use App\Models\Tours;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PersonsController extends Controller
@@ -15,10 +16,23 @@ class PersonsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $persons = Persons::all();
+        $persons = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $persons = Agencies::find($user->agency_id)->persons()->get();
+            } else
+                $persons = Persons::withTrashed()->whereNull('deleted_at')->get();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $persons = Agencies::where('id', $request->user()->id)->persons()->get();
+        } else {
+            $persons[] = Persons::find($request->user()->id);
+        }
+        
         return PersonsResource::collection($persons);
+
     }
     public function all()
     {
