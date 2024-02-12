@@ -7,9 +7,6 @@ import ActivityIcon from '../../common/ActivityIcon.vue';
 import CustomModal from '../../common/CustomModal.vue';
 import ContactItem from '../contacts/ContactItem.vue';
 
-import html2pdf from "html2pdf.js";
-import __WEBPACK_EXTERNAL_MODULE_jspdf__ from "html2pdf.js";
-
 export default {
     components: { CustomModal, ActivityIcon, ActivityDetails, DayItem, DocumentsItem, ContactItem },
     props: {
