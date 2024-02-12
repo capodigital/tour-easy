@@ -28,7 +28,7 @@ export default {
                         <line x1="19" x2="19" y1="16" y2="22" />
                         <line x1="16" x2="22" y1="19" y2="19" />
                     </svg>
-                    <p class="ms-1 text-app-primary-100">Desde: {{ tour.startdate }}</p>
+                    <p class="ms-1 text-app-primary-100">Desde: {{ Utils.date(tour.startdate) }}</p>
                 </div>
                 <div class="flex rounded bg-app-primary-600 bg-opacity-30 py-1 px-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
@@ -40,7 +40,7 @@ export default {
                         <line x1="3" x2="21" y1="10" y2="10" />
                         <path d="m16 20 2 2 4-4" />
                     </svg>
-                    <p class="ms-1 text-app-primary-100">Hasta: {{ tour.enddate }}</p>
+                    <p class="ms-1 text-app-primary-100">Hasta: {{ Utils.date(tour.enddate) }}</p>
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@ export default {
                 </button>
             </div>
             <div class="flex">
-                <a :href="'#details/' + tour.id"
+                <a v-if="tour.active" :href="'#details/' + tour.id"
                     class="bg-gradient-to-br overlay-button from-app-primary-500 to-app-primary-800 text-white px-3 h-7 rounded flex text-sm items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
                         stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
