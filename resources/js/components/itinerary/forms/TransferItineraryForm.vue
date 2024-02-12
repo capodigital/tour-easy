@@ -51,7 +51,6 @@ export default {
                 <div class="flex items-center rounded border border-gray-300 px-2">
                     <select required v-model="activity.supplier_id" name="supplier_id"
                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        <option class="text-black" :value="null">Seleccionar supplier</option>
                         <template v-for="item in suppliers">
                             <option class="text-black" :value="item.id">
                                 {{ item.tradename }}
