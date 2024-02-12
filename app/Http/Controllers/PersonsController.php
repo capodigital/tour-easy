@@ -26,11 +26,11 @@ class PersonsController extends Controller
             } else
                 $persons = Persons::withTrashed()->whereNull('deleted_at')->get();
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $persons = Agencies::where('id', $request->user()->id)->persons()->get();
+            $persons = Agencies::where('id', $request->user()->id)->first()->persons()->get();
         } else {
             $persons[] = Persons::find($request->user()->id);
         }
-        
+
         return PersonsResource::collection($persons);
 
     }
