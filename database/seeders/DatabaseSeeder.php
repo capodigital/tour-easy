@@ -28,6 +28,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            LanguageSeeder::class,
+        ]);
+        $this->call([
+            CurrenciesSeeder::class,
+        ]);
+        $this->call([
             TyperedesSeeder::class,
 
         ]);
@@ -52,9 +58,9 @@ class DatabaseSeeder extends Seeder
 
         ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
-       // $path2 = base_path() . '\database\seeders\Ciudades.sql_';
+        // $path2 = base_path() . '\database\seeders\Ciudades.sql_';
         $sql1 = file_get_contents($path1);
-       // $sql2 = file_get_contents($path2);
+        // $sql2 = file_get_contents($path2);
         DB::unprepared($sql1);
         //DB::unprepared($sql2);
 

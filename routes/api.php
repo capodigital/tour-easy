@@ -20,6 +20,8 @@ use App\Http\Controllers\TypeitinerariesController;
 use App\Http\Controllers\TypeplacesController;
 use App\Http\Controllers\TypesocialmediasController;
 use App\Http\Controllers\UserController;
+use App\Models\Currency;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -99,13 +101,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('typeitineraries', TypeitinerariesController::class);
     Route::resource('typeplaces', TypeplacesController::class);
     Route::resource('typesocialmedia', TypesocialmediasController::class);
+    Route::resource('typesocialmedias', TypesocialmediasController::class);
 
     Route::resource('documents', DocumentsController::class);
 
     Route::resource('users', UserController::class);
     Route::post('/users/password/{user}', [UserController::class, 'updatePassword']);
     Route::get('/currentitineraries', [ItinerariesController::class, 'getCurrent']);
-
+    Route::get('/languages', function () {
+        return response()->json(Language::all());
+    });
+    Route::get('/currencies', function () {
+        return response()->json(Currency::all());
+    });
 });
 
 Route::get('public/tours/{tour}', [ToursController::class, 'show']);

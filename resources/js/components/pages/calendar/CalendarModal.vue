@@ -1,28 +1,28 @@
 <script>
+import FlyItineraryForm from '../../itinerary/forms/FlyItineraryForm.vue';
+import TransferItineraryForm from '../../itinerary/forms/TransferItineraryForm.vue';
+import BusItineraryForm from '../../itinerary/forms/BusItineraryForm.vue';
+import TrainItineraryForm from '../../itinerary/forms/TrainItineraryForm.vue';
+import ShowItineraryForm from '../../itinerary/forms/ShowItineraryForm.vue';
+import ActivityItineraryForm from '../../itinerary/forms/ActivityItineraryForm.vue';
+import HotelItineraryForm from '../../itinerary/forms/HotelItineraryForm.vue';
 import CustomModal from '../../common/CustomModal.vue';
 import axios from 'axios';
 
 export default {
-    components: { CustomModal },
+    components: { CustomModal, FlyItineraryForm, TransferItineraryForm, BusItineraryForm, TrainItineraryForm, ShowItineraryForm, ActivityItineraryForm, HotelItineraryForm },
     props: {
         activity: Object,
     },
     data() {
         return {
-            types: [
-                { id: 1, description: "Show" },
-                { id: 2, description: "Actividad" },
-                { id: 3, description: "Servicio" },
-                { id: 4, description: "Transporte terrestre" },
-                { id: 5, description: "Hotel" },
-                { id: 6, description: "Avión" },
-                { id: 7, description: "Tren" },
-                { id: 8, description: "Transfer" }
-            ],
+            tour: null,
             tour_id: null,
             tours: [],
-            persons: [],
+            persons_1: [],
+            persons_2: [],
             suppliers: [],
+            types: [],
             countries: [],
             start_cities: [],
             end_cities: [],
@@ -48,38 +48,10 @@ export default {
                 }
             });
         },
-        person(person) {
-            switch (this.activity.typeitinerary_id) {
-                case 1:
-                    return person.typecontact_id == 3 || person.typecontact_id == 2
-                case 4:
-                case 6:
-                case 7:
-                case 8:
-                    return person.typecontact_id == 4
-                default:
-                    return false
-            }
-        },
-        place(place) {
-            switch (this.activity.typeitinerary_id) {
-                case 1:
-                case 2:
-                case 3:
-                    return place.typeplace_id == 1
-                case 5:
-                    return place.typeplace_id == 2
-                case 6:
-                    return place.typeplace_id == 3
-                case 7:
-                    return place.typeplace_id == 4
-                default:
-                    return false
-            }
-        },
         updateCountries() {
             for (const tour of this.tours) {
                 if (tour.id == this.tour_id) {
+                    this.tour = tour
                     this.countries = tour.countries;
                     if (this.countries.length > 0) {
                         this.setCities(this.countries[0].code, 'start')
@@ -112,13 +84,13 @@ export default {
         }).then((response) => {
             this.tours = response.data.data;
         });
-        axios.get('api/persons', {
+        axios.get('api/typeitineraries', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
         }).then((response) => {
-            this.persons = response.data.data;
-        });
+            this.types = response.data.data;
+        })
         axios.get('api/places', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
@@ -176,170 +148,38 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <label class="text-slate-200 text-xs font-semibold">Nombre</label>
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                        <i class="bi bi-envelope text-gray-100"></i>
-                        <input required v-model="activity.name" name="name" type="text" placeholder="Nombre del itinerario"
-                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                    </div>
-                </div>
-                <div>
-                    <label class="text-slate-200 text-xs font-semibold">Descripción</label>
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-1 py-1">
-                        <textarea required rows="3" v-model="activity.notes" name="notes" placeholder="Datos adicionales"
-                            class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-1 py-1"></textarea>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-x-2 my-3" v-if="activity.typeitinerary_id == 1">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Prueba de sonido</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input required v-model="activity.showcheck" name="showcheck" type="time"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Inicio del show</label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-calendar-day text-gray-100"></i>
-                            <input required v-model="activity.showtime" name="showtime" type="time"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de inicio</label>
-                        <div class="flex">
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_startdate" type="date" placeholder="Fecha de inicio"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_starttime" type="time" placeholder="Hora de inicio"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
-                            </div>
-                        </div>
-                        <input type="hidden" name="startdate" :value="_startdate + ' ' + _starttime" />
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Fecha y hora de fin</label>
-                        <div class="flex">
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_enddate" type="date" placeholder="Fecha de fin"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2 w-1/2">
-                                <i class="bi bi-calendar-day text-gray-100"></i>
-                                <input required v-model="_endtime" type="time" placeholder="Hora de fin"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                            </div>
-                        </div>
-                        <input type="hidden" name="enddate" :value="_enddate + ' ' + _endtime" />
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">País <template
-                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de
-                                salida</template>
-                        </label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-globe text-gray-100"></i>
-                            <select required @change="(e) => setCities(e.target.value, 'start')"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="country in countries" :value="country.code">{{
-                                    country.name }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-slate-200 text-xs font-semibold">Ciudad <template
-                                v-if="[4, 6, 7, 8].includes(Number(activity.typeitinerary_id))"> de
-                                salida</template>
-                        </label>
-                        <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                            <i class="bi bi-globe-americas text-gray-100"></i>
-                            <select required v-model="activity.city_start_id" name="city_start_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option class="text-black" v-for="city in start_cities" :value="city.id">{{
-                                    city.name }} ({{ city.code }})
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <template v-if="[6, 7, 8].includes(Number(activity.typeitinerary_id))">
-
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">País de destino</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe text-gray-100"></i>
-                                <select required @change="(e) => setCities(e.target.value, 'end')"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="country in countries" :value="country.code">{{
-                                        country.name }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-slate-200 text-xs font-semibold">Ciudad de destino</label>
-                            <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                                <i class="bi bi-globe-americas text-gray-100"></i>
-                                <select required v-model="activity.city_destination_id" name="city_destination_id"
-                                    class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                    <option class="text-black" v-for="city in end_cities" :value="city.id">{{
-                                        city.name
-                                    }} ({{ city.code }})
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                <template v-if="tour != null">
+                    <FlyItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                        :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                        :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                        :persons_2="persons_2" v-if="activity.typeitinerary_id == 1 || activity.typeitinerary_id == 2" />
+                    <TransferItineraryForm @updatecities="setCities" :tour="tour" :activity="activity"
+                        :suppliers="suppliers" :places="places" :startdate="_startdate" :starttime="_starttime"
+                        :enddate="_enddate" :endtime="_endtime" :countries="countries" :start_cities="start_cities"
+                        :end_cities="end_cities" :persons_1="persons_1" :persons_2="persons_2"
+                        v-else-if="activity.typeitinerary_id == 3" />
+                    <BusItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                        :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                        :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                        :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 4" />
+                    <TrainItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                        :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                        :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                        :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 5" />
+                    <HotelItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :suppliers="suppliers"
+                        :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                        :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                        :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 6" />
+                    <ShowItineraryForm @updatecities="setCities" :tour="tour" :activity="activity" :places="places"
+                        :startdate="_startdate" :starttime="_starttime" :enddate="_enddate" :endtime="_endtime"
+                        :countries="countries" :start_cities="start_cities" :end_cities="end_cities" :persons_1="persons_1"
+                        :persons_2="persons_2" v-else-if="activity.typeitinerary_id == 7" />
+                    <ActivityItineraryForm @updatecities="setCities" :tour="tour" :activity="activity"
+                        :suppliers="suppliers" :startdate="_startdate" :starttime="_starttime" :enddate="_enddate"
+                        :endtime="_endtime" :countries="countries" :start_cities="start_cities" :end_cities="end_cities"
+                        :persons_1="persons_1" :persons_2="persons_2"
+                        v-else-if="activity.typeitinerary_id == 8 || activity.typeitinerary_id == 9" />
                 </template>
-                <div class="grid grid-cols-2 gap-x-2">
-                    <div v-if="[1, 4, 6, 7, 8].includes(Number(activity.typeitinerary_id))">
-                        <label class="text-slate-200 text-xs font-semibold">Contacto</label>
-                        <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select required v-model="activity.person_id" name="person_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <template v-for="item in persons">
-                                    <option v-if="person(item)" class="text-black" :value="item.id">{{
-                                        item.name
-                                    }}</option>
-                                </template>
-                            </select>
-                        </div>
-                    </div>
-                    <div v-if="[1, 2, 3, 5, 6, 7].includes(Number(activity.typeitinerary_id))">
-                        <label class="text-slate-200 text-xs font-semibold">Lugar</label>
-                        <div class="flex items-center rounded border border-gray-300 px-2">
-                            <select required v-model="activity.place_id" name="place_id"
-                                class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <template v-for="item in places">
-                                    <option v-if="place(item)" class="text-black" :value="item.id">{{
-                                        item.name
-                                    }}</option>
-                                </template>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-check items-center text-gray-200 pt-2">
-                        <input type="hidden" :value="outoftour ? 1 : 0" name="outoftour" />
-                        <input aria-label="Fuera de gira" class="form-check-input me-2" type="checkbox"
-                            v-model="outoftour" />
-                        <label class="form-check-label leading-4 text-sm text-center mt-1">
-                            Fuera de gira
-                        </label>
-                    </div>
-                </div>
             </div>
             <div class="flex justify-center">
                 <button type="button" @click="$emit('close')"

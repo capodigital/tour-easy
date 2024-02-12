@@ -27,7 +27,8 @@ export default {
     methods: {
         add() {
             this.activity = {
-                tour_id: this.tour.id, persons_1: [],
+                tour_id: this.tour.id,
+                persons_1: [],
                 persons_2: [],
             }
             this.show = true

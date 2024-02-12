@@ -63,21 +63,21 @@ export default {
                     </div>
                 </div>
                 <hr class="bg-gray-500 text-gray-500" />
-                <div class="flex items-center my-1">
+                <a :href="'tel:' + person.phone" class="flex items-center my-1">
                     <i class="bi bi-telephone text-lg me-2 text-gray-200"></i>
                     <div>
                         <h3 class="text-gray-300">Número de teléfono principal</h3>
                         <p class="text-sm text-gray-400">{{ person.phone }}</p>
                     </div>
-                </div>
+                </a>
                 <hr class="bg-gray-500 text-gray-500" />
-                <div class="flex items-center my-1">
+                <a :href="'tel:' + person.extra_phone" class="flex items-center my-1">
                     <i class="bi bi-telephone text-lg me-2 text-gray-200"></i>
                     <div>
                         <h3 class="text-gray-300">Número de teléfono secundario</h3>
                         <p class="text-sm text-gray-400">{{ person.extra_phone }}</p>
                     </div>
-                </div>
+                </a>
                 <hr class="bg-gray-500 text-gray-500" />
                 <div class="flex items-center my-1">
                     <i class="bi bi-passport text-lg me-2 text-gray-200"></i>

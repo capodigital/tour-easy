@@ -8,16 +8,6 @@ export default {
         const today = new Date();
         return {
             forms: [],
-            types: [
-                { id: 1, description: "Show" },
-                { id: 2, description: "Actividad" },
-                { id: 3, description: "Servicio" },
-                { id: 4, description: "Transporte terrestre" },
-                { id: 5, description: "Hotel" },
-                { id: 6, description: "Avión" },
-                { id: 7, description: "Tren" },
-                { id: 8, description: "Transfer" }
-            ],
             month: today.getMonth(),
             year: today.getFullYear(),
             date: today,
@@ -42,6 +32,9 @@ export default {
             this.activity = {
                 startdate: `${this.year}-${(Number(this.month) + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
                 typeitinerary_id: 1,
+                tour_id: this.tours.length > 0 ? this.tours[0] : null,
+                persons_1: [],
+                persons_2: [],
             };
             this.show = true;
         },

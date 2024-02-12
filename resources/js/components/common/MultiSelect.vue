@@ -6,6 +6,10 @@ export default {
         ids: Array,
         label: String,
         initial: Array,
+        filter: {
+            type: Boolean,
+            default: true,
+        }
     },
     data() {
         return {
@@ -26,9 +30,14 @@ export default {
     methods: {
         update(id, checked) {
             if (checked) {
-                this.ids.push(id)
+                if (!this.ids.includes(id)) {
+                    this.ids.push(id)
+                }
             } else {
-                this.ids.splice(this.ids.indexOf(id), 1)
+                const index = this.ids.indexOf(id);
+                if (index >= 0) {
+                    this.ids.splice(index, 1)
+                }
             }
         },
         person(id) {
@@ -37,10 +46,16 @@ export default {
                     return item;
                 }
             }
+        },
+        selectAll(e) {
+            for (const option of this.options) {
+                if ((this.group == null || this.group == option.group_id) && (this.type == null || this.type == option.typecontact_id)) {
+                    this.update(option.id, e.target.checked);
+                }
+            }
         }
     },
     mounted() {
-        console.log(this.initial)
         for (const item of this.initial) {
             this.ids.push(item.id)
         }
@@ -72,10 +87,16 @@ export default {
         <div class="flex items-center rounded border border-gray-300 px-0 cursor-pointer">
             <div class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3 flex">
                 <p v-if="ids.length == 0" @click="collapse = !collapse" class="w-full">{{ label }}</p>
-                <div class="whitespace-pre-wrap w-full">
-                    <span @click="update(id, false)" v-for="id in ids"
-                        class="inline-block cursor-pointer text-xs whitespace-nowrap bg-gray-400 text-black rounded py-1 px-2 mx-0.5">{{
-                            person(id).name }} <i class="bi bi-x"></i></span>
+                <div class="whitespace-pre-wrap w-full max-w-[20rem]">
+                    <template v-for="(id, index) in ids">
+                        <span v-if="index < 2" @click="update(id, false)"
+                            class="inline-block cursor-pointer text-xs whitespace-nowrap bg-gray-400 text-black rounded py-1 px-2 m-0.5">{{
+                                person(id).name }} <i class="bi bi-x"></i></span>
+                    </template>
+                    <span v-if="ids.length > 2"
+                        class="inline-block cursor-pointer text-xs whitespace-nowrap bg-gray-400 text-black rounded py-1 px-2 m-0.5">
+                        +{{ ids.length - 2 }} más
+                    </span>
                 </div>
                 <button @click="collapse = !collapse" type="button" :class="{ 'rotate-180': collapse }"
                     class="transition-all"><i class="bi bi-chevron-down"></i></button>
@@ -83,7 +104,7 @@ export default {
         </div>
         <ul class="overflow-hidden transition-all absolute bottom-[3.2rem] w-full left-0 gradient-1 rounded shadow shadow-gray-700"
             :class="{ 'h-0': !collapse, 'h-auto': collapse }">
-            <li class="flex p-2">
+            <li v-if="filter" class="flex p-2">
                 <div class="flex items-center rounded border border-gray-300 px-0.5 w-1/2 mx-1">
                     <select v-model="group"
                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-2 py-1">
@@ -101,6 +122,15 @@ export default {
                             {{ item.description }}
                         </option>
                     </select>
+                </div>
+            </li>
+            <li class="flex justify-center">
+                <div class="form-check items-center">
+                    <input aria-label="Seleccionar todo" @change="selectAll" class="form-check-input me-2"
+                        type="checkbox" />
+                    <label class="form-check-label leading-4 text-gray-300 text-sm text-center mt-1">
+                        Seleccionar todo
+                    </label>
                 </div>
             </li>
             <template v-for="option in options">

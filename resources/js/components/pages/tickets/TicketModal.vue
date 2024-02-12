@@ -43,7 +43,7 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         })
-        axios.get('src/currencies.json', {
+        axios.get('api/currencies', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }

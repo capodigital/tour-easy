@@ -98,7 +98,7 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         });
-        axios.get('src/languages.json', {
+        axios.get('api/languages', {
             headers: {
                 'Authorization': `Bearer ${this.Utils.token()}`
             }
