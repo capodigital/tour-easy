@@ -54,13 +54,27 @@ class PersonsController extends Controller
             'birthday.before' => 'El campo fecha de nacimiento debe ser una fecha anterior a hoy',
             'passport_expiry.after' => 'El campo fecha de expiración del pasaporte debe ser una fecha mayor a hoy',
         ];
-        
+
         $request->validate($rules, $customMessages);
 
         $data = $request->only([
-            'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
-            'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id', 'agency_id',
-            'passport', 'passport_expiry', 'notify_type', 'group'
+            'birthday',
+            'name',
+            'lastname',
+            'notes',
+            'extra_phone',
+            'phone',
+            'email',
+            'lang',
+            'position',
+            'notify',
+            'typecontact_id',
+            'country_id',
+            'agency_id',
+            'passport',
+            'passport_expiry',
+            'notify_type',
+            'group_id'
         ]);
 
         if (!$request->has('agency_id')) {
@@ -74,7 +88,7 @@ class PersonsController extends Controller
         $person = Persons::create($data);
 
         if ($request->has('socialmedias')) {
-            Socialmedias::where('socialmediaable_id',$person->id)->delete();
+            Socialmedias::where('socialmediaable_id', $person->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
                 if (isset($socialmedia['typesocialmedia_id'])) {
                     Socialmedias::create([
@@ -154,9 +168,22 @@ class PersonsController extends Controller
         ]);
 
         $data = $request->only([
-            'birthday', 'name', 'lastname', 'notes', 'extra_phone', 'phone',
-            'email', 'lang', 'position', 'notify', 'typecontact_id', 'country_id',
-            'passport', 'passport_expiry', 'notify_type', 'group'
+            'birthday',
+            'name',
+            'lastname',
+            'notes',
+            'extra_phone',
+            'phone',
+            'email',
+            'lang',
+            'position',
+            'notify',
+            'typecontact_id',
+            'country_id',
+            'passport',
+            'passport_expiry',
+            'notify_type',
+            'group'
         ]);
 
         //Almacenar los datos en la base de datos

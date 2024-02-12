@@ -54,18 +54,17 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-x-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2">
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Fecha y hora de inicio</label>
                 <div class="flex">
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
+                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-2/3">
                         <i class="bi bi-calendar-day text-gray-100"></i>
                         <input required :min="Utils.getDateInput(tour.startdate)" :max="Utils.getDateInput(tour.enddate)"
                             v-model="_startdate" type="date" placeholder="Fecha del show"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                     </div>
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                        <i class="bi bi-calendar-day text-gray-100"></i>
+                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/3">
                         <input required v-model="_starttime" type="time" placeholder="Hora del show"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-[0.65rem]">
                     </div>
@@ -75,14 +74,13 @@ export default {
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Fecha y hora de fin</label>
                 <div class="flex">
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
+                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-2/3">
                         <i class="bi bi-calendar-day text-gray-100"></i>
                         <input :min="Utils.getDateInput(tour.startdate)" :max="Utils.getDateInput(tour.enddate)" required
                             v-model="_enddate" type="date" placeholder="Fecha de fin del show"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                     </div>
-                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/2">
-                        <i class="bi bi-calendar-day text-gray-100"></i>
+                    <div class="flex items-center mb-3 rounded border border-gray-300 px-2 me-1 w-1/3">
                         <input required v-model="_endtime" type="time" placeholder="Hora de fin del show"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                     </div>
@@ -120,7 +118,8 @@ export default {
         <div class="grid grid-cols-2 gap-x-2">
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Personas resposables</label>
-                <MultiSelect :filter="false" :ids="persons_1" label="Seleccionar contactos" :options="contacts" :initial="activity.persons_1">
+                <MultiSelect :filter="false" :ids="persons_1" label="Seleccionar contactos" :options="contacts"
+                    :initial="activity.persons_1">
                     <template v-slot="{ item }">
                         <div class="w-full">
                             <small class="float-right text-gray-500 text-xs">{{ item.typecontact.description }}</small>
@@ -134,7 +133,8 @@ export default {
             </div>
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Personas asociadas</label>
-                <MultiSelect :ids="persons_2" label="Seleccionar contactos" :options="associated" :initial="activity.persons_2">
+                <MultiSelect :ids="persons_2" label="Seleccionar contactos" :options="associated"
+                    :initial="activity.persons_2">
                     <template v-slot="{ item }">
                         <div class="w-full">
                             <small class="float-right text-gray-500 text-xs">{{ item.typecontact.description }}</small>
