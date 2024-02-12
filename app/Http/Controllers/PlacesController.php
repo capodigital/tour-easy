@@ -7,6 +7,7 @@ use App\Models\Agencies;
 use App\Models\Documents;
 use App\Models\Places;
 use App\Models\Socialmedias;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PlacesController extends Controller
@@ -14,9 +15,21 @@ class PlacesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $places = Places::all();
+        $places = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $places = Agencies::find($user->agency_id)->places()->get();
+            } else
+                $places = places::withTrashed()->whereNull('deleted_at')->get();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $places = Agencies::where('id', $request->user()->id)->first()->places()->get();
+        } else {
+            $places[] = places::find($request->user()->id);
+        }
+
         return PlacesResource::collection($places);
     }
     public function all()
