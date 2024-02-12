@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2024 a las 02:00:33
+-- Tiempo de generación: 12-02-2024 a las 14:17:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -52,8 +52,8 @@ CREATE TABLE `agencies` (
 --
 
 INSERT INTO `agencies` (`id`, `created_at`, `updated_at`, `tradename`, `taxname`, `taxcode`, `owner`, `image`, `address`, `email`, `password`, `notes`, `phone`, `remember_token`, `deleted_at`, `city_id`, `typeagency_id`) VALUES
-(1, '2024-02-08 02:14:16', '2024-02-08 02:55:52', 'Ullrich-Abernathy', 'PLC Kuhic, Nienow and Kub', 'FCPXUBLZ', 'Webster Balistreri Sr.', 'src/src/MDP4TzERlafgBeSoeEz4xGww4CMAZKOlQOd4kjAS.webp', '81757 Ansel GatewayWest Lolitastad, OR 21380-1404', 'imani.tremblay@leannon.com', '$2y$12$AAGH.vxpgUMhZohs28O1bOyV66yYtqF8FLimOKSLHoo7WgxNM3T0q', 'Iure maiores rerum et deleniti. Qui necessitatibus laudantium aut ut temporibus. Adipisci veniam est et ipsa repudiandae fugit et.', '657.824.8932', NULL, NULL, 42, NULL),
-(2, '2024-02-08 02:14:16', '2024-02-08 02:14:16', 'Dooley-Carter', 'Inc Mayer-Fadel', 'WNJGNV3NEBO', 'Margot Koch', NULL, '34019 Reichel Lodge Apt. 736\nMadisenburgh, LA 57743-1932', 'jayme99@hettinger.com', '$2y$12$XpVYxh4ADrxtSkqpfkpbdOStQFGHE.Syonpmy9R/6MLOfnkIffHuy', 'Suscipit maiores aut et labore. Iste dolore rem minima quidem possimus suscipit et. Laboriosam inventore id autem.', '+1-831-473-9836', NULL, NULL, 8583, NULL);
+(1, '2024-02-12 16:36:15', '2024-02-12 16:36:15', 'Conn-Crooks', 'and Sons Corkery Ltd', 'DZPZGSQ4AGK', 'Garnett Harris', NULL, '220 Lucious Stravenue\nEast Isobelfort, MA 42876-6246', 'marianna01@kovacek.info', '$2y$12$yAVi6cNsNxW3rT4kmoGN2eHbBkZq70EsGqPvrxiAsQqL1IeOTW8SW', 'Suscipit et harum et expedita velit voluptatum. Voluptatem nostrum consequatur aut ut blanditiis ut tenetur.', '1-914-964-2881', NULL, NULL, 5680, NULL),
+(2, '2024-02-12 16:36:15', '2024-02-12 16:36:15', 'Bergnaum-Shanahan', 'Group Jerde, Balistreri and Reichert', 'KQOPQT7CH3Y', 'Toney Bradtke', NULL, '4024 Greenfelder Highway\nWolfffurt, SD 35304-4306', 'mante.cydney@renner.org', '$2y$12$EfbdVmwEeI20Ms/67XDjWecPmbDfM9smfAWhAhK1ippEkr4gGu896', 'Aut officia et modi quia voluptatem. Quod voluptate sapiente nisi eius. Odio pariatur beatae aperiam dolor. Non et ex in.', '843.300.5970', NULL, NULL, 1356, NULL);
 
 -- --------------------------------------------------------
 
@@ -84,10 +84,10 @@ CREATE TABLE `artists` (
 --
 
 INSERT INTO `artists` (`id`, `created_at`, `updated_at`, `stagename`, `name`, `lastname`, `birthday`, `tags`, `notes`, `image`, `email`, `password`, `remember_token`, `deleted_at`, `agency_id`) VALUES
-(1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'tyson.eichmann', 'Mark Rohan MD', 'Sipes', '1989-08-11', 'Reggae Rock, Acid Jazz, R&B, Ska Punk', 'Et a ducimus beatae temporibus. Expedita quibusdam ut suscipit rerum. Ut deleniti nulla omnis dignissimos dignissimos quo laudantium soluta.', 'http://localhost/storage/artists/artist3.jpeg', 'pierce.kulas@nienow.com', '$2y$12$mhKWvScVgl8Cd0E8SQYQyuTwnEvYuC6ClaZ/56HMGDIEpXNYvXEGm', NULL, NULL, 1),
-(2, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'riley.abernathy', 'Alberto Koepp', 'King', '1979-01-12', 'Latin Jazz, Trance, Psychedelic Rock, Jazz', 'Quia temporibus deleniti asperiores aliquam sed cum. Sunt esse ut eum quo. Id sit odio qui temporibus. Quo velit consequatur voluptatibus quibusdam. Qui voluptate qui non molestias et quae odio.', 'http://localhost/storage/artists/artist1.jpeg', 'hagenes.aracely@heathcote.net', '$2y$12$MnsqGyo6DipqHv0/JXHA3ugc1.71jawoHQWzQ12Vm6nyIvwd9YoP2', NULL, NULL, 2),
-(3, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'lois04', 'Misael Lockman III', 'Schuppe', '1945-02-01', 'Punk, Disco, Pop, Big Band', 'Hic et rerum praesentium eum alias sunt quidem. Qui velit nihil necessitatibus in similique qui rerum.', 'http://localhost/storage/artists/artist2.jpeg', 'reyes.cruickshank@gmail.com', '$2y$12$9DaVq.Ht9m6j0kOXsWga0OYofjEvBgvAd8TlUhoOYmmCLHordPJnC', NULL, NULL, 1),
-(4, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'loyal47', 'Spencer Schroeder', 'Torphy', '1983-02-20', 'Jazz Fusion, Pop Rock, Rock and Roll, Pop Punk', 'Mollitia excepturi sit ipsum in porro minima. Consequatur quasi unde voluptas aut possimus occaecati. Temporibus totam impedit quis pariatur impedit ut non. Eos rerum provident eligendi earum esse.', 'http://localhost/storage/artists/artist4.jpeg', 'sage46@gmail.com', '$2y$12$EuuhpP.tMQVSlJ2QxaksYezDWlJnZnQoTiR058zktV/xSRoMyXJZG', NULL, NULL, 1);
+(1, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'welch.marlee', 'Kirstin Leannon', 'Auer', '1950-08-01', 'Rock, Disco, Soft Rock, Folk', 'Non soluta laborum ipsum aut. Iure ipsam velit autem. Tempore voluptates optio eos cumque et sit vel mollitia. Eveniet reiciendis qui harum dolorum eius autem repudiandae.', 'http://localhost/storage/artists/artist2.jpeg', 'jaskolski.yessenia@price.net', '$2y$12$/gY9PL7G5CTtLrulgzLwHeo78Wm/zj16z6TU4CmMX40yboWN6aE16', NULL, NULL, 2),
+(2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'stamm.darian', 'Litzy Homenick II', 'Quitzon', '1938-03-04', 'Funk, Modal Jazz, Progressive Rock, Electronic', 'Ut corporis dolore voluptatem voluptatem facere enim necessitatibus. Occaecati blanditiis harum soluta autem. Laboriosam cupiditate enim cum. Molestias ut molestiae unde officia rerum id aut.', 'http://localhost/storage/artists/artist3.jpeg', 'alexandria10@gmail.com', '$2y$12$v7NUpb5s/SsnDHXlZc7KFuCriWXDXqyKhssTtaCt4GzGP6lnVT.V2', NULL, NULL, 1),
+(3, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'kattie.nikolaus', 'Kali Hirthe', 'Bauch', '1963-12-02', 'Bebop, Folk Rock, Gypsy Jazz, Electronic', 'Laborum in exercitationem occaecati amet. Ullam ut saepe et perferendis numquam. Hic sapiente ut quidem nostrum eum rerum odio reiciendis. Nemo incidunt non deserunt iusto.', 'http://localhost/storage/artists/artist4.jpeg', 'rweimann@gmail.com', '$2y$12$QoIgkVU.ZLSRM4uwzLZMo.J5bZJFYC/jsi3EazWD6MKrt1JFwkauW', NULL, NULL, 1),
+(4, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'zora.ortiz', 'Jayne Koelpin', 'Jast', '1980-10-10', 'Techno, Electronic, Hard Bop, Jazz Rock', 'Quia et amet qui consectetur et blanditiis sed. Reiciendis repellat placeat minus excepturi et.', 'http://localhost/storage/artists/artist1.jpeg', 'arvel99@hotmail.com', '$2y$12$nFcilYyV5FNxcxRqOv.bCOOgEQGP1xGSAUGLhgPBSxhkfzFEpBeAu', NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -9771,16 +9771,139 @@ CREATE TABLE `countrytours` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `countrytours`
+-- Estructura de tabla para la tabla `currencies`
 --
 
-INSERT INTO `countrytours` (`id`, `tour_id`, `country_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 105, '2024-02-08 06:05:33', '2024-02-08 06:05:33'),
-(3, 2, 229, '2024-02-08 06:05:33', '2024-02-08 06:05:33'),
-(4, 2, 197, '2024-02-08 06:05:33', '2024-02-08 06:05:33'),
-(5, 2, 134, '2024-02-08 06:05:33', '2024-02-08 06:05:33'),
-(6, 2, 184, '2024-02-08 06:05:33', '2024-02-08 06:05:33');
+CREATE TABLE `currencies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `currency` varchar(191) NOT NULL,
+  `abbreviation` varchar(191) NOT NULL,
+  `symbol` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `currencies`
+--
+
+INSERT INTO `currencies` (`id`, `currency`, `abbreviation`, `symbol`) VALUES
+(1, 'Albania Lek', 'ALL', '&#76;&#101;&#107;'),
+(2, 'Afghanistan Afghani', 'AFN', '&#1547;'),
+(3, 'Argentina Peso', 'ARS', '&#36;'),
+(4, 'Aruba Guilder', 'AWG', '&#402;'),
+(5, 'Australia Dollar', 'AUD', '&#36;'),
+(6, 'Azerbaijan New Manat', 'AZN', '&#1084;&#1072;&#1085;'),
+(7, 'Bahamas Dollar', 'BSD', '&#36;'),
+(8, 'Barbados Dollar', 'BBD', '&#36;'),
+(9, 'Belarus Ruble', 'BYR', '&#112;&#46;'),
+(10, 'Belize Dollar', 'BZD', '&#66;&#90;&#36;'),
+(11, 'Bermuda Dollar', 'BMD', '&#36;'),
+(12, 'Bolivia Boliviano', 'BOB', '&#36;&#98;'),
+(13, 'Bosnia and Herzegovina Convertible Marka', 'BAM', '&#75;&#77;'),
+(14, 'Botswana Pula', 'BWP', '&#80;'),
+(15, 'Bulgaria Lev', 'BGN', '&#1083;&#1074;'),
+(16, 'Brazil Real', 'BRL', '&#82;&#36;'),
+(17, 'Brunei Darussalam Dollar', 'BND', '&#36;'),
+(18, 'Cambodia Riel', 'KHR', '&#6107;'),
+(19, 'Canada Dollar', 'CAD', '&#36;'),
+(20, 'Cayman Islands Dollar', 'KYD', '&#36;'),
+(21, 'Chile Peso', 'CLP', '&#36;'),
+(22, 'China Yuan Renminbi', 'CNY', '&#165;'),
+(23, 'Colombia Peso', 'COP', '&#36;'),
+(24, 'Costa Rica Colon', 'CRC', '&#8353;'),
+(25, 'Croatia Kuna', 'HRK', '&#107;&#110;'),
+(26, 'Cuba Peso', 'CUP', '&#8369;'),
+(27, 'Czech Republic Koruna', 'CZK', '&#75;&#269;'),
+(28, 'Denmark Krone', 'DKK', '&#107;&#114;'),
+(29, 'Dominican Republic Peso', 'DOP', '&#82;&#68;&#36;'),
+(30, 'East Caribbean Dollar', 'XCD', '&#36;'),
+(31, 'Egypt Pound', 'EGP', '&#163;'),
+(32, 'El Salvador Colon', 'SVC', '&#36;'),
+(33, 'Estonia Kroon', 'EEK', '&#107;&#114;'),
+(34, 'Euro Member Countries', 'EUR', '&#8364;'),
+(35, 'Falkland Islands (Malvinas) Pound', 'FKP', '&#163;'),
+(36, 'Fiji Dollar', 'FJD', '&#36;'),
+(37, 'Ghana Cedis', 'GHC', '&#162;'),
+(38, 'Gibraltar Pound', 'GIP', '&#163;'),
+(39, 'Guatemala Quetzal', 'GTQ', '&#81;'),
+(40, 'Guernsey Pound', 'GGP', '&#163;'),
+(41, 'Guyana Dollar', 'GYD', '&#36;'),
+(42, 'Honduras Lempira', 'HNL', '&#76;'),
+(43, 'Hong Kong Dollar', 'HKD', '&#36;'),
+(44, 'Hungary Forint', 'HUF', '&#70;&#116;'),
+(45, 'Iceland Krona', 'ISK', '&#107;&#114;'),
+(46, 'India Rupee', 'INR', ''),
+(47, 'Indonesia Rupiah', 'IDR', '&#82;&#112;'),
+(48, 'Iran Rial', 'IRR', '&#65020;'),
+(49, 'Isle of Man Pound', 'IMP', '&#163;'),
+(50, 'Israel Shekel', 'ILS', '&#8362;'),
+(51, 'Jamaica Dollar', 'JMD', '&#74;&#36;'),
+(52, 'Japan Yen', 'JPY', '&#165;'),
+(53, 'Jersey Pound', 'JEP', '&#163;'),
+(54, 'Kazakhstan Tenge', 'KZT', '&#1083;&#1074;'),
+(55, 'Korea (North) Won', 'KPW', '&#8361;'),
+(56, 'Korea (South) Won', 'KRW', '&#8361;'),
+(57, 'Kyrgyzstan Som', 'KGS', '&#1083;&#1074;'),
+(58, 'Laos Kip', 'LAK', '&#8365;'),
+(59, 'Latvia Lat', 'LVL', '&#76;&#115;'),
+(60, 'Lebanon Pound', 'LBP', '&#163;'),
+(61, 'Liberia Dollar', 'LRD', '&#36;'),
+(62, 'Lithuania Litas', 'LTL', '&#76;&#116;'),
+(63, 'Macedonia Denar', 'MKD', '&#1076;&#1077;&#1085;'),
+(64, 'Malaysia Ringgit', 'MYR', '&#82;&#77;'),
+(65, 'Mauritius Rupee', 'MUR', '&#8360;'),
+(66, 'Mexico Peso', 'MXN', '&#36;'),
+(67, 'Mongolia Tughrik', 'MNT', '&#8366;'),
+(68, 'Mozambique Metical', 'MZN', '&#77;&#84;'),
+(69, 'Namibia Dollar', 'NAD', '&#36;'),
+(70, 'Nepal Rupee', 'NPR', '&#8360;'),
+(71, 'Netherlands Antilles Guilder', 'ANG', '&#402;'),
+(72, 'New Zealand Dollar', 'NZD', '&#36;'),
+(73, 'Nicaragua Cordoba', 'NIO', '&#67;&#36;'),
+(74, 'Nigeria Naira', 'NGN', '&#8358;'),
+(75, 'Korea (North) Won', 'KPW', '&#8361;'),
+(76, 'Norway Krone', 'NOK', '&#107;&#114;'),
+(77, 'Oman Rial', 'OMR', '&#65020;'),
+(78, 'Pakistan Rupee', 'PKR', '&#8360;'),
+(79, 'Panama Balboa', 'PAB', '&#66;&#47;&#46;'),
+(80, 'Paraguay Guarani', 'PYG', '&#71;&#115;'),
+(81, 'Peru Nuevo Sol', 'PEN', '&#83;&#47;&#46;'),
+(82, 'Philippines Peso', 'PHP', '&#8369;'),
+(83, 'Poland Zloty', 'PLN', '&#122;&#322;'),
+(84, 'Qatar Riyal', 'QAR', '&#65020;'),
+(85, 'Romania New Leu', 'RON', '&#108;&#101;&#105;'),
+(86, 'Russia Ruble', 'RUB', '&#1088;&#1091;&#1073;'),
+(87, 'Saint Helena Pound', 'SHP', '&#163;'),
+(88, 'Saudi Arabia Riyal', 'SAR', '&#65020;'),
+(89, 'Serbia Dinar', 'RSD', '&#1044;&#1080;&#1085;&#46;'),
+(90, 'Seychelles Rupee', 'SCR', '&#8360;'),
+(91, 'Singapore Dollar', 'SGD', '&#36;'),
+(92, 'Solomon Islands Dollar', 'SBD', '&#36;'),
+(93, 'Somalia Shilling', 'SOS', '&#83;'),
+(94, 'South Africa Rand', 'ZAR', '&#82;'),
+(95, 'Korea (South) Won', 'KRW', '&#8361;'),
+(96, 'Sri Lanka Rupee', 'LKR', '&#8360;'),
+(97, 'Sweden Krona', 'SEK', '&#107;&#114;'),
+(98, 'Switzerland Franc', 'CHF', '&#67;&#72;&#70;'),
+(99, 'Suriname Dollar', 'SRD', '&#36;'),
+(100, 'Syria Pound', 'SYP', '&#163;'),
+(101, 'Taiwan New Dollar', 'TWD', '&#78;&#84;&#36;'),
+(102, 'Thailand Baht', 'THB', '&#3647;'),
+(103, 'Trinidad and Tobago Dollar', 'TTD', '&#84;&#84;&#36;'),
+(104, 'Turkey Lira', 'TRY', ''),
+(105, 'Turkey Lira', 'TRL', '&#8356;'),
+(106, 'Tuvalu Dollar', 'TVD', '&#36;'),
+(107, 'Ukraine Hryvna', 'UAH', '&#8372;'),
+(108, 'United Kingdom Pound', 'GBP', '&#163;'),
+(109, 'United States Dollar', 'USD', '&#36;'),
+(110, 'Uruguay Peso', 'UYU', '&#36;&#85;'),
+(111, 'Uzbekistan Som', 'UZS', '&#1083;&#1074;'),
+(112, 'Venezuela Bolivar', 'VEF', '&#66;&#115;'),
+(113, 'Viet Nam Dong', 'VND', '&#8363;'),
+(114, 'Yemen Rial', 'YER', '&#65020;'),
+(115, 'Zimbabwe Dollar', 'ZWD', '&#90;&#36;');
 
 -- --------------------------------------------------------
 
@@ -9806,24 +9929,24 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`id`, `name`, `url`, `document_path`, `size`, `ext`, `documentable_id`, `documentable_type`, `created_at`, `updated_at`) VALUES
-(1, 'Velit mollitia iure et id magni.', 'http://www.crooks.com/fugiat-et-voluptatum-quia-et-sunt-aut-placeat.html', 'http://schaden.info/dolor-blanditiis-optio-voluptatibus-omnis-et-iure', 583, '.doc', 1, 'App\\Models\\Agencies', '2024-02-08 02:14:16', '2024-02-08 02:14:16'),
-(2, 'Ullam blanditiis nihil fugiat quisquam non dicta magnam aliquid.', 'http://kilback.com/possimus-non-et-aut-quisquam-exercitationem-cum-dolorum-et', 'https://leffler.org/deserunt-fugit-et-odio-facere-nesciunt-dolor.html', 846, '.doc', 2, 'App\\Models\\Agencies', '2024-02-08 02:14:16', '2024-02-08 02:14:16'),
-(3, 'Sint voluptatem placeat ea.', 'https://casper.com/ut-voluptate-molestiae-sit-sunt-id.html', 'http://greenholt.com/fuga-explicabo-sunt-sunt-dolores-qui', 463, '.doc', 2, 'App\\Models\\Agencies', '2024-02-08 02:14:16', '2024-02-08 02:14:16'),
-(4, 'Perspiciatis laudantium id ea quasi vel esse.', 'https://www.damore.com/accusamus-voluptas-voluptatem-suscipit-nisi', 'http://morar.net/assumenda-est-pariatur-voluptatibus-sed-illum', 380, '.doc', 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(5, 'Rerum unde provident voluptate porro rerum nobis porro doloremque.', 'http://www.schuster.com/optio-consequatur-totam-voluptatem-neque-quod-nemo-enim-officiis', 'http://lynch.com/soluta-recusandae-totam-voluptatem-culpa-soluta-esse.html', 25, '.doc', 4, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(6, 'Minus sunt nihil odio temporibus magni recusandae rerum.', 'http://www.bogisich.com/aut-iste-dolores-et.html', 'http://www.hegmann.org/aliquid-quis-sunt-recusandae-error-consequatur-recusandae-veniam.html', 152, '.doc', 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(7, 'Et molestias et optio molestiae ea quis perferendis.', 'http://www.padberg.org/excepturi-aut-voluptatem-deleniti-nulla-accusantium-expedita', 'http://www.adams.com/consequatur-eligendi-atque-maxime-sint-qui-est', 142, '.doc', 1, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(8, 'Occaecati quo dolores consectetur et.', 'http://www.rippin.com/alias-eaque-ratione-sunt-et-aliquam-et-tempore-quis', 'http://russel.com/', 667, '.doc', 3, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(9, 'Ut provident ut quo ducimus et accusamus ad.', 'http://buckridge.org/', 'http://walker.com/aut-ea-dolores-nobis', 539, '.doc', 2, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(10, 'Placeat quasi eos numquam sit quis.', 'https://bahringer.org/voluptatem-ipsam-doloribus-sed-pariatur.html', 'http://www.beer.com/molestiae-et-labore-officia-facilis-omnis-tenetur.html', 715, '.doc', 4, 'App\\Models\\Persons', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(11, 'Architecto ea in voluptas ullam debitis id.', 'https://heathcote.com/delectus-libero-vero-odio-ad-quo-nulla-velit.html', 'https://lockman.com/veritatis-est-dolorem-consequatur-molestiae-quos.html', 407, '.doc', 5, 'App\\Models\\Persons', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(12, 'Incidunt est velit omnis natus laborum qui officia.', 'http://www.west.info/', 'http://www.heaney.com/autem-qui-dignissimos-pariatur-maiores-nobis-voluptatibus.html', 775, '.doc', 9, 'App\\Models\\Persons', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(13, 'Ratione temporibus enim mollitia repellat ut est nesciunt nam.', 'http://vonrueden.net/tempore-possimus-ea-et-consequuntur-aliquam-voluptates.html', 'http://sipes.com/et-beatae-eveniet-repellat-cum-quam-adipisci.html', 456, '.doc', 1, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(14, 'Impedit qui nesciunt voluptatem et voluptates.', 'http://www.schinner.com/neque-maiores-labore-sint-eos', 'http://www.pacocha.info/nobis-dolores-nostrum-rerum-temporibus-incidunt-culpa-autem', 221, '.doc', 5, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(15, 'Est debitis ex consequatur enim dolor nam.', 'http://www.johnson.com/odio-et-quo-culpa-harum-voluptatem-et.html', 'http://emard.info/accusamus-et-qui-fuga-cum-recusandae-est-modi.html', 418, '.doc', 6, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(16, 'Molestiae sint ut velit voluptatem voluptas eveniet voluptatem.', 'http://bruen.net/', 'http://kris.com/placeat-totam-quis-molestias-laborum-in-consequatur-pariatur', 6, '.doc', 12, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(17, 'Necessitatibus consequatur nam vel.', 'https://www.runolfsdottir.com/expedita-ipsam-repudiandae-quod-officiis-dicta-in-odio', 'http://abernathy.com/omnis-sed-sit-aperiam-saepe', 701, '.doc', 10, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(18, 'Ratione soluta culpa porro enim.', 'http://www.wilderman.biz/dolor-rerum-provident-est.html', 'http://www.okuneva.net/', 971, '.doc', 12, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21');
+(1, 'Ullam repudiandae libero vero alias.', 'http://simonis.com/aspernatur-eos-sunt-ea-maxime', 'http://skiles.com/quo-ut-autem-consequatur-et-dignissimos-amet-vel', 729, '.doc', 1, 'App\\Models\\Agencies', '2024-02-12 16:36:15', '2024-02-12 16:36:15'),
+(2, 'Non exercitationem eius alias id ex.', 'http://hyatt.org/et-culpa-ex-vero-minima-blanditiis', 'https://leuschke.com/amet-rem-aut-qui-explicabo.html', 801, '.doc', 1, 'App\\Models\\Agencies', '2024-02-12 16:36:15', '2024-02-12 16:36:15'),
+(3, 'Quis ut excepturi minus.', 'http://www.will.net/magnam-eum-consequuntur-odit-voluptatem-voluptates-nesciunt-architecto.html', 'http://www.boyle.com/sed-quia-numquam-dicta-iste-voluptatibus-non-vel-odio', 87, '.doc', 2, 'App\\Models\\Agencies', '2024-02-12 16:36:15', '2024-02-12 16:36:15'),
+(4, 'Recusandae a eos vel aspernatur nisi ut voluptatem.', 'http://collins.com/explicabo-omnis-omnis-commodi-doloribus-maiores-illo-non', 'https://www.sipes.com/eligendi-aliquam-aut-sed-expedita', 749, '.doc', 4, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(5, 'Et nisi nesciunt distinctio optio tempore necessitatibus.', 'http://www.satterfield.biz/et-fugit-ratione-omnis-omnis-quasi-magni.html', 'http://graham.org/architecto-iste-nobis-dolor-et-voluptate', 672, '.doc', 2, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(6, 'Et rerum minus quam quibusdam.', 'http://www.runolfsdottir.net/quia-nulla-debitis-id-praesentium-rerum', 'http://koepp.com/voluptas-ipsum-deleniti-quibusdam-labore-pariatur-et-nam', 383, '.doc', 1, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(7, 'Dolor sit et culpa alias.', 'https://keebler.com/eos-non-delectus-similique-voluptatem.html', 'http://pfannerstill.com/ut-voluptates-quidem-voluptatem-delectus-placeat-perspiciatis-nesciunt', 705, '.doc', 2, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(8, 'Consequatur aut ut velit consequatur.', 'https://johns.biz/rerum-nam-non-veniam-reprehenderit-maiores-ut.html', 'https://koch.com/illum-ut-quaerat-nostrum-laborum.html', 649, '.doc', 3, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(9, 'Id deleniti deleniti praesentium minima laboriosam.', 'https://www.streich.info/omnis-odio-exercitationem-et-labore-in-vel', 'http://www.kuhlman.org/sit-qui-autem-et-necessitatibus.html', 296, '.doc', 1, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(10, 'Porro suscipit eos occaecati accusamus quasi.', 'http://stamm.org/', 'https://willms.info/alias-voluptates-praesentium-soluta-porro-adipisci-veniam-officiis.html', 946, '.doc', 7, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(11, 'Et consectetur est perspiciatis velit aut quia.', 'http://www.corkery.org/voluptas-sequi-reiciendis-facilis-quia-perspiciatis-et-officiis-vel', 'http://www.schamberger.com/eos-voluptas-tenetur-suscipit-adipisci', 314, '.doc', 8, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(12, 'Animi repellendus veniam natus quia laborum.', 'https://wolff.info/adipisci-provident-dolorem-occaecati-rem-dolor.html', 'http://stark.biz/ut-odit-maiores-cum-dolore-et-quaerat', 667, '.doc', 2, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(13, 'Et omnis libero illo quae facilis accusantium repellat.', 'https://www.goyette.biz/illo-natus-consectetur-possimus-explicabo-et', 'http://gerhold.org/distinctio-ullam-est-autem-repellat-tempore', 706, '.doc', 5, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(14, 'Exercitationem cumque quia et magni.', 'http://www.lehner.com/qui-laborum-perferendis-nesciunt-omnis-doloremque-expedita', 'http://kunde.com/', 822, '.doc', 8, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(15, 'Aut eaque ab numquam voluptas rerum itaque.', 'http://kshlerin.net/rerum-magni-nobis-eum-nemo-nihil-quam', 'http://www.johnston.com/', 798, '.doc', 4, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(16, 'Est tempore exercitationem dolores et consequatur voluptatem.', 'http://www.armstrong.org/vitae-sint-quibusdam-minus-repudiandae-perspiciatis-dolor.html', 'http://www.lehner.info/', 206, '.doc', 1, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(17, 'Expedita odit qui est sed.', 'http://www.braun.biz/laudantium-recusandae-odit-tempora-distinctio', 'http://fay.com/', 916, '.doc', 10, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(18, 'Accusamus architecto fugit doloremque numquam quisquam harum in.', 'http://www.cassin.org/laborum-tempore-voluptas-debitis-explicabo-quia-et', 'http://gerhold.com/eius-maiores-non-repudiandae-tempora-quia-officia', 1013, '.doc', 13, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20');
 
 -- --------------------------------------------------------
 
@@ -9877,7 +10000,6 @@ CREATE TABLE `itineraries` (
   `city_start_id` bigint(20) UNSIGNED DEFAULT NULL,
   `city_destination_id` bigint(20) UNSIGNED DEFAULT NULL,
   `typeitinerary_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `person_id` bigint(20) UNSIGNED DEFAULT NULL,
   `supplier_id` bigint(20) UNSIGNED DEFAULT NULL,
   `name` varchar(150) DEFAULT NULL,
   `startdate` timestamp NULL DEFAULT NULL,
@@ -9897,19 +10019,274 @@ CREATE TABLE `itineraries` (
 -- Volcado de datos para la tabla `itineraries`
 --
 
-INSERT INTO `itineraries` (`id`, `tour_id`, `place_id`, `city_start_id`, `city_destination_id`, `typeitinerary_id`, `person_id`, `supplier_id`, `name`, `startdate`, `enddate`, `notes`, `outoftour`, `carrier`, `carrier_id`, `showcheck`, `showtime`, `notify`, `created_at`, `updated_at`) VALUES
-(1, 3, 3, 8548, 5126, 1, 4, 4, 'Jedediah Ledner', '2024-02-13 13:38:32', '2024-02-18 09:03:59', 'Quia totam facilis aperiam quia eveniet consequatur. Magnam quia distinctio doloribus enim ut officiis tempora fugit. Deserunt qui facilis consequatur facere. Est veniam qui non repellendus hic et. Voluptas maxime exercitationem enim omnis aut quaerat voluptas.', 0, 'Tanya Emmerich Sr.', 'WAVCRVU5', '19:22:37', '08:52:49', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(2, 3, 10, 8015, 5895, 2, 4, 9, 'Adolfo Bins', '2024-02-16 02:13:34', '2024-02-19 03:03:40', 'Sed ex hic et eum repudiandae. A voluptatum illo ab eos tempora et sed ullam.', 1, 'Selena Swift', 'GKBKJM37', '09:28:25', '13:59:41', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(3, 3, 5, 7420, 3939, 3, 4, 2, 'Leonardo Bogisich', '2024-02-12 19:45:50', '2024-02-16 16:58:20', 'Veniam ad quaerat delectus sit quia dolore qui. Iusto dolores autem nemo dolore est sed. Voluptates ipsum quaerat cumque.', 1, 'Dr. Verona Kuvalis V', 'MUNJJRCDBO7', '12:20:13', '11:32:56', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(4, 2, 6, 8006, 1675, 7, 3, 1, 'Khalid Heathcote', '2024-02-15 01:56:49', '2024-02-16 03:56:12', 'Pariatur occaecati rem esse praesentium. Et sit est et natus voluptatem ea esse. Facere excepturi excepturi sed. Dolore id veritatis asperiores quia repellendus pariatur.', 1, 'Pedro Kuhlman', 'YUEPKP63', '23:39:12', '16:16:47', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(5, 1, 8, 3564, 823, 3, 3, 10, 'Leonard Hoppe', '2024-02-12 23:43:08', '2024-02-17 15:23:29', 'Et iure et unde ea. Quaerat qui quaerat repellendus sapiente.', 1, 'Prof. Destini Champlin II', 'XNSLHJJ0A36', '18:01:36', '18:23:47', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(6, 2, 8, 4849, 8672, 5, 6, 5, 'Prof. Sterling Douglas III', '2024-02-12 15:15:20', '2024-02-17 04:02:50', 'Labore provident veritatis neque rerum. Commodi ut voluptatibus est rerum non. Sapiente quos odit a.', 0, 'Prof. Fletcher Terry', 'RWBATWW3', '15:12:24', '08:10:06', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(7, 4, 5, 5892, 8350, 5, 1, 10, 'Ardella Murazik', '2024-02-13 19:27:03', '2024-02-17 20:51:29', 'Fugiat itaque et ut repudiandae corrupti. Beatae dolor incidunt expedita nostrum. Laborum hic magni laudantium excepturi ad consectetur voluptas.', 1, 'Miss Alexanne Grimes Jr.', 'SOQXPV1X', '10:29:48', '19:23:41', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(8, 2, 10, 1816, 7569, 2, 2, 10, 'Chance Bins', '2024-02-13 05:26:53', '2024-02-17 21:53:55', 'Qui ullam dolorem corporis fugiat neque repellat. Nihil quaerat iusto adipisci quia eveniet animi. Quia deleniti vel delectus iste odio ut.', 0, 'Wilfred Graham', 'VRNSHMNTVTT', '05:08:42', '16:56:35', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(9, 3, 8, 6441, 6287, 2, 1, 10, 'Kane Jones III', '2024-02-12 10:14:46', '2024-02-16 02:18:40', 'Id ipsam vero et neque sit quis. Suscipit pariatur nemo odit explicabo consequuntur. Sit dolore consequatur necessitatibus neque repudiandae consectetur explicabo. Ad repudiandae accusantium laudantium laborum.', 0, 'Jack Mante', 'PWXLJE30', '06:04:56', '06:52:32', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(10, 3, 7, 5126, 6227, 3, 8, 9, 'Prof. Avery Labadie', '2024-02-12 02:30:43', '2024-02-16 02:31:09', 'Ipsam eveniet consequuntur explicabo voluptatum eius. Aut ea non voluptas suscipit nihil. Et laborum quis et animi velit est vero quia. Voluptates rerum provident ea.', 0, 'Herminio Nikolaus', 'DUXBPPTO', '20:35:34', '17:18:57', 0, '2024-02-08 02:14:20', '2024-02-08 02:14:20'),
-(11, 2, 6, 3625, NULL, 1, 6, NULL, 'Ejemplo de servidor', '2024-02-10 20:38:00', '2024-02-12 22:40:00', 'Ejemplo', 0, NULL, NULL, '18:38:00', '19:38:00', 0, '2024-02-08 02:38:42', '2024-02-08 02:38:42'),
-(12, 2, 6, 3625, NULL, 1, 6, NULL, 'Ejemplo de servidor', '2024-02-23 20:39:00', '2024-02-24 20:42:00', 'Ejemplo', 0, NULL, NULL, '18:40:00', '20:44:00', 0, '2024-02-08 02:41:04', '2024-02-08 02:41:04');
+INSERT INTO `itineraries` (`id`, `tour_id`, `place_id`, `city_start_id`, `city_destination_id`, `typeitinerary_id`, `supplier_id`, `name`, `startdate`, `enddate`, `notes`, `outoftour`, `carrier`, `carrier_id`, `showcheck`, `showtime`, `notify`, `created_at`, `updated_at`) VALUES
+(1, 3, 4, 1846, 7219, 1, 7, 'Maryam Runolfsdottir', '2024-02-19 18:36:49', '2024-02-24 00:44:14', 'Error sunt saepe dolorem reiciendis a modi. Cupiditate sed quia ea molestiae.', 1, 'Tess Lesch', 'GKTOZUIDG9Z', '16:17:40', '20:07:12', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(2, 1, 9, 5701, 6836, 7, 6, 'Bradly Goyette', '2024-02-18 16:07:27', '2024-02-21 05:45:45', 'Maxime autem sed magni atque. Quae omnis delectus ut ut. Assumenda laudantium unde nihil est accusamus. Quasi reprehenderit dignissimos neque in optio.', 1, 'Skyla Kilback IV', 'WRELYCEK', '06:34:54', '08:02:49', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(3, 2, 8, 3746, 1862, 1, 1, 'Hulda Metz', '2024-02-19 14:18:10', '2024-02-21 20:14:07', 'Doloremque veritatis rerum veniam provident et voluptates. Voluptas est velit consectetur ex quis libero. Magni et et velit officia explicabo. Voluptas tempore at sunt molestias dolor dolores rem doloribus.', 0, 'Kylee Raynor Jr.', 'ZJBISLWMRK0', '07:25:57', '22:50:44', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(4, 1, 1, 4754, 5830, 9, 6, 'Miss Esta Oberbrunner III', '2024-02-17 11:06:23', '2024-02-24 00:47:12', 'Dolores inventore est quis error sed fuga. Exercitationem tenetur sit earum sequi odio ea aperiam. Fugit eum et maxime commodi dignissimos aut. Et ratione distinctio voluptates. Molestias quam harum commodi assumenda et voluptatibus.', 0, 'Dr. Sincere Ernser', 'OELFLRPN', '20:34:01', '08:10:20', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(5, 1, 3, 3413, 4337, 5, 4, 'Isaias Howell', '2024-02-19 01:54:08', '2024-02-21 19:55:07', 'Dolor doloremque expedita libero. Nihil autem sed et sit incidunt aut perferendis suscipit. Et praesentium vel pariatur blanditiis. Unde impedit quia voluptates est tenetur.', 1, 'Ewald Anderson', 'KCWXFYFDS66', '11:59:05', '04:13:42', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(6, 2, 4, 2504, 3948, 1, 5, 'Kellen Greenholt', '2024-02-19 17:53:44', '2024-02-24 01:19:16', 'Consequuntur sapiente qui officia aliquam voluptas minus. Omnis debitis qui eum voluptate. Rerum qui sit consectetur quia quod. Aliquid occaecati veritatis aut.', 0, 'Prof. Wava Okuneva', 'FTVWTTKYEX9', '20:33:00', '17:06:00', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(7, 1, 4, 7103, 9165, 4, 3, 'Ashlee Pagac', '2024-02-19 16:50:22', '2024-02-21 04:27:20', 'Dolor consequatur dolorem et quo qui laboriosam odio. Voluptas optio molestiae magnam qui veniam officiis ipsa. Et beatae nam est non. Deleniti harum laudantium sit laudantium.', 1, 'Archibald Deckow II', 'VTNINMXBS08', '15:35:26', '08:35:42', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(8, 3, 9, 4560, 1148, 1, 2, 'Terrill Padberg', '2024-02-18 11:07:25', '2024-02-23 07:06:29', 'Officia quibusdam accusamus similique facere adipisci ratione excepturi. Voluptatem laborum ullam in reiciendis ipsam nesciunt assumenda. Dolore odio deleniti praesentium.', 1, 'Miss Lorine Hansen Jr.', 'TTLDGPEWFH8', '23:33:55', '15:05:09', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(9, 2, 3, 1817, 1198, 3, 4, 'Evert Littel', '2024-02-17 20:58:58', '2024-02-20 17:42:38', 'Accusantium ut fuga quibusdam minus est modi. Laborum assumenda voluptas maiores. Corrupti officia porro deleniti qui. Cum iusto magnam beatae atque qui autem.', 0, 'Mrs. Kathleen Rowe II', 'GLTTVTSAKZ1', '14:21:57', '23:48:31', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19'),
+(10, 2, 6, 5978, 9343, 9, 10, 'Eve Krajcik', '2024-02-17 05:26:34', '2024-02-22 11:11:42', 'Qui reprehenderit sit cupiditate quisquam. Quo iste id libero est nesciunt quam. Aperiam repudiandae aut omnis unde quae tempora ea.', 0, 'Janet Maggio', 'YTCWWORDETR', '22:18:07', '07:49:02', 0, '2024-02-12 16:36:19', '2024-02-12 16:36:19');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `languages`
+--
+
+CREATE TABLE `languages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `code` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `languages`
+--
+
+INSERT INTO `languages` (`id`, `name`, `code`) VALUES
+(1, 'Afrikaans', 'af'),
+(2, 'Afrikaans (South Africa)', 'af-ZA'),
+(3, 'Arabic', 'ar'),
+(4, 'Arabic (U.A.E.)', 'ar-AE'),
+(5, 'Arabic (Bahrain)', 'ar-BH'),
+(6, 'Arabic (Algeria)', 'ar-DZ'),
+(7, 'Arabic (Egypt)', 'ar-EG'),
+(8, 'Arabic (Iraq)', 'ar-IQ'),
+(9, 'Arabic (Jordan)', 'ar-JO'),
+(10, 'Arabic (Kuwait)', 'ar-KW'),
+(11, 'Arabic (Lebanon)', 'ar-LB'),
+(12, 'Arabic (Libya)', 'ar-LY'),
+(13, 'Arabic (Morocco)', 'ar-MA'),
+(14, 'Arabic (Oman)', 'ar-OM'),
+(15, 'Arabic (Qatar)', 'ar-QA'),
+(16, 'Arabic (Saudi Arabia)', 'ar-SA'),
+(17, 'Arabic (Syria)', 'ar-SY'),
+(18, 'Arabic (Tunisia)', 'ar-TN'),
+(19, 'Arabic (Yemen)', 'ar-YE'),
+(20, 'Azeri (Latin)', 'az'),
+(21, 'Azeri (Latin) (Azerbaijan)', 'az-AZ'),
+(22, 'Azeri (Cyrillic) (Azerbaijan)', 'az-AZ'),
+(23, 'Belarusian', 'be'),
+(24, 'Belarusian (Belarus)', 'be-BY'),
+(25, 'Bulgarian', 'bg'),
+(26, 'Bulgarian (Bulgaria)', 'bg-BG'),
+(27, 'Bosnian (Bosnia and Herzegovina)', 'bs-BA'),
+(28, 'Catalan', 'ca'),
+(29, 'Catalan (Spain)', 'ca-ES'),
+(30, 'Czech', 'cs'),
+(31, 'Czech (Czech Republic)', 'cs-CZ'),
+(32, 'Welsh', 'cy'),
+(33, 'Welsh (United Kingdom)', 'cy-GB'),
+(34, 'Danish', 'da'),
+(35, 'Danish (Denmark)', 'da-DK'),
+(36, 'German', 'de'),
+(37, 'German (Austria)', 'de-AT'),
+(38, 'German (Switzerland)', 'de-CH'),
+(39, 'German (Germany)', 'de-DE'),
+(40, 'German (Liechtenstein)', 'de-LI'),
+(41, 'German (Luxembourg)', 'de-LU'),
+(42, 'Divehi', 'dv'),
+(43, 'Divehi (Maldives)', 'dv-MV'),
+(44, 'Greek', 'el'),
+(45, 'Greek (Greece)', 'el-GR'),
+(46, 'English', 'en'),
+(47, 'English (Australia)', 'en-AU'),
+(48, 'English (Belize)', 'en-BZ'),
+(49, 'English (Canada)', 'en-CA'),
+(50, 'English (Caribbean)', 'en-CB'),
+(51, 'English (United Kingdom)', 'en-GB'),
+(52, 'English (Ireland)', 'en-IE'),
+(53, 'English (Jamaica)', 'en-JM'),
+(54, 'English (New Zealand)', 'en-NZ'),
+(55, 'English (Republic of the Philippines)', 'en-PH'),
+(56, 'English (Trinidad and Tobago)', 'en-TT'),
+(57, 'English (United States)', 'en-US'),
+(58, 'English (South Africa)', 'en-ZA'),
+(59, 'English (Zimbabwe)', 'en-ZW'),
+(60, 'Esperanto', 'eo'),
+(61, 'Spanish', 'es'),
+(62, 'Spanish (Argentina)', 'es-AR'),
+(63, 'Spanish (Bolivia)', 'es-BO'),
+(64, 'Spanish (Chile)', 'es-CL'),
+(65, 'Spanish (Colombia)', 'es-CO'),
+(66, 'Spanish (Costa Rica)', 'es-CR'),
+(67, 'Spanish (Dominican Republic)', 'es-DO'),
+(68, 'Spanish (Ecuador)', 'es-EC'),
+(69, 'Spanish (Castilian)', 'es-ES'),
+(70, 'Spanish (Spain)', 'es-ES'),
+(71, 'Spanish (Guatemala)', 'es-GT'),
+(72, 'Spanish (Honduras)', 'es-HN'),
+(73, 'Spanish (Mexico)', 'es-MX'),
+(74, 'Spanish (Nicaragua)', 'es-NI'),
+(75, 'Spanish (Panama)', 'es-PA'),
+(76, 'Spanish (Peru)', 'es-PE'),
+(77, 'Spanish (Puerto Rico)', 'es-PR'),
+(78, 'Spanish (Paraguay)', 'es-PY'),
+(79, 'Spanish (El Salvador)', 'es-SV'),
+(80, 'Spanish (Uruguay)', 'es-UY'),
+(81, 'Spanish (Venezuela)', 'es-VE'),
+(82, 'Estonian', 'et'),
+(83, 'Estonian (Estonia)', 'et-EE'),
+(84, 'Basque', 'eu'),
+(85, 'Basque (Spain)', 'eu-ES'),
+(86, 'Farsi', 'fa'),
+(87, 'Farsi (Iran)', 'fa-IR'),
+(88, 'Finnish', 'fi'),
+(89, 'Finnish (Finland)', 'fi-FI'),
+(90, 'Faroese', 'fo'),
+(91, 'Faroese (Faroe Islands)', 'fo-FO'),
+(92, 'French', 'fr'),
+(93, 'French (Belgium)', 'fr-BE'),
+(94, 'French (Canada)', 'fr-CA'),
+(95, 'French (Switzerland)', 'fr-CH'),
+(96, 'French (France)', 'fr-FR'),
+(97, 'French (Luxembourg)', 'fr-LU'),
+(98, 'French (Principality of Monaco)', 'fr-MC'),
+(99, 'Galician', 'gl'),
+(100, 'Galician (Spain)', 'gl-ES'),
+(101, 'Gujarati', 'gu'),
+(102, 'Gujarati (India)', 'gu-IN'),
+(103, 'Hebrew', 'he'),
+(104, 'Hebrew (Israel)', 'he-IL'),
+(105, 'Hindi', 'hi'),
+(106, 'Hindi (India)', 'hi-IN'),
+(107, 'Croatian', 'hr'),
+(108, 'Croatian (Bosnia and Herzegovina)', 'hr-BA'),
+(109, 'Croatian (Croatia)', 'hr-HR'),
+(110, 'Hungarian', 'hu'),
+(111, 'Hungarian (Hungary)', 'hu-HU'),
+(112, 'Armenian', 'hy'),
+(113, 'Armenian (Armenia)', 'hy-AM'),
+(114, 'Indonesian', 'id'),
+(115, 'Indonesian (Indonesia)', 'id-ID'),
+(116, 'Icelandic', 'is'),
+(117, 'Icelandic (Iceland)', 'is-IS'),
+(118, 'Italian', 'it'),
+(119, 'Italian (Switzerland)', 'it-CH'),
+(120, 'Italian (Italy)', 'it-IT'),
+(121, 'Japanese', 'ja'),
+(122, 'Japanese (Japan)', 'ja-JP'),
+(123, 'Georgian', 'ka'),
+(124, 'Georgian (Georgia)', 'ka-GE'),
+(125, 'Kazakh', 'kk'),
+(126, 'Kazakh (Kazakhstan)', 'kk-KZ'),
+(127, 'Kannada', 'kn'),
+(128, 'Kannada (India)', 'kn-IN'),
+(129, 'Korean', 'ko'),
+(130, 'Korean (Korea)', 'ko-KR'),
+(131, 'Konkani', 'kok'),
+(132, 'Konkani (India)', 'kok-IN'),
+(133, 'Kyrgyz', 'ky'),
+(134, 'Kyrgyz (Kyrgyzstan)', 'ky-KG'),
+(135, 'Lithuanian', 'lt'),
+(136, 'Lithuanian (Lithuania)', 'lt-LT'),
+(137, 'Latvian', 'lv'),
+(138, 'Latvian (Latvia)', 'lv-LV'),
+(139, 'Maori', 'mi'),
+(140, 'Maori (New Zealand)', 'mi-NZ'),
+(141, 'FYRO Macedonian', 'mk'),
+(142, 'FYRO Macedonian (Former Yugoslav Republic of Macedonia)', 'mk-MK'),
+(143, 'Mongolian', 'mn'),
+(144, 'Mongolian (Mongolia)', 'mn-MN'),
+(145, 'Marathi', 'mr'),
+(146, 'Marathi (India)', 'mr-IN'),
+(147, 'Malay', 'ms'),
+(148, 'Malay (Brunei Darussalam)', 'ms-BN'),
+(149, 'Malay (Malaysia)', 'ms-MY'),
+(150, 'Maltese', 'mt'),
+(151, 'Maltese (Malta)', 'mt-MT'),
+(152, 'Norwegian (Bokm?l)', 'nb'),
+(153, 'Norwegian (Bokm?l) (Norway)', 'nb-NO'),
+(154, 'Dutch', 'nl'),
+(155, 'Dutch (Belgium)', 'nl-BE'),
+(156, 'Dutch (Netherlands)', 'nl-NL'),
+(157, 'Norwegian (Nynorsk) (Norway)', 'nn-NO'),
+(158, 'Northern Sotho', 'ns'),
+(159, 'Northern Sotho (South Africa)', 'ns-ZA'),
+(160, 'Punjabi', 'pa'),
+(161, 'Punjabi (India)', 'pa-IN'),
+(162, 'Polish', 'pl'),
+(163, 'Polish (Poland)', 'pl-PL'),
+(164, 'Pashto', 'ps'),
+(165, 'Pashto (Afghanistan)', 'ps-AR'),
+(166, 'Portuguese', 'pt'),
+(167, 'Portuguese (Brazil)', 'pt-BR'),
+(168, 'Portuguese (Portugal)', 'pt-PT'),
+(169, 'Quechua', 'qu'),
+(170, 'Quechua (Bolivia)', 'qu-BO'),
+(171, 'Quechua (Ecuador)', 'qu-EC'),
+(172, 'Quechua (Peru)', 'qu-PE'),
+(173, 'Romanian', 'ro'),
+(174, 'Romanian (Romania)', 'ro-RO'),
+(175, 'Russian', 'ru'),
+(176, 'Russian (Russia)', 'ru-RU'),
+(177, 'Sanskrit', 'sa'),
+(178, 'Sanskrit (India)', 'sa-IN'),
+(179, 'Sami (Northern)', 'se'),
+(180, 'Sami (Northern) (Finland)', 'se-FI'),
+(181, 'Sami (Skolt) (Finland)', 'se-FI'),
+(182, 'Sami (Inari) (Finland)', 'se-FI'),
+(183, 'Sami (Northern) (Norway)', 'se-NO'),
+(184, 'Sami (Lule) (Norway)', 'se-NO'),
+(185, 'Sami (Southern) (Norway)', 'se-NO'),
+(186, 'Sami (Northern) (Sweden)', 'se-SE'),
+(187, 'Sami (Lule) (Sweden)', 'se-SE'),
+(188, 'Sami (Southern) (Sweden)', 'se-SE'),
+(189, 'Slovak', 'sk'),
+(190, 'Slovak (Slovakia)', 'sk-SK'),
+(191, 'Slovenian', 'sl'),
+(192, 'Slovenian (Slovenia)', 'sl-SI'),
+(193, 'Albanian', 'sq'),
+(194, 'Albanian (Albania)', 'sq-AL'),
+(195, 'Serbian (Latin) (Bosnia and Herzegovina)', 'sr-BA'),
+(196, 'Serbian (Cyrillic) (Bosnia and Herzegovina)', 'sr-BA'),
+(197, 'Serbian (Latin) (Serbia and Montenegro)', 'sr-SP'),
+(198, 'Serbian (Cyrillic) (Serbia and Montenegro)', 'sr-SP'),
+(199, 'Swedish', 'sv'),
+(200, 'Swedish (Finland)', 'sv-FI'),
+(201, 'Swedish (Sweden)', 'sv-SE'),
+(202, 'Swahili', 'sw'),
+(203, 'Swahili (Kenya)', 'sw-KE'),
+(204, 'Syriac', 'syr'),
+(205, 'Syriac (Syria)', 'syr-SY'),
+(206, 'Tamil', 'ta'),
+(207, 'Tamil (India)', 'ta-IN'),
+(208, 'Telugu', 'te'),
+(209, 'Telugu (India)', 'te-IN'),
+(210, 'Thai', 'th'),
+(211, 'Thai (Thailand)', 'th-TH'),
+(212, 'Tagalog', 'tl'),
+(213, 'Tagalog (Philippines)', 'tl-PH'),
+(214, 'Tswana', 'tn'),
+(215, 'Tswana (South Africa)', 'tn-ZA'),
+(216, 'Turkish', 'tr'),
+(217, 'Turkish (Turkey)', 'tr-TR'),
+(218, 'Tatar', 'tt'),
+(219, 'Tatar (Russia)', 'tt-RU'),
+(220, 'Tsonga', 'ts'),
+(221, 'Ukrainian', 'uk'),
+(222, 'Ukrainian (Ukraine)', 'uk-UA'),
+(223, 'Urdu', 'ur'),
+(224, 'Urdu (Islamic Republic of Pakistan)', 'ur-PK'),
+(225, 'Uzbek (Latin)', 'uz'),
+(226, 'Uzbek (Latin) (Uzbekistan)', 'uz-UZ'),
+(227, 'Uzbek (Cyrillic) (Uzbekistan)', 'uz-UZ'),
+(228, 'Vietnamese', 'vi'),
+(229, 'Vietnamese (Viet Nam)', 'vi-VN'),
+(230, 'Xhosa', 'xh'),
+(231, 'Xhosa (South Africa)', 'xh-ZA'),
+(232, 'Chinese', 'zh'),
+(233, 'Chinese (S)', 'zh-CN'),
+(234, 'Chinese (Hong Kong)', 'zh-HK'),
+(235, 'Chinese (Macau)', 'zh-MO'),
+(236, 'Chinese (Singapore)', 'zh-SG'),
+(237, 'Chinese (T)', 'zh-TW'),
+(238, 'Zulu', 'zu'),
+(239, 'Zulu (South Africa)', 'zu-ZA');
 
 -- --------------------------------------------------------
 
@@ -9953,7 +10330,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2023_12_16_175800_create_promotions_table', 1),
 (24, '2023_12_17_022720_create_photos_table', 1),
 (25, '2023_12_18_062001_create_tickets_table', 1),
-(26, '2024_02_06_175133_create_countrytours_table', 1);
+(26, '2024_02_06_175133_create_countrytours_table', 1),
+(27, '2024_02_09_044056_create_currencies_table', 1),
+(28, '2024_02_09_044056_create_languages_table', 1),
+(29, '2024_02_09_044056_create_personitineraries_table', 1);
 
 -- --------------------------------------------------------
 
@@ -9991,8 +10371,38 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(2, 'App\\Models\\Agencies', 1, 'f8b7c4a2e6d9c0a1b3f5', '43021f0ae991d5623ba07d3fb9027e0ab249e477ce8084995888cffc8ea21731', '[\"*\"]', '2024-02-08 03:11:41', NULL, '2024-02-08 02:44:43', '2024-02-08 03:11:41'),
-(3, 'App\\Models\\Agencies', 1, 'f8b7c4a2e6d9c0a1b3f5', '6be629b289d81aba3cfe2edcf816cef35e03d20547a53d1a98c644706c7381a9', '[\"*\"]', '2024-02-08 06:56:35', NULL, '2024-02-08 06:00:24', '2024-02-08 06:56:35');
+(1, 'App\\Models\\User', 1, 'f8b7c4a2e6d9c0a1b3f5', 'd616c69b3d8c28e522d5b45f7b72681fa6f241c61cb1f76a4729cc13fa13f34e', '[\"*\"]', '2024-02-12 19:07:42', NULL, '2024-02-12 16:37:02', '2024-02-12 19:07:42');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personitineraries`
+--
+
+CREATE TABLE `personitineraries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `type` int(11) NOT NULL DEFAULT 2,
+  `person_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `itinerary_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `personitineraries`
+--
+
+INSERT INTO `personitineraries` (`id`, `type`, `person_id`, `itinerary_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 7, 2, NULL, NULL),
+(2, 1, 7, 4, NULL, NULL),
+(3, 1, 8, 5, NULL, NULL),
+(4, 1, 8, 7, NULL, NULL),
+(5, 1, 4, 3, NULL, NULL),
+(6, 1, 9, 6, NULL, NULL),
+(7, 1, 10, 9, NULL, NULL),
+(8, 1, 4, 10, NULL, NULL),
+(9, 1, 10, 1, NULL, NULL),
+(10, 1, 6, 8, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -10029,16 +10439,16 @@ CREATE TABLE `persons` (
 --
 
 INSERT INTO `persons` (`id`, `name`, `lastname`, `birthday`, `email`, `phone`, `extra_phone`, `lang`, `position`, `notify`, `notes`, `passport`, `passport_expiry`, `notify_type`, `group_id`, `typecontact_id`, `country_id`, `agency_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Marcia Wiza', 'Metz', '2005-08-19', 'maggio.eveline@yahoo.com', '+1-463-623-0387', '1-610-519-4578', 'Francés', 'Sed praesentium rerum dolor sed.', 0, 'Et exercitationem occaecati rerum aut laboriosam. Inventore ut tempora voluptatibus quasi. Enim laudantium atque dignissimos blanditiis eos molestiae.', 'RZUJSND7', '2027-10-17', 'SMS', 4, 5, 234, 1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(2, 'Edwin Kshlerin', 'McGlynn', '2005-04-28', 'edwina.padberg@vandervort.com', '+13516273090', '+1 (539) 744-4315', 'Inglés', 'Officiis quis pariatur est fuga perferendis.', 0, 'Qui id enim qui quas qui. Laudantium magni ut sint ea laborum veniam reiciendis minus. Aut ut magnam inventore aliquid quasi.', 'SROFWLSWFHJ', '2026-08-11', 'WhatsApp', 4, 4, 216, 2, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(3, 'Gwendolyn Reilly PhD', 'Deckow', '1931-02-08', 'margarita.rowe@hotmail.com', '(864) 751-3469', '+1-828-996-4364', 'Español', 'Nesciunt vel rerum omnis molestiae consequatur.', 0, 'Sed sint omnis dignissimos cupiditate. Doloremque aut nesciunt blanditiis libero quia. Culpa soluta quo iusto at qui quos.', 'XJHWCDAI', '2026-04-20', 'Correo', 4, 6, 123, 1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(4, 'Mrs. Cassidy Von V', 'Davis', '1976-08-17', 'cronin.rosario@gmail.com', '(620) 887-0126', '(339) 550-8812', 'Francés', 'Perspiciatis alias at sit voluptas expedita.', 0, 'In esse aut ex consequatur impedit ab qui. Et expedita ut et aut.', 'JGGNQVG0', '2026-04-14', 'WhatsApp', 3, 2, 84, 1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(5, 'Turner Tillman', 'O\'Hara', '2006-01-10', 'kihn.dedrick@yahoo.com', '1-989-891-2889', '+1-820-254-5699', 'Inglés', 'Repellat labore itaque dolores eligendi fugit.', 0, 'Doloremque officiis labore quis exercitationem eos natus. Eligendi autem amet quos eos dolor. Voluptas quasi error animi magnam voluptatem fugit consequuntur. Nesciunt itaque et aliquid molestias. Minus consectetur eos laborum possimus nisi nisi nobis.', 'UMRCYRJOFZV', '2027-10-21', 'Telegram', 4, 6, 32, 1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(6, 'Mr. Dante Lueilwitz', 'Labadie', '1967-08-09', 'cyrus47@metz.com', '1-435-501-0785', '678-243-5505', 'Español', 'Nostrum nesciunt earum fugiat quisquam et quas ea.', 0, 'In sit sequi sit nobis fugiat. Architecto officiis laudantium possimus ad laboriosam distinctio similique. Quis ut est et eveniet non ea qui aliquam. Sit officia aut voluptas et temporibus.', 'CIPOHDXC', '2025-09-17', 'SMS', 2, 3, 251, 1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(7, 'Prof. Bailee Koch MD', 'Blick', '1963-07-23', 'mohr.ernestine@ferry.com', '+1-440-678-0892', '+19125199835', 'Español', 'Eaque dolores sunt dolor error id.', 0, 'Distinctio minus molestiae facere labore. Cumque quas molestias nihil aut facilis. Ad doloremque recusandae eligendi dolor accusamus necessitatibus corporis.', 'VZVZMJTQ0B4', '2027-11-10', 'SMS', 2, 3, 224, 2, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(8, 'Ms. Enola Ondricka III', 'Koss', '1941-02-22', 'khammes@hotmail.com', '680.783.1538', '1-878-930-9599', 'Francés', 'Pariatur rerum eligendi quia qui omnis optio assumenda voluptatem.', 0, 'Aut culpa repudiandae iusto et porro. Illum officia omnis quia doloribus. Explicabo qui enim architecto vel enim nihil.', 'ELLWFCIR', '2027-11-22', 'Correo', 3, 5, 153, 2, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(9, 'Bryana Marvin', 'Willms', '1994-09-28', 'barton.cierra@gmail.com', '+1 (539) 536-9113', '+1-337-615-4887', 'Español', 'Qui deleniti molestiae eius ex quo earum nesciunt corporis.', 0, 'Expedita nam magni tenetur sit ipsa. Harum aut ut ut ut.', 'RDFUIHX6', '2027-05-11', 'SMS', 4, 6, 146, 2, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL),
-(10, 'Nels Walker III', 'Bauch', '1946-12-23', 'lukas13@breitenberg.net', '+1 (832) 716-5919', '+1 (225) 514-8450', 'Francés', 'Earum blanditiis quia repellendus molestiae veniam.', 0, 'Consequatur fuga dolore iure natus repellat animi. Et in maxime est deserunt vero fuga. Non laborum est beatae quod velit laboriosam at.', 'TCMDMFTG', '2028-01-06', 'Telegram', 1, 3, 206, 1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', NULL);
+(1, 'Eve Altenwerth', 'Gleichner', '1948-07-03', 'shanahan.gladyce@wolf.info', '+1-703-990-4672', '(320) 494-8062', 'Vietnamese', 'Id animi fugiat ipsa ut et reiciendis dicta natus.', 0, 'Odio sunt asperiores dicta ad et quia cumque. Id molestiae cumque amet iste exercitationem. Reprehenderit optio ut quia ut nihil dolor aspernatur illo. Nostrum amet ut repudiandae cumque.', 'BNAHUWVBFH7', '2025-09-18', 'WhatsApp', 4, 5, 88, 1, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(2, 'Lilian Schumm', 'Rogahn', '1926-08-09', 'obeer@lueilwitz.com', '1-341-229-1662', '+17315089281', 'Slovenian', 'Accusantium omnis mollitia sed in a debitis et.', 0, 'Qui porro nemo repellendus consequatur. Porro tempora ipsum sed error aliquam ea. Et recusandae sequi et nostrum odit.', 'VAILQYPMFVZ', '2027-01-07', 'Correo', 3, 7, 174, 2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(3, 'Jaquelin Steuber', 'Williamson', '1984-11-13', 'nick.deckow@hotmail.com', '+1-442-705-7424', '854-826-5175', 'Sami (Lule) (Norway)', 'Eos soluta ex nam dolore quidem quo quia.', 0, 'Unde non nostrum velit impedit nesciunt. Cupiditate quo eligendi consequatur qui dolor. Eligendi fugit eos quos doloribus. Assumenda adipisci laborum id non velit velit.', 'MSYKBLIZ', '2027-09-19', 'WhatsApp', 3, 7, 35, 2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(4, 'Keith Lockman', 'D\'Amore', '1947-12-23', 'rlowe@kulas.net', '(443) 472-4487', '305.899.8415', 'Spanish (El Salvador)', 'Ab aliquam excepturi commodi praesentium ad et optio.', 0, 'Aut quos sit velit nam quia et rerum. Dolores harum temporibus et qui. Et beatae enim at rerum maxime. Perspiciatis consequatur aliquam impedit. Ea eos et modi aut quo dolorem occaecati.', 'XUUOJOYUPY6', '2028-01-05', 'SMS', 2, 4, 218, 2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(5, 'Roscoe Corkery', 'Prohaska', '1950-12-31', 'jorge.labadie@wilderman.biz', '940.565.3633', '+1-585-915-5704', 'Ukrainian (Ukraine)', 'Veniam quis cumque velit labore sit laborum adipisci omnis.', 0, 'Suscipit alias aliquid enim impedit facilis. Enim voluptas et et. Consequatur consectetur ratione sunt et.', 'LCTNJJ4SSUZ', '2026-11-21', 'Telegram', 4, 11, 70, 1, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(6, 'Brenden Renner', 'Legros', '1925-02-20', 'elliott20@hotmail.com', '+19414659037', '(229) 448-3686', 'Sami (Northern) (Norway)', 'Et ut ipsum nam eius et.', 0, 'Saepe consequatur et eligendi est doloremque occaecati. Quo culpa eligendi aliquid dignissimos qui nobis. Quasi nemo reprehenderit inventore eos sint totam et. Illo nihil suscipit delectus odit molestiae itaque.', 'UOXHLIRZNAF', '2026-03-19', 'SMS', 4, 8, 159, 2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(7, 'Alexie O\'Conner', 'Bernier', '1941-03-14', 'metz.golda@langworth.com', '+1 (617) 583-7931', '(425) 549-1479', 'Arabic (Libya)', 'Ea sit et qui iusto repellendus et.', 0, 'Consequuntur quasi quisquam molestiae rerum. Praesentium et officia aperiam quod. Sequi voluptas qui ipsam pariatur modi.', 'JVVFQQZ1', '2026-03-04', 'Telegram', 1, 1, 113, 1, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(8, 'Demario Lang', 'Haag', '1949-11-26', 'corkery.vicky@hotmail.com', '+1 (352) 940-5283', '380.580.9060', 'Japanese (Japan)', 'Quod facilis ut occaecati id eligendi autem at.', 0, 'Quibusdam est laudantium harum ut. Qui aut suscipit numquam quam. Nisi eveniet nemo minus numquam expedita dolorem. Minus facere sed eius velit quisquam blanditiis et iste.', 'KRMYFJ7J', '2027-03-30', 'WhatsApp', 1, 1, 54, 1, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(9, 'Marcelo Cruickshank', 'Wyman', '1926-10-13', 'chelsey36@crist.org', '725-941-9657', '+1-201-430-6013', 'English (United Kingdom)', 'Fuga quaerat facere et autem.', 0, 'Perspiciatis nam rem et quidem est. Sunt modi sunt vero quod autem ipsa consequuntur. Et velit tenetur id beatae ullam. Autem repellendus sed eligendi impedit assumenda ad. Rerum assumenda consequatur sed quibusdam.', 'LVRHRDBY8WY', '2025-09-11', 'Correo', 4, 4, 219, 2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL),
+(10, 'Allan Pouros', 'Gleichner', '1997-12-04', 'karolann.cole@gmail.com', '1-224-873-9715', '347-809-4125', 'Kannada', 'Quia est omnis quia commodi.', 0, 'Officiis aut cum tenetur blanditiis perferendis commodi. Id earum et porro quibusdam voluptatum vitae quos. Delectus ducimus ullam dicta non nostrum voluptatem. Consequatur in saepe dolorem recusandae provident natus.', 'GQKAGOTT', '2028-01-21', 'WhatsApp', 2, 10, 209, 2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -10059,10 +10469,10 @@ CREATE TABLE `persontours` (
 --
 
 INSERT INTO `persontours` (`id`, `tour_id`, `person_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 6, NULL, NULL),
-(2, 3, 1, NULL, NULL),
-(3, 4, 3, NULL, NULL),
-(4, 1, 2, NULL, NULL);
+(1, 1, 1, NULL, NULL),
+(2, 4, 7, NULL, NULL),
+(3, 2, 2, NULL, NULL),
+(4, 3, 9, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -10194,26 +10604,26 @@ CREATE TABLE `places` (
 --
 
 INSERT INTO `places` (`id`, `name`, `google_id`, `phone`, `extra_phone`, `manager`, `email`, `gis`, `notes`, `address`, `typeplace_id`, `city_id`, `agency_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Stacy Schroeder', 'Ut deleniti tempore unde molestias.', '+1-585-745-1096', '551.341.9584', 'Nash Schaden V', 'dewitt96@hauck.com', '23.1415927,-82.3567098420046', 'Aut rerum unde quis atque velit ut. Quam aut rerum qui sed. Quibusdam qui quam quos optio. Officiis aperiam qui sed aut facilis sint.', '83980 Edgar Circles Apt. 149\nNorth Joana, NJ 13239-5499', 3, 2308, 1, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(2, 'Fausto Gaylord', 'Quae omnis nihil sequi et qui.', '+19733992318', '+1-681-908-3283', 'Dr. Kaela White', 'croob@hotmail.com', '23.12572,-82.38807', 'Voluptatum aut fuga ut ullam et. Aut recusandae ipsa dolorem sint quia. Laboriosam distinctio tempore labore ipsa soluta aliquam dolore. Architecto doloremque harum ad cumque veritatis. Eius repellendus blanditiis vel unde consequatur magnam.', '51617 Beer Locks\nPort Camille, MN 47765', 4, 9271, 1, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(3, 'Ms. Kamille Bruen III', 'Aut illo autem unde.', '(678) 368-3446', '816.401.3925', 'Ms. Lina McDermott', 'stone71@ortiz.net', '23.1245097,-82.3859821673449 ', 'Officiis sunt omnis voluptates. Atque eos ut distinctio optio. Odit dolore molestiae neque modi.', '81004 Mireya Vista\nEast Jarvisville, AL 11225', 4, 5374, 1, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(4, 'Jonathan Daugherty I', 'Explicabo nemo quibusdam mollitia porro.', '(281) 384-5947', '785-712-8502', 'Prof. Marie Cartwright II', 'ofelia70@yahoo.com', '23.1245097,-82.3859821673449 ', 'Rerum in officiis debitis alias quasi blanditiis. Qui inventore ipsa magnam eveniet. Commodi natus architecto ut. Suscipit corrupti recusandae facilis corporis voluptas. Nihil est eum rerum magni reprehenderit.', '718 Eldred Ports Apt. 987\nErnaland, CT 77518-6978', 1, 167, 2, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(5, 'Lupe Zemlak II', 'Odit beatae distinctio soluta omnis odit enim.', '1-531-742-9259', '903.298.1518', 'Jalon Sawayn I', 'kadin.moen@hill.com', '23.1415927,-82.3567098420046', 'Consequuntur dicta temporibus nesciunt sint corrupti voluptas quos. Aperiam vel neque cumque ut blanditiis ad necessitatibus. Veniam cupiditate in provident. Dolorem ullam consectetur vero facilis tempore maiores.', '603 McCullough Plaza Suite 460\nFaheyborough, DE 95535', 1, 6784, 1, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(6, 'Lee Hodkiewicz', 'Dignissimos vel sit ut et autem molestiae itaque.', '+1 (240) 531-6519', '818.577.6553', 'Ms. Karlie Boyer Sr.', 'xcole@gmail.com', '23.0138889,-82.6094444', 'Beatae et sunt suscipit consectetur. Et corporis est impedit eos nihil facilis. Ipsa explicabo non sed animi. Molestias voluptatem sunt perspiciatis nulla. Architecto quisquam quidem qui dignissimos.', '2884 Littel Overpass Suite 231\nMeredithville, TN 56934-0099', 1, 253, 1, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(7, 'Raymond Muller', 'Nihil eum voluptate quae molestiae facere quia doloremque.', '469-392-7035', '+1.785.869.2374', 'Maya Dach', 'fritz89@gmail.com', '23.0138889,-82.6094444', 'Inventore qui suscipit quos veniam ex. Consectetur modi aut omnis libero eligendi. Non voluptatem qui facere excepturi vero reiciendis sed.', '302 Jacquelyn Fords Suite 008\nDiannashire, NV 36988-3972', 4, 5370, 1, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(8, 'Silas Cruickshank', 'Quibusdam ea minus qui magni id voluptatem.', '+1-458-401-7470', '419-842-6062', 'Mr. Jaron Lynch II', 'pete58@hotmail.com', '23.0138889,-82.6094444', 'Magni eius consectetur tenetur aliquid velit illum laborum. At voluptate aut minima est odio. Molestias doloremque earum nihil accusantium quo corrupti.', '22833 Sallie Circles Apt. 922\nHerzogview, MI 12252-6833', 4, 38, 2, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(9, 'Prof. Domenica Bernhard DVM', 'Et cum rem excepturi dolor sunt minus.', '+18154315060', '+19416047611', 'Miss Kayli Lehner IV', 'fdonnelly@wyman.info', '23.1245097,-82.3859821673449 ', 'Distinctio assumenda libero ullam numquam harum. Qui quae omnis doloremque exercitationem voluptatum voluptates reiciendis. Nihil numquam perferendis temporibus et. Praesentium minima quos accusantium voluptatem voluptatem nostrum.', '25498 Runolfsson Forge\nWisokyland, IL 14282', 2, 5349, 2, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(10, 'Chaz Wilkinson', 'Sint voluptatibus dolores dolorum aperiam sed nulla.', '+12023431517', '(323) 477-0564', 'Isabella Bode PhD', 'nschroeder@gmail.com', '23.1245097,-82.3859821673449 ', 'Magni ea aut cum quos excepturi placeat officia maxime. Error reiciendis dicta et ea qui dolores. Nisi voluptates rem ad voluptatem eos officia incidunt. Dicta adipisci quaerat unde aut voluptate assumenda in.', '195 Sibyl Mall\nSouth Delpha, ID 95479-2234', 4, 2831, 2, '2024-02-08 02:14:19', '2024-02-08 02:14:19', NULL),
-(11, 'Dortha Hickle', 'Magnam beatae et voluptatum fugiat repudiandae sapiente soluta.', '1-228-606-6264', '+1-470-795-1581', 'Devante Fadel', 'rebeka54@gmail.com', '23.12572,-82.38807', 'Iste molestiae porro facere voluptatem qui ut laborum voluptas. Eveniet ut libero est ipsa sed suscipit voluptas. Enim non nesciunt libero atque.', '8533 Joey Drive Suite 430\nWest Lela, GA 97332', 3, 8967, 2, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(12, 'Luna Carter', 'Aut a impedit laudantium quo accusamus dolorum sit delectus.', '(470) 463-5867', '+1-904-357-1266', 'Hobart Bogisich', 'armstrong.garrick@rogahn.com', '23.12572,-82.38807', 'Ratione quae laboriosam ducimus dolor similique. Autem molestiae autem consequuntur sit maxime. Perferendis hic eveniet est doloribus.', '386 McClure Plains Apt. 222\nFriesenhaven, SD 93927-7617', 2, 9027, 1, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(13, 'Claudine Hand DDS', 'Nostrum tempora consequuntur quaerat quae ea.', '1-781-908-0557', '+19082875689', 'Glenda Cole PhD', 'wkuhlman@yost.biz', '23.0138889,-82.6094444', 'Magni labore expedita rerum modi voluptatibus. Dolor sed quas voluptas vitae fugit. Consectetur nam quibusdam voluptate reprehenderit voluptatibus.', '6373 Bayer Mall\nCatherinefurt, AL 38538', 3, 1020, 2, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(14, 'Meda Russel', 'Officia et quo nostrum molestiae.', '1-364-620-2121', '283.909.3481', 'Prof. Tatum Kohler MD', 'hansen.payton@yahoo.com', '23.13747,-82.35867', 'Voluptates iusto rem est cumque rerum. Repudiandae sed quos et commodi magni. Ducimus ea est nihil reprehenderit eum soluta accusamus id. Amet ex numquam consequuntur eligendi doloremque fugiat.', '73443 Lauryn Locks Suite 031\nWhitneymouth, OK 79095-4084', 3, 6979, 1, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(15, 'Dr. Earline Stiedemann PhD', 'Non quidem consequatur vitae.', '+12763971915', '330.298.1557', 'Godfrey Schroeder IV', 'louvenia.mueller@frami.com', '23.12314,-82.37196', 'Dolorem velit facilis praesentium ipsa consequatur vel est culpa. Accusantium quos et aliquid ut cumque. Unde vero blanditiis qui quos dicta. Tempora impedit et qui voluptatibus rerum.', '6200 Orval Stream Suite 203\nWintheiserchester, OK 90291', 4, 1456, 2, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(16, 'Aliya Spencer DDS', 'Odit molestias dignissimos voluptate distinctio.', '+1-364-205-0332', '1-586-809-3844', 'Emerson Nolan', 'reilly.clyde@yahoo.com', '23.12572,-82.38807', 'Id sequi culpa quasi quod voluptatum numquam. Eveniet impedit tempora aut laudantium delectus soluta voluptatem. Aut voluptatem veritatis atque voluptatem non. Iusto nam rerum officia sunt corporis velit corrupti.', '12321 Abbott Way\nBotsfordmouth, LA 62127', 1, 7758, 2, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(17, 'Casimir Kihn', 'Laborum omnis mollitia eaque et corporis est.', '678.984.1989', '207.406.2153', 'Myrna Muller', 'ahilpert@gmail.com', '23.12314,-82.37196', 'Illo beatae officiis quaerat doloremque sapiente nihil ea. Ut qui quod animi est et ex dolorum aliquam. Vel possimus dolores et possimus exercitationem sint.', '1071 Lebsack Plaza Apt. 422\nNorth Amari, CT 64328-2024', 2, 4204, 1, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(18, 'Kayla D\'Amore', 'Ratione eligendi dolorem dolores sit.', '1-234-410-6832', '361.893.7454', 'Josefa Kunze III', 'roob.emelie@legros.net', '23.12314,-82.37196', 'Est et incidunt et et. Aspernatur iste tempore asperiores quis molestias. Vero autem temporibus dolor quaerat.', '67324 Eileen Crest\nTyreebury, SC 94133', 1, 2015, 1, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(19, 'Davon VonRueden', 'Natus et est saepe molestiae sed quo.', '279.498.4378', '1-760-281-0237', 'Lorine Kreiger', 'carol54@gmail.com', '23.12572,-82.38807', 'Sequi voluptas et consequatur debitis iure nostrum. Quod quia qui dolore ea ut autem. Autem ea sed ex modi rerum voluptas occaecati. Omnis aliquam voluptate corporis voluptas.', '6447 Dax Oval Apt. 118\nEast Dulce, SC 67050', 4, 2607, 2, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL),
-(20, 'Ernestine Collins MD', 'Ab architecto blanditiis quod exercitationem.', '+1-463-643-7326', '732-221-1723', 'Lauretta Adams', 'eleonore.rohan@yahoo.com', '23.12572,-82.38807', 'Quidem molestiae qui sunt rerum. Quia tempora sapiente adipisci eum reprehenderit saepe ut. Accusantium porro ad voluptas quasi ad dignissimos aliquid.', '9893 Harris Wells\nNorth Magnus, VA 43389', 2, 3641, 1, '2024-02-08 02:14:20', '2024-02-08 02:14:20', NULL);
+(1, 'Marlen Reynolds', 'Et voluptatem ullam quia molestiae sapiente.', '+1.260.672.5355', '419.483.3253', 'Houston Champlin', 'ydaniel@gmail.com', '23.1245097,-82.3859821673449 ', 'Necessitatibus officia magni nobis aut. Eligendi nam culpa cumque enim sint. Doloribus quia quasi fugit.', '5882 O\'Connell Union\nCronafort, ND 98228-3636', 4, 7506, 1, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(2, 'Jean Little', 'Id quam sed neque commodi.', '1-812-877-5711', '(947) 484-9854', 'Ms. Lauryn Johnston', 'ckoch@gmail.com', '23.1245097,-82.3859821673449 ', 'Necessitatibus labore saepe quas odio accusantium quia perferendis. Praesentium consectetur quibusdam consequatur et ipsum ducimus et. Beatae sed quibusdam harum maiores ut.', '71587 Bailey Haven Suite 705\nKobeton, FL 53467', 1, 6032, 2, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(3, 'Shania Boehm', 'Excepturi non beatae vel eligendi ut hic ipsum sint.', '(740) 635-0099', '+1-385-557-9814', 'Junior Cole Sr.', 'billie.stoltenberg@hand.com', '23.1245097,-82.3859821673449 ', 'Optio nemo delectus quod earum. Molestiae necessitatibus sunt accusantium assumenda dolor enim eum. Id dicta modi aliquid iste quas debitis omnis. Fugiat nihil numquam repellendus aliquid saepe.', '4310 Rowe Square\nKreigershire, OR 73774', 3, 8035, 2, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(4, 'Adell Leffler', 'Perferendis delectus ut nostrum quis reiciendis in molestiae.', '(667) 510-8910', '740.245.4040', 'Prof. Maryse Rempel Sr.', 'haleigh.hegmann@yahoo.com', '23.0138889,-82.6094444', 'Atque corporis est nemo quidem velit animi rerum accusantium. Laboriosam ut et eligendi earum. Nihil ut molestiae doloribus eum deleniti repellendus consequuntur. Adipisci tenetur officia quibusdam qui rerum. Ut iusto enim tenetur sit.', '9076 Schoen Drives\nLuciousberg, FL 86995-7537', 3, 4802, 2, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(5, 'Carli Heaney Sr.', 'Et tenetur dolorum in at sit maxime.', '+1 (808) 210-8757', '971.737.8824', 'Reggie Denesik', 'frodriguez@hotmail.com', '23.12572,-82.38807', 'Qui molestiae et eius corporis et quo modi. Quas dolores et at neque in. Aut occaecati non vitae voluptatum. Qui harum adipisci qui excepturi dolore consequatur.', '6632 Bins Forges Suite 184\nSchillerberg, MN 51537-1967', 1, 6540, 1, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(6, 'Lucious Hagenes Sr.', 'Consequuntur magnam iusto ut facilis quos quia.', '(425) 440-0652', '1-678-445-8992', 'Prof. Robert Goodwin', 'romaine.hodkiewicz@jenkins.info', '23.13747,-82.35867', 'Enim dolorem repudiandae quidem dolores. Optio non culpa est. Odit vitae fuga ea. Explicabo rerum tempora eum minus.', '9236 Eliezer Street Suite 766\nTurnerchester, NM 82793', 2, 1742, 2, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(7, 'Robin Russel', 'Et sint sed voluptas ipsam tempore.', '+1 (253) 925-0519', '619-862-9822', 'Dr. Iva Hane V', 'breanne.larkin@gmail.com', '23.12314,-82.37196', 'Tenetur libero velit rerum. Ullam aperiam ut cupiditate qui. Voluptas minima dolor consequatur saepe adipisci. Aspernatur architecto enim qui sint nulla eveniet adipisci.', '73438 Brakus Shoals Suite 752\nNorth Luemouth, ID 35925-5667', 2, 7091, 1, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(8, 'Laury Kerluke', 'A quia possimus culpa cumque in neque.', '+18102321562', '575-542-1376', 'Flo Abernathy', 'godfrey78@gmail.com', '23.13747,-82.35867', 'Et impedit rerum ipsam explicabo voluptatem laudantium. Suscipit voluptatem totam ut repudiandae dolor amet nobis.', '8352 Earline Lock Apt. 967\nTrinityshire, GA 67677-0529', 1, 2528, 1, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(9, 'Selena Jacobi', 'Mollitia est commodi similique excepturi quae ut.', '(762) 851-7833', '657-988-2560', 'Angelita Mayert', 'naufderhar@gmail.com', '23.1245097,-82.3859821673449 ', 'Minima neque necessitatibus dolorem nulla est consequatur. Adipisci accusamus voluptatem assumenda. Hic dolorem quo voluptates autem. Corrupti ipsa nobis blanditiis reiciendis a. Laborum vel autem illo tempora error vel aut.', '93489 Runolfsson Oval Suite 349\nPort Maemouth, VA 21181-8477', 2, 505, 1, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(10, 'Sophia Dare', 'Non temporibus sequi cum aut.', '(307) 302-7022', '320.415.5656', 'Irving Rippin', 'littel.cora@osinski.com', '23.1245097,-82.3859821673449 ', 'Recusandae molestiae voluptate et. Voluptas non sunt atque qui soluta quo deleniti. Id minima aspernatur nesciunt et quasi cupiditate.', '336 Emilia Throughway\nNorth Venastad, DC 06690', 2, 7728, 2, '2024-02-12 16:36:18', '2024-02-12 16:36:18', NULL),
+(11, 'Maymie Dietrich MD', 'Aut nam facilis quaerat quisquam quas est fuga.', '(660) 991-4961', '+1.618.975.7318', 'Miss Juliet Buckridge', 'cassin.marshall@schulist.info', '23.1415927,-82.3567098420046', 'Expedita laboriosam ea ut minima porro repudiandae. Quia aliquid rerum autem exercitationem facilis nostrum est. Voluptas in laboriosam sit. Aspernatur dolorem explicabo est quia et eaque.', '4089 Cordie Loop Apt. 055\nMichelmouth, ME 62093-0042', 4, 190, 2, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(12, 'Isidro Abernathy', 'Dolor consequatur ut itaque qui minima vel.', '(520) 579-2643', '+1 (234) 453-4384', 'Rosalinda Ortiz', 'betsy71@gmail.com', '23.0138889,-82.6094444', 'Deserunt voluptates enim architecto. Dicta impedit laudantium non nemo aliquid vel repellendus. Est non quasi voluptatibus deleniti officia voluptas ducimus.', '44202 Runolfsdottir Alley\nPort Brianneside, MO 41878', 2, 181, 1, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(13, 'Jarrell Friesen III', 'Molestiae sed aperiam enim praesentium.', '1-218-656-6665', '678.436.6966', 'Shaun Okuneva', 'goodwin.arlene@gmail.com', '23.13747,-82.35867', 'Est atque enim sunt eaque ad nisi. Quaerat earum nihil aut suscipit. Sint maxime ea vel neque est animi recusandae.', '374 Darron Place Apt. 489\nHaliefort, TN 91912-6020', 2, 2568, 1, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(14, 'Mr. Adonis Herman', 'Aliquid deleniti ea eveniet quia illum eligendi in.', '1-423-467-0524', '1-623-609-5238', 'Mckenna Littel', 'kskiles@gmail.com', '23.0138889,-82.6094444', 'Omnis doloremque doloremque qui non ipsam nulla in minima. Ut odit beatae ipsam nostrum. Unde ab voluptatibus beatae ratione ea.', '4319 Kutch Place Suite 754\nWest Xanderside, SC 72929-2571', 2, 3756, 2, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(15, 'Maynard Nicolas DVM', 'Hic excepturi excepturi est et.', '+1-509-785-6676', '+1-256-327-2522', 'Destini Wuckert DVM', 'nkunze@marks.com', '23.12572,-82.38807', 'Velit quae eaque nam voluptates vitae iure aliquid. Dolores quia id quibusdam aliquam fugiat consequuntur. A itaque id ea voluptatibus. Harum voluptatem eum necessitatibus.', '803 Hand Lake\nMayermouth, MS 01504-7308', 3, 7465, 2, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(16, 'Mr. Cade Konopelski III', 'Vel vero maiores omnis quia perspiciatis cum est.', '+1.361.798.2384', '+1-641-659-9435', 'Dr. Emory Schulist', 'soledad58@yahoo.com', '23.0138889,-82.6094444', 'Ut fugit voluptates ut ad iusto. Et pariatur ipsa ut est repellat alias animi. Recusandae rerum ad et quaerat quam.', '91198 Kerluke Haven\nSouth Jazmyne, MO 44583', 1, 7796, 1, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(17, 'Kelton Welch', 'Voluptatem sunt dicta qui.', '+18702151612', '1-480-602-2185', 'Prof. Josephine Harvey', 'janick.breitenberg@tromp.org', '23.13747,-82.35867', 'Et consequatur voluptates et non. Quod soluta nam molestiae id nisi sapiente.', '88111 Molly Heights Suite 279\nFlaviebury, AR 71532-1182', 4, 1794, 1, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(18, 'Prof. Katrine Witting', 'Odio est praesentium rerum optio eaque porro velit dignissimos.', '434.979.5091', '+1-575-255-6204', 'Gregorio Goldner', 'gdavis@hotmail.com', '23.1245097,-82.3859821673449 ', 'Facilis esse autem dolores quia molestias accusantium. Neque est quas consectetur dolores. Qui aut omnis et libero consequatur. Ipsam aliquam commodi ea et id eos.', '215 Richie Glen Suite 273\nFrancisside, MT 62866-4181', 1, 901, 2, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(19, 'Mable Mueller', 'Qui corporis temporibus dignissimos reiciendis ut debitis.', '(734) 660-8411', '1-432-291-8435', 'Riley Bernhard', 'leo.hintz@gmail.com', '23.1245097,-82.3859821673449 ', 'Ipsa culpa ex consequatur rerum ut voluptas provident. Molestias officiis id et aliquam. Soluta atque eum necessitatibus enim ipsa sed dolorum voluptatem.', '94619 Freddie Tunnel Suite 239\nShirleymouth, OK 18392', 2, 8935, 1, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL),
+(20, 'Trycia McClure MD', 'Eos enim consectetur sed iste omnis molestiae.', '+15156021294', '631-921-0456', 'Dr. Jane Weber', 'miracle85@heidenreich.biz', '23.1415927,-82.3567098420046', 'Eveniet et quasi ipsum quia delectus mollitia. Vitae eius laboriosam quidem harum accusamus. Eveniet minima similique tenetur aut.', '886 Boyle Way Apt. 343\nPort Arielle, DE 75736-2656', 2, 7011, 1, '2024-02-12 16:36:20', '2024-02-12 16:36:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -10253,59 +10663,59 @@ CREATE TABLE `socialmedias` (
 --
 
 INSERT INTO `socialmedias` (`id`, `description`, `url`, `typesocialmedia_id`, `socialmediaable_id`, `socialmediaable_type`, `created_at`, `updated_at`) VALUES
-(1, 'Ipsam ipsum vero eum omnis placeat odit. Omnis et iusto ut excepturi eaque. Eius maxime ad voluptatem modi quos voluptas ratione doloribus.', 'http://klocko.org/debitis-sit-nam-qui-quia-nemo', 2, 2, 'App\\Models\\Agencies', '2024-02-08 02:14:16', '2024-02-08 02:14:16'),
-(2, 'Et dignissimos ut quo vel culpa est. Ea autem sed praesentium optio maiores eius.', 'http://champlin.com/', 6, 2, 'App\\Models\\Agencies', '2024-02-08 02:14:16', '2024-02-08 02:14:16'),
-(3, 'Voluptate quisquam expedita odio explicabo earum rerum qui repudiandae. Est voluptates earum rem pariatur facilis et. Cum vel eum voluptatem omnis.', 'http://zemlak.net/ea-voluptas-rerum-et-inventore-error-omnis.html', 9, 2, 'App\\Models\\Agencies', '2024-02-08 02:14:16', '2024-02-08 02:14:16'),
-(4, 'Maxime eos earum quia unde dolorum eligendi natus. Sint similique dignissimos nulla aliquid. Dolorum saepe libero sit voluptatem at vero.', 'http://www.fritsch.com/', 3, 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(5, 'Corrupti odio voluptate repellendus odit cumque. Nostrum voluptas quia et qui. Molestias illo vitae ab quis fugiat nesciunt eos eius. Exercitationem et eos est accusantium architecto quia.', 'http://legros.com/', 7, 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(6, 'Amet et rem minima molestiae quo. Similique omnis consequatur quo ut quasi in. Voluptas voluptatum ipsa quam deserunt porro.', 'https://renner.com/est-voluptates-magnam-debitis-aliquam-soluta.html', 3, 3, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(7, 'In et magnam sequi nulla enim. Quis molestiae earum autem et magnam quisquam. Tempore fugiat beatae exercitationem a omnis. Aperiam tempora eos et maiores voluptatem quia.', 'http://www.maggio.com/ut-temporibus-commodi-porro-voluptatem', 5, 3, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(8, 'Non earum impedit ut reiciendis. Illum quia aut perferendis rerum voluptas. Rem commodi maiores et nesciunt sit corporis blanditiis.', 'http://www.kohler.com/dolore-omnis-dolores-vel-libero-omnis-dolorem-voluptatem', 5, 2, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(9, 'Est aut eius cum distinctio numquam accusantium ut vel. Ab maxime sed qui. Perferendis et quam reprehenderit non. Molestiae quia molestiae sed fuga aut.', 'http://koss.info/nam-quia-dolor-impedit-doloribus-debitis-ipsa', 7, 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(10, 'Sequi error dignissimos cum maxime unde quidem atque. Delectus et nisi assumenda. Natus placeat quia voluptatibus corporis expedita qui autem.', 'http://windler.com/quis-omnis-velit-sed-est-expedita-est', 10, 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(11, 'Omnis quis sit facere vel rem ratione consequatur. Temporibus qui fuga quasi similique. Excepturi quia dolores est aperiam molestiae consequatur atque.', 'https://www.hermiston.biz/neque-non-in-non-nihil-omnis-dolorum', 4, 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(12, 'Qui illum nobis debitis dolorem suscipit. Tempore cupiditate consequuntur tempora. Molestiae saepe eum eligendi dolores. Culpa laborum et ullam sunt. Et libero sed ab necessitatibus repellendus non sequi id.', 'http://lebsack.com/at-voluptas-perferendis-voluptates-dignissimos-exercitationem-qui', 3, 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(13, 'Sunt ad et minima harum ipsa ut non. Qui voluptate voluptatem omnis suscipit ut dolore maxime. Non enim eos quasi saepe et et.', 'https://swaniawski.biz/neque-quia-voluptatem-unde-corrupti.html', 1, 1, 'App\\Models\\Artists', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(14, 'In repellat cupiditate eligendi ea sit. Quo iste ut vel quia amet magni. Ut et temporibus repellat voluptatibus eos. Velit qui aperiam sunt dolores veniam sunt non reiciendis.', 'http://www.spencer.biz/', 1, 4, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(15, 'Accusantium quam rerum omnis incidunt. Ipsa accusamus ut repellat facilis et similique sed. Consequatur repudiandae veniam odio blanditiis debitis. Optio minima esse libero illum aliquid.', 'http://www.ryan.com/aliquid-sunt-accusamus-saepe-nisi', 7, 1, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(16, 'Quisquam dolorem earum magni consequatur rerum occaecati. Enim qui est rerum et. In veritatis minima eum dolor qui aut. Est aut voluptate voluptatem ut consequatur doloremque.', 'http://www.strosin.com/facere-praesentium-quia-quis-non.html', 7, 2, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(17, 'Sunt et beatae enim quas et ipsum. Nisi mollitia quo tempora omnis consequatur. Impedit provident autem tempora suscipit beatae.', 'http://harber.com/neque-est-fuga-saepe-nemo', 5, 1, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(18, 'Perferendis nostrum et assumenda pariatur ut. Reprehenderit nesciunt distinctio sed velit aliquam.', 'http://www.roberts.com/id-nam-non-doloribus-esse-sequi-rerum', 3, 2, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(19, 'Possimus deserunt excepturi vel libero aut. Eos odit modi non et quam provident nobis. Rerum laborum sapiente repellat ipsa sequi.', 'http://www.brekke.org/odio-illum-commodi-ipsam-porro-autem-sit-ut.html', 5, 3, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(20, 'Eum sed est corporis. Dolore neque aut voluptatum sint et aut natus hic. Suscipit eveniet molestiae esse delectus corrupti et. Tempore accusantium quis vero et ducimus non praesentium.', 'http://cronin.com/', 6, 1, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(21, 'Eius qui facere deleniti sunt eos dolore ullam. Ad porro et explicabo nihil. Neque vitae voluptatem qui et culpa incidunt. Consequuntur et ducimus inventore et ratione.', 'http://www.zulauf.biz/sit-autem-dolorem-eos-optio-maxime', 7, 1, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(22, 'Distinctio fuga impedit reprehenderit et. Nemo aut et rem nobis libero. Amet sed inventore autem repellat eos incidunt optio. Molestiae dolorum odit error. Placeat et commodi reprehenderit consequuntur perspiciatis aperiam vel.', 'http://www.fisher.net/', 1, 3, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(23, 'Iste cum quo sit et est dolore culpa. Recusandae cupiditate totam sint molestiae incidunt deserunt perferendis. Debitis reiciendis ea ea repellat minus et corporis. Laudantium fugiat aut reprehenderit natus eum. Autem sed porro sed quas sed iste.', 'https://emard.com/praesentium-rerum-officia-facere-dolor-quis-quod-sit-corporis.html', 10, 1, 'App\\Models\\Tours', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(24, 'Et qui modi cum qui. Est dolorem veritatis veritatis id optio non id. Eum blanditiis sunt deserunt qui. Sunt neque quo doloremque modi quod.', 'http://haag.com/quasi-maiores-sit-et.html', 9, 3, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(25, 'Aut voluptas odit repellendus odit pariatur dolores consectetur. Enim dignissimos minima sint nesciunt non. Fugiat aut ut quidem eligendi sint.', 'http://www.grimes.com/qui-nostrum-sit-dolorum-quasi', 6, 1, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(26, 'Ut eum tempore ut facilis hic facere explicabo laborum. Dolor aut sit aut. Debitis quibusdam voluptas quod vel unde dolores dolorum. Cum ut repudiandae corrupti dolores.', 'https://www.waters.info/pariatur-ipsam-omnis-qui-fugit-qui-nostrum', 9, 7, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(27, 'A possimus sit ratione corrupti. Dolor odit omnis nulla. Rerum recusandae aut iste. Sit ea fuga non accusantium aut nihil reprehenderit.', 'http://mcglynn.com/voluptatem-culpa-assumenda-et-ducimus-distinctio-repellat-fuga-enim', 4, 2, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(28, 'Nesciunt blanditiis accusamus est ipsa. Dolorem aspernatur aperiam consequatur. Perferendis eos nulla dolor sapiente illo deserunt eos. Quo ex doloremque magnam rerum. Recusandae a reprehenderit ipsam quia et tenetur.', 'http://www.pfeffer.com/animi-quis-in-provident-vitae-corrupti-sequi-qui', 5, 3, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(29, 'Quia sed aut vitae assumenda ipsam sapiente. Facere cumque a a molestiae similique et asperiores. Repudiandae sed esse sunt et vel numquam. Autem debitis quisquam ipsa dolor dolores eligendi in tenetur.', 'http://www.ledner.biz/', 8, 5, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(30, 'Iste ipsam molestiae quibusdam. Repellendus quia eos eveniet omnis est suscipit. Non voluptatem adipisci quod facere illo. Pariatur repudiandae cupiditate animi nihil.', 'https://lowe.com/tenetur-voluptatem-nesciunt-aspernatur-labore-autem.html', 7, 2, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(31, 'Asperiores quia sed qui a labore corrupti rerum. Error accusantium itaque quae beatae hic aliquid. Dolores incidunt quisquam ut vel. Ut est non aliquid a architecto. Exercitationem consequuntur consequatur sunt aut velit.', 'http://denesik.com/eum-ut-dolorem-sequi-atque-ad.html', 10, 3, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(32, 'Et sint porro quia ducimus voluptates. Nobis exercitationem similique doloribus rerum quam. Quasi rerum rerum ut est soluta.', 'https://hudson.com/quibusdam-aliquid-sit-expedita-impedit-deserunt-tenetur-delectus.html', 10, 4, 'App\\Models\\Persons', '2024-02-08 02:14:17', '2024-02-08 02:14:17'),
-(33, 'Voluptas explicabo accusamus voluptatibus vel accusantium assumenda. Deleniti recusandae blanditiis optio iure aut dolorem porro. Aliquid reiciendis dolore ullam tempore. Dolores error voluptatum cum eos.', 'http://bartoletti.net/quos-aspernatur-omnis-qui-qui-nihil', 9, 6, 'App\\Models\\Persons', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(34, 'Tenetur quam voluptas provident nihil. Sed mollitia exercitationem corrupti officia voluptates harum molestias rerum.', 'http://konopelski.info/sit-velit-iusto-provident-sed', 5, 10, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(35, 'Ut odit aut eum. Et inventore ex incidunt esse. Et fugit architecto ab labore qui qui. Vero ea earum rerum quis ut sunt. Quia eum aspernatur architecto iste magnam.', 'https://www.klocko.com/non-consequatur-dolor-voluptatem-illo', 10, 10, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(36, 'Aut cumque officiis quasi culpa et. Qui quia ut illum molestiae blanditiis et.', 'https://www.kovacek.com/esse-eveniet-nihil-saepe-voluptate', 3, 6, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(37, 'Repudiandae ullam eos sint sit aspernatur fugit aut. Exercitationem natus est aut. Eveniet nesciunt necessitatibus voluptatibus sint reprehenderit.', 'https://www.koepp.com/aut-a-est-eius-temporibus-et', 9, 1, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(38, 'Veritatis ut eaque laborum repellendus molestias dolorem laudantium voluptas. Nihil enim nesciunt et aut saepe possimus. Aspernatur voluptatem voluptatem earum enim error.', 'http://www.veum.com/mollitia-vero-aut-et-ab-fugit-et-tempore-enim', 5, 4, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(39, 'Facere nulla aut illum quia mollitia. Temporibus perspiciatis porro provident quidem quisquam non fugit libero. Aut optio exercitationem ut a qui quo.', 'http://www.ortiz.org/voluptas-nostrum-tempora-nihil-molestiae-impedit', 3, 3, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(40, 'Praesentium neque voluptatem quo corporis. Accusamus officiis et qui non. Rerum eveniet placeat numquam recusandae illo corporis. Quis laboriosam reiciendis dolorem itaque voluptatum autem voluptatum. Cum excepturi pariatur assumenda asperiores vero soluta accusamus veniam.', 'http://mccullough.com/labore-nihil-est-iure-sunt-quidem-tempora-ipsum', 1, 1, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(41, 'Repellat recusandae tenetur rerum asperiores. Aspernatur quidem quibusdam dolor assumenda consequatur iure. Ad eum aut praesentium est ex nihil. Unde et ut minima repellat quis eos.', 'http://graham.info/quis-porro-voluptatem-minima-at-repudiandae.html', 10, 8, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(42, 'Et quo exercitationem earum quis. Saepe est magni et nihil sit maiores. Quibusdam laudantium sit odio debitis eos. Consequuntur sit sed doloremque consequatur neque possimus sunt.', 'http://altenwerth.biz/assumenda-ut-nisi-suscipit-numquam-consequatur-cumque-quia-possimus', 7, 9, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(43, 'Saepe nemo praesentium et vel. Ut et sit asperiores ea dolorum sed. Atque non quia et non temporibus enim. Quisquam reprehenderit voluptatibus expedita pariatur porro corrupti. Sint unde optio ipsum eos similique amet doloribus aperiam.', 'https://www.king.com/placeat-et-est-quia-eum-deserunt', 8, 8, 'App\\Models\\Suppliers', '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(44, 'Sint est omnis repellat quis pariatur cumque. Non ut dolor error est. Labore ab ut aut rerum est quis saepe.', 'http://okon.com/voluptatem-amet-repellendus-repudiandae-voluptas-sunt', 4, 6, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(45, 'Nemo alias provident nobis a vero error et. Fugit voluptas voluptas iure qui accusantium incidunt repudiandae. Quod dolorum enim possimus temporibus impedit accusamus reprehenderit itaque.', 'http://www.lehner.com/', 4, 6, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(46, 'Nam eos distinctio ullam. Eos tenetur consequatur occaecati consequuntur facere natus nobis. Voluptatum cupiditate vero mollitia dolor molestiae quia occaecati. Eos beatae aut ipsa ullam quo ex et. Nihil ratione qui id perferendis odit possimus beatae.', 'http://www.windler.com/sed-reprehenderit-at-esse-ducimus-sit-incidunt', 7, 13, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(47, 'Odio nemo excepturi aut quia impedit omnis perspiciatis ratione. Non a provident consequuntur consequuntur. Pariatur omnis rerum qui culpa quas. Nostrum quo veniam placeat quo ut est doloribus.', 'http://www.conroy.com/magni-nulla-blanditiis-esse-dicta-officia-repudiandae-dolor-quisquam.html', 1, 17, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(48, 'Est exercitationem ab sit corrupti. Iste nisi et eaque ullam. Facere mollitia perspiciatis voluptates et. Ipsam nulla veniam quae.', 'http://hagenes.net/temporibus-enim-repudiandae-excepturi-quia-autem-aut-placeat', 3, 11, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(49, 'Quia repellendus qui dolores. Harum perferendis quis quae doloribus numquam laudantium. Eveniet est sunt ut modi.', 'http://www.monahan.com/voluptas-quas-quam-commodi-natus-sequi.html', 3, 3, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(50, 'Veritatis ut sunt repudiandae officiis et consequatur. Cupiditate est quo repudiandae deleniti libero labore. Odit amet reprehenderit repudiandae autem et.', 'https://mayer.biz/quaerat-cumque-sed-minima-omnis-quia-unde-possimus-porro.html', 3, 5, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(51, 'Sed earum voluptatem animi. Omnis impedit commodi perferendis voluptatibus. Temporibus est deleniti rerum vel voluptate aspernatur blanditiis.', 'https://www.kertzmann.com/iste-dolorem-expedita-deleniti-fugiat-quae', 5, 8, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(52, 'Suscipit consequatur voluptatum error. Quasi praesentium alias quidem qui quam aut. Accusantium a a totam ut quos. Libero veniam non non quaerat quidem sed.', 'https://howell.com/tempore-atque-ab-et-tempore-repellendus-eligendi.html', 9, 6, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(53, 'Et molestiae et laudantium magni architecto maxime voluptas adipisci. Distinctio dolore nihil quas modi vitae numquam itaque et. Quia praesentium porro officia et. Quis et accusantium voluptatum officiis repellendus reprehenderit perferendis.', 'https://zulauf.com/rem-cupiditate-tempora-sed-et.html', 9, 13, 'App\\Models\\Places', '2024-02-08 02:14:21', '2024-02-08 02:14:21');
+(1, 'Rem qui quia iusto et aliquam sit. Dolor quod facilis soluta quaerat temporibus dolores. Quaerat fugiat dolores dolor quisquam quas vel placeat sunt.', 'http://white.com/', 3, 1, 'App\\Models\\Agencies', '2024-02-12 16:36:15', '2024-02-12 16:36:15'),
+(2, 'Et quos et fugit rerum ullam. Ut perspiciatis odio nisi. Id cupiditate amet et omnis. Perspiciatis aut voluptatem aliquam quidem ipsam.', 'https://dicki.com/et-ab-iste-qui-sapiente.html', 5, 1, 'App\\Models\\Agencies', '2024-02-12 16:36:15', '2024-02-12 16:36:15'),
+(3, 'Quo blanditiis et expedita. Ea tempora et ut dolorem. Est voluptatibus aut et qui distinctio minima ipsum.', 'http://www.champlin.biz/eos-aut-quia-qui-dolore-a-voluptatem-ut-molestiae', 8, 2, 'App\\Models\\Agencies', '2024-02-12 16:36:15', '2024-02-12 16:36:15'),
+(4, 'Quidem est exercitationem voluptatem provident. Nemo dolor saepe sint magni delectus molestiae. Quia nostrum eius repellendus reiciendis ad deserunt. Officia unde ad ut cupiditate officiis unde.', 'https://wisozk.com/quae-neque-blanditiis-est-itaque.html', 2, 4, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(5, 'Vero sed illum officia rem voluptas. Ut inventore tempore neque soluta iusto et. Quia optio corporis assumenda at sint ipsum.', 'http://www.price.com/quis-rerum-natus-porro-modi-quibusdam-quia-et.html', 3, 2, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(6, 'Omnis rerum provident quibusdam et. Tenetur facere nostrum porro sunt vitae. Saepe quia temporibus vel non expedita eum.', 'http://www.davis.com/', 7, 1, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(7, 'Quisquam non eaque maxime optio exercitationem ratione beatae. Eos ullam eius ut pariatur illo eum.', 'http://www.hagenes.net/', 10, 1, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(8, 'Aut error iste beatae quisquam sunt. Sint dolorum hic sit saepe at. Est dolore ipsa doloribus qui. Beatae eligendi ex distinctio modi eum provident.', 'https://www.donnelly.com/qui-nemo-adipisci-reiciendis-sequi-numquam', 9, 3, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(9, 'Incidunt enim mollitia harum aperiam. Vitae sapiente ullam cupiditate harum sit. A debitis dolor et ducimus aut cupiditate nulla. Maiores dolorem ipsam similique quos cumque nostrum vel laborum.', 'http://www.feest.net/', 9, 3, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(10, 'Et quia rerum tenetur culpa molestias. Nostrum cum nihil velit et praesentium et dolorum. Explicabo consequatur incidunt officia a ad.', 'http://www.oreilly.com/', 7, 4, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(11, 'Laudantium perferendis sapiente error vel quo a sequi. Eligendi laudantium nihil soluta temporibus. Libero quae architecto officiis libero quia eos quis.', 'http://www.schowalter.com/culpa-dicta-repellat-placeat-ut-commodi-aut-voluptate', 9, 4, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(12, 'Ex recusandae debitis voluptatem corporis. Rerum labore corrupti occaecati et ipsum suscipit. Voluptatem consequatur perferendis et odit voluptatibus qui ab. Dolor iure nemo magni dolores qui.', 'https://rosenbaum.com/et-dolorem-optio-omnis.html', 9, 4, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(13, 'Vel quas labore dolore libero. Ipsam totam amet vero et in. Omnis aspernatur qui molestiae quisquam.', 'http://steuber.info/dolores-ullam-dignissimos-ducimus-velit-libero.html', 7, 1, 'App\\Models\\Artists', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(14, 'Ad corrupti rerum assumenda laborum ut. Sunt qui velit aspernatur deserunt. Adipisci vel illum similique voluptatem eum dolores. Esse voluptatem adipisci iste et qui. Amet magnam sequi reprehenderit quia quidem sed qui.', 'http://anderson.com/nihil-voluptas-maxime-sint-quia-quidem-animi', 7, 2, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(15, 'Quis qui blanditiis quidem dicta doloribus dolorum. Aut soluta magni deserunt nam voluptas. Dolore laborum deserunt voluptatem soluta in.', 'http://www.murazik.biz/tempore-ut-omnis-et-dicta-et-ipsum-quia', 6, 4, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(16, 'Vel ut et quos cupiditate. Possimus a veniam odit fugiat sunt est sed. Debitis cumque architecto voluptas occaecati ut. Iure nihil voluptatem nemo animi sit.', 'http://www.padberg.com/non-exercitationem-nostrum-eum.html', 10, 1, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(17, 'Error repellat praesentium qui molestias omnis. Nihil molestiae quia voluptas numquam esse aut sint. Laborum est dolore ut et iusto qui.', 'https://murphy.info/illum-id-cum-dolores-vel-vitae.html', 7, 4, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(18, 'Enim impedit quae accusamus dicta quos sunt. Numquam voluptatem non possimus rerum iste natus. Iusto quis ut hic.', 'https://howe.biz/velit-itaque-ut-quia-non-dolor.html', 8, 1, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(19, 'Quod tempora aut corporis iusto illum dolor. Velit quod eos molestiae animi et repudiandae omnis quasi. Voluptatum doloremque et et facilis perspiciatis. A adipisci nostrum repellendus molestiae perspiciatis.', 'https://www.schulist.biz/incidunt-ullam-porro-quia-numquam-totam-dolorem-molestiae-voluptate', 7, 1, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(20, 'Nam vel consectetur temporibus atque esse velit maiores veniam. Voluptates autem qui officia doloremque sint dolores atque consequuntur. Placeat molestiae molestiae velit consequatur perspiciatis. Accusamus non aut velit dolore saepe animi optio.', 'http://breitenberg.org/excepturi-provident-soluta-quam-cupiditate-delectus-placeat', 3, 2, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(21, 'Aut voluptas dolorum labore veniam. Explicabo natus est adipisci ex. Aut voluptas numquam quidem inventore doloremque.', 'http://grimes.com/eligendi-molestias-ex-sapiente-vitae.html', 10, 3, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(22, 'Sed recusandae reprehenderit officiis. Atque est quisquam in nihil. Sequi dolores numquam sint distinctio ullam reprehenderit. Ducimus rerum nobis dolores ut.', 'http://www.rice.biz/', 8, 1, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(23, 'Neque et eum inventore qui dolorem. Consequatur accusamus culpa alias vel et consequatur. Accusantium sapiente quidem omnis nam deleniti ut libero. Ducimus eos eaque et voluptatem quae.', 'http://ryan.com/illo-atque-doloribus-ut-ipsum-ut', 6, 3, 'App\\Models\\Tours', '2024-02-12 16:36:16', '2024-02-12 16:36:16'),
+(24, 'Sed aut itaque aut iusto. Nulla totam qui ducimus quam quia molestiae minima aut. Voluptatem minima corporis quam alias autem perferendis repudiandae.', 'http://www.maggio.com/nesciunt-iure-asperiores-excepturi-fuga-nostrum-corporis-iure.html', 8, 1, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(25, 'Consequuntur natus perspiciatis omnis amet. Quidem sit corrupti a in qui. Autem dignissimos ea voluptatem consectetur. Sit ex aut eaque optio commodi dolorem.', 'http://lubowitz.com/animi-error-reprehenderit-ea-autem-ducimus-non-quibusdam', 1, 10, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(26, 'Facere officiis accusantium iusto velit saepe sunt asperiores. Unde repellendus nesciunt aperiam dicta ex ut. Soluta consectetur dolorum tempora iste possimus distinctio quam. Et et in debitis ipsam facere id similique expedita.', 'http://www.cruickshank.net/fugiat-soluta-iusto-mollitia-qui-sed-doloribus-perspiciatis', 6, 5, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(27, 'Ipsam repudiandae esse nihil non et recusandae. Error eum ut aut aspernatur magnam eaque. Optio velit a enim quasi possimus quod. At libero quaerat velit autem accusantium ut consequatur.', 'http://fisher.net/', 7, 2, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(28, 'At laudantium ratione alias ut suscipit. Eum omnis ut ut fuga magni neque. Sit voluptate animi occaecati assumenda minus.', 'http://rice.com/voluptatum-qui-nihil-aut-alias.html', 8, 1, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(29, 'Suscipit voluptatum et laudantium quasi perferendis odit distinctio. Commodi veritatis adipisci est ut. Eos dolores aliquam amet quaerat. Ex aut tempora tempore eum.', 'https://www.wisozk.com/nihil-porro-occaecati-repellendus-dolorem-consequatur-culpa', 8, 3, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(30, 'Sunt nam deserunt dicta sequi facere omnis quidem occaecati. Qui earum illum laborum numquam sint.', 'http://www.paucek.info/molestiae-illo-non-eum-dolores-facilis-consequatur', 8, 1, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(31, 'Optio adipisci et voluptatem facere ullam quod dolor molestias. Et sint corporis ea animi quo delectus. Dolorum consequatur quibusdam aut eos cum repellat. A explicabo eligendi odio dicta temporibus non voluptatum soluta.', 'http://www.schuppe.com/nihil-accusantium-et-dignissimos-maxime', 6, 8, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(32, 'Quam dolor necessitatibus velit voluptas. Mollitia iste facilis quibusdam consectetur autem saepe. Earum consequatur beatae et dolor et et. Ipsam est natus quaerat omnis totam.', 'http://nitzsche.biz/', 2, 1, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(33, 'Molestiae quis omnis architecto. Distinctio nihil exercitationem totam.', 'http://www.rempel.com/', 5, 7, 'App\\Models\\Persons', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(34, 'Nisi quam dolorem et sequi fuga accusantium eos. Nisi occaecati nulla ut. Quod deserunt architecto et non eaque officiis rerum. Quod aut enim fuga eum.', 'http://www.collins.com/', 8, 2, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(35, 'Quaerat expedita ex tempore quod culpa. Adipisci pariatur placeat qui dolore. Modi voluptas commodi molestias sequi. Odit est ut quia rerum.', 'http://hane.net/sit-in-numquam-consequatur-assumenda', 4, 10, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(36, 'Consequuntur eaque ut totam perspiciatis. Hic veritatis doloribus rerum porro nostrum ut ratione.', 'https://www.gleason.com/excepturi-non-repellendus-et-est-soluta-nam-soluta', 4, 9, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(37, 'Consequatur inventore magnam maiores aperiam dolores voluptatem tempora. Nihil alias explicabo aut. Quibusdam sequi eos voluptas quam. Excepturi quidem blanditiis a error tenetur adipisci.', 'http://www.jones.info/blanditiis-quasi-unde-fugiat-et-perspiciatis-quas-quia-dolores.html', 6, 7, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(38, 'Dolores commodi modi ipsam possimus aut maxime dolorum. Laborum sunt repellat ut fugit blanditiis rem. Ipsa consectetur molestiae ut aut velit explicabo. Consequuntur et quis neque assumenda rerum.', 'http://shields.net/', 6, 6, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(39, 'Non aut sed similique officia velit facilis. Omnis laudantium sed quas ipsa sit. Labore iusto laboriosam aut assumenda ut earum occaecati. Ad architecto sed sint et vitae dolorem culpa.', 'http://www.kuhn.com/tempore-placeat-incidunt-provident-qui', 10, 4, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(40, 'Commodi qui enim distinctio id quia sequi. Consequuntur nihil est incidunt. Dolore sunt aperiam dignissimos.', 'https://lehner.com/dolor-rerum-est-error-ut-optio-qui.html', 3, 2, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(41, 'Perferendis quis unde consequatur quo. Porro ut delectus iure. Ratione officiis consequuntur esse.', 'http://rohan.com/', 10, 2, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(42, 'Ullam ea sed error qui voluptate pariatur. Rerum tempore et ut nesciunt dolorum minus. Asperiores pariatur voluptas doloremque unde impedit eos accusamus. In itaque amet placeat saepe sed et ex.', 'http://ryan.info/', 4, 9, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(43, 'Molestiae harum quod suscipit voluptates laboriosam dolores non. Ducimus expedita provident omnis aut. Rem quasi est dolores inventore omnis repellat. Vitae perspiciatis omnis sit est magnam aut debitis.', 'https://www.fritsch.com/quidem-architecto-voluptatem-porro-laudantium-voluptatibus-iste-quo', 10, 1, 'App\\Models\\Suppliers', '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(44, 'Vel sunt impedit natus aut. Commodi quia sapiente et laboriosam. Neque modi aspernatur quaerat blanditiis fuga quos dolores. Sequi et vel rerum provident consectetur iste asperiores.', 'https://ledner.biz/cupiditate-eum-explicabo-cumque-aut.html', 4, 1, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(45, 'Aut dolor quisquam deserunt suscipit debitis temporibus. Corporis cum sint qui reiciendis. Impedit tempore velit ut odio ratione. Aliquam doloremque officia rem id at. Provident in praesentium maxime est ut voluptate.', 'https://www.hackett.com/aut-sit-impedit-voluptate-quia-ut-qui-iste', 5, 11, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(46, 'Voluptatem quo incidunt sapiente quaerat aliquid. Eius aut velit facere aut dolorum minima. Eos ipsa modi non iusto qui molestiae distinctio. Quibusdam cumque laboriosam est assumenda.', 'http://zulauf.net/omnis-qui-ullam-a-error-magni-sunt-itaque.html', 10, 6, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(47, 'Saepe asperiores voluptas neque deserunt minus repellat ipsam. Sed fugiat repellat error qui nihil rem eligendi. Harum qui fuga repellendus modi. Corporis laborum animi minima mollitia.', 'http://kassulke.com/', 1, 6, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(48, 'Sint sapiente dolores modi voluptatem quia sit doloremque est. Facilis debitis alias nam. Perspiciatis cum quisquam dolor suscipit rerum earum. Sed nemo et quia aut vel.', 'https://bernier.com/facere-deleniti-velit-eum-sequi-non.html', 1, 18, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(49, 'Commodi reiciendis qui corporis. Ea voluptatem atque voluptatibus quod deleniti. Architecto minima non quia aperiam ab.', 'http://von.biz/animi-aspernatur-aliquam-dolore-inventore-et', 1, 12, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(50, 'Eius ducimus et et deserunt. Architecto qui veritatis accusantium aperiam exercitationem.', 'http://bernhard.com/qui-ut-voluptas-est-id.html', 1, 19, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(51, 'Nobis unde explicabo ipsam totam ex fugiat a. Eos et pariatur eum velit. Aut natus esse qui quia consectetur a harum.', 'https://www.oconnell.com/aliquid-sunt-sapiente-fugit-ut-dolorem', 8, 2, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(52, 'Tenetur quasi et ex reiciendis aut ut. Velit nostrum libero deserunt est. Porro iusto adipisci earum assumenda et omnis.', 'http://padberg.net/voluptatem-quia-voluptatem-et-enim-ipsum-odit-vero-nemo', 2, 14, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(53, 'Omnis quibusdam quia aut. Voluptatem qui qui ratione porro. Et est consequuntur qui qui quo corporis. Et omnis rem quo quia occaecati sapiente.', 'http://www.prosacco.com/culpa-provident-omnis-nam-est-modi', 7, 7, 'App\\Models\\Places', '2024-02-12 16:36:20', '2024-02-12 16:36:20');
 
 -- --------------------------------------------------------
 
@@ -10341,16 +10751,16 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `tradename`, `taxname`, `taxcode`, `address`, `email`, `manager`, `manager_phone`, `manager_email`, `paydata`, `phone`, `extra_phone`, `contact`, `contact_phone`, `contact_email`, `notes`, `city_id`, `agency_id`, `created_at`, `updated_at`) VALUES
-(1, 'Heaney, Rutherford and D\'Amore', 'Conrad Cartwright', 'ISRTYDWR', '99486 Jacobson Flat\nNew Kristoffer, MA 19881', 'vmoore@gmail.com', 'Dr. Ivy Hackett DVM', '+1.910.970.3739', 'kihn.lelia@cormier.info', 'In qui ut quam et voluptas a molestiae. Sed sed nemo quae quasi officiis libero. Saepe quasi voluptatem magni expedita quia in atque. Voluptates exercitationem est est eum minima quia.', '(938) 594-5116', '1-619-676-2101', 'Prof. Audra Jaskolski', '+1-707-968-7856', 'breanna.metz@bradtke.com', 'Eveniet unde odit incidunt distinctio dolorem sed sint. Eum ducimus eum et iusto. Enim qui alias cum vero est aliquid. Eum quibusdam nulla dolorem dolorem voluptas aut.', 3976, 2, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(2, 'Auer, Koelpin and Will', 'Prof. Maggie Will MD', 'EVJVVL4V', '431 Lockman Lakes\nLake Luis, MN 83681-3217', 'jedidiah.hilpert@schulist.com', 'Arvilla Anderson DDS', '956-867-5254', 'laurel.dickens@yahoo.com', 'Fugiat officia iusto beatae. Id impedit id autem fugiat et. Quod eligendi hic assumenda ab repudiandae saepe. Deleniti eaque id officiis. Ad voluptas ea eos vel illo.', '+19497613657', '1-347-943-3586', 'Miss Isabella Collins V', '+1.812.958.3826', 'nicholaus.graham@yahoo.com', 'Hic aut animi molestiae cupiditate voluptatem veniam et dolore. Iure qui delectus vel aut. Et temporibus mollitia ut occaecati.', 4181, 2, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(3, 'Boyle Ltd', 'Dwight Gorczany', 'AQBBUXYO', '8019 Upton Curve Suite 070\nWest Alecside, VA 90187-1249', 'destany43@grady.com', 'Anissa Howell', '(561) 441-8807', 'flavie19@thiel.com', 'Laudantium dolorem eum nobis. Voluptas quidem rerum quasi delectus. Facere sapiente quos recusandae assumenda soluta.', '+1 (636) 492-0970', '1-786-763-0372', 'German Cartwright', '(913) 654-1194', 'elmore.hilpert@hotmail.com', 'Deserunt quo molestiae ad est asperiores velit. Sunt consequatur enim quod nihil. Fugit autem nemo velit aut id qui.', 99, 2, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(4, 'Gislason and Sons', 'Madelynn Dickinson', 'REUICRO2', '87283 Emmanuel Springs\nEast Sincere, NC 27353', 'kub.otis@hotmail.com', 'Kianna Rau', '+1-828-942-5016', 'qbode@yahoo.com', 'Totam dolorem qui ea ipsum odit ducimus voluptates. Ut nesciunt sunt assumenda mollitia illo quidem sed et. Quo omnis ratione consequatur corrupti et repellat. Incidunt inventore dolorem quia nihil voluptates omnis.', '743-943-3168', '(276) 902-2404', 'Francis Langosh MD', '423-342-6590', 'dbarrows@gmail.com', 'Non expedita deserunt placeat incidunt. Itaque in et nisi corporis. Repellendus rerum suscipit laborum et. Necessitatibus doloremque sunt aut et quas molestiae.', 5676, 2, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(5, 'Sanford PLC', 'Therese Schuppe', 'XLNXQSJG', '83734 Raynor Fort\nWest Rene, NC 43695-0252', 'ycollins@breitenberg.com', 'Ericka Reichel', '+18309372250', 'daron87@yahoo.com', 'Eligendi ipsa eligendi mollitia distinctio neque sit sit. Minus itaque hic est quidem.', '(442) 601-7434', '313-360-6792', 'Ms. Delfina Nikolaus', '1-978-584-5042', 'mitchell.sallie@hotmail.com', 'Explicabo dicta voluptate quisquam modi sed. Architecto vitae itaque minus quis. Quasi facere voluptas id consequatur. Accusantium voluptatem rerum suscipit quo maiores quia voluptates.', 6221, 1, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(6, 'Beahan and Sons', 'Khalil Leuschke PhD', 'SYYROZUP', '23823 Amelia Points Apt. 249\nWintheiserland, UT 92155', 'brannon45@hotmail.com', 'Vito Hessel PhD', '276.770.5333', 'xlittle@kunde.net', 'Sunt culpa rem expedita qui. Ipsum molestiae est qui minus porro libero omnis. Et aut aut ab magni sed eveniet.', '(586) 214-8825', '+16288527100', 'Erik Stehr', '+1.210.595.5215', 'stephania.purdy@kilback.org', 'Tenetur illum voluptatem eligendi voluptas. Ratione debitis praesentium accusantium et quas. Velit est eos doloremque provident quisquam. Veritatis neque laudantium aut neque voluptate.', 1771, 2, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(7, 'Predovic and Sons', 'Dr. Raven Hoppe III', 'FBZKPMBV', '5085 Icie Ports\nNorth Cristobalchester, MS 53587', 'dicki.willard@herman.com', 'Bell West', '440-287-4296', 'kessler.judson@hermann.biz', 'Natus et consequatur enim nihil ut possimus unde vel. Corporis voluptate itaque in asperiores ad. Quibusdam molestiae et ut. Occaecati deserunt numquam vitae.', '802-222-9320', '+1 (769) 981-7099', 'Helen Leuschke', '(207) 718-7486', 'mosciski.nathen@yahoo.com', 'Qui et modi nesciunt recusandae enim. Atque dolore dolore officiis voluptates vel deserunt. Quia eaque possimus quia maiores. Non minus eligendi nemo veritatis ipsam.', 4495, 1, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(8, 'Price, Crooks and O\'Kon', 'Jolie Schmidt', 'BZMCPVWO', '84678 Khalil Road\nAlfview, WY 28738-4375', 'obeatty@hotmail.com', 'Orlo Schumm', '929.588.8873', 'wborer@yahoo.com', 'Rem perspiciatis ut nisi magnam beatae. Dolorum officiis enim quo totam quibusdam natus voluptates. Vel itaque rerum explicabo et in. Hic corrupti id sit sed debitis.', '+1.458.652.0683', '+1 (906) 250-1060', 'Dr. Aimee Hintz PhD', '726.229.7380', 'ryley.paucek@gmail.com', 'Et eveniet adipisci tempore omnis perspiciatis laborum sunt atque. Praesentium non dolorem explicabo ut itaque ipsam quas. Numquam amet consequatur fugit quae quo.', 3633, 1, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(9, 'Rogahn-Cummings', 'Marcellus Auer', 'QBOZNRTCH8E', '84441 Wilburn Courts Apt. 424\nPort Dan, NJ 32172-3739', 'wleannon@gmail.com', 'Modesta Schinner', '(267) 975-3560', 'morissette.velda@yahoo.com', 'Quia numquam expedita sed perspiciatis et natus adipisci. Non optio molestias dolorem eum rerum odit distinctio ea. Qui tenetur facere nihil qui et ducimus explicabo.', '678-503-6105', '+1-815-264-8801', 'Ralph Cormier', '1-612-464-6894', 'ccrist@yahoo.com', 'Consequatur aut dolor veniam sed dolor. Incidunt labore ut nam dolorem suscipit. Consectetur dignissimos et alias.', 696, 1, '2024-02-08 02:14:18', '2024-02-08 02:14:18'),
-(10, 'Huel-Abernathy', 'Mr. Ephraim Prosacco', 'RHJDECLH', '803 Streich Heights\nLeschport, NM 71756-8704', 'smiller@johnston.com', 'Rodger O\'Reilly', '+1-315-471-3625', 'nhodkiewicz@bogisich.com', 'Sed esse hic sed tenetur corporis ut. Eos quasi illo explicabo optio.', '+1.804.925.8784', '463-280-7863', 'Kaylee Stehr V', '(424) 616-9965', 'leffler.dora@yahoo.com', 'Officia deleniti commodi dolorum hic optio dolorum. Dolor minus recusandae mollitia qui illo ipsa et. Id qui sapiente temporibus voluptas aut.', 8680, 1, '2024-02-08 02:14:18', '2024-02-08 02:14:18');
+(1, 'Howell LLC', 'Michale McGlynn', 'TLLXUI4M7O4', '89398 Ollie Roads Suite 365\nSophiaville, PA 10994', 'dhartmann@ortiz.org', 'Kaden Schinner I', '518.466.6989', 'whuel@swift.com', 'In atque qui provident vitae soluta. Eum consectetur numquam accusamus rerum mollitia. Repudiandae dignissimos optio animi enim natus sint nobis rerum. Molestiae excepturi sunt suscipit similique sit sint sit placeat.', '+1-240-719-2453', '1-470-415-2751', 'Dr. Turner McKenzie Sr.', '(720) 843-5442', 'dosinski@beer.com', 'Officia enim beatae ducimus non nam quis alias. Mollitia cupiditate non voluptas eveniet harum dolore facilis. Et et veritatis est ipsam.', 478, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(2, 'Maggio, Bernier and Wolf', 'Mrs. Gerda Blanda', 'XOSEMVBS7SH', '145 Elvis Row\nKerlukechester, MD 76385-6796', 'kilback.terrell@mayert.com', 'Kyla Rutherford', '+1 (740) 880-9973', 'johann.pollich@pagac.com', 'Nesciunt quas facere ea ad. Repellat magnam et neque fugit. In quas distinctio suscipit aperiam et. Deleniti consequatur quo omnis similique assumenda consectetur.', '517-593-3879', '+1-475-929-4362', 'Casandra Goodwin', '+1 (863) 698-3951', 'gottlieb.dominique@dare.com', 'Possimus cumque iure quia perspiciatis. Eveniet omnis ut qui est dicta. Doloremque dolore eos eos totam ut ut magni in.', 3438, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(3, 'Smitham, Dach and Sanford', 'Elouise White', 'JLYKLONZ', '9789 David Mill Suite 398\nBoylestad, OH 82567-9621', 'yadira.botsford@hotmail.com', 'Laron O\'Reilly', '817-456-2821', 'harmony92@kris.com', 'Dolor culpa suscipit labore iure officia cum doloremque. Ipsum non aut consectetur sint voluptatum aut blanditiis est. Non ad et autem velit.', '+17735270791', '+1 (727) 832-9854', 'Ms. Lessie Wisozk', '1-571-287-5507', 'ptoy@gmail.com', 'Magni omnis et dolorem est ea tempore. Qui unde dolorum consequatur id eum. Quisquam libero qui qui.', 8002, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(4, 'Reichel-Larkin', 'Jabari Daniel V', 'UGLXND8XL18', '35871 Gilbert Causeway Suite 362\nMarksborough, NE 57775-9146', 'kuphal.junior@crooks.com', 'Alana Heaney', '+13204968508', 'fcassin@bernhard.info', 'Quas reiciendis magnam quam reiciendis dolorem omnis. Aut corrupti minima veniam odio voluptatem voluptas. Reiciendis ab ut commodi atque accusantium fugit nostrum.', '(757) 240-3420', '910-470-0590', 'Dr. Gillian Pfeffer Sr.', '+12259392996', 'jess37@klocko.net', 'Ea quaerat consequuntur facilis. Cumque et ut quidem magni. Quibusdam velit maiores quia sed sed nobis quo.', 8077, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(5, 'Senger Inc', 'Mrs. Ciara Connelly Jr.', 'HVNWKN5RRH5', '13655 Cecelia Key\nSouth Leann, OH 58695-4215', 'xsporer@brekke.com', 'Trystan Torp', '1-410-716-6321', 'zkris@friesen.com', 'Asperiores perspiciatis illo ullam recusandae in. Excepturi natus odio et repellendus voluptatibus. Dolorem magni impedit voluptatem accusamus eveniet est. Impedit ducimus quia fugiat debitis quam velit.', '725-560-7460', '+1.631.690.6868', 'Ludie Beahan', '1-534-336-0169', 'heathcote.nyah@hotmail.com', 'At recusandae doloremque enim laudantium. Rerum dolor inventore sit consequatur qui quia.', 3909, 2, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(6, 'Howe, Ebert and Kertzmann', 'Ms. Alisha Stamm I', 'UVOPYSMK', '307 Parker Drive\nDuBuqueport, ND 15457', 'shea42@carroll.com', 'Ari Gleichner', '+17757071515', 'lexus.koss@murazik.com', 'Expedita sunt est omnis saepe quibusdam repudiandae debitis. Labore quam earum fuga voluptas exercitationem impedit rem. Voluptates rerum est atque iste non. Unde facere itaque temporibus dolor sit.', '+1 (586) 328-0297', '+1.669.907.4935', 'Prof. Favian Abbott', '1-636-220-3306', 'dianna52@roberts.com', 'Qui et eos doloribus fugit id. Unde labore quia incidunt dignissimos a ipsam amet omnis. Et ea nihil aut exercitationem. Velit pariatur aut animi dolorem soluta vel.', 4737, 2, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(7, 'Roob, Wintheiser and Kunze', 'Berry Altenwerth', 'CGKGHV94GL3', '71837 Jovanny Union Apt. 680\nNorth Jeanneberg, DC 32336-1447', 'turcotte.orin@hotmail.com', 'Prof. Mariah Dietrich', '+1.872.496.6909', 'kane.lockman@boehm.com', 'In corporis minus enim voluptatem. Laboriosam tenetur laborum eos. Voluptatem ducimus sed sunt quis est. Ut sit exercitationem officia voluptatem nesciunt.', '979.461.1288', '606-504-9416', 'Caleigh Welch', '+1 (610) 799-7445', 'mnikolaus@hotmail.com', 'Sapiente explicabo rem sapiente ut deserunt delectus. Molestiae corporis voluptate non. Tempora molestias blanditiis omnis laudantium in aspernatur illum deserunt. Minima debitis tempore repudiandae nulla quaerat mollitia.', 6461, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(8, 'Mosciski-Gorczany', 'Summer Hill', 'FBEKXP4Z5XJ', '786 Mattie Shoals\nSouth Arnulfo, DC 88489', 'justina.schowalter@beahan.com', 'Irving Buckridge IV', '901-998-3674', 'rkris@mitchell.net', 'Sed blanditiis expedita est voluptas omnis adipisci. Adipisci fuga quis ipsum nisi. Recusandae vitae aut autem. Sint assumenda sint nostrum et.', '661.800.0970', '+18459512748', 'Mohamed Bahringer', '+1-212-680-3094', 'jessie.wintheiser@vonrueden.info', 'Magni enim illo ea sequi qui velit ut pariatur. Minus praesentium rerum aperiam laboriosam aut voluptate iure. Rerum consectetur aliquam sunt autem non. Laudantium placeat est est veritatis aliquid et.', 995, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(9, 'Klein PLC', 'Gunner Hegmann', 'EEVIZNLSBAV', '519 Chanel Extension\nKochchester, WA 99601-9068', 'ekeeling@gmail.com', 'Stephanie Rosenbaum Jr.', '+15312579712', 'ulegros@mann.com', 'Et nesciunt est sed sed magni debitis. Laboriosam explicabo rerum eum doloribus.', '+1-786-536-9202', '1-612-242-4103', 'Dr. Madelynn Monahan', '(843) 837-7786', 'hparker@hotmail.com', 'Aspernatur consequatur nulla quas molestiae. Modi quia alias laboriosam ab consequuntur exercitationem corrupti autem. Architecto numquam minus blanditiis corporis. Molestiae voluptatem in saepe voluptas odit accusamus rem.', 9200, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17'),
+(10, 'Hoppe-Vandervort', 'Warren Effertz', 'MEJENTJ1CUO', '818 Smith Station Suite 862\nSavanahborough, NC 98285', 'chaim56@hotmail.com', 'Dashawn Glover', '1-504-570-7252', 'agustina09@auer.com', 'Voluptas possimus aut exercitationem dicta et. At animi omnis voluptas eius harum dolore. Vero saepe quia ratione aut voluptatem. Fuga laudantium rerum voluptatem molestias et nulla.', '325-834-8368', '+1 (216) 318-9746', 'Edna Cummings', '1-564-687-0916', 'hcarter@volkman.com', 'Eos ut sed a laborum. Corporis qui ea nesciunt aut error error ipsum. Ipsum aliquam cumque sint omnis debitis.', 7727, 1, '2024-02-12 16:36:17', '2024-02-12 16:36:17');
 
 -- --------------------------------------------------------
 
@@ -10378,16 +10788,16 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`id`, `name`, `lastname`, `email`, `amount`, `wallet`, `chain`, `notes`, `trans`, `itinerary_id`, `created_at`, `updated_at`) VALUES
-(1, 'Dr. Izabella Kohler II', 'Kohler', 'ivah13@wilderman.com', 86.00, 'culpa', 'sint', 'Occaecati alias officiis sit expedita culpa corrupti et. Facere minus delectus sit animi impedit repudiandae. Accusantium et commodi rerum ut vel voluptatum laboriosam.', 'Consequatur provident repellat est sit commodi nihil architecto. Harum saepe quibusdam ex molestias aut cupiditate. Aut laboriosam quos quae labore dicta omnis aut.', 5, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(2, 'Khalil Schuppe', 'Torp', 'osteuber@gmail.com', 121.00, 'odio', 'ipsam', 'Quam consequatur recusandae cupiditate voluptatum voluptatibus omnis. Magnam odit tempore aut nostrum itaque eveniet fugiat. Dolores officia molestiae reprehenderit nihil laboriosam eaque reiciendis. Quis asperiores sapiente in numquam nihil.', 'Autem est sint ipsam. Enim omnis aut excepturi eum velit est. Qui provident aut natus dolores. Omnis sunt architecto facere.', 8, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(3, 'Kendrick Dibbert DVM', 'Grant', 'urohan@hermiston.com', 21.00, 'et', 'ut', 'Maxime omnis impedit eos quo. Asperiores aliquam rerum eius laudantium quae dolorem dolorum.', 'Odio enim rerum voluptatem et id. Explicabo quae voluptatibus dolor est magnam quod.', 10, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(4, 'Akeem Hodkiewicz DDS', 'Rutherford', 'gottlieb.harvey@robel.org', 87.00, 'corporis', 'reiciendis', 'Architecto suscipit suscipit ab et quo vel minus. Dolorem dolore labore laboriosam assumenda itaque sit. In et quam quasi harum.', 'Ut tempora sed fuga deleniti excepturi tempore. Dolores dolorem corporis labore fugit sapiente. Nobis nobis blanditiis tempora rerum numquam.', 1, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(5, 'Madelynn Lebsack III', 'Kerluke', 'randy.ruecker@hotmail.com', 74.00, 'autem', 'possimus', 'Rerum sit odit voluptas quidem enim. Dolor libero odio assumenda quae saepe maxime ea. Vel eius dolores corporis dicta.', 'Nulla dolores minus labore corrupti fugit debitis dolor. Aut qui necessitatibus vel nihil. Ut maxime at omnis ut quo ullam libero.', 8, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(6, 'Luigi Goyette', 'Ryan', 'rrunolfsdottir@yahoo.com', 94.00, 'perferendis', 'sed', 'Ut voluptatum officiis ratione error accusamus rerum. Cum sed nam vel ipsum nostrum repellendus eius eligendi.', 'Ut molestias tenetur ut nihil laborum quos. Mollitia inventore distinctio quia nulla ut sunt quasi. Labore eaque blanditiis et fugit illum. Illum corporis id ratione incidunt. Maxime exercitationem voluptatibus eum quod dolore non sed.', 2, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(7, 'Roselyn Emmerich', 'Crona', 'plarkin@hill.info', 187.00, 'laborum', 'molestiae', 'Sed et sequi architecto placeat ut perferendis. Voluptatem et voluptatum eos dolor earum nesciunt sit perspiciatis. Eligendi esse similique eos et amet amet. Ab amet ut aut aut repellat velit quis.', 'Officia atque laborum earum ut. Voluptatem sit earum iusto magni maxime et. Eos aut quam et necessitatibus ut et. Necessitatibus nostrum enim optio.', 10, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(8, 'Kyla Schultz', 'Brown', 'alegros@hotmail.com', 97.00, 'ullam', 'sequi', 'Molestias sint deleniti laudantium molestias placeat. Asperiores unde voluptatem quisquam sunt numquam architecto eos. Quo dolorem velit accusantium enim. Et velit sunt soluta voluptas iure incidunt doloremque.', 'Atque neque quia iste ut vitae perferendis. Ex quis porro porro qui quidem aspernatur architecto. Error odit est provident dolores.', 3, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(9, 'Philip Prosacco', 'O\'Hara', 'noemi36@russel.org', 54.00, 'rem', 'praesentium', 'In corrupti eligendi quod. Perspiciatis saepe hic suscipit nobis minima. Explicabo quis eos minima aut nam aperiam sed consequatur. Iusto autem excepturi dicta et consectetur.', 'Eos aspernatur nostrum explicabo consequatur voluptatem voluptas natus. Ex fugiat laudantium consequatur fugiat eligendi. Facilis sit aut quo officiis qui eaque.', 6, '2024-02-08 02:14:21', '2024-02-08 02:14:21'),
-(10, 'Dr. Antonio Hartmann', 'Cormier', 'jayce86@gmail.com', 139.00, 'in', 'dolorem', 'Quibusdam consequatur dolor voluptas ut suscipit iure. Aut accusamus et autem incidunt dicta. Molestiae aliquam dolores animi at qui doloremque.', 'Vitae sed et voluptas consequatur. Consequatur aliquam quis id. Dicta nostrum quo quaerat. Quos delectus dolorem quo velit. Consequuntur libero vitae sit tempora et.', 9, '2024-02-08 02:14:21', '2024-02-08 02:14:21');
+(1, 'Maia Beahan', 'Streich', 'bstamm@konopelski.net', 112.00, 'aliquam', 'Albania Lek (ALL)', 'Reprehenderit rerum officia non necessitatibus. Error dolores qui eius dolor quia. Et fuga sunt reprehenderit sequi vitae voluptate.', 'Autem facere ab inventore et rerum corrupti. Nobis non atque in minus nihil eaque. Veritatis qui officiis aperiam et. Rerum necessitatibus dicta et et vitae provident repellendus.', 3, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(2, 'Zoie Gorczany', 'Wyman', 'tfeil@feil.com', 171.00, 'laborum', 'Jamaica Dollar (JMD)', 'Et ut et corrupti consequatur consequuntur sint ut. Aliquam enim corrupti nostrum ipsam omnis voluptatem laborum. Quasi sit qui laudantium.', 'Quos quod et nulla velit aut nisi. Alias sit aut cum provident sit. Distinctio deleniti cum quas eligendi.', 10, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(3, 'Ruby Parisian', 'Schmeler', 'heathcote.daisy@schimmel.biz', 142.00, 'placeat', 'Indonesia Rupiah (IDR)', 'Eum aut dolor sit rem. Suscipit eum id nemo rem harum. Iusto aliquam ratione ex aut.', 'Eum deleniti qui quia quisquam dolores asperiores incidunt. Dolorem omnis dolorem repudiandae. Qui et qui nostrum ratione soluta voluptatem magnam. Quo consequatur nemo labore labore sint omnis.', 4, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(4, 'Johanna Becker III', 'Wunsch', 'felix.pollich@langworth.info', 198.00, 'quam', 'Yemen Rial (YER)', 'Quo doloribus aspernatur nemo vel repudiandae dolore in. Impedit culpa omnis molestiae sapiente et. Ea id et doloremque beatae accusamus repudiandae atque consequuntur.', 'Fuga molestiae et voluptatem sunt ipsa ullam in. Consequatur voluptatem voluptas et quas quasi non qui. Quidem a vitae veritatis aut ab. Provident laudantium ad eos quia incidunt.', 9, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(5, 'Lauren Mayert', 'Feil', 'nico.dach@hotmail.com', 190.00, 'et', 'Syria Pound (SYP)', 'Aperiam eos occaecati aut in labore ea. Eligendi sit eos quas numquam. Reprehenderit et pariatur atque. Rerum omnis impedit in est. Ullam eveniet repudiandae quibusdam id.', 'Et illum possimus autem. Est voluptatibus illum sunt ullam quis.', 8, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(6, 'Catharine Boyer', 'Lueilwitz', 'malachi47@cassin.org', 93.00, 'sit', 'Peru Nuevo Sol (PEN)', 'Sit ratione perferendis nisi. Aut possimus doloribus molestias ipsa consequatur. Beatae laboriosam expedita eius aliquid. Ea ea aut voluptatem.', 'Quae rerum veniam deserunt vel. Veniam id deleniti ut. Eveniet nisi nobis labore. Ad ipsam unde recusandae sint explicabo molestias quaerat quos.', 3, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(7, 'Dr. Adrien Hagenes', 'Franecki', 'christophe.beahan@hotmail.com', 128.00, 'sunt', 'Bermuda Dollar (BMD)', 'In sunt dolores ipsam accusamus unde saepe. Quo in id ad labore omnis enim nesciunt et. Iste maiores nisi autem doloribus nam veniam repellat. Voluptate quo sequi mollitia aut ipsum maiores ratione.', 'Rerum incidunt sint et laudantium iusto quisquam dolorem. Facere sint aut sit ut ut. Suscipit iusto commodi et tempora assumenda.', 4, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(8, 'Maryse Gusikowski', 'Veum', 'ashtyn.kuvalis@hotmail.com', 137.00, 'odio', 'Namibia Dollar (NAD)', 'Dolor aut sunt et corrupti ex. Ut aliquam vitae veniam laborum neque sint totam. Provident sit explicabo aut a nostrum et a. Soluta quia cum magnam veniam ducimus et.', 'In quia vitae dolore. Ipsum voluptate reprehenderit omnis maxime id omnis corporis et. Culpa non necessitatibus praesentium quod velit iure. Blanditiis natus sint soluta nihil.', 4, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(9, 'Prof. Kaleb Bode', 'Hamill', 'kulas.juana@schamberger.com', 85.00, 'qui', 'Barbados Dollar (BBD)', 'Fugit voluptatum modi porro reprehenderit aliquid. Fuga consequatur et veritatis distinctio corrupti. Totam et qui dolores accusamus quibusdam magni.', 'Voluptatibus nulla est minus ipsam numquam facere eos. Beatae reiciendis amet expedita omnis asperiores neque atque. Et eaque maiores dolorem. Rem dolore nihil aut suscipit qui tempore natus. Magnam quae aperiam expedita iure.', 8, '2024-02-12 16:36:20', '2024-02-12 16:36:20'),
+(10, 'Ashley Toy', 'Graham', 'harris.maye@yahoo.com', 190.00, 'doloribus', 'Venezuela Bolivar (VEF)', 'Voluptatem explicabo recusandae recusandae consequatur ut aliquam sit asperiores. Repudiandae fugit iste nobis eum quasi. Aut et molestias dolorem quia nobis. Sunt hic ad culpa aliquam voluptatem.', 'Voluptate non enim suscipit. Impedit ut omnis molestiae qui consequatur quaerat voluptatem. Inventore possimus harum quibusdam molestiae ea voluptas eius. Ut est autem aut vel aut ut asperiores.', 9, '2024-02-12 16:36:20', '2024-02-12 16:36:20');
 
 -- --------------------------------------------------------
 
@@ -10417,10 +10827,10 @@ CREATE TABLE `tours` (
 --
 
 INSERT INTO `tours` (`id`, `created_at`, `updated_at`, `tourname`, `startdate`, `enddate`, `tourcartel`, `notes`, `spotify_list`, `youtube_list`, `active`, `deleted_at`, `agency_id`, `artist_id`) VALUES
-(1, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'Implemented intangible GraphicInterface', '2024-02-29', '2024-03-15', 'http://localhost/storage/tours/tour1.jpeg', 'Et amet delectus voluptates sunt blanditiis. Aspernatur et veniam sunt esse inventore. Qui omnis incidunt ducimus rerum debitis.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 2, 1),
-(2, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'Organic homogeneous framework', '2024-02-24', '2024-03-14', 'http://localhost/storage/tours/tour3.jpeg', 'Autem adipisci sit voluptas doloremque voluptatum dolores. Numquam at qui recusandae et accusamus dolor in. Dolorem ipsum aliquid ipsam voluptas. Vel corporis tenetur tenetur. Nam quasi totam accusantium ipsa ducimus libero.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 1, 4),
-(3, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'Exclusive empowering superstructure', '2024-03-05', '2024-03-30', 'http://localhost/storage/tours/tour4.jpeg', 'Ut enim maxime commodi laboriosam assumenda. Unde dolore et voluptas. Iusto quia sequi quo sapiente nostrum veniam.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 1, 3),
-(4, '2024-02-08 02:14:17', '2024-02-08 02:14:17', 'Sharable composite initiative', '2024-02-29', '2024-03-10', 'http://localhost/storage/tours/tour2.jpeg', 'Aut suscipit eos labore itaque aut. Officiis magnam animi omnis. Officiis et voluptate ad amet.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 1, 4);
+(1, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'Fully-configurable object-oriented encoding', '2024-02-22', '2024-03-13', 'http://localhost/storage/tours/tour4.jpeg', 'Unde cupiditate minus minima soluta ipsam aut voluptas. Doloremque sed sit aspernatur possimus et quibusdam dignissimos.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 1, 2),
+(2, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'Inverse static systemengine', '2024-03-03', '2024-03-30', 'http://localhost/storage/tours/tour1.jpeg', 'Facilis aut perspiciatis beatae. Blanditiis sit aperiam cum assumenda rerum et. Rem ut sunt et voluptatibus fugit. Nam ut odit suscipit aut ut quisquam. Voluptatum et aliquam laudantium.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 2, 2),
+(3, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'Triple-buffered grid-enabled superstructure', '2024-02-28', '2024-04-01', 'http://localhost/storage/tours/tour3.jpeg', 'Corporis ullam sit velit consequatur qui ab distinctio dolor. Et vel reprehenderit voluptatibus. Debitis molestiae natus non. Sint rerum in voluptatem esse ratione non et.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 2, 4),
+(4, '2024-02-12 16:36:16', '2024-02-12 16:36:16', 'Monitored user-facing benchmark', '2024-03-10', '2024-03-13', 'http://localhost/storage/tours/tour2.jpeg', 'Excepturi nam illo suscipit fugiat perspiciatis dolor. Recusandae hic nesciunt est consequatur iste rem voluptas. Et perferendis et voluptas accusamus exercitationem vero.', 'https://open.spotify.com/embed/playlist/3nzDoGB795nZ3cRY2OJrcW?utm_source=generator&theme=0', 'https://www.youtube.com/embed/videoseries?si=39cHU3tmhy86GT1H&amp;list=PLhazrcQIhlEGnFQQ-Kyeg07oPVmfMfaqr', 1, NULL, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -10463,11 +10873,17 @@ CREATE TABLE `typecontacts` (
 
 INSERT INTO `typecontacts` (`id`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Artista', NULL, NULL),
-(2, 'Manager', NULL, NULL),
-(3, 'Promotor', NULL, NULL),
-(4, 'Chofer', NULL, NULL),
-(5, 'Crew', NULL, NULL),
-(6, 'Tech', NULL, NULL);
+(2, 'Agente', NULL, NULL),
+(3, 'Manager', NULL, NULL),
+(4, 'Tour Manager', NULL, NULL),
+(5, 'Promotor', NULL, NULL),
+(6, 'Booking', NULL, NULL),
+(7, 'Técnico', NULL, NULL),
+(8, 'Chofer', NULL, NULL),
+(9, 'Proveedor', NULL, NULL),
+(10, 'Equipo Artista', NULL, NULL),
+(11, 'Personal Artista', NULL, NULL),
+(12, 'Seguridad', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -10487,14 +10903,15 @@ CREATE TABLE `typeitineraries` (
 --
 
 INSERT INTO `typeitineraries` (`id`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Show', NULL, NULL),
-(2, 'Actividad', NULL, NULL),
-(3, 'Servicio', NULL, NULL),
+(1, 'Vuelo Comercial', NULL, NULL),
+(2, 'Vuelo Privado', NULL, NULL),
+(3, 'Transfer', NULL, NULL),
 (4, 'Transporte terrestre', NULL, NULL),
-(5, 'Hotel', NULL, NULL),
-(6, 'Avión', NULL, NULL),
-(7, 'Tren', NULL, NULL),
-(8, 'Transfer', NULL, NULL);
+(5, 'Tren', NULL, NULL),
+(6, 'Alojamiento', NULL, NULL),
+(7, 'Show', NULL, NULL),
+(8, 'Actividad Prensa', NULL, NULL),
+(9, 'Actividad Fans', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -10573,7 +10990,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `agency_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Ariel Leyva', 'arielleyva@gmail.com', '2024-02-08 02:14:21', '$2y$12$8fhnZk63o0io.SM34YiDvOB/fvOWdcMD.OI9v8KOB./9c8t6R0sxu', NULL, 'm6mbKG1UJa', '2024-02-08 02:14:21', '2024-02-08 02:14:21');
+(1, 'Ariel Leyva', 'arielleyva@gmail.com', '2024-02-12 16:36:20', '$2y$12$XfEUJrGzjHvZ7q5KQFvo1ehPCd6x4g7VZP.bm3LKUZquEesXuntSu', NULL, 'kVGUqdzQK4', '2024-02-12 16:36:20', '2024-02-12 16:36:20');
 
 --
 -- Índices para tablas volcadas
@@ -10620,6 +11037,12 @@ ALTER TABLE `countrytours`
   ADD KEY `countrytours_country_id_foreign` (`country_id`);
 
 --
+-- Indices de la tabla `currencies`
+--
+ALTER TABLE `currencies`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `documents`
 --
 ALTER TABLE `documents`
@@ -10648,8 +11071,13 @@ ALTER TABLE `itineraries`
   ADD KEY `itineraries_city_start_id_foreign` (`city_start_id`),
   ADD KEY `itineraries_city_destination_id_foreign` (`city_destination_id`),
   ADD KEY `itineraries_typeitinerary_id_foreign` (`typeitinerary_id`),
-  ADD KEY `itineraries_person_id_foreign` (`person_id`),
   ADD KEY `itineraries_supplier_id_foreign` (`supplier_id`);
+
+--
+-- Indices de la tabla `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `migrations`
@@ -10670,6 +11098,14 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indices de la tabla `personitineraries`
+--
+ALTER TABLE `personitineraries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `personitineraries_person_id_foreign` (`person_id`),
+  ADD KEY `personitineraries_itinerary_id_foreign` (`itinerary_id`);
 
 --
 -- Indices de la tabla `persons`
@@ -10813,7 +11249,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT de la tabla `countrytours`
 --
 ALTER TABLE `countrytours`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `currencies`
+--
+ALTER TABLE `currencies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT de la tabla `documents`
@@ -10837,19 +11279,31 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT de la tabla `itineraries`
 --
 ALTER TABLE `itineraries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `personitineraries`
+--
+ALTER TABLE `personitineraries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `persons`
@@ -10915,13 +11369,13 @@ ALTER TABLE `typeagencies`
 -- AUTO_INCREMENT de la tabla `typecontacts`
 --
 ALTER TABLE `typecontacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `typeitineraries`
 --
 ALTER TABLE `typeitineraries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `typeplaces`
@@ -10971,11 +11425,17 @@ ALTER TABLE `countrytours`
 ALTER TABLE `itineraries`
   ADD CONSTRAINT `itineraries_city_destination_id_foreign` FOREIGN KEY (`city_destination_id`) REFERENCES `cities` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `itineraries_city_start_id_foreign` FOREIGN KEY (`city_start_id`) REFERENCES `cities` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `itineraries_person_id_foreign` FOREIGN KEY (`person_id`) REFERENCES `persons` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `itineraries_place_id_foreign` FOREIGN KEY (`place_id`) REFERENCES `places` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `itineraries_supplier_id_foreign` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `itineraries_tour_id_foreign` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `itineraries_typeitinerary_id_foreign` FOREIGN KEY (`typeitinerary_id`) REFERENCES `typeitineraries` (`id`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `personitineraries`
+--
+ALTER TABLE `personitineraries`
+  ADD CONSTRAINT `personitineraries_itinerary_id_foreign` FOREIGN KEY (`itinerary_id`) REFERENCES `itineraries` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `personitineraries_person_id_foreign` FOREIGN KEY (`person_id`) REFERENCES `persons` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `persons`
