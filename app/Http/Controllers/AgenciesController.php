@@ -10,6 +10,7 @@ use App\Models\Socialmedias;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class AgenciesController extends Controller
@@ -24,10 +25,11 @@ class AgenciesController extends Controller
             $user = User::find($request->user()->id);
             if ($user->agency_id != null) {
                 $agencies[] = Agencies::find($user->agency_id)->first();
-            } else
+            } else {
                 $agencies = Agencies::withTrashed()->whereNull('deleted_at')->get();
+            }
         } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
-            $agencies[] = Agencies::find($request->user()->id)->first();
+            $agencies[] = Agencies::where('id', $request->user()->id)->first();
         } else {
             $agencies[] = Artists::find($request->user()->id)->agency()->first();
         }
