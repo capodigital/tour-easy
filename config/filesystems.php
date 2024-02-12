@@ -46,6 +46,9 @@ return [
 
         'src' => [
             'driver' => 'local',
+            //Descomentar esta línea si los archivos que se subirán a la página no estarán el el directorio public/src
+            //Ajustar la ruta según el path del servidor
+            // 'root' => '/home/u776231812/domains/msomnium.tech/public_html/tour/src',
             'root' => public_path('src'),
             'url' => env('APP_URL') . '/src',
             'visibility' => 'public',
