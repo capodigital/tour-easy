@@ -85,17 +85,18 @@ export default {
 <template>
     <div v-click-outside="() => collapse = false" class="relative">
         <div class="flex items-center rounded border border-gray-300 px-0 cursor-pointer">
-            <div class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3 flex">
-                <p v-if="ids.length == 0" @click="collapse = !collapse" class="w-full">{{ label }}</p>
-                <div class="whitespace-pre-wrap w-full max-w-[20rem]">
+            <div :class="{ 'py-3': ids.length == 0, 'py-2': ids.length > 0 }"
+                class="bg-transparent w-full sm:min-w-[10rem] md:min-w-[20rem] lg:min-w-[30rem] text-gray-300 text-sm border-none focus:outline-none px-3 flex">
+                <p v-if="ids.length == 0" @click="collapse = !collapse" class="w-full whitespace-nowrap">{{ label }}</p>
+                <div class="whitespace-pre-wrap w-full">
                     <template v-for="(id, index) in ids">
-                        <span v-if="index < 2" @click="update(id, false)"
+                        <span v-if="index < 3" @click="update(id, false)"
                             class="inline-block cursor-pointer text-xs whitespace-nowrap bg-gray-400 text-black rounded py-1 px-2 m-0.5">{{
                                 person(id).name }} <i class="bi bi-x"></i></span>
                     </template>
-                    <span v-if="ids.length > 2"
+                    <span v-if="ids.length > 3"
                         class="inline-block cursor-pointer text-xs whitespace-nowrap bg-gray-400 text-black rounded py-1 px-2 m-0.5">
-                        +{{ ids.length - 2 }} más
+                        +{{ ids.length - 3 }} más
                     </span>
                 </div>
                 <button @click="collapse = !collapse" type="button" :class="{ 'rotate-180': collapse }"

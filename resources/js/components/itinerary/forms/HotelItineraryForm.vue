@@ -117,7 +117,7 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-x-2">
+        <div class="grid md:grid-cols-2 gap-x-2">
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Personas resposables</label>
                 <MultiSelect :filter="false" :ids="persons_1" label="Seleccionar contactos" :options="contacts"
