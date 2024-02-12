@@ -18,7 +18,7 @@ export default {
 </script>
 <template>
     <CustomModal @close="$emit('close')">
-        <article class="rounded-lg max-w-xl gradient-2 mb-2 scroll overflow-auto p-2">
+        <article class="rounded-lg gradient-2 mb-2 scroll overflow-auto p-2">
             <h1
                 class="font-bold bg-gradient-to-tr from-app-primary-500 text-center to-app-primary-700 text-2xl bg-clip-text text-transparent drop-shadow-md shadow-black mb-2">
                 DETALLES DE ITINERARIO

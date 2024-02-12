@@ -10,7 +10,7 @@ export default {
 }
 </script>
 <template>
-    <article class="rounded-lg max-w-xl mb-2 p-2">
+    <article class="rounded-lg mb-2 p-2">
         <div class="flex items-center mt-2">
             <ActivityIcon :activity="activity" :size="20" />
             <div class="ps-2">

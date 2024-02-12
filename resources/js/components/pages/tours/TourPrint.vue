@@ -171,10 +171,10 @@ export default {
                 </div>
                 <div class="p-2">
                     <p class="text-sm text-white">Redes sociales</p>
-                    <div class="mt-3 grid grid-cols-2">
+                    <div class="mt-3 leading-3">
                         <a v-for="socialmedia in tour.socialmedias" :href="socialmedia.url" target="_blank"
-                            class="px-3 rounded-md flex justify-center text-whiteitems-center me-1">
-                            {{ socialmedia.url }}
+                            class="text-gray-300 text-sm mb-0 leading-5">
+                            <p><strong>{{ socialmedia.typesocialmedia.name }}:</strong> {{ socialmedia.url }}</p>
                         </a>
                     </div>
                 </div>
