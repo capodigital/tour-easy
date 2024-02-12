@@ -4,11 +4,11 @@
 /public/build
 /vendor
 /public/build/manifest.json
-/public/agencies
-/public/artists
-/public/documents
-/public/photos
-/public/tours
+/public/src/agencies
+/public/src/artists
+/public/src/documents
+/public/src/photos
+/public/src/tours
 .env
 .env.backup
 .env.production
