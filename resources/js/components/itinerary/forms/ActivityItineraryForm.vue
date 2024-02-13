@@ -118,7 +118,7 @@ export default {
         <div class="grid md:grid-cols-2 gap-x-2">
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Personas resposables</label>
-                <MultiSelect :filter="false" :ids="persons_1" label="Seleccionar contactos" :options="contacts"
+                <MultiSelect :groups="tour.agency.groups" :filter="false" :ids="persons_1" label="Seleccionar contactos" :options="contacts"
                     :initial="activity.persons_1">
                     <template v-slot="{ item }">
                         <div class="w-full">
@@ -133,7 +133,7 @@ export default {
             </div>
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Personas asociadas</label>
-                <MultiSelect :ids="persons_2" label="Seleccionar contactos" :options="associated"
+                <MultiSelect :groups="tour.agency.groups" :ids="persons_2" label="Seleccionar contactos" :options="associated"
                     :initial="activity.persons_2">
                     <template v-slot="{ item }">
                         <div class="w-full">

@@ -28,6 +28,7 @@ class AgenciesResource extends JsonResource
             $city = new CitiesResource($city);
         }
         $typeagency = Typeagencies::find($this->typeagency_id);
+        $groups = GroupsResource::collection($this->groups()->get());
         return [
             'id' => $this->id,
             'tradename' => $this->tradename,
@@ -46,6 +47,7 @@ class AgenciesResource extends JsonResource
             'typeagency_id' => $this->typeagency_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
             'documents' => DocumentsResource::collection($this->documents()->get()),
+            'groups' => $groups,
             // 'users' => User::where('agency_id', $this->id),
             'users' => $this->users,
 

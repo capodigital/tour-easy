@@ -38,9 +38,10 @@ class PersonsFactory extends Factory
             'passport' => fake()->swiftBicNumber(),
             'passport_expiry' => fake()->dateTimeBetween('+1 years', '4 years'),
             'notify_type' => fake()->randomElement(['WhatsApp', 'Telegram', 'Correo', 'SMS']),
-            'group_id' => function () {
-                return Groups::all()->random()->id;
-            },
+            // 'group_id' => function () {
+            //     return Groups::all()->random()->id;
+            // },
+            'group_id' => null,
             'agency_id' => function () {
                 return Agencies::all()->random()->id;
             },

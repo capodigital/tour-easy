@@ -12,7 +12,6 @@ export default {
         return {
             agencies: [],
             countries: [],
-            //cities: [],
             groups: [],
             country_id: 'AF',
             languages: [],
@@ -21,15 +20,6 @@ export default {
         }
     },
     methods: {
-        /*setCities(country) {
-            axios.post('api/cities', { code: country }, {
-                headers: {
-                    'Authorization': `Bearer ${this.Utils.token()}`
-                }
-            }).then((response) => {
-                this.cities = response.data;
-            });
-        },*/
         removeDocument(index) {
             const confirm = new Confirm('¡Confirmar operación!', '¿Seguro que desea eliminar este documento?')
             confirm.fire().then((result) => {
@@ -46,6 +36,17 @@ export default {
                     })
                 }
             })
+        },
+        setGroups(agency) {
+            axios.post('api/groups/agency', { id: agency }, {
+                headers: {
+                    'Authorization': `Bearer ${this.Utils.token()}`
+                }
+            }).then((response) => {
+                this.groups = response.data.data
+            }).catch((error) => {
+                this.Utils.error(error.response)
+            });
         }
     },
     created() {
@@ -67,6 +68,11 @@ export default {
             }
         }).then((response) => {
             this.agencies = response.data.data;
+            if (this.person.agency_id != undefined) {
+                this.setGroups(this.person.agency_id);
+            } else if (this.agencies.length > 0) {
+                this.setGroups(this.agencies[0].id)
+            }
         }).catch((error) => {
             this.Utils.error(error.response)
         });
@@ -107,15 +113,7 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         });
-        axios.get('api/groups', {
-            headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }
-        }).then((response) => {
-            this.groups = response.data.data;
-        }).catch((error) => {
-            this.Utils.error(error.response)
-        });
+
     },
 }
 </script>
@@ -137,7 +135,8 @@ export default {
                 <div v-if="Utils.role() != 'agency' && person.id == undefined">
                     <label class="text-slate-200 text-xs font-semibold">Agencia</label>
                     <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
-                        <select required v-model="person.agency_id" name="agency_id"
+                        <select required @change="(e) => setGroups(e.target.value)" v-model="person.agency_id"
+                            name="agency_id"
                             class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                             <option class="text-black" v-for="item in agencies" :value="item.id">{{
                                 item.taxname
@@ -266,9 +265,11 @@ export default {
                         <label class="text-slate-200 text-xs font-semibold">Grupo</label>
                         <div class="flex items-center mb-3 rounded border border-gray-300 px-2">
                             <i class="bi bi-collection text-gray-100"></i>
-                            <select required v-model="person.group_id" name="group_id"
+                            <select v-model="person.group_id" name="group_id"
                                 class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
-                                <option v-for="group in groups" class="text-black" :value="group.id">{{ group.name }}</option>
+                                <option class="text-black" value="0">Sin asignar</option>
+                                <option v-for="group in groups" class="text-black" :value="group.id">{{ group.name }}
+                                </option>
                             </select>
                         </div>
                     </div>

@@ -39,7 +39,15 @@ class PersonsResource extends JsonResource
             $country = new CountriesResource($country);
         }
         $typecontact = Typecontacts::find($this->typecontact_id);
-        $group = Groups::find($this->group_id);
+        if ($this->group_id == null) {
+            $group = [
+                'id' => null,
+                'name' => 'Sin asignar',
+            ];
+        } else {
+            $group = Groups::find($this->group_id);
+        }
+
 
         return [
             'id' => $this->id,

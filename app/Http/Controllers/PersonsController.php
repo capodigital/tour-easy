@@ -90,6 +90,9 @@ class PersonsController extends Controller
             'notify_type',
             'group_id'
         ]);
+        if ($data['group_id'] == '0') {
+            $data['group_id'] = null;
+        }
 
         if (!$request->has('agency_id')) {
             if ($request->user()->getMorphClass() == 'App\\Models\\User') {
@@ -197,8 +200,11 @@ class PersonsController extends Controller
             'passport',
             'passport_expiry',
             'notify_type',
-            'group'
+            'group_id'
         ]);
+        if ($data['group_id'] == '0') {
+            $data['group_id'] = null;
+        }
 
         //Almacenar los datos en la base de datos
         $person->update($data);

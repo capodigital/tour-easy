@@ -4,6 +4,7 @@ export default {
     props: {
         options: Array,
         ids: Array,
+        groups: Array,
         label: String,
         initial: Array,
         filter: {
@@ -14,7 +15,7 @@ export default {
     data() {
         return {
             collapse: false,
-            groups: [],
+            // groups: [],
             types: [],
             group: null,
             type: null,
@@ -70,15 +71,15 @@ export default {
         }).catch((error) => {
             this.Utils.error(error.response)
         });
-        axios.get('api/groups', {
-            headers: {
-                'Authorization': `Bearer ${this.Utils.token()}`
-            }
-        }).then((response) => {
-            this.groups = response.data.data;
-        }).catch((error) => {
-            this.Utils.error(error.response)
-        });
+        // axios.get('api/groups', {
+        //     headers: {
+        //         'Authorization': `Bearer ${this.Utils.token()}`
+        //     }
+        // }).then((response) => {
+        //     this.groups = response.data.data;
+        // }).catch((error) => {
+        //     this.Utils.error(error.response)
+        // });
     }
 }
 </script>

@@ -79,6 +79,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('places', PlacesController::class);
 
     Route::resource('groups', GroupsController::class);
+    Route::post('/groups/agency', [GroupsController::class, 'getByAgency']);
 
     Route::resource('suppliers', SuppliersController::class);
     Route::post('/suppliers/agency', [SuppliersController::class, 'suppliersByAgency']);
