@@ -53,10 +53,6 @@ class DatabaseSeeder extends Seeder
             TypeagenciesSeeder::class,
 
         ]);
-        $this->call([
-            GroupsSeeder::class,
-
-        ]);
         $path1 = base_path() . '\database\seeders\Paises.sql_';
         // $path2 = base_path() . '\database\seeders\Ciudades.sql_';
         $sql1 = file_get_contents($path1);

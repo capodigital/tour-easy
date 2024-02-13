@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
             $table->timestamps();
         });
     }

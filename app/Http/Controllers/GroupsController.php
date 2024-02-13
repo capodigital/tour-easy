@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\GroupsResource;
+use App\Models\Agencies;
 use App\Models\Groups;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
 {
 
-   public function index()
+   public function index(Request $request)
    {
-       $groups = Groups::all();
+    $groups = [];
+    if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+        $user = User::find($request->user()->id);
+        if ($user->agency_id != null) {
+            $groups = Agencies::find($user->agency_id)->groups()->get();
+        } else
+            $groups = groups::withTrashed()->whereNull('deleted_at')->get();
+    } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+        $groups = Agencies::where('id', $request->user()->id)->first()->groups()->get();
+    } else {
+        $groups[] = groups::find($request->user()->id);
+    }
        return GroupsResource::collection($groups);
    }
 
@@ -29,6 +42,7 @@ class GroupsController extends Controller
    {
        $request->validate([
            'name' => 'required',
+           
 
 
        ]);
@@ -36,6 +50,13 @@ class GroupsController extends Controller
        $data = $request->only([
            'name'
        ]);
+       if (!$request->has('agency_id')) {
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $data['agency_id'] = $request->user()->agency_id;
+        } else {
+            $data['agency_id'] = $request->user()->id;
+        }
+    }
 
 
        //Almacenar los datos en la base de datos

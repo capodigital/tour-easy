@@ -68,16 +68,23 @@ class AgenciesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'tradename' => 'required',
             'email' => 'required|email|unique:agencies',
+            'taxname' => 'required|unique:agencies',
             'password' => [
                 'required',
                 'string',
             ],
             'image' => ['required', 'image'],
 
-        ]);
+        ];
+        $customMessages = [
+            'email.unique' => 'El email ya existe',
+            'taxname.unique' => 'El código fiscal ya existe'
+        ];
+        
+        $request->validate($rules, $customMessages);
 
         $data = $request->only([
             'tradename',
@@ -188,11 +195,18 @@ class AgenciesController extends Controller
      */
     public function update(Request $request, Agencies $agency)
     {
-        $request->validate([
+        $rules = [
             'tradename' => 'required',
             'email' => ['required', 'email', 'unique:agencies,email,' . $agency->id],
+            'taxname' => ['required', 'unique:agencies,taxname,' . $agency->id],
 
-        ]);
+        ];
+        $customMessages = [
+            'email.unique' => 'El email ya existe',
+            'taxname.unique' => 'El código fiscal ya existe'
+        ];
+        
+        $request->validate($rules, $customMessages);
 
         $data = $request->only([
             'tradename',

@@ -76,6 +76,10 @@ class Agencies extends Authenticatable
     {
         return $this->hasMany(Persons::class, 'agency_id');
     }
+    public function groups(): HasMany
+    {
+        return $this->hasMany(Groups::class, 'agency_id');
+    }
     public function suppliers(): HasMany
     {
         return $this->hasMany(Suppliers::class, 'agency_id');
