@@ -7,6 +7,7 @@ use App\Models\Agencies;
 use App\Models\Documents;
 use App\Models\Socialmedias;
 use App\Models\Suppliers;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SuppliersController extends Controller
@@ -14,9 +15,20 @@ class SuppliersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $suppliers = Suppliers::all();
+        $suppliers = [];
+        if ($request->user()->getMorphClass() == 'App\\Models\\User') {
+            $user = User::find($request->user()->id);
+            if ($user->agency_id != null) {
+                $suppliers = Agencies::find($user->agency_id)->suppliers()->get();
+            } else
+                $suppliers = suppliers::withTrashed()->whereNull('deleted_at')->get();
+        } else if ($request->user()->getMorphClass() == 'App\\Models\\Agencies') {
+            $suppliers = Agencies::where('id', $request->user()->id)->first()->suppliers()->get();
+        } else {
+            $suppliers[] = suppliers::find($request->user()->id);
+        }
         return SuppliersResource::collection($suppliers);
     }
 
