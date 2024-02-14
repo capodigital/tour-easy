@@ -68,7 +68,7 @@ class ArtistsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:artists',
@@ -78,12 +78,12 @@ class ArtistsController extends Controller
             'birthday' => 'required|before:today'
 
         ];
-        
+
         $customMessages = [
             'birthday.before' => 'El campo fecha debe ser una fecha anterior a hoy',
             'email.unique' => 'El email ya existe'
         ];
-        
+
         $request->validate($rules, $customMessages);
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'agency_id', 'notes']);
         if (!$request->has('agency_id')) {
@@ -192,16 +192,16 @@ class ArtistsController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'email' => 'required|email|unique:artists,' . $artist->id,
+            'email' => 'required|email|unique:artists,email,' . $artist->id,
             'birthday' => 'required|before:today'
 
         ];
-        
+
         $customMessages = [
             'birthday.before' => 'El campo fecha debe ser una fecha anterior a hoy',
             'email.unique' => 'El email ya existe'
         ];
-        
+
         $request->validate($rules, $customMessages);
 
         $data = $request->only(['stagename', 'email', 'lastname', 'name', 'birthday', 'tags', 'notes']);
