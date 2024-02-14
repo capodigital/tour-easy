@@ -52,7 +52,7 @@ export default {
                     <select required v-model="activity.supplier_id" name="supplier_id"
                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         <template v-for="item in suppliers">
-                            <option class="text-black" :value="item.id">
+                            <option v-if="item.agency_id == tour.agency_id" class="text-black" :value="item.id">
                                 {{ item.tradename }}
                             </option>
                         </template>

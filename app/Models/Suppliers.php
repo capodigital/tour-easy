@@ -7,13 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Suppliers extends Model
 {
+    use SoftDeletes;
     use HasFactory;
     protected $fillable = [
-        'company_name', 'taxname', 'tax_code', 'address', 'notes', 'extra_phone', 'agency_id', 'phone',
-        'email', 'contact_manager', 'contact_phone', 'contact_email', 'city_id'
+        'agency_id',
+        'tradename',
+        'email',
+        'address',
+        'notes',
+        'extra_phone',
+        'phone',
+        'email',
+        'manager',
+        'manager_contact',
+        'manager_email',
+        'contact',
+        'contact_phone',
+        'contact_email',
+        'city_id',
+        'paydata',
+        'taxname',
+        'taxcode'
     ];
 
     public function agency(): BelongsTo
@@ -24,14 +42,19 @@ class Suppliers extends Model
     {
         return $this->belongsTo(Cities::class, 'city_id');
     }
-    
+
     public function socialmedias(): MorphMany
     {
-        return $this->morphMany(Socialmedias::class, 'socialmediasable','socialmediaable_type','socialmediaable_id');
+        return $this->morphMany(Socialmedias::class, 'socialmediasable', 'socialmediaable_type', 'socialmediaable_id');
     }
-    
+
+    public function documents(): MorphMany
+    {
+        return $this->morphMany(Documents::class, 'documentsable', 'documentable_type', 'documentable_id');
+    }
+
     public function itineraries(): HasMany
     {
-        return $this->hasMany(Itineraries::class,'supplier_id');
+        return $this->hasMany(Itineraries::class, 'supplier_id');
     }
 }

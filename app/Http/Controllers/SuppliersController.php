@@ -44,43 +44,64 @@ class SuppliersController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'company_name' => 'required',
+        // $request->validate([
+        //     'company_name' => 'required',
 
 
-        ]);
+        // ]);
 
         $data = $request->only([
-            'company_name', 'supplier_name', 'tax_code', 'address', 'notes', 'extra_phone',
-            'phone', 'email', 'contact_manager', 'contact_phone', 'contact_email', 'city_id'
+            'agency_id',
+            'tradename',
+            'email',
+            'address',
+            'notes',
+            'extra_phone',
+            'phone',
+            'email',
+            'manager',
+            'manager_phone',
+            'manager_email',
+            'contact',
+            'contact_phone',
+            'contact_email',
+            'city_id',
+            'paydata',
+            'taxname',
+            'taxcode'
         ]);
 
-        $data['agency_id'] = $request->user()->id;
+        // $data['agency_id'] = $request->user()->id;
 
         //Almacenar los datos en la base de datos
         $supplier = Suppliers::create($data);
 
         if ($request->has('socialmedias')) {
+            Socialmedias::where('socialmediaable_id', $supplier->id)->delete();
             foreach ($request->socialmedias as $socialmedia) {
-                Socialmedias::create([
-                    'url' => $socialmedia->url,
-                    'description' => $socialmedia->description,
-                    'typesocialmedia_id' => $socialmedia->typesocialmedia_id,
-                    'socialmediaable_id' => $supplier->id,
-                    'socialmediaable_type' => 'App\Models\Suppliers'
-                ]);
+                if (isset($socialmedia['typesocialmedia_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typesocialmedia_id' => $socialmedia['typesocialmedia_id'],
+                        'socialmediaable_id' => $supplier->id,
+                        'socialmediaable_type' => 'App\Models\Suppliers'
+                    ]);
+                }
             }
         }
 
         if ($request->has('documents')) {
-            foreach ($request->documents as $document) {
+            foreach ($request->file('documents') as $document) {
                 $sizeInBytes = $document->getSize();
                 $sizeInMB = $sizeInBytes / 1024 / 1024;
                 $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
                 Documents::create([
                     'url' => null,
-                    'name' => $document->name,
-                    'document_path' => $document->document_path,
+                    'name' => $name,
+                    'document_path' => $path,
                     'size' => $sizeInMB,
                     'ext' => $extension,
                     'documentable_id' => $supplier->id,
@@ -88,20 +109,22 @@ class SuppliersController extends Controller
                 ]);
             }
         }
+
         if ($request->has('urls')) {
             foreach ($request->urls as $url) {
-                Documents::create([
-                    'url' => $url,
-                    'name' => null,
-                    'document_path' => null,
-                    'size' => null,
-                    'ext' => null,
-                    'documentable_id' => $supplier->id,
-                    'documentable_type' => 'App\Models\Suppliers'
-                ]);
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $supplier->id,
+                        'documentable_type' => 'App\Models\Suppliers'
+                    ]);
+                }
             }
         }
-
 
         $supplier->refresh();
         return new SuppliersResource($supplier);
@@ -128,53 +151,78 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, Suppliers $supplier)
     {
-        $request->validate([
-            'company_name' => 'required',
-        ]);
-
         $data = $request->only([
-            'company_name', 'supplier_name', 'tax_code', 'address', 'notes', 'extra_phone',
-            'phone', 'email', 'contact_manager', 'contact_phone', 'contact_email', 'city_id'
+            'agency_id',
+            'tradename',
+            'email',
+            'address',
+            'notes',
+            'extra_phone',
+            'phone',
+            'email',
+            'manager',
+            'manager_phone',
+            'manager_email',
+            'contact',
+            'contact_phone',
+            'contact_email',
+            'city_id',
+            'paydata',
+            'taxname',
+            'taxcode'
         ]);
 
         //Almacenar los datos en la base de datos
         $supplier->update($data);
 
-        Socialmedias::where('socialmediaable_id', $supplier->id)->delete();
-        foreach ($request->socialmedias as $socialmedia) {
-            Socialmedias::create([
-                'url' => $socialmedia->url,
-                'description' => $socialmedia->description,
-                'typesocialmedia_id' => $socialmedia->typesocialmedia_id,
-                'socialmediaable_id' => $supplier->id,
-                'socialmediaable_type' => 'App\Models\Suppliers'
-            ]);
+        if ($request->has('socialmedias')) {
+            Socialmedias::where('socialmediaable_id', $supplier->id)->delete();
+            foreach ($request->socialmedias as $socialmedia) {
+                if (isset($socialmedia['typesocialmedia_id'])) {
+                    Socialmedias::create([
+                        'url' => $socialmedia['url'],
+                        'description' => $socialmedia['description'],
+                        'typesocialmedia_id' => $socialmedia['typesocialmedia_id'],
+                        'socialmediaable_id' => $supplier->id,
+                        'socialmediaable_type' => 'App\Models\Suppliers'
+                    ]);
+                }
+            }
         }
-        Documents::where('documentable_id', $supplier->id)->delete();
-        foreach ($request->documents as $document) {
-            $sizeInBytes = $document->getSize();
-            $sizeInMB = $sizeInBytes / 1024 / 1024;
-            $extension = $document->getClientOriginalExtension();
-            Documents::create([
-                'url' => null,
-                'name' => $document->name,
-                'document_path' => $document->document_path,
-                'size' => $sizeInMB,
-                'ext' => $extension,
-                'documentable_id' => $supplier->id,
-                'documentable_type' => 'App\Models\Suppliers'
-            ]);
+
+        if ($request->has('documents')) {
+            foreach ($request->file('documents') as $document) {
+                $sizeInBytes = $document->getSize();
+                $sizeInMB = $sizeInBytes / 1024 / 1024;
+                $extension = $document->getClientOriginalExtension();
+                $name = $document->getClientOriginalName();
+                $path = $document->store('documents', 'src');
+                Documents::create([
+                    'url' => null,
+                    'name' => $name,
+                    'document_path' => $path,
+                    'size' => $sizeInMB,
+                    'ext' => $extension,
+                    'documentable_id' => $supplier->id,
+                    'documentable_type' => 'App\Models\Suppliers'
+                ]);
+            }
         }
-        foreach ($request->urls as $url) {
-            Documents::create([
-                'url' => $url,
-                'name' => null,
-                'document_path' => null,
-                'size' => null,
-                'ext' => null,
-                'documentable_id' => $supplier->id,
-                'documentable_type' => 'App\Models\Suppliers'
-            ]);
+
+        if ($request->has('urls')) {
+            foreach ($request->urls as $url) {
+                if ($url != "") {
+                    Documents::create([
+                        'url' => $url,
+                        'name' => null,
+                        'document_path' => null,
+                        'size' => null,
+                        'ext' => null,
+                        'documentable_id' => $supplier->id,
+                        'documentable_type' => 'App\Models\Suppliers'
+                    ]);
+                }
+            }
         }
 
         $supplier->refresh();

@@ -21,13 +21,14 @@ return new class extends Migration
             $table->string('manager', 250)->nullable();
             $table->string('manager_phone', 250)->nullable();
             $table->string('manager_email', 250)->nullable();
-            $table->text('paydata', 250)->nullable();
+            $table->text('paydata')->nullable();
             $table->string('phone', 30)->nullable();
             $table->string('extra_phone', 30)->nullable();
             $table->string('contact', 100)->nullable();
             $table->string('contact_phone', 150)->nullable();
             $table->string('contact_email', 150)->nullable();
             $table->text('notes')->nullable();
+            $table->softDeletes();
             $table->foreignId('city_id')->nullable()->references('id')->on('cities')->onDelete('set null');
             $table->foreignId('agency_id')->nullable()->references('id')->on('agencies')->onDelete('set null');
             $table->timestamps();

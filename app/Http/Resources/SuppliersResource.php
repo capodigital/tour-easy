@@ -38,14 +38,17 @@ class SuppliersResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'company_name' => $this->company_name,
             'tradename' => $this->tradename,
             'taxname' => $this->taxname,
-            'tax_code' => $this->tax_code,
+            'taxcode' => $this->taxcode,
+            'paydata' => $this->paydata,
             'phone' => $this->phone,
             'extra_phone' => $this->extra_phone,
             'address' => $this->address,
-            'contact_manager' => $this->contact_manager,
+            'manager' => $this->manager,
+            'manager_email' => $this->manager_email,
+            'manager_phone' => $this->manager_phone,
+            'contact' => $this->contact,
             'contact_phone' => $this->contact_phone,
             'contact_email' => $this->contact_email,
             'notes' => $this->notes,
@@ -55,8 +58,7 @@ class SuppliersResource extends JsonResource
             'city' => $city,
             'city_id' => $this->city_id,
             'socialmedias' => SocialmediasResource::collection($this->socialmedias()->get()),
-
-
+            'documents' => DocumentsResource::collection($this->documents()->get()),
         ];
     }
 }

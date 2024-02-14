@@ -2,6 +2,7 @@
 import axios from 'axios';
 import ConfigurationModal from './ConfigurationModal.vue';
 import { ref } from 'vue'
+import SupplierList from './supplier/SupplierList.vue';
 
 export default {
     data() {
@@ -9,6 +10,7 @@ export default {
             collapsed: false,
             profile: false,
             configuration: false,
+            supplier: false,
             cart: ref(null),
             user: this.Utils.user(),
             role: this.Utils.role(),
@@ -48,7 +50,7 @@ export default {
             this.current = response.data.data
         })
     },
-    components: { ConfigurationModal }
+    components: { ConfigurationModal, SupplierList }
 }
 </script>
 <template>
@@ -106,6 +108,17 @@ export default {
                     </svg>
                     <p class="ms-2 text-gray-100 text-sm">Configuración</p>
                 </button>
+                <button @click="supplier = true"
+                    class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-settings">
+                        <path
+                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <p class="ms-2 text-gray-100 text-sm">Proveedores</p>
+                </button>
                 <button @click="logout"
                     class="me-2 hover:bg-gradient-to-r hover:from-transparent hover:via-[#ffffff66] hover:to-transparent w-full rounded p-2 transition-all flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -120,6 +133,7 @@ export default {
             </div>
         </div>
         <ConfigurationModal @close="configuration = false" v-if="configuration" />
+        <SupplierList @close="supplier = false" v-if="supplier" />
     </nav>
 </template>
 <style scoped>

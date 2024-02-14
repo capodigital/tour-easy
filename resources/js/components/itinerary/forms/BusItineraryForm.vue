@@ -59,7 +59,7 @@ export default {
                     <select required v-model="activity.supplier_id" name="supplier_id"
                         class="bg-transparent w-full text-gray-300 text-sm border-none focus:outline-none px-3 py-3">
                         <template v-for="item in suppliers">
-                            <option class="text-black" :value="item.id">
+                            <option v-if="item.agency_id == tour.agency_id" class="text-black" :value="item.id">
                                 {{ item.tradename }}
                             </option>
                         </template>
@@ -157,7 +157,8 @@ export default {
         <div class="grid md:grid-cols-2 gap-x-2">
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Personas resposables</label>
-                <MultiSelect :groups="tour.agency.groups" :filter="false" :ids="persons_1" label="Seleccionar contactos" :options="contacts" :initial="activity.persons_1">
+                <MultiSelect :groups="tour.agency.groups" :filter="false" :ids="persons_1" label="Seleccionar contactos"
+                    :options="contacts" :initial="activity.persons_1">
                     <template v-slot="{ item }">
                         <div class="w-full">
                             <small class="float-right text-gray-500 text-xs">{{ item.typecontact.description }}</small>
@@ -171,7 +172,8 @@ export default {
             </div>
             <div>
                 <label class="text-slate-200 text-xs font-semibold">Personas asociadas</label>
-                <MultiSelect :groups="tour.agency.groups" :ids="persons_2" label="Seleccionar contactos" :options="associated" :initial="activity.persons_2">
+                <MultiSelect :groups="tour.agency.groups" :ids="persons_2" label="Seleccionar contactos"
+                    :options="associated" :initial="activity.persons_2">
                     <template v-slot="{ item }">
                         <div class="w-full">
                             <small class="float-right text-gray-500 text-xs">{{ item.typecontact.description }}</small>
